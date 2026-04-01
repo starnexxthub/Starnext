@@ -1,0 +1,70 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import styles from './AboutPage.module.css';
+import HeroSection from './components/HeroSection';
+import CoverScroll from './components/CoverScroll';
+import TeamSection from './components/TeamSection';
+import PeopleSection from './components/PeopleSection';
+import Navbar from '../sections/Navbar';
+import Footer from '../sections/Footer'; // Already imported
+
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+export default function AboutPage() {
+  const mainRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const currentSectionRef = useRef<HTMLSpanElement>(null);
+  const navDotsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  const updateNavDots = (activeIndex: number) => {
+    navDotsRef.current.forEach((dot, index) => {
+      if (dot) {
+        dot.classList.toggle(styles.navDotActive, index === activeIndex);
+      }
+    });
+    if (currentSectionRef.current) {
+      currentSectionRef.current.textContent = `0${activeIndex + 1}`;
+    }
+  };
+
+  const goToSection = (index: number) => {
+    const coverTrigger = ScrollTrigger.getAll().find(
+      st => st.vars.trigger === "#coverWrapper"
+    );
+    if (coverTrigger) {
+      const targetScroll = index === 0 ? coverTrigger.start : coverTrigger.end;
+      gsap.to(window, { 
+        scrollTo: { y: targetScroll, autoKill: false }, 
+        duration: 1, 
+        ease: "power2.inOut" 
+      });
+    }
+  };
+
+  return (
+    <>
+      <Navbar />
+      <main ref={mainRef} className={styles.section}>
+        <HeroSection />
+        <CoverScroll 
+          progressBarRef={progressBarRef}
+          updateNavDots={updateNavDots}
+        />
+        <TeamSection />
+        <PeopleSection />
+      </main>
+      <Footer /> 
+    </>
+  );
+}
