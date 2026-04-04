@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useRouter } from "next/navigation";
 
 // Define Particle interface
 interface ParticleType {
@@ -15,6 +16,7 @@ interface ParticleType {
 }
 
 export default function AboutSection() {
+  const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([])
   const counterTargets = [30, 50, 30, 100]
@@ -218,7 +220,7 @@ export default function AboutSection() {
               environment and fostering a performance-based culture.
             </p>
 
-            <button className="about-btn btn-navy">
+            <button className="about-btn btn-navy" onClick={() => router.push("/about")}>
               MORE ABOUT US
               <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

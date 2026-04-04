@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -24,7 +26,7 @@ export default function Navbar() {
         <div className="d-flex align-items-center justify-content-between w-100">
           
           {/* Logo */}
-          <a href="#" className="logo-wrapper" id="logo">
+          <a href="/" className="logo-wrapper" id="logo">
             <img src="/img/star-logo.png" className="w-50" alt="Starnext" />
             <div className="logo-icon"></div>
             <div className="logo-text-group"></div>
@@ -34,26 +36,26 @@ export default function Navbar() {
           <div className="nav-menu-wrapper d-none d-lg-block" id="navMenu">
             <ul className="nav-menu">
               <li className="nav-item">
-                <a href="#" className="nav-link-custom active">
-                  <span className="nav-dot"></span>
+                <a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
+                  
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/about" className="nav-link-custom">
-                  <span className="nav-dot"></span>
+                <a href="/about" className={`nav-link ${pathname === "/about" ? "active" : ""}`}>
+                 
                   About
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/service" className="nav-link-custom">
-                  <span className="nav-dot"></span>
+                <a href="/service" className={`nav-link ${pathname === "/service" ? "active" : ""}`}>
+                  
                   Services
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/blogs" className="nav-link-custom">
-                  <span className="nav-dot"></span>
+                <a href="/blogs" className={`nav-link ${pathname === "/blogs" ? "active" : ""}`}>
+                  
                   Blogs
                 </a>
               </li>

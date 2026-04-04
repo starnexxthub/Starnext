@@ -11,8 +11,8 @@ export default function ContactPage() {
       <Navbar />
       <ContactForm />
       <ContactInfo />
-      <SocialBar />
       <Newsletter />
+      <SocialBar />
       <Footer />
     </main>
   );

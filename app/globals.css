@@ -32,6 +32,39 @@
       margin-left: 10px;
       font-weight: 500;
     }
+    .nav-link {
+  color: #fff !important;
+  margin: 0 10px;
+  font-size: 15px;
+  position: relative; /* IMPORTANT */
+  text-decoration: none;
+}
+
+/* underline base */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: #0d6efd;
+  transition: width 0.3s ease;
+}
+
+/* active underline */
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* hover effect (optional but recommended) */
+.nav-link:hover::after {
+  width: 100%;
+}
+
+
+
+    
     .font-main{
   font-family: "Figtree", sans-serif;
   }
@@ -267,6 +300,7 @@ letter-spacing: -7px;
 
 .newsletter-form {
   width: 560px;
+  margin-top: 60px;
 }
 
 .newsletter-inputWrap {
@@ -335,6 +369,7 @@ letter-spacing: -7px;
 
   .newsletter-form {
     width: 100%;
+    margin-top: 0px;
   }
 }
 .starnext-bar {

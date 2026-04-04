@@ -165,7 +165,7 @@ export default function FAQSection() {
             </ul>
 
             <div className="magnetic-wrap">
-              <a href="#contact" className="btn faq-btn" id="faqContactBtn">Contact Us</a>
+              <a href="/contact" className="btn faq-btn" id="faqContactBtn">Contact Us</a>
             </div>
           </div>
 

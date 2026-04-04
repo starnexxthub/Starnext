@@ -1,6 +1,8 @@
 'use client'
+import { useState } from "react";
 
 export default function ContactSection() {
+  const [service, setService] = useState("");
   return (
     <section className="starnext-contact py-5">
       <div className="container">
@@ -63,14 +65,17 @@ export default function ContactSection() {
 
                 <div className="mb-4 position-relative">
                   <label className="form-label sr-only" htmlFor="service">Service</label>
-                  <select id="service" className="form-select line-select">
-                    <option value="" selected disabled>Service</option>
-                    <option>Website Development</option>
-                    <option>SEO</option>
-                    <option>Branding</option>
-                    <option>Social Media Marketing</option>
-                    <option>Performance Ads</option>
-                  </select>
+                  <select
+  id="service"
+  className="form-select line-select"
+  value={service}
+  onChange={(e) => setService(e.target.value)}
+>
+  <option value="" disabled>Service</option>
+  <option value="web">Website Development</option>
+  <option value="seo">SEO</option>
+  <option value="branding">Branding</option>
+</select>
                 </div>
 
                 <div className="mb-4">

@@ -35,6 +35,7 @@ export default function ServicePage() {
     margin-left: 0;
     margin-right: 0;
   }
+  
 }
 
 /* Optional: extra polish for very small screens */
@@ -49,9 +50,15 @@ export default function ServicePage() {
       <main style={{ backgroundColor: "#f5f5f5", color: "black", overflowX: "hidden" }}>
         {/* HERO */}
         <section
-          className="position-relative d-flex flex-column align-items-center px-3 px-sm-4"
-          style={{ minHeight: "100vh", paddingTop: "clamp(4rem, 5vw, 5rem)" }}
-        >
+  className="position-relative d-flex flex-column align-items-center px-3 px-sm-4 mx-auto"
+  style={{
+    minHeight: "clamp(90vh, 100vh, 110vh)", // adaptive height
+    paddingTop: "clamp(5rem, 6vw, 5rem)",
+    paddingBottom: "clamp(2rem, 5vw, 4rem)",
+    maxWidth: "1400px", // prevents over-stretch on large screens
+    width: "100%",
+  }}
+>
           <h1
             className="fw-semibold text-center"
             style={{ fontSize: "clamp(1.875rem, 5vw, 3.75rem)", letterSpacing: "-0.025em",marginTop:"15px" }}
@@ -239,10 +246,30 @@ maxWidth: "458px",
 </section>
 
         {/* PROJECTS */}
-        <section className="mx-auto px-3 px-sm-4" style={{ paddingBottom: "clamp(0.5rem, 2.5vw, 2.5rem)" }}> <h2 className="text-center fw-bold" style={{ fontSize: "40px" }}> Recent Projects </h2> <ProjectCard /> </section>
+        <section
+  className="mx-auto px-3 px-sm-4"
+  style={{
+    paddingBottom: "clamp(0.5rem, 2.5vw, 2.5rem)"
+  }}
+>
+  <h2
+    className="text-center fw-bold"
+    style={{
+      fontSize: "clamp(26px, 4vw, 40px)",
+      marginBottom: "clamp(1rem, 2vw, 2rem)"
+    }}
+  >
+    Recent Projects
+  </h2>
+
+  <div style={{ marginTop: "-40px" }}>
+    <ProjectCard />
+  </div>
+</section>
       </main>
-      <SocialBar />
+      
       <Newsletter />
+      <SocialBar />
       <Footer />
     </>
 

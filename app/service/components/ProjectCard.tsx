@@ -46,7 +46,9 @@ const Card = ({ project, i, progress, range, targetScale }: {
       <motion.div
         style={{ 
           scale, 
-          top: `calc(5vh + ${i * 20}px)`, 
+          //top: `calc(5vh + ${i * 20}px)`,
+           
+
           zIndex: i 
         }}
         className="project-card-inner"
@@ -90,7 +92,7 @@ export default function ProjectCard() {
         }
 
         .card-container {
-          height: 100vh;
+          height: 85vh;
           display: flex;
           align-items: center;
           justify-content: center;

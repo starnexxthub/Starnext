@@ -13,7 +13,7 @@ export default function Newsletter() {
                 <path d="m22 9-8.7 6.2a2 2 0 0 1-2.3 0L2 9" stroke="currentColor" strokeWidth="1.8"/>
               </svg>
             </span>
-            <input type="email" name="email" placeholder="enter your email" required />
+            <input type="email" name="email" placeholder="Enter your email" required />
             <button type="submit">Subscribe</button>
           </div>
           <p className="newsletter-note">You will be able to unsubscribe at any time.</p>
