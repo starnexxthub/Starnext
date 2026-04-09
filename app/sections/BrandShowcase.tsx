@@ -3,8 +3,16 @@
 import { useEffect } from 'react'
 
 export default function BrandShowcase() {
+  const logoPairs = [
+  ["/logos/l1.png", "/logos/l2.png"],
+  ["/logos/l3.png", "/logos/l4.png"],
+  ["/logos/l5.png", "/logos/l6.png"],
+  ["/logos/l7.png", "/logos/l8.png"],
+  ["/logos/l9.png", "/logos/l10.png"],
+]
   useEffect(() => {
     if (typeof window === 'undefined') return
+    let pairIndex = 0
 
     const brandHeader = document.getElementById('brandHeader')
     if (brandHeader) {
@@ -49,20 +57,33 @@ export default function BrandShowcase() {
     }
 
     function stepAllBrand() {
-      brandTracks.forEach((track) => {
-        const stepPx = stepPxFor(track)
-        ;(track as HTMLElement).style.transition = `transform ${MOVE_MS}ms ease-in-out`
-        ;(track as HTMLElement).style.transform = `translateY(${-stepPx}px)`
-      })
+  brandTracks.forEach((track) => {
+    const stepPx = stepPxFor(track)
+    ;(track as HTMLElement).style.transition = `transform ${MOVE_MS}ms ease-in-out`
+    ;(track as HTMLElement).style.transform = `translateY(${-stepPx}px)`
+  })
 
-      setTimeout(() => {
-        brandTracks.forEach((track) => {
-          ;(track as HTMLElement).style.transition = 'none'
-          ;(track as HTMLElement).style.transform = 'translateY(0px)'
-          rotateOnce(track)
-        })
-      }, MOVE_MS)
-    }
+  setTimeout(() => {
+
+    pairIndex = (pairIndex + 1) % logoPairs.length
+    const [logoA, logoB] = logoPairs[pairIndex]
+
+    brandTracks.forEach((track, index) => {
+
+      const logo = index % 2 === 0 ? logoA : logoB
+
+      track.innerHTML = `
+        <img src="${logo}" />
+        <img src="${logo}" />
+        <img src="${logo}" />
+      `
+
+      ;(track as HTMLElement).style.transition = 'none'
+      ;(track as HTMLElement).style.transform = 'translateY(0px)'
+    })
+
+  }, MOVE_MS)
+}
 
     if (brandTracks.length) {
       stepAllBrand()

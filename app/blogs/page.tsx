@@ -8,6 +8,8 @@ import Navbar from '../sections/Navbar';
 import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
 import SocialBar from '../sections/SocialBar';
+import { title } from "process";
+import { image } from "framer-motion/client";
 
 export default function BlogPage() {
   
@@ -45,6 +47,12 @@ export default function BlogPage() {
       id: 6,
       title: "How to Create a Winning Social Media Strategy",
       image: "/img/b2.png"
+    },
+    {
+      id:7,
+      title:"How to give no **** ",
+      image:"/img/b3.png"
+
     }
 
 
@@ -265,7 +273,7 @@ export default function BlogPage() {
 
         .blog-cards-wrapper {
   position: relative;
-   height: 800px;
+   height: 1000px;
   
   overflow-x: hidden;
   scroll-behavior: smooth;  

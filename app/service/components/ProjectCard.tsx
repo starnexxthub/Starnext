@@ -88,11 +88,11 @@ export default function ProjectCard() {
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
           overflow-y: scroll; /* Ensure scrolling still works */
-          height: 80vh; /* Set height to viewport */
+          height: 70vh; /* Set height to viewport */
         }
 
         .card-container {
-          height: 80vh;
+          height: 70vh;
           display: flex;
           align-items: center;
           justify-content: center;
