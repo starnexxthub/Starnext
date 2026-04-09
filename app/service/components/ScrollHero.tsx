@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const IMAGES = [
   { src: "/assets/image.png", rotate: 14, x: "-90%", y: [-300, -120] },
   { src: "/assets/bmw.png", rotate: -20, x: "-90%", y: [-80, 200] },
-  { src: "/assets/art.png", rotate: 17, x: "-120%", y: [160, 360] },
+  { src: "/assets/art.png", rotate: 17, x: "-105%", y: [160, 360] },
   { src: "/assets/cour.png", rotate: 27, x: "70%", y: [200, 80] },
   { src: "/assets/love.png", rotate: -17, x: "100%", y: [-100, -470] },
   { src: "/assets/est.png", rotate: 7, x: "20%", y: [-96, -120] },

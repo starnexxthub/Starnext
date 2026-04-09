@@ -99,16 +99,16 @@ export default function Navbar() {
               <a href="#" className="nav-link-custom active">Home</a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link-custom">About</a>
+              <a href="/about" className="nav-link-custom">About</a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link-custom">Services</a>
+              <a href="/service" className="nav-link-custom">Services</a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link-custom">Portfolio</a>
+              <a href="/portfolio" className="nav-link-custom">Portfolio</a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link-custom">Testimonials</a>
+              <a href="/testimonials" className="nav-link-custom">Testimonials</a>
             </li>
           </ul>
           <div className="nav-actions">

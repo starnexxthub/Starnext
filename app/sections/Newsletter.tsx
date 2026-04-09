@@ -14,7 +14,7 @@ export default function Newsletter() {
               </svg>
             </span>
             <input type="email" name="email" placeholder="Enter your email" required />
-            <button type="submit">Subscribe</button>
+            <button type="submit" >Subscribe</button>
           </div>
           <p className="newsletter-note">You will be able to unsubscribe at any time.</p>
         </form>

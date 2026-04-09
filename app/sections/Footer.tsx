@@ -42,10 +42,10 @@ export default function Footer() {
           <div className="col-6 col-lg-3">
             <h4 className="footer-title">Services</h4>
             <ul className="footer-my-list">
-              <li><a href="/service/digital">Digital Marketing</a></li>
+              <li><a href="/service/Digital">Digital Marketing</a></li>
               <li><a href="/service">Web & App Development</a></li>
-              <li><a href="/service/seo">Search Engine Optimization</a></li>
-              <li><a href="/service/socialmedia">Social Media Marketing</a></li>
+              <li><a href="/service/Seo">Search Engine Optimization</a></li>
+              <li><a href="/service/SocialMedia">Social Media Marketing</a></li>
             </ul>
           </div>
           <div className="col-6 col-lg-3 mt-4 mt-lg-0">

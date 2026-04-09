@@ -1,263 +1,66 @@
 'use client';
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-import gsap from 'gsap';
+
 import Navbar from '../sections/Navbar';
 import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
 import SocialBar from '../sections/SocialBar';
 
 export default function BlogPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const trackRef = useRef<HTMLDivElement>(null);
+  
+  
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const currentY = useRef(0);
-  const targetY = useRef(0);
-  const isHovering = useRef(false);
-  const touchStartY = useRef(0);
-  const lastTouchY = useRef(0);
-  const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+ 
 
   const blogPosts = [
     {
       id: 1,
-      title: "Top 10 Digital Marketing Agencies in Dehradun",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80"
+      title: "The Future of Web Design",
+      image: "/img/b2.png"
     },
     {
       id: 2,
-      title: "Top 10 Digital Marketing Agencies in Dehradun",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&auto=format&fit=crop&q=80"
+      title: "How websites actually work",
+      image: "/img/b3.png"
     },
     {
       id: 3,
-      title: "Top 10 Digital Marketing Agencies in Dehradun",
-      image: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&auto=format&fit=crop&q=80"
+      title: "10 Tips for Building a Successful Online Business",
+      image: "/img/b4.png"
     },
     {
       id: 4,
-      title: "Top 10 Digital Marketing Agencies in Dehradun",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80"
+      title: "The Ultimate Guide to SEO in 2024",
+      image: "/img/b6.png"
+    },
+    {
+      id: 5,
+      title: "The Power of Storytelling in Marketing",
+      image: "/img/b3.png"
+    },
+    {
+      id: 6,
+      title: "How to Create a Winning Social Media Strategy",
+      image: "/img/b2.png"
     }
+
+
   ];
 
   // Duplicate for infinite scroll
-  const allPosts = [...blogPosts, ...blogPosts];
+ 
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      initAnimations();
-      initSmoothScroll();
-    }, 600);
+  
 
-    return () => clearTimeout(timer);
-  }, []);
+  
 
-  const initAnimations = () => {
-    // Sidebar entrance
-    gsap.from('.sidebar', {
-      x: -50,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
+  
 
-    // Blog list items
-    gsap.to('.blog-list-item', {
-      x: 0,
-      opacity: 1,
-      duration: 0.5,
-      stagger: 0.08,
-      delay: 0.2,
-      ease: 'power2.out'
-    });
-
-    // Social icons
-    gsap.from('.social-icon', {
-      scale: 0,
-      opacity: 0,
-      duration: 0.4,
-      stagger: 0.08,
-      delay: 0.6,
-      ease: 'back.out(1.7)'
-    });
-
-    // Cards entrance
-    gsap.from('.blog-card', {
-      y: 60,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      delay: 0.1,
-      ease: 'power3.out'
-    });
-  };
-
-  const initSmoothScroll = () => {
-    const cardHeight = 240;
-    const totalOriginalCards = 4;
-    const totalHeight = cardHeight * totalOriginalCards;
-    const autoScrollSpeed = 0.3;
-
-    const updateScroll = () => {
-      if (!isHovering.current) {
-        targetY.current -= autoScrollSpeed;
-      }
-
-      // Infinite loop logic
-      if (Math.abs(targetY.current) >= totalHeight) {
-        targetY.current = 0;
-        currentY.current = 0;
-        if (trackRef.current) {
-          trackRef.current.style.transform = `translateY(${currentY.current}px)`;
-        }
-      }
-
-      // Smooth interpolation
-      currentY.current += (targetY.current - currentY.current) * 0.08;
-      
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translateY(${currentY.current}px)`;
-      }
-
-      requestAnimationFrame(updateScroll);
-    };
-
-    requestAnimationFrame(updateScroll);
-  };
-
-  const handleCardMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    isHovering.current = true;
-    const cardBg = e.currentTarget.querySelector('.blog-card-bg');
-    if (cardBg) {
-      gsap.to(cardBg, { scale: 1.1, duration: 0.5, ease: 'power2.out' });
-    }
-  };
-
-  const handleCardMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    isHovering.current = false;
-    const cardBg = e.currentTarget.querySelector('.blog-card-bg');
-    if (cardBg) {
-      gsap.to(cardBg, { scale: 1, duration: 0.5, ease: 'power2.out' });
-    }
-    
-    // Reset 3D tilt effect
-    const inner = e.currentTarget.querySelector('.blog-card-inner');
-    if (inner) {
-      gsap.to(inner, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.4,
-        ease: 'power2.out'
-      });
-    }
-  };
-
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 30;
-    const rotateY = (centerX - x) / 30;
-
-    const inner = card.querySelector('.blog-card-inner');
-    if (inner) {
-      gsap.to(inner, {
-        rotateX,
-        rotateY,
-        duration: 0.2,
-        ease: 'power2.out'
-      });
-    }
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
-    
-    isHovering.current = true;
-    const scrollAmount = e.deltaY * 0.5;
-    targetY.current -= scrollAmount;
-
-    const cardHeight = 240;
-    const totalOriginalCards = 4;
-    const totalHeight = cardHeight * totalOriginalCards;
-    const maxScroll = -(totalHeight + cardHeight);
-    const minScroll = cardHeight;
-
-    if (targetY.current > minScroll) targetY.current = minScroll;
-    if (targetY.current < maxScroll) targetY.current = maxScroll;
-
-    wheelTimeout.current = setTimeout(() => {
-      isHovering.current = false;
-    }, 150);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartY.current = e.touches[0].clientY;
-    lastTouchY.current = touchStartY.current;
-    isHovering.current = true;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const touchY = e.touches[0].clientY;
-    const deltaY = lastTouchY.current - touchY;
-    lastTouchY.current = touchY;
-    targetY.current -= deltaY;
-
-    const cardHeight = 240;
-    const totalOriginalCards = 4;
-    const totalHeight = cardHeight * totalOriginalCards;
-    const maxScroll = -(totalHeight + cardHeight);
-    const minScroll = cardHeight;
-
-    if (targetY.current > minScroll) targetY.current = minScroll;
-    if (targetY.current < maxScroll) targetY.current = maxScroll;
-  };
-
-  const handleTouchEnd = () => {
-    setTimeout(() => {
-      isHovering.current = false;
-    }, 300);
-  };
-
-  const scrollToCard = (index: number) => {
-    const cardHeight = 240;
-    const targetPosition = -(index * cardHeight);
-    const track = trackRef.current;
-    
-    if (!track) return;
-
-    const currentTransform = track.style.transform;
-    const currentYValue = parseFloat(currentTransform.replace('translateY(', '').replace('px)', '')) || 0;
-
-    gsap.to({ y: currentYValue }, {
-      y: targetPosition,
-      duration: 0.8,
-      ease: 'power3.inOut',
-      onUpdate: function() {
-        const y = (this.targets()[0] as { y: number }).y;
-        track.style.transform = `translateY(${y}px)`;
-        targetY.current = y;
-        currentY.current = y;
-      }
-    });
-  };
-
-  const handleSocialHover = (e: React.MouseEvent<HTMLDivElement>, isEnter: boolean) => {
-    gsap.to(e.currentTarget, {
-      scale: isEnter ? 1.15 : 1,
-      y: isEnter ? -3 : 0,
-      duration: 0.3,
-      ease: isEnter ? 'back.out(1.7)' : 'power2.out'
-    });
-  };
+  
+  
 
   return (
     
@@ -347,35 +150,26 @@ export default function BlogPage() {
         }
 
         .sidebar {
-          background: var(--card-bg);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px;
-          padding: 30px;
-          height: fit-content;
-          position: sticky;
-          top: 30px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
+  background: rgba(10, 20, 35, 0.9);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 25px;
+  position: sticky;
+  top: 30px;
+}
 
-        .sidebar-title {
-          font-size: 28px;
-          font-weight: 600;
-          letter-spacing: 3px;
-          margin-bottom: 25px;
-          position: relative;
-          display: inline-block;
-        }
+.sidebar-title {
+  font-size: 18px;
+  letter-spacing: 4px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 
-        .sidebar-title::after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, var(--accent-blue), transparent);
-        }
+.sidebar-title::after {
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+}
 
         .blog-list {
           list-style: none;
@@ -383,16 +177,17 @@ export default function BlogPage() {
           margin-bottom: 30px;
         }
 
-        .blog-list-item {
-          padding: 15px 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          cursor: pointer;
-          transition: all 0.3s ease;
-          opacity: 0;
-          transform: translateX(-20px);
-          font-size: 14px;
-          line-height: 1.5;
-        }
+ .blog-list-item {
+  font-size: 12px;
+  color: #cbd5e1;
+  letter-spacing: 1px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  transform: none;   /* remove old shift */
+}
 
         .blog-list-item:hover {
           color: var(--accent-blue);
@@ -407,16 +202,16 @@ export default function BlogPage() {
         }
 
         .connect-section {
-          margin-top: 30px;
-          padding-top: 20px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
 
-        .connect-title {
-          font-size: 20px;
-          margin-bottom: 20px;
-          font-weight: 500;
-        }
+.connect-title {
+  font-size: 14px;
+  color: #cbd5e1;
+  margin-bottom: 15px;
+}
 
         .social-icons {
           display: flex;
@@ -465,42 +260,25 @@ export default function BlogPage() {
         .social-icon.whatsapp { color: #25d366; }
 
         .blog-cards-wrapper {
-          position: relative;
-          height: 600px;
-          overflow: hidden;
-          mask-image: linear-gradient(to bottom, 
-            transparent 0%, 
-            black 5%, 
-            black 95%, 
-            transparent 100%);
-          -webkit-mask-image: linear-gradient(to bottom, 
-            transparent 0%, 
-            black 5%, 
-            black 95%, 
-            transparent 100%);
-        }
+  position: relative;
+   height: 800px;
+  
+  overflow-x: hidden;
+  scroll-behavior: smooth;  
+}
 
         .blog-cards-track {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          position: absolute;
-          width: 100%;
-          will-change: transform;
-          top: 0;
+          
+          position: relative;
+          
         }
 
         .blog-card {
-          position: relative;
-          height: 220px;
-          border-radius: 16px;
-          overflow: hidden;
-          cursor: pointer;
-          transform-style: preserve-3d;
-          perspective: 1000px;
-          flex-shrink: 0;
-          background: #000;
-        }
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;   /* 🔥 spacing between cards */
+}
 
         .blog-card-inner {
           position: relative;
@@ -525,36 +303,32 @@ export default function BlogPage() {
         }
 
         .blog-card-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);
-          transition: all 0.4s ease;
-        }
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.9) 0%,
+    rgba(0,0,0,0.6) 40%,
+    rgba(0,0,0,0.2) 70%,
+    transparent 100%
+  );
+}
 
         .blog-card:hover .blog-card-overlay {
           background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
         }
 
-        .blog-card-content {
-          position: absolute;
-          bottom: 25px;
-          left: 25px;
-          z-index: 2;
-          max-width: 280px;
-        }
+         .blog-card-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
 
-        .blog-card-title {
-          font-size: 22px;
-          font-weight: 700;
-          line-height: 1.3;
-          margin-bottom: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          transition: all 0.3s ease;
-        }
+ .blog-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  max-width: 280px;
+  line-height: 1.4;
+}
 
         .read-btn {
           display: inline-flex;
@@ -670,9 +444,7 @@ export default function BlogPage() {
       `}</style>
 
       {/* Loading Screen */}
-      <div className={`loader ${!isLoading ? 'hidden' : ''}`}>
-        <div className="loader-circle"></div>
-      </div>
+      
 
       <div className="blog-page">
         {/* Background Elements */}
@@ -704,47 +476,48 @@ export default function BlogPage() {
                   <h2 className="sidebar-title">BLOGS</h2>
                   
                   <ul className="blog-list">
-                    {blogPosts.map((post, index) => (
-                      <li 
-                        key={post.id} 
-                        className="blog-list-item" 
-                        onClick={() => scrollToCard(index)}
-                      >
-                        {post.title}
-                      </li>
-                    ))}
-                  </ul>
+  {blogPosts.map((post) => (
+    <li 
+      key={post.id} 
+      className="blog-list-item"
+      onClick={() => {
+        const el = document.getElementById(`blog-${post.id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }}
+    >
+      {post.title}
+    </li>
+  ))}
+</ul>
 
                   <div className="connect-section">
                     <h3 className="connect-title">Connect us</h3>
                     <div className="social-icons">
                       <div 
                         className="social-icon linkedin"
-                        onMouseEnter={(e) => handleSocialHover(e, true)}
-                        onMouseLeave={(e) => handleSocialHover(e, false)}
+                        
                       >
-                        <i className="fab fa-linkedin-in"></i>
+                        <img src="/img/_Linkedin.svg" alt="LinkedIn" />
                       </div>
                       <div 
                         className="social-icon youtube"
-                        onMouseEnter={(e) => handleSocialHover(e, true)}
-                        onMouseLeave={(e) => handleSocialHover(e, false)}
+                        
                       >
-                        <i className="fab fa-youtube"></i>
+                        <img src="/img/_YouTube.svg" alt="YouTube" />
                       </div>
                       <div 
                         className="social-icon instagram"
-                        onMouseEnter={(e) => handleSocialHover(e, true)}
-                        onMouseLeave={(e) => handleSocialHover(e, false)}
+                        
                       >
-                        <i className="fab fa-instagram"></i>
+                        <img src="/img/_Instagram.svg" alt="Instagram" />
                       </div>
                       <div 
                         className="social-icon whatsapp"
-                        onMouseEnter={(e) => handleSocialHover(e, true)}
-                        onMouseLeave={(e) => handleSocialHover(e, false)}
+                        
                       >
-                        <i className="fab fa-whatsapp"></i>
+                        <img src="/img/_WhatsApp.svg" alt="WhatsApp" />
                       </div>
                     </div>
                   </div>
@@ -756,36 +529,37 @@ export default function BlogPage() {
                 <div 
                   className="blog-cards-wrapper" 
                   ref={wrapperRef}
-                  onWheel={handleWheel}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
+                  
                 >
-                  <div className="blog-cards-track" ref={trackRef}>
-                    {allPosts.map((post, index) => (
-                      <div 
-                        key={`${post.id}-${index}`}
-                        className="blog-card"
-                        onMouseEnter={handleCardMouseEnter}
-                        onMouseLeave={handleCardMouseLeave}
-                        onMouseMove={handleCardMouseMove}
-                      >
-                        <div className="blog-card-inner">
-                          <div 
-                            className="blog-card-bg" 
-                            style={{ backgroundImage: `url('${post.image}')` }}
-                          ></div>
-                          <div className="blog-card-overlay"></div>
-                          <div className="blog-card-content">
-                            <h3 className="blog-card-title">{post.title}</h3>
-                            <button className="read-btn">
-                              Read <i className="fas fa-arrow-right"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <div className="blog-cards-track">
+  {blogPosts.map((post) => (
+    <div className="blog-card" key={post.id} id={`blog-${post.id}`}>
+      <div className="blog-card-inner">
+
+        {/* IMAGE */}
+        <div
+          className="blog-card-bg"
+          style={{ backgroundImage: `url(${post.image})` }}
+        ></div>
+
+        {/* OVERLAY */}
+        <div className="blog-card-overlay"></div>
+
+        {/* CONTENT */}
+        <div className="blog-card-content">
+          <h3 className="blog-card-title">
+            {post.title}
+          </h3>
+
+          <div className="read-btn">
+            Read More →
+          </div>
+        </div>
+
+      </div>
+    </div>
+  ))}
+</div>
                 </div>
               </div>
 

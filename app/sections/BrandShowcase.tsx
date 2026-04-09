@@ -100,17 +100,33 @@ export default function BrandShowcase() {
             <div className="top-glow"></div>
 
             <div className="brand-grid">
-              {[1, 2, 3, 4, 5, 6].map((item, index) => (
-                <div className="brand-item" key={item}>
-                  <div className="logo-wheel">
-                    <div className="logo-wheel-track" data-wheel="brand">
-                      <img src="/img/amae.png" alt="Amae Beauty" />
-                      <img src="/img/RanuPath.png" alt="Dr. Ranu Pathology Centre" />
-                      <img src="/img/amae.png" alt="Amae Beauty" />
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {[1, 2, 3, 4, 5, 6].map((item, index) => {
+  const isAmae = item % 2 !== 0
+
+  return (
+    <div className="brand-item" key={item}>
+      <div className="logo-wheel">
+        <div className="logo-wheel-track" data-wheel="brand">
+
+          {isAmae ? (
+            <>
+              <img src="/img/amae.png" alt="Amae Beauty" />
+              <img src="/img/amae.png" alt="Amae Beauty" />
+              <img src="/img/amae.png" alt="Amae Beauty" />
+            </>
+          ) : (
+            <>
+              <img src="/img/RanuPath.png" alt="Dr. Ranu Pathology Centre" />
+              <img src="/img/RanuPath.png" alt="Dr. Ranu Pathology Centre" />
+              <img src="/img/RanuPath.png" alt="Dr. Ranu Pathology Centre" />
+            </>
+          )}
+
+        </div>
+      </div>
+    </div>
+  )
+})}
             </div>
           </div>
         </div>

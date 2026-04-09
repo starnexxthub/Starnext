@@ -213,14 +213,14 @@ export default function AboutSection() {
             </h2>
           </div>
 
-          <div className="content-right">
+          <div className="content-right" style={{paddingTop:28}}>
             <p className="about-desc">
               We recognize that constant satisfaction of client is essential to business survival. Being a digital marketing and web
               development company, we work towards securing a long-term partnership with each client by developing a productive work
               environment and fostering a performance-based culture.
             </p>
 
-            <button className="about-btn btn-navy" onClick={() => router.push("/about")}>
+            <button className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-px-8 tw-py-4 tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1" onClick={() => router.push("/about")}>
               MORE ABOUT US
               <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

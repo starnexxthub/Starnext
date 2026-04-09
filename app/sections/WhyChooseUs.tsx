@@ -108,7 +108,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bento Grid */}
-        <div className="tw-relative">
+        <div className="tw-relative" style={{marginRight:100}}>
           <div className="star-container tw-hidden tw-lg-block">
             <img src="/star.png" alt="" className="img-fluid" />
           </div>
@@ -205,7 +205,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="tw-mt-16 tw-flex tw-flex-col tw-sm-flex-row tw-items-center tw-gap-6 reveal-bottom tw-opacity-0">
+        {/* <div className="tw-mt-16 tw-flex tw-flex-col tw-sm-flex-row tw-items-center tw-gap-6 reveal-bottom tw-opacity-0">
           <p className="tw-text-slate-700 tw-text-lg tw-max-w-md mb-0">
             Designing Seamless User Interfaces that Transform Ideas into Exceptional Digital Experiences
           </p>
@@ -216,7 +216,7 @@ export default function WhyChooseUs() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   )

@@ -46,7 +46,7 @@ const Card = ({ project, i, progress, range, targetScale }: {
       <motion.div
         style={{ 
           scale, 
-          //top: `calc(5vh + ${i * 20}px)`,
+          //top: `calc(5vh + ${i * 10}px)`,
            
 
           zIndex: i 
@@ -88,16 +88,18 @@ export default function ProjectCard() {
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
           overflow-y: scroll; /* Ensure scrolling still works */
-          height: 100vh; /* Set height to viewport */
+          height: 90vh; /* Set height to viewport */
         }
 
         .card-container {
-          height: 85vh;
+          height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
           position: sticky;
           top: 0;
+
+          
         }
 
         .project-card-inner {
@@ -154,7 +156,7 @@ export default function ProjectCard() {
         );
       })}
       
-      <div style={{ height: "10vh" }} />
+      
     </main>
   );
 }

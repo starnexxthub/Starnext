@@ -11,7 +11,7 @@ const testimonialImages = [
 ]
 
 const videoSources = [
-  '/video/cv.mp4',
+  
   '/video/mlb.mp4',
   '/video/oriaana.mp4',
   '/video/alpha.mp4',
@@ -39,7 +39,7 @@ export default function Testimonials() {
       }
     })
 
-    tTl.to('.testimonial-title', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
+    tTl
       .to('.testimonial-subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.8')
       .to('.nav-controls', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.6')
       .to('.progress-container', { opacity: 1, duration: 0.6 }, '-=0.4')
@@ -216,18 +216,21 @@ export default function Testimonials() {
             <div className="t-mask-right mask-right d-none d-lg-block"></div>
 
             <div ref={scrollContainerRef} id="scrollContainer" className="t-scroll ps-2 ms-n2">
-              {testimonialImages.map((img, index) => (
-                <div className="t-card testimonial-card card-item" key={index} data-video={videoSources[index]}>
-                  <video
-                    src={videoSources[index]}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-100 h-100 object-cover"
-                  />
-                </div>
-              ))}
+              {videoSources.map((video, index) => (
+  <div 
+    className="t-card testimonial-card card-item" 
+    key={index}
+  >
+    <video
+      src={video}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      className="w-100 h-100 object-cover"
+    />
+  </div>
+))}
             </div>
           </div>
         </div>

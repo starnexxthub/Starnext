@@ -1,5 +1,7 @@
 'use client'
 
+import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from 'react'
 
 const servicesData = [
@@ -11,6 +13,7 @@ const servicesData = [
 
 export default function ServicesDesktop() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -78,11 +81,10 @@ export default function ServicesDesktop() {
               <h3 className="fw-semibold">DIGITAL MARKETING</h3>
               <p className="fw-semibold">Best Digital Marketing Company</p>
               <p>
-                StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online.
-                Our strategies are built to create measurable impact and long-term brand value.
+                 StarNext Softech, the best digital marketing company, brings years of industry experience to help businesses achieve growth through innovative digital solutions
               </p>
 
-              <button className="about-btn btn-navy">
+              <button className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-px-8 tw-py-4 tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1" onClick={() => router.push("/services/Digital")}>
                 MORE ABOUT US
                 <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -94,11 +96,10 @@ export default function ServicesDesktop() {
               <h3>SOCIAL MEDIA MARKETING</h3>
               <p className="fw-semibold">Best Social Media Marketing Company</p>
               <p>
-                StarNext Softech is a results-driven social media marketing company with deep expertise in delivering high-impact social media solutions.
-                Our mission is to establish ourselves as the leading social media marketing company globally.
+                StarNext’s social media marketing drives growth with engaging campaigns, data-driven strategies, and stunning content, boosting reach, engagement, and loyalty.
               </p>
 
-              <button className="about-btn btn-navy">
+              <button className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-px-8 tw-py-4 tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1" onClick={() => router.push("/services/SocialMedia")}>
                 MORE ABOUT US
                 <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -110,12 +111,11 @@ export default function ServicesDesktop() {
               <h3>SEO</h3>
               <p className="fw-semibold">Best SEO Company</p>
               <p>
-                If you&apos;re a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice.
-                As a leading SEO company, we drive business growth through strategic search optimisation, while our local SEO services boost visibility,
-                attract nearby customers, and give your brand a competitive edge.
+                We help brands dominate search rankings through data-led SEO that drives qualified traffic and conversions.
+
               </p>
 
-              <button className="about-btn btn-navy">
+              <button className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-px-8 tw-py-4 tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1" onClick={() => router.push("/services/Seo")}>
                 MORE ABOUT US
                 <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -127,11 +127,11 @@ export default function ServicesDesktop() {
               <h3>WEB DESIGNING</h3>
               <p className="fw-semibold">Best Web Designing Company</p>
               <p>
-                StarNext Softech is a fast-growing and trusted web designing company in Dehradun, Uttarakhand. We specialise in high-quality website
-                design and development services that combine clean UI/UX, strong performance, and business-focused functionality.
+                From concept to launch, we deliver high-performance, visually refined websites that engage audiences, convert customers, and accelerate measurable business growth.
+
               </p>
 
-              <button className="about-btn btn-navy">
+              <button className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-px-8 tw-py-4 tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1" onClick={() => router.push("/services")} >
                 MORE ABOUT US
                 <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

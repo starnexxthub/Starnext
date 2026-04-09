@@ -83,7 +83,7 @@ export default function Home() {
       <ScrollSequence />
       <WhyChooseUs />
       <BrandShowcase />
-      <HeroExpand />
+      {/* <HeroExpand /> */}
       <ContactSection />
       <Testimonials />
       <FAQSection />

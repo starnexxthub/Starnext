@@ -42,28 +42,28 @@ export default function ContactSection() {
           <div className="col-12 col-lg-6">
             <div className="contact-form-wrap">
               <h3 className="form-title mb-2">Contact Us</h3>
-              <p className="form-sub mb-4">
+              <p className="form-sub mb-3">
                 Let&apos;s build something that moves the needle.<br /><br />
                 Share a few details and our team will get back to you within one business day.
               </p>
 
               <form className="contact-form" action="#" method="post">
-                <div className="mb-4">
+                <div className="mb-5">
                   <label className="form-label sr-only" htmlFor="name">Name</label>
                   <input id="name" type="text" className="form-control line-input" placeholder="Name" />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-5">
                   <label className="form-label sr-only" htmlFor="email">Email</label>
                   <input id="email" type="email" className="form-control line-input" placeholder="Email" />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-5">
                   <label className="form-label sr-only" htmlFor="phone">Phone</label>
                   <input id="phone" type="tel" className="form-control line-input" placeholder="Phone" />
                 </div>
 
-                <div className="mb-4 position-relative">
+                <div className="mb-5 position-relative">
                   <label className="form-label sr-only" htmlFor="service">Service</label>
                   <select
   id="service"

@@ -95,7 +95,7 @@ export default function TeamSection() {
         </div>
 
         <div id="imgTop" className={`${styles.teamImage} ${styles.imgTop}`}>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop" alt="Team member" />
+          <img src="/img/founder.png" alt="Team member" />
         </div>
         <div id="imgLeftTop" className={`${styles.teamImage} ${styles.imgLeftTop}`}>
           <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop" alt="Team member" />
@@ -111,7 +111,7 @@ export default function TeamSection() {
         </div>
 
         <div id="centerImage" className={styles.teamCenterImage}>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop" alt="Featured team member" />
+          <img src="img/black.png" alt="Featured team member" />
         </div>
 
         <div id="leftPanel" className={`${styles.sidePanel} ${styles.sidePanelLeft}`}>
