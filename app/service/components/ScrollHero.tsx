@@ -3,13 +3,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const IMAGES = [
-  { src: "/assets/image.png", rotate: 14, x: "-90%", y: [-300, -120] },
-  { src: "/assets/bmw.png", rotate: -20, x: "-90%", y: [-80, 200] },
-  { src: "/assets/art.png", rotate: 17, x: "-105%", y: [160, 360] },
-  { src: "/assets/cour.png", rotate: 27, x: "70%", y: [200, 80] },
-  { src: "/assets/love.png", rotate: -17, x: "100%", y: [-100, -470] },
-  { src: "/assets/est.png", rotate: 7, x: "20%", y: [-96, -120] },
-  { src: "/assets/fact.png", rotate: -17, x: "10%", y: [600, -120] },
+  { src: "/assets/image.png", rotate: -24, x: "-90%", y: [-300, -120] },
+  { src: "/assets/bmw.png", rotate: 20, x: "-90%", y: [-100, 200] },
+  { src: "/assets/art.png", rotate: -27, x: "-105%", y: [140, 360] },
+  { src: "/assets/cour.png", rotate: 27, x: "70%", y: [140, 80] },
+  { src: "/assets/love.png", rotate: 27, x: "40%", y: [-150, -470] },
+  { src: "/assets/est.png", rotate: 10, x: "20%", y: [-96, -120] },
+  { src: "/assets/fact.png", rotate: -17, x: "-10%", y: [420, -120] },
 ];
 
 export default function ScrollHero() {

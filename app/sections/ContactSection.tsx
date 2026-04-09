@@ -10,7 +10,7 @@ export default function ContactSection() {
           <div className="col-12 col-lg-6">
             <h2 className="contact-title mb-4">Let&apos;s Get<br />in Touch</h2>
 
-            <div className="contact-cards d-grid gap-4">
+            <div className="contact-cards d-grid ">
               <div className="info-card">
                 <div className="info-label">Phone</div>
                 <div className="info-value">+91 8267016702, +91 7248777724</div>

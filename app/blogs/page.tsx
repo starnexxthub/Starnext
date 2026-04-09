@@ -226,11 +226,11 @@ export default function BlogPage() {
           align-items: center;
           justify-content: center;
           font-size: 18px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          
           cursor: pointer;
           position: relative;
           overflow: hidden;
-          background: rgba(255, 255, 255, 0.05);
+          
         }
 
         .social-icon::before {
@@ -240,15 +240,19 @@ export default function BlogPage() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(255, 255, 255, 0.1);
+          
           border-radius: 10px;
-          transition: all 0.3s ease;
+          
         }
 
         .social-icon:hover::before {
-          background: rgba(255, 255, 255, 0.2);
-          transform: scale(1.1);
+          
+          transform: scale(1.2);
         }
+          .social-icon:hover {
+  transform: scale(1.25);
+}
+
 
         .social-icon.linkedin { color: #0077b5; }
         .social-icon.youtube { color: #ff0000; }
@@ -312,9 +316,7 @@ export default function BlogPage() {
   );
 }
 
-        .blog-card:hover .blog-card-overlay {
-          background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
-        }
+        
 
          .blog-card-content {
   position: absolute;
@@ -344,7 +346,7 @@ export default function BlogPage() {
           opacity: 0;
           transform: translateY(15px);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          backdrop-filter: blur(10px);
+          
         }
 
         .blog-card:hover .read-btn {
@@ -358,20 +360,7 @@ export default function BlogPage() {
           box-shadow: 0 0 20px var(--hover-glow);
         }
 
-        .blog-card::after {
-          content: '';
-          position: absolute;
-          top: -2px;
-          left: -2px;
-          right: -2px;
-          bottom: -2px;
-          background: linear-gradient(45deg, var(--accent-blue), transparent, var(--accent-blue));
-          border-radius: 18px;
-          opacity: 0;
-          z-index: -1;
-          transition: opacity 0.4s ease;
-          filter: blur(10px);
-        }
+        
 
         .blog-card:hover::after {
           opacity: 0.5;
