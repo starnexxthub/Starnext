@@ -111,10 +111,10 @@ export default function AboutSection() {
       }
     })
 
-    tl.fromTo('.about-label', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-      .fromTo('.about-title', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-      .fromTo('.about-desc', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.5')
-      .fromTo('.about-btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+    tl.fromTo('.about-label', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
+      .fromTo('.about-title', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+      .fromTo('.about-desc', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.5')
+      .fromTo('.about-btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.4')
 
     // SVG line animation
     const path = document.querySelector('#main-line') as SVGPathElement

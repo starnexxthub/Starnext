@@ -198,13 +198,13 @@ export default function SR7Slider() {
             <sr7-txt id="SR7_2_1-13-24" className="sr7-layer">StarNext Softech is a fast-growing and best website designing company in Dehradun, Uttarakhand. We specialize in the best website design and development services.</sr7-txt>
             <a id="SR7_2_1-13-31" className="sr7-layer" href="" target="_blank" rel="noopener">Call Now</a>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-13-38" className="sr7-layer">graphics and video editing</sr7-txt>
+            <sr7-txt id="SR7_2_1-13-38" className="sr7-layer">Graphics and Video editing</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-13-42" className="sr7-layer">Website Devlopment</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-13-43" className="sr7-layer">Social media</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-13-44" className="sr7-layer">digital marketing</sr7-txt>
+            <sr7-txt id="SR7_2_1-13-44" className="sr7-layer">Digital Marketing</sr7-txt>
           {/* @ts-ignore */}
           </sr7-slide>
 
@@ -232,11 +232,11 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-12-38" className="sr7-layer">Social media</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-12-42" className="sr7-layer">website devlopment</sr7-txt>
+            <sr7-txt id="SR7_2_1-12-42" className="sr7-layer">Website Devlopment</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-12-43" className="sr7-layer">Graphics And Video Editing</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-12-44" className="sr7-layer">DIgital marketing</sr7-txt>
+            <sr7-txt id="SR7_2_1-12-44" className="sr7-layer">Digital Marketing</sr7-txt>
           {/* @ts-ignore */}
           </sr7-slide>
 
@@ -249,7 +249,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             </sr7-bg>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-11-4" className="sr7-layer">social media</sr7-txt>
+            <sr7-txt id="SR7_2_1-11-4" className="sr7-layer">Social Media</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-11-20" className="sr7-layer">Best Social Media Marketing Company in Dehradun</sr7-txt>
             {/* @ts-ignore */}

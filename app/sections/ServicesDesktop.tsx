@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react'
 
 const servicesData = [
-  { title: '', desc: '', img: '/img/dm.webp' },
+  { title: '', desc: '', img: '/img/digitalM.webp' },
   { title: '', desc: '', img: '/img/social.webp' },
   { title: '', desc: '', img: '/img/seo.webp' },
   { title: '', desc: '', img: '/img/Development.webp' }

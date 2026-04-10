@@ -9,8 +9,11 @@ import HeroSection from './components/HeroSection';
 import CoverScroll from './components/CoverScroll';
 import TeamSection from './components/TeamSection';
 import PeopleSection from './components/PeopleSection';
+import TestimonialSection from './components/TestimonialSection';
 import Navbar from '../sections/Navbar';
-import Footer from '../sections/Footer'; // Already imported
+import Footer from '../sections/Footer'; 
+import Newsletter from '../sections/Newsletter';
+import SocialBar from '../sections/SocialBar';
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -63,7 +66,11 @@ export default function AboutPage() {
         />
         <TeamSection />
         <PeopleSection />
+        <TestimonialSection/>
       </main>
+
+      <Newsletter/>
+      <SocialBar/>
       <Footer /> 
     </>
   );

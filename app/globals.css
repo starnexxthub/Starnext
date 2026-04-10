@@ -304,7 +304,7 @@ letter-spacing: -7px;
 
 .newsletter-bar {
   height: 208px;
-  background: #072E50;
+  background:#031E4C;
   display: flex;
   align-items: center;
 }
@@ -367,8 +367,11 @@ letter-spacing: -7px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+
+  transition: background 0.3s ease; /* smooth hover animation */
 }
- .newsletter-inputWrap button:hover {
+
+.newsletter-inputWrap button:hover {
   background: #000d1a;
 }
 

@@ -37,6 +37,7 @@ export default function ScrollHero() {
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-left:50px;
         }
         .scroll-hero-card {
           position: absolute;
