@@ -84,7 +84,9 @@ export default function TeamSection() {
         trigger: section,
         start: "top top+=1",
         end: "+=150%",
-        scrub: 0.6,
+        scrub: 1.2,
+   
+        
         invalidateOnRefresh: true,
         
       }
@@ -129,7 +131,7 @@ export default function TeamSection() {
   }, section);
 
   
- ScrollTrigger.normalizeScroll(true);
+ 
   return () => ctx.revert();
 
 }, []);
