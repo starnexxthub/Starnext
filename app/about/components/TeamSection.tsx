@@ -83,8 +83,9 @@ export default function TeamSection() {
       scrollTrigger: {
         trigger: section,
         start: "top top+=1",
-        end: "+=150%",
+        end: "+=100%",
         scrub: 1.2,
+        
    
         
         invalidateOnRefresh: true,
@@ -119,6 +120,10 @@ export default function TeamSection() {
       .to(`.${styles.panelContent}`, { opacity: 0 }, 0.85);
 
     // floating animation
+   ScrollTrigger.create({
+  trigger: section,
+  start: "top 80%",
+  onEnter: () => {
     gsap.to(`.${styles.teamImage}`, {
       y: "+=10",
       duration: 2,
@@ -127,8 +132,12 @@ export default function TeamSection() {
       repeat: -1,
       stagger: 0.2
     });
+  },
+  once: true
+});
+    
 
-  }, section);
+  }, );
 
   
  
