@@ -30,11 +30,7 @@ const stats = [
 
 
 
-if (typeof window !== "undefined") {
 
-  gsap.registerPlugin(ScrollTrigger);
-
-}
 
 
 
@@ -59,6 +55,14 @@ export default function TeamSection() {
     gsap.set("#leftPanel", { width: "0%" });
     gsap.set("#rightPanel", { width: "0%" });
 
+    gsap.set([
+  "#imgTop",
+  "#imgLeftTop",
+  "#imgRightTop",
+  "#imgLeftBottom",
+  "#imgRightBottom"
+], { opacity: 1, scale: 1, x: 0, y: 0 });
+
     const animateCounter = (
   element: Element,
   target: number,
@@ -79,9 +83,10 @@ export default function TeamSection() {
       scrollTrigger: {
         trigger: section,
         start: "top top+=1",
-        end: "+=200%",
+        end: "+=150%",
         scrub: 0.6,
         invalidateOnRefresh: true,
+        
       }
     });
 
@@ -123,11 +128,8 @@ export default function TeamSection() {
 
   }, section);
 
-  // ✅ FIX FOR LIVE (IMPORTANT)
-  window.addEventListener("load", () => {
-    ScrollTrigger.refresh();
-  });
-
+  
+ ScrollTrigger.normalizeScroll(true);
   return () => ctx.revert();
 
 }, []);
