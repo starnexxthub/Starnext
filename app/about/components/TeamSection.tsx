@@ -14,32 +14,36 @@ const stats = [
 ];
 
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    requestAnimationFrame(() => {
+  const section = sectionRef.current;
+  if (!section) return;
 
-    // Counter animation function
-    const animateCounter = (element: Element, target: number, duration = 2) => {
-      const obj = { val: 0 };
-      return gsap.to(obj, {
-        val: target,
-        duration: duration,
-        ease: "power2.out",
-        onUpdate: () => {
-          element.textContent = Math.round(obj.val).toString();
-        }
-      });
-    };
+  gsap.registerPlugin(ScrollTrigger);
 
-    // Main timeline
+  const ctx = gsap.context(() => {
+
+    const animateCounter = (
+  element: Element,
+  target: number,
+  duration: number = 2
+) => {
+  const obj = { val: 0 };
+
+  return gsap.to(obj, {
+    val: target,
+    duration,
+    ease: "power2.out",
+    onUpdate: () => {
+      element.textContent = Math.round(obj.val).toString();
+    }
+  });
+};
+
     const teamTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -49,21 +53,20 @@ export default function TeamSection() {
       }
     });
 
-    teamTl.to("#imgTop", { y: "35vh", scale: 2.2, opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0)
-      .to("#imgLeftTop", { x: "30vw", y: "20vh", scale: 0.5, opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0)
-      .to("#imgRightTop", { x: "-30vw", y: "20vh", scale: 0.5, opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0)
-      .to("#imgLeftBottom", { x: "25vw", y: "-15vh", scale: 0.5, opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0)
-      .to("#imgRightBottom", { x: "-25vw", y: "-15vh", scale: 0.5, opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0)
-      .to("#teamCenterText", { opacity: 0, y: -50, duration: 0.15, ease: "power2.inOut" }, 0.1)
-      .to("#centerImage", { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" }, 0.2)
-      .to("#centerImage", { scale: 1.3, duration: 0.25, ease: "power2.inOut" }, 0.45)
-      .to("#leftPanel", { width: "25%", duration: 0.25, ease: "power2.inOut" }, 0.45)
-      .to("#rightPanel", { width: "25%", duration: 0.25, ease: "power2.inOut" }, 0.45)
-      .to(`.${styles.panelContent}`, { 
-        opacity: 1, 
-        duration: 0.2, 
-        stagger: 0.05, 
-        ease: "power2.out",
+    teamTl
+      .to("#imgTop", { y: "35vh", scale: 2.2, opacity: 0 }, 0)
+      .to("#imgLeftTop", { x: "30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
+      .to("#imgRightTop", { x: "-30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
+      .to("#imgLeftBottom", { x: "25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
+      .to("#imgRightBottom", { x: "-25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
+      .to("#teamCenterText", { opacity: 0, y: -50 }, 0.1)
+      .to("#centerImage", { opacity: 1, scale: 1 }, 0.2)
+      .to("#centerImage", { scale: 1.3 }, 0.45)
+      .to("#leftPanel", { width: "25%" }, 0.45)
+      .to("#rightPanel", { width: "25%" }, 0.45)
+      .to(`.${styles.panelContent}`, {
+        opacity: 1,
+        stagger: 0.05,
         onStart: () => {
           const counters = document.querySelectorAll(`.${styles.statNumber}`);
           counters.forEach((counter, index) => {
@@ -72,11 +75,10 @@ export default function TeamSection() {
           });
         }
       }, 0.55)
-      .to("#centerImage", { scale: 3, y: "20vh", duration: 0.3, ease: "power2.in" }, 0.7)
-      .to(["#leftPanel", "#rightPanel"], { width: "50%", duration: 0.3, ease: "power2.in" }, 0.7)
-      .to(`.${styles.panelContent}`, { opacity: 0, duration: 0.2, ease: "power2.in" }, 0.85);
+      .to("#centerImage", { scale: 3, y: "20vh" }, 0.7)
+      .to(["#leftPanel", "#rightPanel"], { width: "50%" }, 0.7)
+      .to(`.${styles.panelContent}`, { opacity: 0 }, 0.85);
 
-    // Floating animation for images
     gsap.to(`.${styles.teamImage}`, {
       y: "+=10",
       duration: 2,
@@ -86,13 +88,16 @@ export default function TeamSection() {
       stagger: 0.2
     });
 
-    setTimeout(() => ScrollTrigger.refresh(), 500);
+  }, section);
 
-    return () => {
-      teamTl.kill();
-    };
-    });
-  }, []);
+  // 🔥 VERY IMPORTANT FOR LIVE
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 800);
+
+  return () => ctx.revert();
+
+}, []);
   
 
   return (
