@@ -45,10 +45,7 @@ const Card = ({ project, i, progress, range, targetScale }: {
     <div className="card-container">
       <motion.div
         style={{ 
-          
-          
-           
-
+          scale,
           zIndex: i 
         }}
         className="project-card-inner"
@@ -78,150 +75,153 @@ export default function ProjectCard() {
   return (
     <main ref={container} className="scroll-container relative">
       <style>{`
-        /* Hide scrollbar */
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
+        /* ── Scrollbar ── */
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-container {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          overflow-y: scroll;
+          height: 80vh;
+        }
 
-.scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: scroll;
-  height: 80vh;
-}
+        /* ── Card container ── */
+        .card-container {
+          height: 80vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: sticky;
+          top: 0;
+          padding: 0 clamp(12px, 4vw, 40px);
+          box-sizing: border-box;
+        }
 
-/* CARD CONTAINER */
-.card-container {
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: sticky;
-  top: 0;
-  padding: 0 20px;
-}
+        /* ── Card ── */
+        .project-card-inner {
+          position: relative;
+          width: 100%;
+          max-width: 924px;
+          background-color: #EDF2F7;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 -10px 50px rgba(0,0,0,0.1);
+          padding: clamp(1.25rem, 3vw, 2.5rem);
+          transform-origin: top;
+          box-sizing: border-box;
+        }
 
-/* CARD */
-.project-card-inner {
-  position: relative;
-  width: 100%;
-  max-width: 924px;
-  min-height: 420px;
-  background-color: #EDF2F7;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 -10px 50px rgba(0,0,0,0.1);
-  padding: 2.5rem;
-  transform-origin: top;
-}
+        /* ── Grid ── */
+        .project-card-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(1rem, 2.5vw, 2rem);
+          align-items: center;
+        }
 
-/* GRID */
-.project-card-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  height: 100%;
-  align-items: center;
-}
+        /* ── Image ── */
+        .project-img-side {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
-/* IMAGE */
-.project-img-side {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+        .project-img-rotated {
+          width: 100%;
+          max-width: 420px;
+          height: auto;
+          border-radius: 12px;
+          transform: rotate(-3deg);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          display: block;
+        }
 
-.project-img-rotated {
-  width: 100%;
-  max-width: 420px;
-  border-radius: 12px;
-  transform: rotate(-3deg);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
+        /* ── Label ── */
+        .project-card-label {
+          display: inline-block;
+          font-size: clamp(11px, 1.2vw, 13px);
+          font-weight: 500;
+          color: #718096;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.5rem;
+        }
 
-/* TEXT */
-.project-card-title {
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-}
+        /* ── Title ── */
+        .project-card-title {
+          font-size: clamp(18px, 2.5vw, 30px);
+          font-weight: 500;
+          margin: 0 0 0.75rem;
+          line-height: 1.3;
+        }
 
-.project-card-desc {
-  font-size: 14px;
-  font-weight: 400;
-  color: #4A5568;
-  line-height: 1.6;
-}
+        /* ── Description ── */
+        .project-card-desc {
+          font-size: clamp(12px, 1.2vw, 14px);
+          font-weight: 400;
+          color: #4A5568;
+          line-height: 1.6;
+          margin: 0;
 
-/* ================= TABLET ================= */
+          /* Clamp visible lines so tall text doesn't overflow the card */
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 7;
+          overflow: hidden;
+        }
 
-@media (max-width: 1024px){
+        /* ── Tablet (≤1024px) ── */
+        @media (max-width: 1024px) {
+          .project-card-inner { max-width: 760px; }
+        }
 
-  .project-card-inner{
-    max-width: 760px;
-    padding:2rem;
-  }
+        /* ── Mobile landscape / large phones (≤768px) ── */
+        @media (max-width: 768px) {
+          .scroll-container,
+          .card-container { height: 80svh; }
 
-  .project-card-title{
-    font-size:26px;
-  }
+          .project-card-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
 
-}
+          .project-img-rotated {
+            max-width: min(260px, 55vw);
+            margin: 0 auto;
+          }
 
-/* ================= MOBILE ================= */
+          .project-card-desc {
+            -webkit-line-clamp: 5;
+          }
+        }
 
-@media (max-width: 768px){
+        /* ── Small phones (≤480px) ── */
+        @media (max-width: 480px) {
+          .project-img-rotated { max-width: min(200px, 65vw); }
 
-  .scroll-container{
-    height:80vh;
-  }
-    .card-container{
-    height:80vh;
-    }
+          .project-card-desc { -webkit-line-clamp: 4; }
+        }
 
-  .project-card-grid{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
+        /* ── Very small phones (≤360px) ── */
+        @media (max-width: 360px) {
+          .project-card-inner { border-radius: 14px; }
+          .project-img-rotated { max-width: 160px; }
+          .project-card-desc { -webkit-line-clamp: 3; }
+        }
 
-  .project-card-inner{
-    padding:1.75rem;
-    min-height:auto;
-  }
+        /* ── Landscape phones — tighter vertical space ── */
+        @media (max-width: 768px) and (orientation: landscape) {
+          .project-card-grid {
+            grid-template-columns: 1fr 1fr;
+            text-align: left;
+          }
 
-  .project-img-rotated{
-    max-width:260px;
-    margin:auto;
-  }
+          .project-img-rotated {
+            max-width: min(200px, 40vw);
+            margin: 0;
+          }
 
-  .project-card-title{
-    font-size:22px;
-  }
-
-  .project-card-desc{
-    font-size:13px;
-  }
-
-}
-
-/* ================= SMALL MOBILE ================= */
-
-@media (max-width: 480px){
-
-  .project-img-rotated{
-    max-width:220px;
-  }
-
-  .project-card-title{
-    font-size:20px;
-  }
-
-  .project-card-desc{
-    font-size:12px;
-  }
-
-}
+          .project-card-desc { -webkit-line-clamp: 4; }
+        }
       `}</style>
 
       {PROJECTS.map((project, i) => {
@@ -237,8 +237,6 @@ export default function ProjectCard() {
           />
         );
       })}
-      
-      
     </main>
   );
 }

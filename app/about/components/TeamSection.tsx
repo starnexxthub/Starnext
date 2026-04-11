@@ -13,12 +13,18 @@ const stats = [
   { target: 23, label: 'Digital experiences launched' },
 ];
 
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    requestAnimationFrame(() => {
 
     // Counter animation function
     const animateCounter = (element: Element, target: number, duration = 2) => {
@@ -80,10 +86,14 @@ export default function TeamSection() {
       stagger: 0.2
     });
 
+    setTimeout(() => ScrollTrigger.refresh(), 500);
+
     return () => {
       teamTl.kill();
     };
+    });
   }, []);
+  
 
   return (
     <section ref={sectionRef} id="teamSection" className={styles.teamSection}>

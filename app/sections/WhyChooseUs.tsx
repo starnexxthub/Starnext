@@ -85,6 +85,84 @@ export default function WhyChooseUs() {
 
   return (
     <section className="tw-relative tw-py-20 tw-px-4 tw-sm-px-6 tw-lg-px-8 tw-overflow-hidden bg-white">
+      <style>{`
+        .why-bento-wrapper {
+          position: relative;
+          /* removed hardcoded marginRight: 100 */
+        }
+
+        /* Star — only visible on large screens, absolutely positioned so it doesn't affect flow */
+        .star-container {
+          position: absolute;
+          top: -20%;
+          right: -60px;
+          transform: translateY(-50%);
+          width: clamp(80px, 10vw, 140px);
+          pointer-events: none;
+          z-index: 999;
+        }
+
+        /* ── Bento grid ── */
+        .bento-grid {
+          display: grid;
+          gap: 1rem;
+          position: relative;
+          z-index: 1;
+          /* 2-col default for medium+ */
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto;
+        }
+
+        /* card-4 spans full width on all sizes */
+        .card-4 {
+          grid-column: 1 / -1;
+        }
+
+        /* ── Mobile (≤ 640px): single column ── */
+        @media (max-width: 640px) {
+          .bento-grid {
+            grid-template-columns: 1fr;
+          }
+          .card-4 {
+            grid-column: 1;
+          }
+          .star-container {
+            display: none !important;
+          }
+          .why-bento-wrapper {
+            margin-right: 0 !important;
+          }
+        }
+
+        /* ── Tablet (641px – 1023px): 2-col, hide star ── */
+        @media (min-width: 641px) and (max-width: 1023px) {
+          .star-container {
+            display: none !important;
+          }
+          .why-bento-wrapper {
+            margin-right: 0 !important;
+          }
+        }
+
+        /* ── Desktop (≥ 1024px): restore right margin for star ── */
+        @media (min-width: 1024px) {
+          .why-bento-wrapper {
+            margin-right: clamp(60px, 8vw, 120px);
+          }
+        }
+
+        /* Card-4 inner layout: stack on mobile, row on md+ */
+        @media (max-width: 640px) {
+          .card-4 .tw-flex {
+            flex-direction: column !important;
+          }
+          .card-4 .magnetic-btn {
+            align-self: stretch;
+            justify-content: center;
+          }
+        }
+      `}</style>
+
       {/* Ambient Background */}
       <div className="tw-absolute tw-inset-0 tw-overflow-hidden tw-pe-none">
         <div className="tw-absolute tw-top-20 tw-left-10 tw-w-72 tw-h-72 tw-bg-blue-100 tw-rounded-full tw-mix-blend-multiply tw-blur-3xl tw-opacity-30 animate-blob"></div>
@@ -108,7 +186,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bento Grid */}
-        <div className="tw-relative" style={{marginRight:100}}>
+        <div className="why-bento-wrapper">
           <div className="star-container tw-hidden tw-lg-block">
             <img src="/star.png" alt="" className="img-fluid" />
           </div>

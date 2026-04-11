@@ -277,7 +277,12 @@ export default function SR7Slider() {
         {/* @ts-ignore */}
         </sr7-content>
       {/* @ts-ignore */}
+      
       </sr7-module>
+      
+      
     </>
+    
+    
   );
 }
