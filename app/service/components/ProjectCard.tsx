@@ -78,68 +78,150 @@ export default function ProjectCard() {
   return (
     <main ref={container} className="scroll-container relative">
       <style>{`
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .scroll-container::-webkit-scrollbar {
-          display: none;
-        }
+        /* Hide scrollbar */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
 
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .scroll-container {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-          overflow-y: scroll; /* Ensure scrolling still works */
-          height: 70vh; /* Set height to viewport */
-        }
+.scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  height: 80vh;
+}
 
-        .card-container {
-          height: 70vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: sticky;
-          top: 0;
+/* CARD CONTAINER */
+.card-container {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  padding: 0 20px;
+}
 
-          
-        }
+/* CARD */
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  max-width: 924px;
+  min-height: 420px;
+  background-color: #EDF2F7;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 -10px 50px rgba(0,0,0,0.1);
+  padding: 2.5rem;
+  transform-origin: top;
+}
 
-        .project-card-inner {
-          position: relative;
-          width: 100%;
-          max-width: 924px;
-          height: 450px;
-          background-color: #EDF2F7;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 -10px 50px rgba(0,0,0,0.1);
-          padding: 2.5rem;
-          transform-origin: top;
-        }
+/* GRID */
+.project-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  height: 100%;
+  align-items: center;
+}
 
-        .project-card-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          height: 100%;
-          align-items: center;
-        }
+/* IMAGE */
+.project-img-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-        .project-img-rotated {
-          width: 100%;
-          border-radius: 12px;
-          transform: rotate(-3deg);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+.project-img-rotated {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  transform: rotate(-3deg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
 
-        .project-card-title {
-          font-size: 30px;
-          font-weight: 500;
-          margin-bottom: 1rem;
-        }
-        .project-card-desc {
-          font-size: 14px;
-          font-weight: 400;
-          color: #4A5568;
-        }
+/* TEXT */
+.project-card-title {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.project-card-desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: #4A5568;
+  line-height: 1.6;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px){
+
+  .project-card-inner{
+    max-width: 760px;
+    padding:2rem;
+  }
+
+  .project-card-title{
+    font-size:26px;
+  }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px){
+
+  .scroll-container{
+    height:80vh;
+  }
+    .card-container{
+    height:80vh;
+    }
+
+  .project-card-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .project-card-inner{
+    padding:1.75rem;
+    min-height:auto;
+  }
+
+  .project-img-rotated{
+    max-width:260px;
+    margin:auto;
+  }
+
+  .project-card-title{
+    font-size:22px;
+  }
+
+  .project-card-desc{
+    font-size:13px;
+  }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px){
+
+  .project-img-rotated{
+    max-width:220px;
+  }
+
+  .project-card-title{
+    font-size:20px;
+  }
+
+  .project-card-desc{
+    font-size:12px;
+  }
+
+}
       `}</style>
 
       {PROJECTS.map((project, i) => {

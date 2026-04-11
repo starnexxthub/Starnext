@@ -35,6 +35,7 @@ export default function ServicePage() {
     margin-left: 0;
     margin-right: 0;
   }
+   
   
 }
 
@@ -253,14 +254,14 @@ maxWidth: "458px",
   }}
 >
   <h2
-    className="text-center fw-bold"
-    style={{
-      fontSize: "clamp(26px, 4vw, 40px)",
-      marginBottom: "clamp(1rem, 2vw, 2rem)"
-    }}
-  >
-    Recent Projects
-  </h2>
+  className="text-center fw-bold"
+  style={{
+    fontSize: "clamp(26px, 4vw, 40px)",
+    marginBottom: "clamp(30px, 5vw, 0px)"
+  }}
+>
+  Recent Projects
+</h2>
 
   <div style={{ marginTop: "-40px" }}>
     <ProjectCard />

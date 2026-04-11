@@ -36,7 +36,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
         trigger: "#coverWrapper",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1,
+        scrub: 0.8,
         onUpdate: (self) => {
           if (progressBar) {
             progressBar.style.width = `${self.progress * 100}%`;
@@ -75,36 +75,12 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
 
     // Touch navigation
     let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.changedTouches[0].screenY;
-    };
+    
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      const touchEndY = e.changedTouches[0].screenY;
-      const diff = touchStartY - touchEndY;
-      
-      if (Math.abs(diff) > 50) {
-        const coverTrigger = ScrollTrigger.getAll().find(
-          st => st.vars.trigger === "#coverWrapper"
-        );
-        if (!coverTrigger) return;
-        
-        const currentIndex = coverTrigger.progress > 0.5 ? 1 : 0;
-        if (diff > 0 && currentIndex === 0) goToSection(1);
-        else if (diff < 0 && currentIndex === 1) goToSection(0);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
       coverScroll.kill();
     };
   }, [progressBarRef, updateNavDots]);

@@ -1855,6 +1855,11 @@ letter-spacing: -7px;
         .newsletter-form {
           width: 100%;
         }
+        .newsletter-title{
+          font-size: 20px;
+          margin-left: 60px;
+          
+        }
       }
        .starnext-bar {
         height: 130px;
@@ -2130,9 +2135,10 @@ letter-spacing: -7px;
       @media (min-width: 768px) {
         .brand-showcase .brand-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 28px;
+          gap: 24px;
         }
       }
+ 
 
       /* Brand item + tooltip */
       .brand-showcase .brand-item {
@@ -2208,6 +2214,22 @@ letter-spacing: -7px;
       .brand-showcase .brand-item:hover .logo-wheel-track img {
         filter: brightness(1.15) drop-shadow(0 0 15px rgba(255,255,255,0.35));
       }
+      @media (max-width: 480px) {
+
+  .brand-showcase .glass-card {
+    padding: 22px;
+  }
+
+  .brand-showcase .logo-wheel {
+    height: 80px;
+  }
+
+  .brand-showcase .logo-wheel-track img {
+    height: 60px;
+    max-width: 120px;
+  }
+
+}
 
       /* ============================================
       YOUR ORIGINAL CSS (kept exactly)

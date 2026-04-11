@@ -96,7 +96,7 @@ export default function SocialMedia() {
           style={{ backgroundColor: "#1e2f3f" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
-            Your website is often the first interaction potential clients have with your business, and in today's market, you have seconds to make the right impression. Our design process combines proven conversion principles with engaging aesthetics to create websites that turn visitors into valuable leads. Every element is strategically crafted to reflect your expertise, build trust with your ideal clients, and guide them toward taking action.
+            StarNext Softech is a results-driven social media marketing company with deep expertise in delivering high-impact social media solutions. Our mission is to establish ourselves as the leading social media marketing company globally.
           </p>
         </div>
 
@@ -104,7 +104,8 @@ export default function SocialMedia() {
           className="mt-4 text-secondary"
           style={{ fontSize: "18px", lineHeight: "1.8" }}
         >
-          Our web design service transforms your business's online presence into a powerful lead-generation engine. We blend strategic design principles with proven conversion tactics to create websites that consistently attract and convert your ideal clients. Every design decision is made with your business goals in mind, ensuring your website becomes your most effective marketing tool.
+          Scale your brand’s growth with targeted influencer marketing that reduces reliance on high-cost ads and delivers sustainable, long-term results. Our proven success through high-performing influencer campaigns reflects our expertise. Strengthen your online presence and increase revenue with tailored strategies designed to engage, influence, and convert your target audience.
+
         </p>
       </div>
 

@@ -37,7 +37,7 @@ export default function ScrollHero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-left:50px;
+          
         }
         .scroll-hero-card {
           position: absolute;
@@ -53,17 +53,26 @@ export default function ScrollHero() {
           .scroll-hero-card {
             width: 200px;
           }
+            .scroll-hero-sticky{
+             margin-left:0px;
+            }
         }
         @media (min-width: 768px) {
           .scroll-hero-card {
             width: 280px;
           }
+            .scroll-hero-sticky{
+             margin-left:0px;
+            }
         }
         @media (min-width: 992px) {
           .scroll-hero-card {
             width: 415px;
             
           }
+            .scroll-hero-sticky{
+             margin-left:50px;
+            }
         }
         .scroll-hero-card img {
           width: 100%;

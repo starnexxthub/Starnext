@@ -95,22 +95,91 @@ export default function Navbar() {
       <div className={`nav-menu-wrapper d-lg-none ${isMenuOpen ? 'active' : ''}`} id="mobileMenu">
         <div className="container">
           <ul className="nav-menu">
-            <li className="nav-item">
-              <a href="#" className="nav-link-custom active">Home</a>
-            </li>
-            <li className="nav-item">
-              <a href="/about" className="nav-link-custom">About</a>
-            </li>
-            <li className="nav-item">
-              <a href="/service" className="nav-link-custom">Services</a>
-            </li>
-            <li className="nav-item">
-              <a href="/portfolio" className="nav-link-custom">Portfolio</a>
-            </li>
-            <li className="nav-item">
-              <a href="/testimonials" className="nav-link-custom">Testimonials</a>
-            </li>
-          </ul>
+  <li className="nav-item">
+    <a
+      href="/"
+      className="nav-link-custom active"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/")
+        setIsMenuOpen(false)
+      }}
+    >
+      Home
+    </a>
+  </li>
+
+  <li className="nav-item">
+    <a
+      href="/about"
+      className="nav-link-custom"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/about")
+        setIsMenuOpen(false)
+      }}
+    >
+      About
+    </a>
+  </li>
+
+  <li className="nav-item">
+    <a
+      href="/service"
+      className="nav-link-custom"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/service")
+        setIsMenuOpen(false)
+      }}
+    >
+      Services
+    </a>
+  </li>
+
+  {/* ✅ ADD BLOGS */}
+  <li className="nav-item">
+    <a
+      href="/blogs"
+      className="nav-link-custom"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/blogs")
+        setIsMenuOpen(false)
+      }}
+    >
+      Blogs
+    </a>
+  </li>
+
+  <li className="nav-item">
+    <a
+      href="/portfolio"
+      className="nav-link-custom"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/portfolio")
+        setIsMenuOpen(false)
+      }}
+    >
+      Portfolio
+    </a>
+  </li>
+
+  <li className="nav-item">
+    <a
+      href="/testimonials"
+      className="nav-link-custom"
+      onClick={(e) => {
+        e.preventDefault()
+        router.push("/testimonials")
+        setIsMenuOpen(false)
+      }}
+    >
+      Testimonials
+    </a>
+  </li>
+</ul>
           <div className="nav-actions">
             <button className="btn-contact w-100">Contact Us</button>
             <a href="tel:+9198876543210" className="phone-link">

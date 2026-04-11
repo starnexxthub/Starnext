@@ -96,7 +96,7 @@ export default function Seo() {
           style={{ backgroundColor: "#1e2f3f" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
-            Your website is often the first interaction potential clients have with your business, and in today's market, you have seconds to make the right impression. Our design process combines proven conversion principles with engaging aesthetics to create websites that turn visitors into valuable leads. Every element is strategically crafted to reflect your expertise, build trust with your ideal clients, and guide them toward taking action.
+           If you’re a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice. As a leading SEO company, we drive business growth through strategic search optimisation, while our local SEO services boost visibility, attract nearby customers, and give your brand a competitive edge.
           </p>
         </div>
 
@@ -104,7 +104,7 @@ export default function Seo() {
           className="mt-4 text-secondary"
           style={{ fontSize: "18px", lineHeight: "1.8" }}
         >
-          Our web design service transforms your business's online presence into a powerful lead-generation engine. We blend strategic design principles with proven conversion tactics to create websites that consistently attract and convert your ideal clients. Every design decision is made with your business goals in mind, ensuring your website becomes your most effective marketing tool.
+          Our e-commerce marketing agency helps businesses lower dependency on paid advertising by building a strong, sustainable organic traffic funnel for long-term growth. With hands-on expertise in e-commerce digital marketing, StarNext delivers measurable results. Partner with our e-commerce marketing company to strengthen your online presence and increase revenue through result-driven e-commerce marketing services
         </p>
       </div>
 

@@ -15,6 +15,32 @@ export default function ContactForm() {
         .form-control::placeholder {
           color: #cbd5e1;
         }
+
+
+   /* MOBILE OPTIMIZATION */
+@media (max-width:768px){
+
+  section{
+    padding:3rem 0 !important;
+  }
+
+  h1{
+    margin-bottom:2.5rem !important;
+    margin-top:30px;
+  }
+
+  .form-card{
+    padding:1.5rem !important;
+    
+  }
+
+  .form-fields{
+    gap:1.25rem !important;
+  }
+
+}
+
+}
       `}</style>
 
       <section
@@ -43,7 +69,7 @@ export default function ContactForm() {
               width: "100%",
               fontSize: "clamp(32px, 6vw, 60px)",
               lineHeight: "1.2",
-              marginBottom: "5rem",
+              marginBottom: "clamp(2rem, 5vw, 5rem)",
               fontWeight: "500"
             }}
           >
@@ -52,7 +78,7 @@ export default function ContactForm() {
 
           {/* FORM CARD */}
           <div
-            className="mx-auto rounded-4 p-4 p-sm-5 text-center"
+  className="form-card mx-auto rounded-4 p-4 p-sm-5 text-center"
             style={{
               background: "rgba(10,30,60,0.85)",
               width: "100%",
@@ -71,7 +97,7 @@ export default function ContactForm() {
 
             {/* FORM */}
             <div
-              className="d-flex flex-column align-items-center justify-content-center gap-5 mx-auto"
+              className=" form-fields d-flex flex-column align-items-center justify-content-center gap-5 mx-auto"
               style={{ maxWidth: "498px", width: "100%", gap: "clamp(1.5rem, 3vw, 2.5rem)" }}
             >
               <input className="form-control w-100" placeholder="Name" style={inputStyle} />

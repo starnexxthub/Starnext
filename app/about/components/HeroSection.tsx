@@ -36,7 +36,7 @@ export default function HeroSection() {
     // Infinite scroll animation
     scrollTweenRef.current = gsap.to(track, {
       x: `-=${totalWidth}`,
-      duration: 20,
+      duration: 30,
       ease: "none",
       repeat: -1,
       modifiers: {

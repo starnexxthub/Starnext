@@ -21,6 +21,12 @@ export default function Digital() {
   margin-left: auto;
   margin-right: auto;
 }
+  .para{
+  max-height:150px;
+  overflow-y:scroll;
+  margin-left:30px;
+
+  }
 
 @media (min-width: 768px) {
   .floating-card-wrapper {
@@ -96,16 +102,29 @@ export default function Digital() {
           style={{ backgroundColor: "#1e2f3f" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
-            Your website is often the first interaction potential clients have with your business, and in today's market, you have seconds to make the right impression. Our design process combines proven conversion principles with engaging aesthetics to create websites that turn visitors into valuable leads. Every element is strategically crafted to reflect your expertise, build trust with your ideal clients, and guide them toward taking action.
+            StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.
           </p>
         </div>
-
+        <div className="para">
         <p
           className="mt-4 text-secondary"
           style={{ fontSize: "18px", lineHeight: "1.8" }}
         >
-          Our web design service transforms your business's online presence into a powerful lead-generation engine. We blend strategic design principles with proven conversion tactics to create websites that consistently attract and convert your ideal clients. Every design decision is made with your business goals in mind, ensuring your website becomes your most effective marketing tool.
+          What Sets Us Apart :<br></br>
+Strategic campaigns that drive quality traffic<br></br>
+Strong online brand positioning<br></br>
+Results-driven execution using data<br></br>
+Cost-effective, tailored business solutions<br></br>
+
+We think like founders, Not Vendors<br></br>
+Focused on empowering your brand with a long-term growth partnership.<br></br>
+Proactive leadership that stays ahead in strategy and execution.<br></br>
+Clear understanding of your requirements with precise delivery.<br></br>
+Flexible, budget-conscious service models.<br></br>
+Maximum-impact marketing efforts designed to drive real business gains.<br></br>
+
         </p>
+        </div>
       </div>
 
       {/* RIGHT CARD */}

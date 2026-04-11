@@ -57,116 +57,158 @@ return (
 </div>
 <style>{`
         .testimonial-section{
-background:linear-gradient(90deg,#000814,#0b2a55);
-padding:120px 0;
-overflow:hidden;
-color:white;
+  background:linear-gradient(90deg,#000814,#0b2a55);
+  padding:100px 0;
+  overflow:hidden;
+  color:white;
 }
 
+/* header */
 .testimonial-header{
-max-width:1200px;
-margin:auto;
-padding:0 20px;
-margin-bottom:40px;
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+  margin-bottom:40px;
 }
 
 .testimonial-header span{
-letter-spacing:3px;
-font-size:24px;
-color:#cbd5e1;
-margin-bottom:20px;
+  letter-spacing:3px;
+  font-size:22px;
+  color:#cbd5e1;
 }
 
 /* slider */
-
 .testimonial-slider{
-overflow:hidden;
-width:100%;
+  overflow:hidden;
+  width:100%;
 }
 
 .testimonial-track{
-display:flex;
-gap:80px;
-animation:scrollTestimonial 25s linear infinite;
+  display:flex;
+  gap:60px;
+  animation:scrollTestimonial 25s linear infinite;
 }
 
 @keyframes scrollTestimonial{
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-50%);
-}
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
 }
 
 /* card */
-
 .testimonial-card{
-display:flex;
-align-items:center;
-gap:50px;
-min-width:900px;
+  display:flex;
+  align-items:center;
+  gap:40px;
+  min-width:750px;
 }
 
 /* image */
-
 .testimonial-img img{
-width:180px;
-height:220px;
-object-fit:cover;
+  width:160px;
+  height:200px;
+  object-fit:cover;
+  border-radius:6px;
 }
 
 /* divider */
-
 .testimonial-divider{
-width:1px;
-height:220px;
-background:#6b7280;
-opacity:.5;
+  width:1px;
+  height:200px;
+  background:#6b7280;
+  opacity:.5;
 }
 
 /* content */
-
 .testimonial-content{
-max-width:550px;
+  max-width:480px;
 }
 
 .quote-icon{
-font-size:70px;
-color:#9fb7d3;
-line-height:1;
-margin-bottom:10px;
+  font-size:60px;
+  color:#9fb7d3;
+  line-height:1;
+  margin-bottom:10px;
 }
 
 .testimonial-content p{
-font-size:20px;
-line-height:1.7;
-color:#e5e7eb;
+  font-size:18px;
+  line-height:1.6;
+  color:#e5e7eb;
 }
 
-/* responsive */
+/* ---------- TABLET ---------- */
 
-@media (max-width:900px){
+@media (max-width:1024px){
 
-.testimonial-card{
-flex-direction:column;
-text-align:center;
-min-width:320px;
+  .testimonial-card{
+    min-width:600px;
+    gap:30px;
+  }
+
+  .testimonial-img img{
+    width:140px;
+    height:180px;
+  }
+
+  .testimonial-content p{
+    font-size:17px;
+  }
+
 }
 
-.testimonial-divider{
-display:none;
+/* ---------- MOBILE ---------- */
+
+@media (max-width:768px){
+
+  .testimonial-section{
+    padding:80px 0;
+  }
+
+  .testimonial-track{
+    gap:40px;
+  }
+
+  .testimonial-card{
+    flex-direction:column;
+    text-align:center;
+    min-width:320px;
+  }
+
+  .testimonial-divider{
+    display:none;
+  }
+
+  .testimonial-img img{
+    width:140px;
+    height:170px;
+  }
+
+  .quote-icon{
+    font-size:50px;
+  }
+
+  .testimonial-content p{
+    font-size:16px;
+  }
+
 }
 
-.testimonial-img img{
-width:160px;
-height:200px;
-}
+/* ---------- SMALL PHONES ---------- */
 
-.testimonial-content p{
-font-size:16px;
-}
+@media (max-width:480px){
+
+  .testimonial-img img{
+    width:120px;
+    height:150px;
+  }
+
+  .testimonial-content{
+    max-width:90%;
+  }
+
+  .testimonial-content p{
+    font-size:15px;
+  }
 
 }
       `}</style>
