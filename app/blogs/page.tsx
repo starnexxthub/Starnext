@@ -8,13 +8,13 @@ import Navbar from '../sections/Navbar';
 import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
 import SocialBar from '../sections/SocialBar';
-import { title } from "process";
-import { image } from "framer-motion/client";
+
 
 export default function BlogPage() {
   
   
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [particles, setParticles] = useState<any[]>([]);
  
 
   const blogPosts = [
@@ -58,7 +58,17 @@ export default function BlogPage() {
 
   ];
 
-  // Duplicate for infinite scroll
+
+  useEffect(() => {
+  const generated = [...Array(30)].map(() => ({
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    animationDelay: `${Math.random() * 15}s`,
+    animationDuration: `${10 + Math.random() * 10}s`
+  }));
+
+  setParticles(generated);
+}, []);
  
 
   return (
@@ -439,18 +449,13 @@ export default function BlogPage() {
         <div className="bg-animation"></div>
         <div className="grid-overlay"></div>
         <div className="floating-particles">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 15}s`,
-                animationDuration: `${10 + Math.random() * 10}s`
-              }}
-            />
-          ))}
+          {particles.map((p, i) => (
+  <div
+    key={i}
+    className="particle"
+    style={p}
+  />
+))}
         </div>
 
         {/* Main Content */}

@@ -14,11 +14,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
+      
       setIsScrolled(window.scrollY > 80)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+
+  
 
   return (
     <nav className={`custom-navbar fixed-top ${isScrolled ? 'scrolled' : ''}`} id="navbar">
@@ -108,11 +112,13 @@ export default function Navbar() {
               <a
                 href="/about"
                 className={`nav-link-custom ${pathname === "/about" ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/about")
-                  setIsMenuOpen(false)
-                }}
+                onClick={() => {
+  setIsMenuOpen(false); // close menu FIRST
+
+  setTimeout(() => {
+    router.push("/about"); // THEN navigate
+  }, 200); // 🔥 important delay
+}}
               >
                 About
               </a>
@@ -122,11 +128,13 @@ export default function Navbar() {
               <a
                 href="/service"
                 className={`nav-link-custom ${pathname === "/service" ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/service")
-                  setIsMenuOpen(false)
-                }}
+                onClick={() => {
+  setIsMenuOpen(false); // close menu FIRST
+
+  setTimeout(() => {
+    router.push("/service"); // THEN navigate
+  }, 200); // 🔥 important delay
+}}
               >
                 Services
               </a>
@@ -136,11 +144,13 @@ export default function Navbar() {
               <a
                 href="/blogs"
                 className={`nav-link-custom ${pathname === "/blogs" ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/blogs")
-                  setIsMenuOpen(false)
-                }}
+                onClick={() => {
+  setIsMenuOpen(false); // close menu FIRST
+
+  setTimeout(() => {
+    router.push("/blog"); // THEN navigate
+  }, 200); // 🔥 important delay
+}}
               >
                 Blogs
               </a>
@@ -150,11 +160,13 @@ export default function Navbar() {
               <a
                 href="/portfolio"
                 className={`nav-link-custom ${pathname === "/portfolio" ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/portfolio")
-                  setIsMenuOpen(false)
-                }}
+                onClick={() => {
+  setIsMenuOpen(false); // close menu FIRST
+
+  setTimeout(() => {
+    router.push("/portfolio"); // THEN navigate
+  }, 200); // 🔥 important delay
+}}
               >
                 Portfolio
               </a>
@@ -164,11 +176,13 @@ export default function Navbar() {
               <a
                 href="/testimonials"
                 className={`nav-link-custom ${pathname === "/testimonials" ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/testimonials")
-                  setIsMenuOpen(false)
-                }}
+                onClick={() => {
+  setIsMenuOpen(false); // close menu FIRST
+
+  setTimeout(() => {
+    router.push("/testimonials"); // THEN navigate
+  }, 200); // 🔥 important delay
+}}
               >
                 Testimonials
               </a>
@@ -179,9 +193,12 @@ export default function Navbar() {
             <button
               className="btn-contact w-100"
               onClick={() => {
-                router.push("/contact")
-                setIsMenuOpen(false)
-              }}
+  setIsMenuOpen(false); 
+
+  setTimeout(() => {
+    router.push("/contact"); 
+  }, 200); 
+}}
             >
               Contact Us
             </button>

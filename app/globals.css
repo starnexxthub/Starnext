@@ -83,6 +83,9 @@
     padding: 10px 20px;
     font-size: 12px;
   }
+  .magnetic-btn::after {
+       margin-bottom: 20px;
+      }
 }
 
 @media (max-width: 480px) {
@@ -90,6 +93,9 @@
     padding: 9px 18px;
     font-size: 11.5px;
   }
+   .magnetic-btn::after {
+       margin-bottom: 20px;
+      }
 } 
 
 
@@ -2651,7 +2657,7 @@ letter-spacing: -7px;
 
       /* bring cards up like -mt-24 */
       .stats-row{
-        margin-top:-6rem;
+        margin-top:2rem;
         position:relative;
         z-index:10;
       }
@@ -2659,7 +2665,7 @@ letter-spacing: -7px;
       @media screen and (max-width: 768px) {
         /* CSS rules for mobile devices go here */
         .stats-row{
-          margin-top:0rem;
+          
           position:relative;
           z-index:10;
         }

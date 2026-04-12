@@ -226,7 +226,7 @@ export default function AboutSection() {
     padding: "14px 28px",
     fontSize: "14px",
     whiteSpace: "nowrap",
-    marginBottom: typeof window !== "undefined" && window.innerWidth < 768 ? "20px" : "0"
+    
 
   }}
   onClick={() => router.push("/about")}
