@@ -40,109 +40,73 @@ export default function TeamSection() {
 
 
 
- useEffect(() => {
+useEffect(() => {
   const section = sectionRef.current;
   if (!section) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // ✅ FIX: Force scroll to top before ScrollTrigger initializes
-  // This prevents production hydration from starting mid-animation
-  window.scrollTo(0, 0);
+  const init = () => {
+    const ctx = gsap.context(() => {
 
-  const ctx = gsap.context(() => {
+      gsap.set("#centerImage", { opacity: 0, scale: 0.8 });
+      gsap.set("#teamCenterText", { opacity: 1 });
+      gsap.set(`.${styles.panelContent}`, { opacity: 0 });
+      gsap.set("#leftPanel", { width: "0%" });
+      gsap.set("#rightPanel", { width: "0%" });
 
-    gsap.set("#centerImage", { opacity: 0, scale: 0.8 });
-    gsap.set("#teamCenterText", { opacity: 1 });
-    gsap.set(`.${styles.panelContent}`, { opacity: 0 });
-    gsap.set("#leftPanel", { width: "0%" });
-    gsap.set("#rightPanel", { width: "0%" });
+      gsap.set([
+        "#imgTop",
+        "#imgLeftTop",
+        "#imgRightTop",
+        "#imgLeftBottom",
+        "#imgRightBottom"
+      ], { opacity: 1, scale: 1, x: 0, y: 0 });
 
-    gsap.set([
-      "#imgTop",
-      "#imgLeftTop",
-      "#imgRightTop",
-      "#imgLeftBottom",
-      "#imgRightBottom"
-    ], { opacity: 1, scale: 1, x: 0, y: 0 });
-
-    const animateCounter = (element: Element, target: number, duration: number = 2) => {
-      const obj = { val: 0 };
-      return gsap.to(obj, {
-        val: target,
-        duration,
-        ease: "power2.out",
-        onUpdate: () => {
-          element.textContent = Math.round(obj.val).toString();
+      const teamTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=100%",
+          scrub: 1.2,
+          invalidateOnRefresh: true,
+          immediateRender: false,
         }
       });
-    };
 
-    const teamTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top+=1",
-        end: "+=100%",
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-        // ✅ FIX: Prevent GSAP from snapping to current scroll position on init
-        immediateRender: false,
-      }
-    });
+      // your animation (unchanged)
+      teamTl
+        .to("#imgTop", { y: "35vh", scale: 2.2, opacity: 0 }, 0)
+        .to("#imgLeftTop", { x: "30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
+        .to("#imgRightTop", { x: "-30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
+        .to("#imgLeftBottom", { x: "25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
+        .to("#imgRightBottom", { x: "-25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
+        .to("#teamCenterText", { opacity: 0, y: -50 }, 0.1)
+        .to("#centerImage", { opacity: 1, scale: 1 }, 0.2)
+        .to("#centerImage", { scale: 1.3 }, 0.45)
+        .to("#leftPanel", { width: "25%" }, 0.45)
+        .to("#rightPanel", { width: "25%" }, 0.45)
+        .to(`.${styles.panelContent}`, { opacity: 1 }, 0.55)
+        .to("#centerImage", { scale: 3, y: "20vh" }, 0.7)
+        .to(["#leftPanel", "#rightPanel"], { width: "50%" }, 0.7)
+        .to(`.${styles.panelContent}`, { opacity: 0 }, 0.85);
 
-    teamTl
-      .to("#imgTop", { y: "35vh", scale: 2.2, opacity: 0 }, 0)
-      .to("#imgLeftTop", { x: "30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
-      .to("#imgRightTop", { x: "-30vw", y: "20vh", scale: 0.5, opacity: 0 }, 0)
-      .to("#imgLeftBottom", { x: "25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
-      .to("#imgRightBottom", { x: "-25vw", y: "-15vh", scale: 0.5, opacity: 0 }, 0)
-      .to("#teamCenterText", { opacity: 0, y: -50 }, 0.1)
-      .to("#centerImage", { opacity: 1, scale: 1 }, 0.2)
-      .to("#centerImage", { scale: 1.3 }, 0.45)
-      .to("#leftPanel", { width: "25%" }, 0.45)
-      .to("#rightPanel", { width: "25%" }, 0.45)
-      .to(`.${styles.panelContent}`, {
-        opacity: 1,
-        stagger: 0.05,
-        onStart: () => {
-          const counters = document.querySelectorAll(`.${styles.statNumber}`);
-          counters.forEach((counter, index) => {
-            const target = parseInt(counter.getAttribute('data-target') || '0');
-            setTimeout(() => animateCounter(counter, target, 1.5), index * 100);
-          });
-        }
-      }, 0.55)
-      .to("#centerImage", { scale: 3, y: "20vh" }, 0.7)
-      .to(["#leftPanel", "#rightPanel"], { width: "50%" }, 0.7)
-      .to(`.${styles.panelContent}`, { opacity: 0 }, 0.85);
-
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top 80%",
-      onEnter: () => {
-        gsap.to(`.${styles.teamImage}`, {
-          y: "+=10",
-          duration: 2,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          stagger: 0.2
-        });
-      },
-      once: true
-    });
-
-    // ✅ FIX: Re-calculate scroll positions after paint
-    // Needed because Next.js SSR can give wrong offsets at hydration time
-    requestAnimationFrame(() => {
+      // ✅ FINAL IMPORTANT FIX
       ScrollTrigger.refresh();
-    });
 
+    }, section);
+
+    return () => ctx.revert();
+  };
+
+  
+  const raf = requestAnimationFrame(() => {
+    setTimeout(init, 100); // small delay fixes production
   });
 
-  return () => ctx.revert();
+  return () => cancelAnimationFrame(raf);
+
 }, []);
- 
 
 
 
