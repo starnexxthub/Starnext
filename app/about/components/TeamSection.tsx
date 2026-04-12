@@ -67,10 +67,11 @@ useEffect(() => {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=100%",
-          scrub: 1.2,
+          end: "bottom top",
+          scrub: 1.5,
           invalidateOnRefresh: true,
           immediateRender: false,
+          anticipatePin: 1,
         }
       });
 
