@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-
+import Link from "next/link";
 import Navbar from '../sections/Navbar';
 import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
@@ -20,37 +20,37 @@ export default function BlogPage() {
   const blogPosts = [
     {
       id: 1,
-      title: "The Future of Web Design",
+      title: "Best Digital Marketing Company—One-Stop Solution for Success",
       image: "/img/b2.png"
     },
     {
       id: 2,
-      title: "How websites actually work",
+      title: "Now Get SEO Services For Your Company At Ease",
       image: "/img/b3.png"
     },
     {
       id: 3,
-      title: "10 Tips for Building a Successful Online Business",
+      title: "Your Number 1 Digital Marketing Company In Dehradun",
       image: "/img/b4.png"
     },
     {
       id: 4,
-      title: "The Ultimate Guide to SEO in 2024",
+      title: "2x customers with lead generation service for your institute",
       image: "/img/b6.png"
     },
     {
       id: 5,
-      title: "The Power of Storytelling in Marketing",
+      title: "Your Best Web Development Company in Dehradun",
       image: "/img/b3.png"
     },
     {
       id: 6,
-      title: "How to Create a Winning Social Media Strategy",
+      title: "How Algorithm of Google Work?",
       image: "/img/b2.png"
     },
     {
       id:7,
-      title:"How to give no **** ",
+      title:"Your Best Website Development Company for Excellence ",
       image:"/img/b3.png"
 
     }
@@ -60,15 +60,6 @@ export default function BlogPage() {
 
   // Duplicate for infinite scroll
  
-
-  
-
-  
-
-  
-
-  
-  
 
   return (
     
@@ -548,9 +539,9 @@ export default function BlogPage() {
             {post.title}
           </h3>
 
-          <div className="read-btn">
-            Read More →
-          </div>
+          <Link href={`/blogs/${post.id}`} className="read-btn">
+  Read More →
+</Link>
         </div>
 
       </div>

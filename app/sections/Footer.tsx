@@ -60,9 +60,9 @@ export default function Footer() {
           <div className="col-6 col-lg-3 mt-4 mt-lg-0">
             <h4 className="footer-title">Legal</h4>
             <ul className="footer-my-list">
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="/faq">FAQs</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms & Conditions</a></li>
             </ul>
           </div>
         </div>

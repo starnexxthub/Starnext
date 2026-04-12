@@ -15,75 +15,40 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   const touchHintRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section2 = section2Ref.current;
-    const progressBar = progressBarRef.current;
-    const touchHint = touchHintRef.current;
+  gsap.registerPlugin(ScrollTrigger); // ← make sure this is registered
 
-    if (!section2) return;
+  const section2 = section2Ref.current;
+  const progressBar = progressBarRef.current;
 
-    // Touch hint
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchDevice && touchHint) {
-      setTimeout(() => touchHint.classList.add('visible'), 500);
-      setTimeout(() => touchHint.classList.remove('visible'), 3000);
-    }
+  if (!section2) return;
 
-    // Main scroll animation
-    const coverScroll = gsap.to(section2, {
-      x: '0%',
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#coverWrapper",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.8,
-        onUpdate: (self) => {
-          if (progressBar) {
-            progressBar.style.width = `${self.progress * 100}%`;
-          }
-          const currentIndex = self.progress > 0.5 ? 1 : 0;
-          updateNavDots(currentIndex);
+  // Set initial position explicitly via GSAP (don't rely on CSS alone)
+  gsap.set(section2, { x: '100%' });
+
+  const coverScroll = gsap.to(section2, {
+    x: '0%',
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#coverWrapper",
+      start: "top top",
+      end: "+=100%",   // ← was "bottom bottom"; this is more reliable
+      scrub: 1,
+      pin: true,        // ← ADD THIS: pins the wrapper while scrolling through it
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        if (progressBar) {
+          progressBar.style.width = `${self.progress * 100}%`;
         }
+        updateNavDots(self.progress > 0.5 ? 1 : 0);
       }
-    });
+    }
+  });
 
-    // Keyboard navigation
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        goToSection(1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        goToSection(0);
-      }
-    };
-
-    // Wheel navigation with debounce
-    let lastScrollTime = 0;
-    const handleWheel = (e: WheelEvent) => {
-      const now = Date.now();
-      if (now - lastScrollTime < 800) return;
-      
-      const st = coverScroll.scrollTrigger;
-      if (!st) return;
-      
-      if (Math.abs(e.deltaY) > 50) {
-        lastScrollTime = now;
-        const direction = e.deltaY > 0 ? 1 : -1;
-        const targetIndex = direction > 0 ? 1 : 0;
-        goToSection(targetIndex);
-      }
-    };
-
-    // Touch navigation
-    let touchStartY = 0;
-    
-
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('wheel', handleWheel);
-      coverScroll.kill();
-    };
-  }, [progressBarRef, updateNavDots]);
+  return () => {
+    coverScroll.scrollTrigger?.kill();
+    coverScroll.kill();
+  };
+}, [progressBarRef, updateNavDots]);
 
   const goToSection = (index: number) => {
     const coverTrigger = ScrollTrigger.getAll().find(

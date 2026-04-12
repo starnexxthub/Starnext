@@ -40,15 +40,18 @@ export default function TeamSection() {
 
 
 
-  useEffect(() => {
+ useEffect(() => {
   const section = sectionRef.current;
   if (!section) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // ✅ FIX: Force scroll to top before ScrollTrigger initializes
+  // This prevents production hydration from starting mid-animation
+  window.scrollTo(0, 0);
+
   const ctx = gsap.context(() => {
 
-    // ✅ INITIAL STATES (CRITICAL FIX)
     gsap.set("#centerImage", { opacity: 0, scale: 0.8 });
     gsap.set("#teamCenterText", { opacity: 1 });
     gsap.set(`.${styles.panelContent}`, { opacity: 0 });
@@ -56,40 +59,34 @@ export default function TeamSection() {
     gsap.set("#rightPanel", { width: "0%" });
 
     gsap.set([
-  "#imgTop",
-  "#imgLeftTop",
-  "#imgRightTop",
-  "#imgLeftBottom",
-  "#imgRightBottom"
-], { opacity: 1, scale: 1, x: 0, y: 0 });
+      "#imgTop",
+      "#imgLeftTop",
+      "#imgRightTop",
+      "#imgLeftBottom",
+      "#imgRightBottom"
+    ], { opacity: 1, scale: 1, x: 0, y: 0 });
 
-    const animateCounter = (
-  element: Element,
-  target: number,
-  duration: number = 2
-) => {
-  const obj = { val: 0 };
+    const animateCounter = (element: Element, target: number, duration: number = 2) => {
+      const obj = { val: 0 };
+      return gsap.to(obj, {
+        val: target,
+        duration,
+        ease: "power2.out",
+        onUpdate: () => {
+          element.textContent = Math.round(obj.val).toString();
+        }
+      });
+    };
 
-  return gsap.to(obj, {
-    val: target,
-    duration,
-    ease: "power2.out",
-    onUpdate: () => {
-      element.textContent = Math.round(obj.val).toString();
-    }
-  });
-};
     const teamTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top+=1",
         end: "+=100%",
         scrub: 1.2,
-        
-   
-        
         invalidateOnRefresh: true,
-        
+        // ✅ FIX: Prevent GSAP from snapping to current scroll position on init
+        immediateRender: false,
       }
     });
 
@@ -119,30 +116,31 @@ export default function TeamSection() {
       .to(["#leftPanel", "#rightPanel"], { width: "50%" }, 0.7)
       .to(`.${styles.panelContent}`, { opacity: 0 }, 0.85);
 
-    // floating animation
-   ScrollTrigger.create({
-  trigger: section,
-  start: "top 80%",
-  onEnter: () => {
-    gsap.to(`.${styles.teamImage}`, {
-      y: "+=10",
-      duration: 2,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-      stagger: 0.2
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 80%",
+      onEnter: () => {
+        gsap.to(`.${styles.teamImage}`, {
+          y: "+=10",
+          duration: 2,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          stagger: 0.2
+        });
+      },
+      once: true
     });
-  },
-  once: true
-});
-    
 
-  }, );
+    // ✅ FIX: Re-calculate scroll positions after paint
+    // Needed because Next.js SSR can give wrong offsets at hydration time
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
-  
- 
+  });
+
   return () => ctx.revert();
-
 }, []);
  
 
