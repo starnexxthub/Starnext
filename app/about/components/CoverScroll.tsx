@@ -31,9 +31,9 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     scrollTrigger: {
       trigger: "#coverWrapper",
       start: "top top",
-      end: "+=100%",   // ← was "bottom bottom"; this is more reliable
+      end: "bottom top",   
       scrub: 1,
-      pin: true,        // ← ADD THIS: pins the wrapper while scrolling through it
+      invalidateOnRefresh: true,
       anticipatePin: 1,
       onUpdate: (self) => {
         if (progressBar) {
