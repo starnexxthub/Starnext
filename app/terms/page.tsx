@@ -72,7 +72,7 @@ export default function TermsPage() {
             <p>
               For any queries, you can contact us at:
               <br />
-              <b>Email:</b> starnext001@gmail.com
+              <b>Email:</b> info@starnexxt.com
             </p>
 
             <h2>Copyright</h2>

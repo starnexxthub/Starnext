@@ -148,7 +148,7 @@ export default function Navbar() {
   setIsMenuOpen(false); // close menu FIRST
 
   setTimeout(() => {
-    router.push("/blog"); // THEN navigate
+    router.push("/blogs"); // THEN navigate
   }, 200); // 🔥 important delay
 }}
               >

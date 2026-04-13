@@ -36,8 +36,8 @@ export default function BrandShowcase() {
     })
 
     // Logo wheel animation
-    const MOVE_MS = 750
-    const PAUSE_MS = 1400
+    const MOVE_MS = 700
+    const PAUSE_MS =1000
     const STEP_MS = MOVE_MS + PAUSE_MS
 
     const brandTracks = Array.from(document.querySelectorAll('.logo-wheel-track[data-wheel="brand"]'))
@@ -56,33 +56,45 @@ export default function BrandShowcase() {
       if (first) track.appendChild(first)
     }
 
-    function stepAllBrand() {
+ function stepAllBrand() {
+  // MOVE animation
   brandTracks.forEach((track) => {
+    const el = track as HTMLElement
     const stepPx = stepPxFor(track)
-    ;(track as HTMLElement).style.transition = `transform ${MOVE_MS}ms ease-in-out`
-    ;(track as HTMLElement).style.transform = `translateY(${-stepPx}px)`
+
+    el.style.transition = `transform ${MOVE_MS}ms ease-in-out`
+    el.style.transform = `translateY(${-stepPx}px)`
   })
 
   setTimeout(() => {
+  brandTracks.forEach((track, index) => {
+    const el = track as HTMLElement
 
-    pairIndex = (pairIndex + 1) % logoPairs.length
-    const [logoA, logoB] = logoPairs[pairIndex]
+    // 🔥 rotate instead of replace
+    const first = track.querySelector("img")
+    if (first) {
+      track.appendChild(first)
+    }
 
-    brandTracks.forEach((track, index) => {
+    // 🔥 ONLY update last image (not all)
+    const imgs = track.querySelectorAll("img")
+    const lastImg = imgs[imgs.length - 1] as HTMLImageElement
 
-      const logo = index % 2 === 0 ? logoA : logoB
+    // update pair smoothly
+    const currentPairIndex =
+  ((pairIndex + (index % 2)) % logoPairs.length + logoPairs.length) % logoPairs.length
+    const [logoA, logoB] = logoPairs[currentPairIndex]
 
-      track.innerHTML = `
-        <img src="${logo}" />
-        <img src="${logo}" />
-        <img src="${logo}" />
-      `
+    lastImg.src = index % 2 === 0 ? logoA : logoB
 
-      ;(track as HTMLElement).style.transition = 'none'
-      ;(track as HTMLElement).style.transform = 'translateY(0px)'
-    })
+    el.style.transition = 'none'
+    el.style.transform = 'translateY(0px)'
+  })
 
-  }, MOVE_MS)
+  // 🔥 update AFTER rotation (important)
+  pairIndex = (pairIndex + 1) % logoPairs.length
+
+}, MOVE_MS)
 }
 
     if (brandTracks.length) {
