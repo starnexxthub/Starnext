@@ -67,7 +67,7 @@ export default function Navbar() {
             <button
               className="btn-contact"
               id="contactBtn"
-              onClick={() => router.push("/contact")}
+              onClick={() => window.location.href = "/contact"}
             >
               Contact Us
             </button>
