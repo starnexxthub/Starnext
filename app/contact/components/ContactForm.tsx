@@ -69,8 +69,9 @@ export default function ContactForm() {
               width: "100%",
               fontSize: "clamp(32px, 6vw, 60px)",
               lineHeight: "1.2",
-              marginBottom: "clamp(2rem, 5vw, 5rem)",
-              fontWeight: "500"
+              marginTop: "clamp(2rem, 5vw, 5rem)",
+              fontWeight: "500",
+              
             }}
           >
             Let’s Build Clarity Together
@@ -84,7 +85,7 @@ export default function ContactForm() {
               width: "100%",
               maxWidth: "658px",
               border: "1px solid rgba(255,255,255,0.08)",
-              marginBottom: "3rem",
+              marginTop: "3rem",
             }}
           >
             <h4 className="mb-2" style={{ fontSize: "30px",fontWeight: "500" }}>

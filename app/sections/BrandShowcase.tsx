@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export default function BrandShowcase() {
   const logoPairs = [
-  ["/logos/l1.png", "/logos/l2.png"],
+  
   ["/logos/l3.png", "/logos/l4.png"],
   ["/logos/l5.png", "/logos/l6.png"],
   ["/logos/l7.png", "/logos/l8.png"],
