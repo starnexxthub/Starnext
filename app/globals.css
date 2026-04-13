@@ -2657,7 +2657,7 @@ letter-spacing: -7px;
 
       /* bring cards up like -mt-24 */
       .stats-row{
-        margin-top:2rem;
+        
         position:relative;
         z-index:10;
       }
@@ -2665,7 +2665,7 @@ letter-spacing: -7px;
       @media screen and (max-width: 768px) {
         /* CSS rules for mobile devices go here */
         .stats-row{
-          
+          margin-top:2rem;
           position:relative;
           z-index:10;
         }

@@ -226,6 +226,7 @@ export default function AboutSection() {
     padding: "14px 28px",
     fontSize: "14px",
     whiteSpace: "nowrap",
+    marginBottom:"20px"
     
 
   }}
