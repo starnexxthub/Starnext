@@ -19,6 +19,7 @@ export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    ScrollTrigger.clearScrollMemory();
     
     const section = sectionRef.current;
     if (!section) return;
@@ -42,7 +43,7 @@ gsap.set(["#leftPanel", "#rightPanel"], { width: 0 });
     const teamTl = gsap.timeline({
  scrollTrigger: {
   trigger: section,
-  start: "top top+=1",
+  start: "top 80%",
   end: "bottom top",          // slightly tighter
   scrub: 1.2,
   pin: true,    
