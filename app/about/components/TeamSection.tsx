@@ -19,13 +19,16 @@ export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+  const timer = setTimeout(() => {
+
     ScrollTrigger.clearScrollMemory();
-    
+    ScrollTrigger.refresh();
+
     const section = sectionRef.current;
     if (!section) return;
 
-    // Counter animation function
-    const animateCounter = (element: Element, target: number, duration = 2) => {
+    // 👇 ALL YOUR GSAP CODE HERE
+const animateCounter = (element: Element, target: number, duration = 2) => {
       const obj = { val: 0 };
       return gsap.to(obj, {
         val: target,
@@ -38,20 +41,24 @@ export default function TeamSection() {
     };
     gsap.set("#centerImage", { opacity: 0, scale: 0.8 });
 gsap.set(["#leftPanel", "#rightPanel"], { width: 0 });
+gsap.set(section, { clearProps: "all" })
 
     // Main timeline
     const teamTl = gsap.timeline({
- scrollTrigger: {
-  trigger: section,
-  start: "top 80%",
-  end: "bottom top",          // slightly tighter
-  scrub: 1.2,
-  pin: true,    
-  pinSpacing:true,// ✅ CRITICAL FIX
-  anticipatePin: 1,
-  invalidateOnRefresh: true,
-}
-    });
+  scrollTrigger: {
+    trigger: section,
+    start: "top 85%",   // little safer
+    end: "bottom top",
+    scrub: 1.2,
+    pin: true,
+    pinSpacing: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+  },
+  defaults: {
+    immediateRender: false   // ✅ CRITICAL FIX
+  }
+});
 
     teamTl.to("#imgTop", { y: "35vh", scale: 2.2, opacity: 0, duration: 0.4, ease: "power2.inOut" }, 0)
       .to("#imgLeftTop", { x: "30vw", y: "20vh", scale: 0.5, opacity: 0, duration: 0.4, ease: "power2.inOut" }, 0)
@@ -90,14 +97,14 @@ gsap.set(["#leftPanel", "#rightPanel"], { width: 0 });
       stagger: 0.2
     });
 
-   requestAnimationFrame(() => {
+   setTimeout(() => {
   ScrollTrigger.refresh(true);
-});
+}, 300);
 
-    return () => {
-      teamTl.kill();
-    };
-  }, []);
+  }, 200); // ✅ delay
+
+  return () => clearTimeout(timer);
+}, []);
 
   return (
     <section ref={sectionRef} id="teamSection" className={styles.teamSection}>
