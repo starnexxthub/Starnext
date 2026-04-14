@@ -47,9 +47,9 @@ gsap.set(section, { clearProps: "all" })
     const teamTl = gsap.timeline({
   scrollTrigger: {
     trigger: section,
-    start: "top 85%",   // little safer
+    start: "top top",   // little safer
     end: "bottom top",
-    scrub: 1.2,
+    scrub: 1.5,
     pin: true,
     pinSpacing: true,
     anticipatePin: 1,
