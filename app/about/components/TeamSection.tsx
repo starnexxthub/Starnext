@@ -48,8 +48,8 @@ gsap.set(section, { clearProps: "all" })
   scrollTrigger: {
     trigger: section,
     start: "top top",   // little safer
-    end: "bottom top",
-    scrub: 1.5,
+    end: "+=300%",
+    scrub: 2,
     pin: true,
     pinSpacing: true,
     anticipatePin: 1,
