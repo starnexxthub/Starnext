@@ -11,11 +11,13 @@ const testimonialImages = [
 ]
 
 const videoSources = [
+  '/video/kj reel.mp4',
+  '/video/Thin thread reel.mp4',
   
   '/video/mlb.mp4',
   '/video/oriaana.mp4',
-  '/video/alpha.mp4',
-  '/video/achintya.mp4'
+  
+  
 ]
 
 export default function Testimonials() {

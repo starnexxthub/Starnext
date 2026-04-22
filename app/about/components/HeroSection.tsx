@@ -7,11 +7,11 @@ import styles from '../AboutPage.module.css';
 import { Sun } from 'lucide-react';
 
 const images = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1504703395950-b89145a5425b?q=80&w=1000&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop',
+  '/img/t1.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t9.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t6.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t10.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t13.png?q=80&w=1000&auto=format&fit=crop',
 ];
 
 export default function HeroSection() {
@@ -108,12 +108,12 @@ export default function HeroSection() {
         </div>
 
         <h1 id="mainTitle" className={styles.heroTitle}>
-          Starnext Digital Growth <br />
+          StarNext Digital Growth <br />
           and <span className={styles.textMuted}>digital experiences.</span>
         </h1>
 
         <p id="subTitle" className={styles.heroSubtitle}>
-          At Starnext, we bring ideas to life through strategy, design, and digital innovation.
+          At StarNext, we bring ideas to life through strategy, design, and digital innovation.
         </p>
       </div>
 

@@ -49,11 +49,38 @@ export default function Navbar() {
                   About
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/service" className={`nav-link ${pathname === "/service" ? "active" : ""}`}>
-                  Services
-                </a>
-              </li>
+              <li className="nav-item dropdown">
+  <a
+  href="/service"
+  className={`nav-link dropdown-toggle d-flex align-items-center gap-1 ${pathname === "/service" ? "active" : ""}`}
+>
+  Services
+  <span className="dropdown-arrow"></span>
+</a>
+
+  <ul className="dropdown-menu-custom">
+    <li>
+      <a href="/service/Digital" className="dropdown-item">
+        Digital Marketing
+      </a>
+    </li>
+    <li>
+      <a href="/service" className="dropdown-item">
+        Web & App Development
+      </a>
+    </li>
+    <li>
+      <a href="/service/Seo" className="dropdown-item">
+        Search Engine Optimization
+      </a>
+    </li>
+    <li>
+      <a href="/service/SocialMedia" className="dropdown-item">
+        Social Media Marketing
+      </a>
+    </li>
+  </ul>
+</li>
               <li className="nav-item">
                 <a href="/blogs" className={`nav-link ${pathname === "/blogs" ? "active" : ""}`}>
                   Blogs
@@ -124,21 +151,38 @@ export default function Navbar() {
               </a>
             </li>
 
-            <li className="nav-item">
-              <a
-                href="/service"
-                className={`nav-link-custom ${pathname === "/service" ? "active" : ""}`}
-                onClick={() => {
-  setIsMenuOpen(false); // close menu FIRST
+                     <li className="nav-item dropdown">
+  <a
+  href="/service"
+  className={`nav-link dropdown-toggle d-flex align-items-center gap-1 ${pathname === "/service" ? "active" : ""}`}
+>
+  Services
+  <span className="dropdown-arrow"></span>
+</a>
 
-  setTimeout(() => {
-    router.push("/service"); // THEN navigate
-  }, 200); // 🔥 important delay
-}}
-              >
-                Services
-              </a>
-            </li>
+  <ul className="dropdown-menu-custom">
+    <li>
+      <a href="/service/Digital" className="dropdown-item">
+        Digital Marketing
+      </a>
+    </li>
+    <li>
+      <a href="/service" className="dropdown-item">
+        Web & App Development
+      </a>
+    </li>
+    <li>
+      <a href="/service/Seo" className="dropdown-item">
+        Search Engine Optimization
+      </a>
+    </li>
+    <li>
+      <a href="/service/SocialMedia" className="dropdown-item">
+        Social Media Marketing
+      </a>
+    </li>
+  </ul>
+</li>
 
             <li className="nav-item">
               <a
