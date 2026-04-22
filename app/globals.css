@@ -197,6 +197,79 @@
     color: #0d6efd;
   }
 }
+/* MOBILE MENU */
+#mobileMenu {
+  background: #0b0f1a;
+  padding: 20px 0;
+}
+
+/* LINKS */
+.nav-link-custom {
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  padding: 14px 0;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ACTIVE */
+.nav-link-custom.active {
+  color: #0d6efd;
+}
+
+/* SERVICES DROPDOWN */
+.mobile-dropdown {
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.mobile-dropdown li a {
+  display: block;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #cbd5e1;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+/* hover feel */
+.mobile-dropdown li a:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+/* ARROW */
+.dropdown-arrow {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(120deg);
+  transition: 0.3s;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(-135deg);
+}
+
+/* CONTACT BUTTON */
+.btn-contact {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-radius: 30px;
+  padding: 12px;
+  font-size: 16px;
+}
+
+/* PHONE */
+.phone-link {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cbd5e1;
+}
 
 
 /* magnetic button*/

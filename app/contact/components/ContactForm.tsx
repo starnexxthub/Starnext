@@ -1,5 +1,40 @@
+'use client';
+import { useState } from "react";
+
 export default function ContactForm() {
 
+  const [form, setForm] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  service: "",
+  message: ""
+});
+
+const [loading, setLoading] = useState(false);
+
+const handleSubmit = async () => {
+  setLoading(true);
+
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+  },
+    body: JSON.stringify(form),
+  });
+
+  const data = await res.json();
+  setLoading(false);
+
+  if (data.success) {
+    alert("Message sent ✅");
+    setForm({ name: "", email: "", phone: "", service: "", message: "" });
+  } else {
+    alert("Error ❌");
+  }
+};
+  
   const inputStyle = {
     height: "50px",
     backgroundColor: "rgba(255,255,255,0.12)",
@@ -100,34 +135,53 @@ export default function ContactForm() {
               className=" form-fields d-flex flex-column align-items-center justify-content-center gap-5 mx-auto"
               style={{ maxWidth: "498px", width: "100%", gap: "clamp(1.5rem, 3vw, 2.5rem)" }}
             >
-              <input className="form-control w-100" placeholder="Name" style={inputStyle} />
-              <input className="form-control w-100" placeholder="Email" style={inputStyle} />
-              <input className="form-control w-100" placeholder="Phone" style={inputStyle} />
+              <input
+  className="form-control w-100"
+  placeholder="Name"
+  style={inputStyle}
+  value={form.name}
+  onChange={(e) => setForm({ ...form, name: e.target.value })}
+/>
+              <input
+  className="form-control w-100"
+  placeholder="Email"
+  style={inputStyle}
+  value={form.email}
+  onChange={(e) => setForm({ ...form, email: e.target.value })}
+/>
+              <input
+  className="form-control w-100"
+  placeholder="Phone"
+  style={inputStyle}
+  value={form.phone}
+  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+/>
 
-              <select className="form-select w-100" style={inputStyle}>
+              <select
+  className="form-select w-100"
+  style={inputStyle}
+  value={form.service}
+  onChange={(e) => setForm({ ...form, service: e.target.value })}
+>
   <option style={{ color: "#000" }}>Service</option>
   <option style={{ color: "#000" }}>Web Development</option>
   <option style={{ color: "#000" }}>UI/UX</option>
 </select>
               <textarea
-                className="form-control w-100"
-                placeholder="Brief Description"
-                style={{ ...inputStyle, height: "170px", resize: "none" }}
-              />
+  className="form-control w-100"
+  placeholder="Brief Description"
+  style={{ ...inputStyle, height: "170px" }}
+  value={form.message}
+  onChange={(e) => setForm({ ...form, message: e.target.value })}
+/>
 
-              <button
-                className="btn w-100 mt-2 rounded-3"
-                style={{
-                  height: "50px",
-                  backgroundColor: "#e5e7eb",
-                  color: "#111",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  border: "none",
-                }}
-              >
-                Send Message
-              </button>
+<button
+  onClick={handleSubmit}
+  disabled={loading}
+  className="btn w-100 mt-2 rounded-3"
+>
+  {loading ? "Sending..." : "Send Message"}
+</button>
             </div>
           </div>
         </div>

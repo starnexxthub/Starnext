@@ -77,32 +77,7 @@ export default function PeopleSection() {
     });
 
     // Hover animations using GSAP
-    cards.forEach((card) => {
-      if (!card) return;
-      const img = card.querySelector('img');
-      const overlay = card.querySelector(`.${styles.peopleCardOverlay}`);
-      const linkedinIcon = card.querySelector(`.${styles.linkedinIcon}`);
-
-      const handleMouseEnter = () => {
-        gsap.to(img, { filter: "blur(8px)", duration: 0.4, ease: "power2.out" });
-        gsap.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" });
-        gsap.to(linkedinIcon, { scale: 1, duration: 0.3, ease: "back.out(1.7)" });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(img, { filter: "blur(0px)", duration: 0.4, ease: "power2.out" });
-        gsap.to(overlay, { opacity: 0, duration: 0.4, ease: "power2.out" });
-        gsap.to(linkedinIcon, { scale: 0.8, duration: 0.3, ease: "power2.in" });
-      };
-
-      card.addEventListener('mouseenter', handleMouseEnter);
-      card.addEventListener('mouseleave', handleMouseLeave);
-
-      return () => {
-        card.removeEventListener('mouseenter', handleMouseEnter);
-        card.removeEventListener('mouseleave', handleMouseLeave);
-      };
-    });
+    
   }, []);
 
   return (
@@ -119,10 +94,12 @@ export default function PeopleSection() {
             >
               <img src={member.img} alt={member.name} />
               <div className={styles.peopleCardOverlay}>
-                <div className={styles.linkedinIcon}>
-                  <Linkedin size={24} color="white" />
-                </div>
-              </div>
+  <div className={styles.overlayContent}>
+    <div className={styles.linkedinIcon}>
+      <Linkedin size={24} color="white" />
+    </div>
+  </div>
+</div>
               <div className={styles.peopleCardInfo}>
                 <span className={styles.peopleName}>{member.name}</span>
                 <span className={styles.peopleDesignation}>{member.role}</span>

@@ -11,6 +11,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isServiceOpen, setIsServiceOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,17 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+  useEffect(() => {
+  if (isMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [isMenuOpen]);
 
 
   
@@ -151,37 +163,23 @@ export default function Navbar() {
               </a>
             </li>
 
-                     <li className="nav-item dropdown">
-  <a
-  href="/service"
-  className={`nav-link dropdown-toggle d-flex align-items-center gap-1 ${pathname === "/service" ? "active" : ""}`}
->
-  Services
-  <span className="dropdown-arrow"></span>
-</a>
+     <li className="nav-item">
+  <div
+    className="nav-link-custom d-flex justify-content-between align-items-center"
+    onClick={() => setIsServiceOpen(!isServiceOpen)}
+  >
+    Services
+    <span className={`dropdown-arrow ${isServiceOpen ? "open" : ""}`}></span>
+  </div>
 
-  <ul className="dropdown-menu-custom">
-    <li>
-      <a href="/service/Digital" className="dropdown-item">
-        Digital Marketing
-      </a>
-    </li>
-    <li>
-      <a href="/service" className="dropdown-item">
-        Web & App Development
-      </a>
-    </li>
-    <li>
-      <a href="/service/Seo" className="dropdown-item">
-        Search Engine Optimization
-      </a>
-    </li>
-    <li>
-      <a href="/service/SocialMedia" className="dropdown-item">
-        Social Media Marketing
-      </a>
-    </li>
-  </ul>
+  {isServiceOpen && (
+    <ul className="mobile-dropdown">
+      <li><a href="/service/Digital" onClick={()=>setIsMenuOpen(false)}>Digital Marketing</a></li>
+      <li><a href="/service" onClick={()=>setIsMenuOpen(false)}>Web & App Development</a></li>
+      <li><a href="/service/Seo" onClick={()=>setIsMenuOpen(false)}>Search Engine Optimization</a></li>
+      <li><a href="/service/SocialMedia" onClick={()=>setIsMenuOpen(false)}>Social Media Marketing</a></li>
+    </ul>
+  )}
 </li>
 
             <li className="nav-item">
@@ -200,37 +198,9 @@ export default function Navbar() {
               </a>
             </li>
 
-            <li className="nav-item">
-              <a
-                href="/portfolio"
-                className={`nav-link-custom ${pathname === "/portfolio" ? "active" : ""}`}
-                onClick={() => {
-  setIsMenuOpen(false); // close menu FIRST
+            
 
-  setTimeout(() => {
-    router.push("/portfolio"); // THEN navigate
-  }, 200); // 🔥 important delay
-}}
-              >
-                Portfolio
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a
-                href="/testimonials"
-                className={`nav-link-custom ${pathname === "/testimonials" ? "active" : ""}`}
-                onClick={() => {
-  setIsMenuOpen(false); // close menu FIRST
-
-  setTimeout(() => {
-    router.push("/testimonials"); // THEN navigate
-  }, 200); // 🔥 important delay
-}}
-              >
-                Testimonials
-              </a>
-            </li>
+            
           </ul>
 
           <div className="nav-actions">

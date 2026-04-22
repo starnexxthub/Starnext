@@ -14,8 +14,8 @@ const videoSources = [
   '/video/kj reel.mp4',
   '/video/Thin thread reel.mp4',
   
-  '/video/mlb.mp4',
-  '/video/oriaana.mp4',
+  '/video/optilux video.mp4',
+  '/video/oriana priyanka reel.mp4',
   
   
 ]
