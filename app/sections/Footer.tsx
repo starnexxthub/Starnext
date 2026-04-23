@@ -35,7 +35,7 @@ export default function Footer() {
             <ul className="footer-my-list">
               <li><a href="/about">About Us</a></li>
               <li><a href="/team">Our Team</a></li>
-              <li><a href="/careers">Careers</a></li>
+             
               <li><a href="/contact">Contact</a></li>
             </ul>
           </div>
