@@ -46,7 +46,7 @@ export default function VideoSection() {
   return (
     <>
       {/* Desktop Video */}
-      <section className="spacer header-index d-none d-md-block"></section>
+      
       <section className="video-section header-index d-none d-md-block">
         <video ref={videoRef1} className="hero-video d-none d-md-block" muted playsInline preload="metadata">
           <source src="/video/video1.mp4" type="video/mp4" />

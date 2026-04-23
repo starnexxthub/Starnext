@@ -62,7 +62,7 @@ export default function ServicePage() {
 >
           <h1
             className="fw-semibold text-center"
-            style={{ fontSize: "clamp(1.875rem, 5vw, 3.75rem)", letterSpacing: "-0.025em",marginTop:"15px" }}
+            style={{ fontSize: "clamp(1.875rem, 5vw, 3.75rem)", letterSpacing: "-0.025em",marginTop:"25px" }}
           >
             Web Development
           </h1>
