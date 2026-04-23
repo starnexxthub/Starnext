@@ -35,15 +35,15 @@ const IMAGE_LEFT =
 
 // Center hero — cinematic mountain landscape
 const IMAGE_CENTER =
-  "img/about.jpeg";
+  "img/Founders.png";
 
 // Right panel — people / creative collaboration
 const IMAGE_RIGHT =
   "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80&fit=crop";
 
-// Replacement fullscreen — city skyline at night
+
 const IMAGE_FULL =
-  "img/black.png";
+  "img/Black.png";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOTAL_PHASES = 5;
@@ -188,7 +188,7 @@ export default function JourneySection() {
             left: "50%",
             top: "50%",
             width: "100vw",
-            height: "100vh",
+            height: "120vh",
             transform: `translate(-50%, -50%) scale(${centerScale})`,
             opacity: centerOpacity * (p0 > 0 ? 1 : 0),
             zIndex: centerZ,
@@ -246,7 +246,7 @@ export default function JourneySection() {
               alt="Our journey — city skyline"
               fill
               sizes="100vw"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover",objectPosition: "center top" }}
             />
             <div style={{
               position: "absolute",
