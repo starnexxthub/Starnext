@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Navbar from "@/app/sections/Navbar";
 import Footer from "@/app/sections/Footer";
+import Newsletter from "../sections/Newsletter";
+import SocialBar from "../sections/SocialBar";
 
 const faqs = [
   {
@@ -83,6 +85,8 @@ export default function FAQPage() {
 
         </div>
       </section>
+      <Newsletter/>
+      <SocialBar/>
 
       <Footer />
 

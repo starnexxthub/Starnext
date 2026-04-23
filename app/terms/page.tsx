@@ -2,6 +2,9 @@
 
 import Navbar from "@/app/sections/Navbar";
 import Footer from "@/app/sections/Footer";
+import Newsletter from "../sections/Newsletter";
+import SocialBar from "../sections/SocialBar";
+
 
 export default function TermsPage() {
   return (
@@ -85,6 +88,8 @@ export default function TermsPage() {
           </div>
         </div>
       </section>
+      <Newsletter/>
+      <SocialBar/>
 
       <Footer />
 
