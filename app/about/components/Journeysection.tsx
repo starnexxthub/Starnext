@@ -43,7 +43,7 @@ const IMAGE_RIGHT =
 
 
 const IMAGE_FULL =
-  "img/Black.png";
+  "img/black.png";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOTAL_PHASES = 5;
