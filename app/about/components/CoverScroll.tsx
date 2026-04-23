@@ -24,7 +24,6 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     offset: ['start start', 'end end'],
   });
 
-  // Slow, cinematic slide — lower stiffness = more lag behind scroll
   const section2XRaw = useTransform(scrollYProgress, [0, 1], ['100%', '0%']);
   const section2X    = useSpring(section2XRaw, {
     stiffness: 40,
@@ -56,8 +55,21 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     window.scrollTo({ top: index === 0 ? top : top + height, behavior: 'smooth' });
   };
 
+  /** Returns true only when #coverWrapper is the pinned section on screen */
+  const isWrapperActive = (): boolean => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return false;
+    const rect = wrapper.getBoundingClientRect();
+    // The wrapper occupies 200vh of scroll space.
+    // It's "active" when its sticky panel is pinned — i.e. rect.top <= 0
+    // and the bottom of the wrapper hasn't left the screen yet.
+    return rect.top <= 0 && rect.bottom > 0;
+  };
+
+  // ── Keyboard navigation (guard added) ────────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isWrapperActive()) return;
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
       if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && current === 0) goToSection(1);
       if ((e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   && current === 1) goToSection(0);
@@ -66,12 +78,17 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollYProgress]);
 
+  // ── Wheel snap — ONLY fires when coverWrapper is the active section ───────
   useEffect(() => {
     let lastScrollTime = 0;
     const handleWheel = (e: WheelEvent) => {
+      // ✅ Guard: ignore completely if section isn't pinned on screen
+      if (!isWrapperActive()) return;
+
       const now = Date.now();
       if (now - lastScrollTime < 800 || Math.abs(e.deltaY) < 50) return;
       lastScrollTime = now;
+
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
       const next = current + (e.deltaY > 0 ? 1 : -1);
       if (next >= 0 && next <= 1) goToSection(next);
@@ -80,10 +97,16 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('wheel', handleWheel);
   }, [scrollYProgress]);
 
+  // ── Touch swipe snap — guard added ───────────────────────────────────────
   useEffect(() => {
     let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => { touchStartY = e.changedTouches[0].screenY; };
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.changedTouches[0].screenY;
+    };
     const handleTouchEnd = (e: TouchEvent) => {
+      // ✅ Guard: ignore if section isn't active
+      if (!isWrapperActive()) return;
+
       const diff = touchStartY - e.changedTouches[0].screenY;
       if (Math.abs(diff) < 50) return;
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
