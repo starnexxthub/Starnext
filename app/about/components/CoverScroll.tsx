@@ -146,7 +146,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
           </div>
           <div className={styles.imageContainer}>
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+              src="img/try2.jpg?w=800&q=90"
               alt="Vision"
               className={styles.sectionImage}
             />
@@ -178,7 +178,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
           </div>
           <div className={styles.imageContainer}>
             <img
-              src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80"
+              src="img/mission.jpg?w=800&q=80"
               alt="Mission"
               className={styles.sectionImage}
             />
