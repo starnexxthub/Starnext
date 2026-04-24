@@ -136,12 +136,13 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               </div>
             </div>
             <div className={styles.keywords}>
-              <span className={styles.keyword}>Innovation</span>
-              <span className={styles.keyword}>Growth</span>
-              <span className={styles.keyword}>Impact</span>
-              <span className={styles.keyword}>Excellence</span>
-              <span className={styles.keyword}>Transformation</span>
-            </div>
+  <p className={styles.keywordText}>
+    We envision becoming a leader in advancing businesses using digital mediums. 
+    Customer loyalty and satisfaction, openness, creativity and teamwork growth 
+    play an essential role in our driving mission. All this contributes to 
+    reflecting who we are, what we are, how we work, and what we strive for.
+  </p>
+</div>
           </div>
           <div className={styles.imageContainer}>
             <img
@@ -169,12 +170,11 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               </div>
             </div>
             <div className={styles.keywords}>
-              <span className={styles.keyword}>Scale</span>
-              <span className={styles.keyword}>Convert</span>
-              <span className={styles.keyword}>Empower</span>
-              <span className={styles.keyword}>Innovate</span>
-              <span className={styles.keyword}>Dominate</span>
-            </div>
+  <p className={styles.keywordText}>
+    To empower businesses with result-driven digital solutions by combining strategy, technology, and creative excellence—while fostering strong customer relationships, delivering measurable outcomes, and continuously evolving with the digital landscape.
+
+  </p>
+</div>
           </div>
           <div className={styles.imageContainer}>
             <img

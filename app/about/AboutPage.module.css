@@ -572,5 +572,33 @@
   .keyword { font-size: 0.8rem; }
 }
 
+.keywordText {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+  max-width: 600px;
+}
 
 
+.galleryWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.galleryTrack {
+  display: flex;
+  width: max-content;  /* essential — lays all items in a single row */
+  gap: 24px;
+}
+
+.galleryItem {
+  width: 320px;
+  flex-shrink: 0;     /* prevents items from squishing */
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

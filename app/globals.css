@@ -79,7 +79,7 @@
   top: 120%;
   left: 0;
   min-width: 250px;
-  background: black;
+  background:#003865;
   backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: 10px 0;
@@ -223,23 +223,31 @@
 
 /* SERVICES DROPDOWN */
 .mobile-dropdown {
-  padding-left: 10px;
-  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+.mobile-dropdown.open {
+  max-height: 300px; /* tall enough to fit all items */
 }
 
 .mobile-dropdown li a {
-  display: block;
-  padding: 10px 12px;
-  font-size: 14px;
-  color: #cbd5e1;
-  border-radius: 8px;
-  transition: 0.2s;
+   display: block;
+  padding: 10px 16px;
+  color:white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.75;
 }
 
 /* hover feel */
 .mobile-dropdown li a:hover {
-  background: rgba(255,255,255,0.05);
-  color: #fff;
+  color: #003865;
+  
+  
 }
 
 /* ARROW */
@@ -302,7 +310,32 @@
     padding-left: 0 !important;
   }
 }
+/* Add this to your CSS */
+@media (max-width: 991px) {
+  .nav-menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
+  .nav-item {
+    display: flex;
+    flex-direction: column;  /* stack toggle + dropdown vertically */
+    align-items: stretch;
+  }
+
+  .nav-link-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile-dropdown {
+    width: 100%;
+    padding-left: 12px;
+  }
+}
 
 
 /* magnetic button*/

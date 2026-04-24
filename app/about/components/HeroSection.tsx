@@ -12,6 +12,15 @@ const images = [
   '/img/t6.png?q=80&w=1000&auto=format&fit=crop',
   '/img/t10.png?q=80&w=1000&auto=format&fit=crop',
   '/img/t13.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t2.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t3.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t4.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t5.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t7.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t8.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t11.png?q=80&w=1000&auto=format&fit=crop',
+  '/img/t12.png?q=80&w=1000&auto=format&fit=crop',
+
 ];
 
 export default function HeroSection() {

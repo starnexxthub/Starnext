@@ -169,17 +169,22 @@ export default function Navbar() {
     onClick={() => setIsServiceOpen(!isServiceOpen)}
   >
     Services
-    <span className={`dropdown-arrow ${isServiceOpen ? "open" : ""}`}></span>
+    <span style={{
+      fontSize: '1.4rem',
+      fontWeight: '300',
+      lineHeight: 1,
+      userSelect: 'none'
+    }}>
+      {isServiceOpen ? '−' : '+'}
+    </span>
   </div>
 
-  {isServiceOpen && (
-    <ul className="mobile-dropdown">
-      <li><a href="/service/Digital" onClick={()=>setIsMenuOpen(false)}>Digital Marketing</a></li>
-      <li><a href="/service" onClick={()=>setIsMenuOpen(false)}>Web & App Development</a></li>
-      <li><a href="/service/Seo" onClick={()=>setIsMenuOpen(false)}>Search Engine Optimization</a></li>
-      <li><a href="/service/SocialMedia" onClick={()=>setIsMenuOpen(false)}>Social Media Marketing</a></li>
-    </ul>
-  )}
+  <ul className={`mobile-dropdown ${isServiceOpen ? 'open' : ''}`}>
+    <li><a href="/service/Digital" onClick={() => setIsMenuOpen(false)}>Digital Marketing</a></li>
+    <li><a href="/service" onClick={() => setIsMenuOpen(false)}>Web & App Development</a></li>
+    <li><a href="/service/Seo" onClick={() => setIsMenuOpen(false)}>Search Engine Optimization</a></li>
+    <li><a href="/service/SocialMedia" onClick={() => setIsMenuOpen(false)}>Social Media Marketing</a></li>
+  </ul>
 </li>
 
             <li className="nav-item">
