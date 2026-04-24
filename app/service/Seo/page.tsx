@@ -154,7 +154,7 @@ maxWidth: "458px",
           EMAIL
         </small>
         <span style={{ fontSize: "14px" }}>
-          support@stanexxt.com
+          info@starnexxt.com
         </span>
       </div>
 
@@ -167,7 +167,7 @@ maxWidth: "458px",
           PHONE
         </small>
         <span style={{ fontSize: "14px" }}>
-          + 44 (0) 208 050 8035
+          + 91 98876543210
         </span>
       </div>
 
@@ -179,8 +179,8 @@ maxWidth: "458px",
         <small className="text-uppercase text-secondary" style={{ fontSize: "11px" }}>
           OFFICE
         </small>
-        <span style={{ fontSize: "14px" }}>
-          42 York Street, TW1 3BW
+        <span style={{ fontSize: "14px",marginLeft:"25px" }}>
+          Dwarka Store,<br></br>Shagun Tower<br></br> 2nd Floor,<br></br>New Rd,Dehradun
         </span>
       </div>
 
