@@ -15,6 +15,7 @@ import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
 import SocialBar from '../sections/SocialBar';
 import JourneySection from './components/Journeysection';
+import FooterBanner from '../sections/FooterBanner';
 
 export default function AboutPage() {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -88,9 +89,9 @@ export default function AboutPage() {
         <TestimonialSection/>
       </main>
 
-      <Newsletter/>
+      
       <SocialBar/>
-      <Footer /> 
+      <FooterBanner/>
     </>
   );
 }

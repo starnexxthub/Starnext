@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function WhyChooseUs() {
+  const router = useRouter()
   useEffect(() => {
     if (typeof window === 'undefined') return
     
@@ -268,7 +270,9 @@ export default function WhyChooseUs() {
                   </p>
                 </div>
 
-                <button className="magnetic-btn magnetic-btn2 tw-bg-white-10 tw-hover-bg-white-20 tw-backdrop-blur-sm tw-border tw-border-white-20 tw-text-white tw-px-6 tw-py-3 tw-rounded-full tw-flex tw-items-center tw-gap-2 tw-text-sm tw-font-medium tw-self-start tw-md-self-center">
+                <button 
+                
+                className="magnetic-btn magnetic-btn2 tw-bg-white-10 tw-hover-bg-white-20 tw-backdrop-blur-sm tw-border tw-border-white-20 tw-text-white tw-px-6 tw-py-3 tw-rounded-full tw-flex tw-items-center tw-gap-2 tw-text-sm tw-font-medium tw-self-start tw-md-self-center">
                   <span className="tw-relative" style={{ zIndex: 10 }}>Let&apos;s Connect</span>
                   <svg className="tw-w-4 tw-h-4 tw-relative" style={{ zIndex: 10 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>

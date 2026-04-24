@@ -50,6 +50,7 @@ const handleSubmit = async () => {
         .form-control::placeholder {
           color: #cbd5e1;
         }
+        
 
 
    /* MOBILE OPTIMIZATION */
@@ -178,11 +179,21 @@ const handleSubmit = async () => {
 <button
   onClick={handleSubmit}
   disabled={loading}
-  className="btn w-100 mt-2 rounded-3"
+  className="w-100 mt-2"
+  style={{
+    background: "linear-gradient(135deg, #00c6ff, #0072ff)",
+    borderRadius: "30px",
+    padding: "12px",
+    fontSize: "16px",
+    border: "none",
+    color: "#fff",
+    fontWeight: "500",
+    cursor: loading ? "not-allowed" : "pointer",
+    opacity: loading ? 0.7 : 1,
+  }}
 >
   {loading ? "Sending..." : "Send Message"}
-</button>
-            </div>
+</button>            </div>
           </div>
         </div>
       </section>

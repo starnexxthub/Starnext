@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Footer() {
+  
   useEffect(() => {
     if (typeof window === 'undefined') return
     
