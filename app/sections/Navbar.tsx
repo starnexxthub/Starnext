@@ -43,7 +43,7 @@ export default function Navbar() {
           
           {/* Logo */}
           <a href="/" className="logo-wrapper" id="logo">
-            <img src="/img/star-logo.png" className="w-50" alt="Starnext" />
+            <img src="/img/star-logo.webp" className="w-50" alt="Starnext" />
             <div className="logo-icon"></div>
             <div className="logo-text-group"></div>
           </a>

@@ -11,7 +11,7 @@ export default function TeamFooterBanner() {
       }}
     >
       <img
-        src="/img/Team-Footer.jpg" // 👈 update path if different
+        src="/img/Team-Footer.webp" // 👈 update path if different
         alt="The Star Team"
         style={{
           width: "100%",

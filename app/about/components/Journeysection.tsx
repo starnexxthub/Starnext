@@ -35,7 +35,7 @@ const IMAGE_LEFT =
 
 // Center hero — cinematic mountain landscape
 const IMAGE_CENTER =
-  "img/Founders.png";
+  "img/Founders.webp";
 
 // Right panel — people / creative collaboration
 const IMAGE_RIGHT =
@@ -43,7 +43,7 @@ const IMAGE_RIGHT =
 
 
 const IMAGE_FULL =
-  "img/black.png";
+  "img/black.webp";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOTAL_PHASES = 5;

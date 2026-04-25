@@ -5,10 +5,10 @@ import { useEffect } from 'react'
 export default function BrandShowcase() {
   const logoPairs = [
   
-  ["/logos/l3.png", "/logos/l4.png"],
-  ["/logos/l5.png", "/logos/l6.png"],
-  ["/logos/l7.png", "/logos/l8.png"],
-  ["/logos/l9.png", "/logos/l10.png"],
+  ["/logos/l3.webp", "/logos/l4.webp"],
+  ["/logos/l5.webp", "/logos/l6.webp"],
+  ["/logos/l7.webp", "/logos/l8.webp"],
+  ["/logos/l9.webp", "/logos/l10.webp"],
 ]
   useEffect(() => {
     if (typeof window === 'undefined') return

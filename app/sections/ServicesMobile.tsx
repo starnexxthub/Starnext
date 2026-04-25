@@ -78,7 +78,7 @@ export default function ServicesMobile() {
 
               <div className="card-footer">
                 <div className="magnetic-wrap">
-                  <a href="#contact" className="btn faq-btn" id="faqContactBtn">Read More</a>
+                  <a href="/service/Digital" className="btn faq-btn" id="faqContactBtn">Read More</a>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function ServicesMobile() {
 
               <div className="card-footer">
                 <div className="magnetic-wrap">
-                  <a href="#contact" className="btn faq-btn" id="faqContactBtn">Read More</a>
+                  <a href="/service/SocialMedia" className="btn faq-btn" id="faqContactBtn">Read More</a>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function ServicesMobile() {
 
               <div className="card-footer">
                 <div className="magnetic-wrap">
-                  <a href="#contact" className="btn faq-btn" id="faqContactBtn">Read More</a>
+                  <a href="/service/Seo" className="btn faq-btn" id="faqContactBtn">Read More</a>
                 </div>
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function ServicesMobile() {
 
               <div className="card-footer">
                 <div className="magnetic-wrap">
-                  <a href="#contact" style={{ background: 'linear-gradient(135deg, #fcfdff 0%, #c8d6fb 100%)', color: '#000d1a' }} className="btn faq-btn" id="faqContactBtn">Read More</a>
+                  <a href="/service" style={{ background: 'linear-gradient(135deg, #fcfdff 0%, #c8d6fb 100%)', color: '#000d1a' }} className="btn faq-btn" id="faqContactBtn">Read More</a>
                 </div>
               </div>
             </div>

@@ -7,19 +7,19 @@ import styles from '../AboutPage.module.css';
 import { Linkedin } from 'lucide-react';
 
 const teamMembers = [
-  { name: 'Anshul Mamgain', role: 'Creative Director', img: '/img/t1.png?w=400&h=550&fit=crop' },
-  { name: 'Himanshu', role: 'SEO Expert', img: 'img/t3.png?w=400&h=600&fit=crop' },
-  { name: 'Ashima ', role: 'Editor', img: 'img/t2.png?w=400&h=450&fit=crop' },
-  { name: 'Sakshi Butola', role: 'Business Head', img: '/img/t9.png?w=400&h=550&fit=crop' },
-  { name: 'Kartik Singh', role: 'Full Stack Developer', img: '/img/t4.png?w=400&h=500&fit=crop' },
-  { name: 'Maheek ', role: 'UI-UX Head', img: '/img/t5.png?w=400&h=480&fit=crop' },
-  { name: 'Mahima', role: 'UI-UX Head', img: '/img/t6.png?w=400&h=520&fit=crop' },
-  { name: 'Manish Rawat', role: 'Editor', img: '/img/t7.png?w=400&h=460&fit=crop' },
-  { name: 'Priyanka', role: 'Brand Head', img: '/img/t8.png?w=400&h=460&fit=crop' },
-  { name: 'Saurabh', role: 'Head Editor', img: '/img/t10.png?w=400&h=460&fit=crop' },
-  { name: 'Shivansh Kapoor', role: 'SEO Expert', img: '/img/t11.png?w=400&h=460&fit=crop' },
-  { name: 'Sumit ', role: 'Senior Editor', img: '/img/t12.png?w=400&h=460&fit=crop' },
-  { name: 'Utkarsh', role: 'Senior Full Stack Developer', img: '/img/t13.png?w=400&h=460&fit=crop' },
+  { name: 'Anshul Mamgain', role: 'Creative Director', img: '/img/t1.webp?w=400&h=550&fit=crop' },
+  { name: 'Himanshu', role: 'SEO Expert', img: 'img/t3.webp?w=400&h=600&fit=crop' },
+  { name: 'Ashima ', role: 'Editor', img: 'img/t2.webp?w=400&h=450&fit=crop' },
+  { name: 'Sakshi Butola', role: 'Business Head', img: '/img/t9.webp?w=400&h=550&fit=crop' },
+  { name: 'Kartik Singh', role: 'Full Stack Developer', img: '/img/t4.webp?w=400&h=500&fit=crop' },
+  { name: 'Maheek ', role: 'UI-UX Head', img: '/img/t5.webp?w=400&h=480&fit=crop' },
+  { name: 'Mahima', role: 'UI-UX Head', img: '/img/t6.webp?w=400&h=520&fit=crop' },
+  { name: 'Manish Rawat', role: 'Editor', img: '/img/t7.webp?w=400&h=460&fit=crop' },
+  { name: 'Priyanka', role: 'Brand Head', img: '/img/t8.webp?w=400&h=460&fit=crop' },
+  { name: 'Saurabh', role: 'Head Editor', img: '/img/t10.webp?w=400&h=460&fit=crop' },
+  { name: 'Shivansh Kapoor', role: 'SEO Expert', img: '/img/t11.webp?w=400&h=460&fit=crop' },
+  { name: 'Sumit ', role: 'Senior Editor', img: '/img/t12.webp?w=400&h=460&fit=crop' },
+  { name: 'Utkarsh', role: 'Senior Full Stack Developer', img: '/img/t13.webp?w=400&h=460&fit=crop' },
 
 ];
 

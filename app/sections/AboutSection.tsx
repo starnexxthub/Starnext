@@ -220,23 +220,21 @@ export default function AboutSection() {
               environment and fostering a performance-based culture.
             </p>
 
-            <button
-  className="magnetic-btn magnetic-btn2 tw-bg-slate-900 tw-hover-bg-slate-800 tw-text-white tw-rounded-full tw-font-medium tw-flex tw-items-center tw-gap-2 tw-transition-all tw-duration-300 tw-hover-shadow-2xl tw-shadow-slate-900-20 tw-hover--translate-y-1"
-  style={{
-    padding: "14px 28px",
-    fontSize: "14px",
-    whiteSpace: "nowrap",
-    marginBottom:"20px"
-    
+            <div className="magnetic-wrap" style={{ marginBottom: 20 }}> 
 
-  }}
-  onClick={() => router.push("/about")}
->
-  MORE ABOUT US
-  <svg style={{ width: "1rem", height: "1rem" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-  </svg>
-</button>
+ <a href="/about" className="btn faq-btn about-btn" > 
+
+MORE ABOUT US 
+
+<svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"> 
+
+<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+ </svg> 
+
+</a> 
+
+</div>
           </div>
         </div>
 
