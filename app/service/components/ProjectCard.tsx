@@ -14,19 +14,19 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     title: "Bold Design For A Creative Construction Powerhouse",
-    img: "/assets/cre.png",
+    img: "/assets/cre.webp",
     label: "Full Website Design & Build",
     description: "Scena Pro, a creative construction company specialising in sets for TV, theatre, and exhibitions, needed a website that could showcase their impressive portfolio while providing intuitive content management for their growing business. After weighing us up against other agencies for over a year, they chose Fourseven Media due to our consultative approach and future SEO growth opportunities. We built a sophisticated Framer website with three interconnected CMS collections (workshops, disciplines, and projects) that link through relationship fields, allowing content to dynamically pull through and interlink across the site. The design leverages bold, image-led storytelling with full-bleed imagery on a dark theme, punctuated by striking orange accents and subtle micro-animations.",
   },
   {
     title: "Bringing a New Jewellery Store to Life",
-    img: "/assets/jwel.png",
+    img: "/assets/jwel.webp",
     label: "E-Commerce & Branding",
     description: "Veylaa Jewellery is a brand built on moments, the client wanted to reflect this in their website design, emphisising quality and their passion for jewellery. Working besides a leading London based designer, we focused on implementing muted pallette tones to the site to bring a beach vibe, while keeping it modern and clean.",
   },
   {
     title: "Bringing Corporate Training to Life",
-    img: "/assets/enga.png",
+    img: "/assets/enga.webp",
     label: "Platform Design & Development",
     description: "Actors in Industry, a corporate training provider specializing in role play-based learning, needed a website that would effectively communicate their unique value proposition while generating quality leads. Our task was to create a high-converting webiste which clearly articulated their services and brand message.",
   },
