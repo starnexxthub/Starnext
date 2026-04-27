@@ -79,7 +79,7 @@
   top: 120%;
   left: 0;
   min-width: 250px;
-  background:#003865;
+  background:#031E4C !important;
   backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: 10px 0;
@@ -276,13 +276,7 @@
 }
 
 /* PHONE */
-.phone-link {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #cbd5e1;
-}
+
 /* FIX MOBILE SERVICES ALIGNMENT */
 @media (max-width: 991px) {
   .nav-item.dropdown > .nav-link-custom {
@@ -377,6 +371,9 @@
   
 }
 } 
+.connect-btn:hover {
+  color: white !important;
+}
 
 
     
@@ -593,7 +590,7 @@ letter-spacing: -7px;
 
 .newsletter-bar {
   height: 208px;
-  background:#031E4C;
+  background:#031E4C !important;
   display: flex;
   align-items: center;
 }
@@ -3631,13 +3628,16 @@ letter-spacing: -7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+
         }
+        .phone-link:hover,
+.phone-link:focus,
+.phone-link:visited {
+  color: #fff !important;
+  text-decoration: none;
+}
         
-        .phone-link:hover .phone-icon {
-            background: #00d4ff;
-            transform: rotate(15deg) scale(1.1);
-        }
+        
         
         /* Particle Background Effect */
         .particles {

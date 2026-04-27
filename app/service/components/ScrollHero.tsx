@@ -9,7 +9,7 @@ const IMAGES = [
   { src: "/assets/cour.webp", rotate: 27, x: "70%", y: [140, 80] },
   { src: "/assets/love.webp", rotate: 27, x: "40%", y: [-150, -470] },
   { src: "/assets/est.webp", rotate: 10, x: "20%", y: [-96, -120] },
-  { src: "/assets/fact.webp", rotate: -17, x: "-10%", y: [420, -120] },
+  { src: "/assets/fact.webp", rotate: -17, x: "-10%", y: [420, -120] } ,
 ];
 
 export default function ScrollHero() {
