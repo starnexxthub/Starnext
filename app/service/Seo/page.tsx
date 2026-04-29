@@ -93,7 +93,7 @@ export default function Seo() {
       <div className="col-12 col-lg-7 ">
         <div
           className="rounded-4 p-4 p-sm-5 text-white"
-          style={{ backgroundColor: "#1e2f3f" }}
+          style={{ backgroundColor: "#031E4C" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
            If you’re a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice. As a leading SEO company, we drive business growth through strategic search optimisation, while our local SEO services boost visibility, attract nearby customers, and give your brand a competitive edge.
@@ -113,7 +113,7 @@ export default function Seo() {
   <div
     className="rounded-4 p-4 p-sm-5 text-white"
     style={{
-      backgroundColor: "#1f3142",
+      backgroundColor: "#031E4C",
       width: "100%",
 maxWidth: "458px",
     }}

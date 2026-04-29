@@ -101,7 +101,7 @@ export default function ServicePage() {
       <div className="col-12 col-lg-7 ">
         <div
           className="rounded-4 p-4 p-sm-5 text-white"
-          style={{ backgroundColor: "#1e2f3f" }}
+          style={{ backgroundColor: "#031E4C" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
             Your website is often the first interaction potential clients have with your business, and in today's market, you have seconds to make the right impression. Our design process combines proven conversion principles with engaging aesthetics to create websites that turn visitors into valuable leads. Every element is strategically crafted to reflect your expertise, build trust with your ideal clients, and guide them toward taking action.
@@ -121,7 +121,7 @@ export default function ServicePage() {
   <div
     className="rounded-4 p-4 p-sm-5 text-white"
     style={{
-      backgroundColor: "#1f3142",
+      backgroundColor: "#031E4C",
       width: "100%",
 maxWidth: "458px",
     }}

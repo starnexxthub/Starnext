@@ -17,6 +17,7 @@ import FAQSection from './sections/FAQSection'
 import Newsletter from './sections/Newsletter'
 import SocialBar from './sections/SocialBar'
 import Footer from './sections/Footer'
+import HeroSection from './sections/HeroSection'
 
 // Dynamically import ScrollSequence to avoid SSR issues
 const ScrollSequence = dynamic(() => import('./components/ScrollSequence'), {
@@ -75,7 +76,7 @@ export default function Home() {
     <>
       <div className="particles" id="particles"></div>
       <Navbar />
-      <SR7Slider />
+      <SR7Slider/>
       <VideoSection />
       <AboutSection />
       <ServicesMobile />

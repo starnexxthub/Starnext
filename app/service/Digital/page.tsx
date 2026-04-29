@@ -4,7 +4,7 @@ import Navbar from "@/app/sections/Navbar";
 import Footer from "@/app/sections/Footer";
 import SocialBar from "@/app/sections/SocialBar";
 import Newsletter from "@/app/sections/Newsletter";
-import ScrollHero from "@/app/service/components/ScrollHero";
+import ScrollHeroSocial from "@/app/service/components/ScrollHeroSocial";
 import ProjectCard from "@/app/service/components/ProjectCard";
 
 export default function Digital() {
@@ -88,7 +88,7 @@ export default function Digital() {
 
           {/* Scroll Hero */}
           <div className="mt-5 w-100" >
-            <ScrollHero />
+            <ScrollHeroSocial />
           </div>
           
 <section className="px-3 px-sm-4" style={{ paddingBottom: "2rem" }}>
@@ -99,7 +99,7 @@ export default function Digital() {
       <div className="col-12 col-lg-7 ">
         <div
           className="rounded-4 p-4 p-sm-5 text-white"
-          style={{ backgroundColor: "#1e2f3f" }}
+          style={{ backgroundColor: "#031E4C" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
             StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.
@@ -132,7 +132,7 @@ Maximum-impact marketing efforts designed to drive real business gains.<br></br>
   <div
     className="rounded-4 p-4 p-sm-5 text-white"
     style={{
-      backgroundColor: "#1f3142",
+      backgroundColor: "#031E4C",
       width: "100%",
 maxWidth: "458px",
     }}
@@ -268,5 +268,4 @@ maxWidth: "458px",
 
   );
 }
-
 
