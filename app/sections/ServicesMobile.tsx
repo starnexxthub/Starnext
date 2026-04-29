@@ -1,54 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
-
 export default function ServicesMobile() {
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined
-    
-    const gsap = (window as any).gsap
-    const ScrollTrigger = (window as any).ScrollTrigger
-    
-    if (!gsap || !ScrollTrigger) return undefined
-
-    const cards = document.querySelectorAll('#cardsSection .blog-card')
-    
-    cards.forEach((card, index) => {
-      gsap.set(card, { y: 100, opacity: 0, rotateX: 15, scale: 0.95 })
-
-      gsap.to(card, {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        scale: 1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        },
-        delay: index * 0.08
-      })
-
-      const img = card.querySelector('.card-image')
-      if (img) {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-          }
-        })
-        .to(card, { y: -30, ease: 'none' }, 0)
-        .to(img, { scale: 1.2, ease: 'none' }, 0)
-      }
-    })
-
-    return undefined
-  }, [])
-
   return (
     <section className="cards-section d-md-none" id="cardsSection">
       <div className="particles" id="cardsParticles"></div>

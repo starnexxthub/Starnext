@@ -8,7 +8,7 @@ export default function ContactInfo() {
           <div className="col-12 col-md-4 d-flex justify-content-center px-2">
             <div
               className="p-4 rounded-3 d-flex flex-column justify-content-between"
-              style={{ backgroundColor: "#3b4f6b", width: "300px", height: "200px" }}
+              style={{ backgroundColor: "rgba(10,30,60,0.85)", width: "300px", height: "200px" }}
             >
               {/* ICON */}
               <div
@@ -19,9 +19,10 @@ export default function ContactInfo() {
                   backgroundColor: "#d1d5db",
                   borderRadius: "10px",
                   opacity: "0.9",
+                  border: "1px solid black"
                 }}
               >
-                <i className="bi bi-envelope" style={{ fontSize: "20px" }}></i>
+                <i className="bi bi-envelope" style={{ fontSize: "20px",color: "black" }}></i>
               </div>
 
               <div>
@@ -39,7 +40,7 @@ export default function ContactInfo() {
           <div className="col-12 col-md-4 d-flex justify-content-center px-2">
             <div
               className="p-4 rounded-3 d-flex flex-column justify-content-between"
-              style={{ backgroundColor: "#3b4f6b", width: "300px", height: "200px" }}
+              style={{ backgroundColor: "rgba(10,30,60,0.85)", width: "300px", height: "200px" }}
             >
               {/* ICON */}
               <div
@@ -50,9 +51,10 @@ export default function ContactInfo() {
                   backgroundColor: "#d1d5db",
                   borderRadius: "10px",
                   opacity: "0.9",
+                  border: "1px solid black"
                 }}
               >
-                <i className="bi bi-telephone" style={{ fontSize: "20px" }}></i>
+                <i className="bi bi-telephone" style={{ fontSize: "20px",color: "black" }}></i>
               </div>
 
               <div>
@@ -70,7 +72,7 @@ export default function ContactInfo() {
           <div className="col-12 col-md-4 d-flex justify-content-center px-2">
             <div
               className="p-4 rounded-3 d-flex flex-column justify-content-between"
-              style={{ backgroundColor: "#3b4f6b", width: "300px", height: "200px" }}
+              style={{ backgroundColor: "rgba(10,30,60,0.85)", width: "300px", height: "200px" }}
             >
               {/* ICON */}
               <div
@@ -81,9 +83,10 @@ export default function ContactInfo() {
                   backgroundColor: "#d1d5db",
                   borderRadius: "10px",
                   opacity: "0.9",
+                  border: "1px solid black"
                 }}
               >
-                <i className="bi bi-geo-alt" style={{ fontSize: "20px" }}></i>                    
+                <i className="bi bi-geo-alt" style={{ fontSize: "20px",color: "black" }}></i>                    
 
               </div>
 

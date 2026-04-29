@@ -6,6 +6,9 @@ export default function WhyChooseUs() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    // Skip all animations on mobile
+    if (window.innerWidth < 768) return
+
     const gsap = (window as any).gsap
     const ScrollTrigger = (window as any).ScrollTrigger
 
@@ -115,6 +118,27 @@ export default function WhyChooseUs() {
           .card-4 .tw-flex { flex-direction: column !important; }
           .card-4 .connect-btn { align-self: stretch; justify-content: center; }
         }
+
+        /* Ensure hidden-by-animation elements are visible on mobile */
+        @media (max-width: 767px) {
+          .char-line-1,
+          .char-line-2 {
+            opacity: 1 !important;
+            transform: none !important;
+          }
+          .subtitle-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+          }
+          [data-card] {
+            opacity: 1 !important;
+            transform: none !important;
+          }
+          .reveal-bottom {
+            opacity: 1 !important;
+            transform: none !important;
+          }
+        }
       `}</style>
 
       {/* Ambient Background */}
@@ -218,9 +242,7 @@ export default function WhyChooseUs() {
                   </p>
                 </div>
 
-                {/* ← button → a href, same magnetic classes preserved */}
-                
-                   <a href="/contact"
+                <a href="/contact"
                   className="magnetic-btn magnetic-btn2 connect-btn tw-bg-white-10 tw-hover-bg-white-20 tw-backdrop-blur-sm tw-border tw-border-white-20 tw-text-white tw-px-6 tw-py-3 tw-rounded-full tw-flex tw-items-center tw-gap-2 tw-text-sm tw-font-medium tw-self-start tw-md-self-center"
                 >
                   <span className="tw-relative" style={{ zIndex: 10 }}>Let&apos;s Connect</span>

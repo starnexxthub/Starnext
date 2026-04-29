@@ -3,13 +3,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const IMAGES = [
-  { src: "/assets/1.jpg", rotate: -24, x: "-90%", y: [-300, -120] },
-  { src: "/assets/2.jpg", rotate: 20, x: "-90%", y: [-100, 200] },
-  { src: "/assets/3.jpg", rotate: -27, x: "-105%", y: [140, 360] },
-  { src: "/assets/4.jpg", rotate: 27, x: "70%", y: [140, 80] },
-  { src: "/assets/5.jpg", rotate: 27, x: "40%", y: [-150, -470] },
-  { src: "/assets/6.jpg", rotate: 10, x: "20%", y: [-96, -120] },
-  { src: "/assets/7.jpg", rotate: -17, x: "-10%", y: [420, -120] } ,
+  { src: "/assets/1.webp", rotate: -24, x: "-90%", y: [-300, -120] },
+  { src: "/assets/2.webp", rotate: 20, x: "-90%", y: [-100, 200] },
+  { src: "/assets/3.webp", rotate: -27, x: "-105%", y: [140, 360] },
+  { src: "/assets/4.webp", rotate: 27, x: "70%", y: [140, 80] },
+  { src: "/assets/5.webp", rotate: 27, x: "40%", y: [-150, -470] },
+  { src: "/assets/6.webp", rotate: 10, x: "20%", y: [-96, -120] },
+  { src: "/assets/7.webp", rotate: -17, x: "-10%", y: [420, -120] } ,
 ];
 
 export default function ScrollHeroSocial() {

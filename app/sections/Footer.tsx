@@ -54,9 +54,9 @@ export default function Footer() {
             <h4 className="footer-title">Resources</h4>
             <ul className="footer-my-list">
               <li><a href="/blogs">Blogs</a></li>
-              <li><a href="#">Case Studies</a></li>
+              {/*<li><a href="#">Case Studies</a></li>
               <li><a href="#">Design Insights</a></li>
-              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Tutorials</a></li>*/}
             </ul>
           </div>
           <div className="col-6 col-lg-3 mt-4 mt-lg-0">

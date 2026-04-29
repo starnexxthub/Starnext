@@ -152,7 +152,9 @@ export default function ContactForm() {
               >
                 <option style={{ color: '#000' }}>Service</option>
                 <option style={{ color: '#000' }}>Web Development</option>
-                <option style={{ color: '#000' }}>UI/UX</option>
+                <option style={{ color: '#000' }}>Social Media Marketing</option>
+                <option style={{ color: '#000' }}>Search Engine Optimization</option>
+                <option style={{ color: '#000' }}>Digital Marketing</option>
               </select>
               <textarea
                 name="message"
