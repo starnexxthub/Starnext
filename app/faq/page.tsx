@@ -9,23 +9,23 @@ import SocialBar from "../sections/SocialBar";
 const faqs = [
   {
     question: "How is Branding used in marketing?",
-    answer: "Branding helps create a unique identity for your business, builds trust, and makes your products or services memorable to customers."
+    answer: "Branding includes creating and implementing a variety of identifiable options to your business so that customers can relate themselves with your business. Further, Branding boosts the recognisability of your products & services among your customers, providing you that competitive position in the market."
   },
   {
     question: "What is the impact of SEO and digital marketing on business?",
-    answer: "SEO and digital marketing increase visibility, drive organic traffic, improve lead generation, and boost overall business growth."
+    answer: "SEO and digital marketing improve visibility, increase qualified traffic, reduce customer acquisition costs over time, and build brand trust—leading to higher conversions and better ROI."
   },
   {
     question: "Does my website will be SSL secured?",
-    answer: "Yes, we ensure your website is SSL secured to protect user data and improve trust and SEO rankings."
+    answer: "Yes. We ensure SSL is enabled so your website runs securely on HTTPS. (SSL availability can depend on your hosting/domain provider, but we handle setup and verification.)"
   },
   {
     question: "Will you buy domain for me or I have to buy?",
-    answer: "We can assist you in purchasing the domain, or you can buy it yourself — both options are available."
+    answer: "Either works. You can purchase it yourself (recommended for ownership), or we can purchase on your behalf and transfer/control it to you."
   },
   {
     question: "What kind of social media marketing services you provide?",
-    answer: "We provide content creation, ad campaigns, audience targeting, analytics tracking, and full social media management."
+    answer: "Strategy, content planning, creatives, Reels, ad campaigns, audience targeting, reporting, and ongoing optimization—tailored to your business goals and budget."
   }
 ];
 

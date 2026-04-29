@@ -17,13 +17,14 @@ export default function PrivacyPage() {
           {/* TITLE */}
           <h1 className="privacy-title">Privacy Policy</h1>
           <p className="privacy-subtitle">
-            Transparency is part of who we are.
+            Transparency is part of who we are. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you interact with our website.
+
           </p>
 
           {/* CONTENT */}
           <div className="privacy-content">
 
-            <h2>1. What information do we collect?</h2>
+            <h2>1. What Information do we collect?</h2>
             <p>
               We collect information when you subscribe to our newsletter or fill out a form.
               You may be asked to enter your name, email address, or phone number.
