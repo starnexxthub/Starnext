@@ -19,7 +19,7 @@ export default function AboutSection() {
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([])
-  const counterTargets = [30, 50, 30, 100]
+  const counterTargets = [400, 600, 350, 90]
 
   useEffect(() => {
     if (typeof window === 'undefined') return

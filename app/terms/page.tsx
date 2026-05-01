@@ -93,7 +93,7 @@ export default function TermsPage() {
 
       <Footer />
 
-      {/* ✅ STYLES */}
+      {/* STYLES */}
       <style jsx>{`
         .terms-wrapper {
           padding: 120px 20px;

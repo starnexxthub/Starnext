@@ -90,7 +90,7 @@ export default function FAQPage() {
 
       <Footer />
 
-      {/* ✅ STYLES */}
+      {/*  STYLES */}
       <style jsx>{`
         .faq-wrapper {
           padding: 120px 20px;

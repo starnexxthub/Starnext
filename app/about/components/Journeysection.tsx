@@ -31,7 +31,7 @@ import Image from "next/image";
 // ─── Unsplash image URLs ─────────────────────────────────────────────────────
 // Left panel  — architecture / urban texture
 const IMAGE_LEFT =
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&fit=crop";
+  "img/j1.webp";
 
 // Center hero — cinematic mountain landscape
 const IMAGE_CENTER =
@@ -39,7 +39,7 @@ const IMAGE_CENTER =
 
 // Right panel — people / creative collaboration
 const IMAGE_RIGHT =
-  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80&fit=crop";
+  "img/Image_.webp";
 
 
 const IMAGE_FULL =
@@ -54,14 +54,15 @@ interface Stat {
 }
 
 const STATS_LEFT: Stat[] = [
-  { value: "2013", label: "The year we founded our company" },
-  { value: "17",   label: "Years of designing Experience" },
+  { value: "2021", label: "The year we founded our company" },
+  { value: "5+",   label: "Years of Website & App Development" },
+  { value: "5+",   label: "Years of Branding Experience" },
 ];
 
 const STATS_RIGHT: Stat[] = [
-  { value: "23",  label: "Industries impacted growth" },
-  { value: "200", label: "Global Collaborations" },
-  { value: "23",  label: "Digital experiences launched" },
+  { value: "100%",  label: "Sucess rate" },
+  { value: "400+", label: "Clients covered" },
+  { value: "50+",  label: "Brands launched" },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────

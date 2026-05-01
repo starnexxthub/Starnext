@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 📩 Send to YOU
+    //  Send to YOU
     await transporter.sendMail({
       from: `"Newsletter" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       html: `<p><b>Email:</b> ${email}</p>`,
     });
 
-    // 📩 Auto reply to user
+    //  Auto reply to user
     await transporter.sendMail({
       from: `"Starnext" <${process.env.EMAIL_USER}>`,
       to: email,

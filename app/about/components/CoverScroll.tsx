@@ -82,7 +82,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   useEffect(() => {
     let lastScrollTime = 0;
     const handleWheel = (e: WheelEvent) => {
-      // ✅ Guard: ignore completely if section isn't pinned on screen
+      // Guard: ignore completely if section isn't pinned on screen
       if (!isWrapperActive()) return;
 
       const now = Date.now();
@@ -104,7 +104,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
       touchStartY = e.changedTouches[0].screenY;
     };
     const handleTouchEnd = (e: TouchEvent) => {
-      // ✅ Guard: ignore if section isn't active
+      // Guard: ignore if section isn't active
       if (!isWrapperActive()) return;
 
       const diff = touchStartY - e.changedTouches[0].screenY;

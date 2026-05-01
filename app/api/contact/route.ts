@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 🔥 Send to YOU
+    //  Send to YOU
     await transporter.sendMail({
       from: `"Website Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -31,14 +31,14 @@ export async function POST(req: Request) {
       `,
     });
 
-    // 🔥 Auto-reply to user
+    //  Auto-reply to user
     await transporter.sendMail({
       from: `"Starnext Team" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "We received your message",
       html: `
         <h3>Thanks ${name} 🙌</h3>
-        <p>We’ve received your message and will get back within 24 hours.</p>
+        <p>We’ve received your message and will get back soon</p>
       `,
     });
 

@@ -76,7 +76,7 @@ export default function PeopleSection() {
       });
     });
 
-    // Hover animations using GSAP
+    
     
   }, []);
 

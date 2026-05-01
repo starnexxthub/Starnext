@@ -26,7 +26,7 @@ export default function AboutPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // ✅ REGISTER HERE (IMPORTANT FIX)
+    // REGISTER HERE (IMPORTANT FIX)
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     // ✅ WAIT FOR FULL LOAD (CRITICAL FOR LIVE)
@@ -36,7 +36,7 @@ export default function AboutPage() {
 
     window.addEventListener("load", handleLoad);
 
-    // ✅ EXTRA SAFETY REFRESH (NEXTJS FIX)
+    //  EXTRA SAFETY REFRESH (NEXTJS FIX)
     const timeout = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 200);
