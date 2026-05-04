@@ -99,7 +99,7 @@ export default function PrivacyPage() {
 
       <Footer />
 
-      {/* ✅ STYLES */}
+      {/*  STYLES */}
       <style jsx>{`
         .privacy-wrapper {
           padding: 120px 20px;

@@ -7,7 +7,7 @@ import styles from '../AboutPage.module.css';
 import { Linkedin } from 'lucide-react';
 
 const teamMembers = [
-  { name: 'Anshul Mamgain', role: 'Creative Director', img: '/img/t1.webp?w=400&h=550&fit=crop' },
+  { name: 'Anshul Mamgain', role : 'CEO', img: '/img/t1.webp?w=400&h=550&fit=crop' },
   { name: 'Himanshu', role: 'SEO Expert', img: 'img/t3.webp?w=400&h=600&fit=crop' },
   { name: 'Ashima ', role: 'Editor', img: 'img/t2.webp?w=400&h=450&fit=crop' },
   { name: 'Sakshi Butola', role: 'Business Head', img: '/img/t9.webp?w=400&h=550&fit=crop' },
