@@ -114,7 +114,7 @@ export default function Navbar() {
               <span className="phone-icon">
                 <i className="bi bi-telephone-fill"></i>
               </span>
-              <span>+91 98876 543210</span>
+              <span>+91 8267016702</span>
             </a>
           </div>
 

@@ -85,7 +85,7 @@ export default function ServicesMobile() {
           </article>
 
           {/* Card 4 */}
-          <article className="blog-card floating floating-delay-4 is-dark" data-card="4">
+          <article className="blog-card floating floating-delay-4 " data-card="4">
             <div className="gradient-border"></div>
             <div className="glow"></div>
 

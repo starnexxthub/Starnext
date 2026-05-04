@@ -21,10 +21,12 @@ export default function VideoSection() {
     if (!activeVideo) return
 
     const safePlay = (video: HTMLVideoElement) => {
-      if (document.visibilityState === 'hidden') return
-      const p = video.play()
-      if (p?.catch) p.catch(() => {})
-    }
+  if (document.visibilityState === 'hidden') return
+  
+  video.currentTime = 0   // 🔥 ensures clean restart
+  const p = video.play()
+  if (p?.catch) p.catch(() => {})
+}
 
     const safePause = (video: HTMLVideoElement) => {
       video.pause()
@@ -62,16 +64,22 @@ export default function VideoSection() {
       <section className="spacer header-index d-none d-md-block"></section>
       <section className="video-section header-index d-none d-md-block">
         <video
-          ref={videoRef1}
-          className="hero-video d-none d-md-block"
-          muted
-          playsInline
-          preload="none"         // ← was "metadata"; skip even metadata until needed
-          poster="/video/video1-poster.webp"  // ← show a frame instead of blank
-        >
-          <source src="/video/video1.webp" type="video/webp" />  {/* ← WebM first (smaller) */}
-          <source src="/video/video1.mp4" type="video/mp4" />
-        </video>
+  ref={videoRef1}
+  className="hero-video"
+  muted
+  playsInline
+  loop                     // ✅ infinite loop
+  preload="none"
+  poster="/video/video1-poster.webp"
+  style={{
+    width: "100%",
+    height: "100vh",
+    objectFit: "cover",   // ✅ responsive fill (important)
+  }}
+>
+  <source src="/video/video1.webm" type="video/webm" />
+  <source src="/video/video1.mp4" type="video/mp4" />
+</video>
       </section>
       <section className="spacer2 header-index d-none d-md-block"></section>
 
@@ -79,16 +87,22 @@ export default function VideoSection() {
       <section className="spacer header-index d-md-none"></section>
       <section className="video-section header-index d-md-none">
         <video
-          ref={videoRef2}
-          className="hero-video d-md-none"
-          muted
-          playsInline
-          preload="none"         // ← same here
-          poster="/video/video1-2-poster.webp"
-        >
-          <source src="/video/video1-2.webm" type="video/webm" />
-          <source src="/video/video1-2.mp4" type="video/mp4" />
-        </video>
+  ref={videoRef2}
+  className="hero-video"
+  muted
+  playsInline
+  loop
+  preload="none"
+  poster="/video/video1-2-poster.webp"
+  style={{
+    width: "100%",
+    height: "100vh",
+    objectFit: "cover",
+  }}
+>
+  <source src="/video/video1-2.webm" type="video/webm" />
+  <source src="/video/video1-2.mp4" type="video/mp4" />
+</video>
       </section>
       <section className="spacer2 header-index d-md-none"></section>
     </>
