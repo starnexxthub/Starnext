@@ -112,8 +112,8 @@ export default function BrandShowcase() {
       <div className="container brand-inner">
         <div className="brand-header" id="brandHeader">
           <h2 className="brand-title">
-            Chosen by Brands That Don&apos;t <br className="d-none d-sm-block" />
-            <span>Play It Safe</span>
+            Chosen by Brands That Don&apos;t  Play It Safe
+            
           </h2>
           <p className="brand-sub">
             The disruptors, innovators, and breakout startups trust us to push creative boundaries and deliver ROI with attitude.
