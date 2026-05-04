@@ -195,8 +195,8 @@ export default function Testimonials() {
 
           {/* RIGHT */}
           <div className="col-lg-8 position-relative">
-            <div className="t-mask-left mask-left d-none d-lg-block"></div>
-            <div className="t-mask-right mask-right d-none d-lg-block"></div>
+            {/*<div className="t-mask-left mask-left d-none d-lg-block"></div>
+            <div className="t-mask-right mask-right d-none d-lg-block"></div>*/}
 
             <div ref={scrollContainerRef} id="scrollContainer" className="t-scroll ps-2 ms-n2">
               {videoSources.map((src, index) => (
