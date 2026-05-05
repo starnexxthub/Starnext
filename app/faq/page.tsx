@@ -8,24 +8,24 @@ import SocialBar from "../sections/SocialBar";
 
 const faqs = [
   {
-    question: "How is Branding used in marketing?",
-    answer: "Branding includes creating and implementing a variety of identifiable options to your business so that customers can relate themselves with your business. Further, Branding boosts the recognisability of your products & services among your customers, providing you that competitive position in the market."
+    question: "What makes StarNext Softech a trusted digital marketing agency?",
+    answer: "StarNext Softech is trusted for its results-driven approach, customized strategies, and transparent communication. Our team focuses on delivering measurable growth and long-term value for every client."
   },
   {
-    question: "What is the impact of SEO and digital marketing on business?",
-    answer: "SEO and digital marketing improve visibility, increase qualified traffic, reduce customer acquisition costs over time, and build brand trust—leading to higher conversions and better ROI."
+    question: "How does StarNext Softech help businesses grow online?",
+    answer: "We use a combination of SEO, social media marketing, paid advertising, and content strategies to increase visibility, attract the right audience, and generate high-quality leads."
   },
   {
-    question: "Does my website will be SSL secured?",
-    answer: "Yes. We ensure SSL is enabled so your website runs securely on HTTPS. (SSL availability can depend on your hosting/domain provider, but we handle setup and verification.)"
+    question: "Can StarNext Softech work with both small businesses and large enterprises?",
+    answer: "Yes, we work with businesses of all sizes. Our strategies are scalable and tailored to meet the specific goals and budgets of startups, SMEs, and large enterprises."
   },
   {
-    question: "Will you buy domain for me or I have to buy?",
-    answer: "Either works. You can purchase it yourself (recommended for ownership), or we can purchase on your behalf and transfer/control it to you."
+    question: "Do you provide customized digital marketing strategies?",
+    answer: "Absolutely. Every strategy is designed based on your business objectives, industry, competition, and target audience to ensure maximum effectiveness and ROI."
   },
   {
-    question: "What kind of social media marketing services you provide?",
-    answer: "Strategy, content planning, creatives, Reels, ad campaigns, audience targeting, reporting, and ongoing optimization—tailored to your business goals and budget."
+    question: "How soon can I expect results after starting with StarNext Softech?",
+    answer: "Timelines depend on the service. Paid campaigns can deliver results within days, while SEO typically takes a few months to show consistent growth. We focus on delivering steady and measurable performance."
   }
 ];
 

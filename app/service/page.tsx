@@ -51,7 +51,7 @@ export default function ServicePage() {
       <main style={{ backgroundColor: "#f5f5f5", color: "black", overflowX: "hidden" }}>
         {/* HERO */}
         <section
-  className="position-relative d-flex flex-column align-items-center px-3 px-sm-4 mx-auto"
+  className="position-relative d-flex flex-column align-items-center  mx-auto"
   style={{
     minHeight: "clamp(90vh, 100vh, 110vh)", // adaptive height
     paddingTop: "clamp(5rem, 6vw, 5rem)",

@@ -49,7 +49,7 @@ export default function Seo() {
       <main style={{ backgroundColor: "#f5f5f5", color: "black", overflowX: "hidden" }}>
         {/* HERO */}
         <section
-          className="position-relative d-flex flex-column align-items-center px-3 px-sm-4"
+          className="position-relative d-flex flex-column align-items-center "
           style={{ minHeight: "100vh", paddingTop: "clamp(4rem, 5vw, 5rem)" }}
         >
           <h1

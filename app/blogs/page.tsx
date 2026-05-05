@@ -486,34 +486,52 @@ export default function BlogPage() {
 </ul>
 
                   <div className="connect-section">
-                    <h3 className="connect-title">Connect us</h3>
-                    <div className="social-icons">
-                      <div 
-                        className="social-icon linkedin"
-                        
-                      >
-                        <img src="/img/_Linkedin.svg" alt="LinkedIn" />
-                      </div>
-                      <div 
-                        className="social-icon youtube"
-                        
-                      >
-                        <img src="/img/_YouTube.svg" alt="YouTube" />
-                      </div>
-                      <div 
-                        className="social-icon instagram"
-                        
-                      >
-                        <img src="/img/_Instagram.svg" alt="Instagram" />
-                      </div>
-                      <div 
-                        className="social-icon whatsapp"
-                        
-                      >
-                        <img src="/img/_WhatsApp.svg" alt="WhatsApp" />
-                      </div>
-                    </div>
-                  </div>
+  <h3 className="connect-title">Connect us</h3>
+
+  <div className="social-icons">
+
+    {/* LINKEDIN */}
+    <a
+      href="https://www.linkedin.com/company/star-next-softech-private-ltd/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-icon linkedin"
+    >
+      <img src="/img/_Linkedin.svg" alt="LinkedIn" />
+    </a>
+
+    {/* YOUTUBE */}
+    <a
+      href="https://www.youtube.com/@starnextsoftech-technology"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-icon youtube"
+    >
+      <img src="/img/_YouTube.svg" alt="YouTube" />
+    </a>
+
+    {/* INSTAGRAM */}
+    <a
+      href="https://www.instagram.com/starnextsoftech_?igsh=MXY3Y2NyenR6ejBvZw%3D%3D&utm_source=qr"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-icon instagram"
+    >
+      <img src="/img/_Instagram.svg" alt="Instagram" />
+    </a>
+
+    {/* WHATSAPP */}
+    <a
+      href="https://wa.me/918267016702"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-icon whatsapp"
+    >
+      <img src="/img/_WhatsApp.svg" alt="WhatsApp" />
+    </a>
+
+  </div>
+</div>
                 </div>
               </div>
 

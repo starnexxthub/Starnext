@@ -175,14 +175,13 @@ export default function FAQSection() {
                 <h2 className="accordion-header" id="headingOne">
                   <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
-                    How is Branding used in marketing ?
+                    What makes StarNext Softech a trusted digital marketing agency?
                   </button>
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                   <div className="accordion-body">
-                    Branding includes creating and implementing a variety of identifiable options to your business so that
-                    customers can relate themselves with your business. Further, Branding boosts the recognisability of your
-                    products & services among your customers, providing you that competitive position in the market.
+                    StarNext Softech is trusted for its results-driven approach, customized strategies, and transparent communication. Our team focuses on delivering measurable growth and long-term value for every client.
+
                   </div>
                 </div>
               </div>
@@ -191,13 +190,14 @@ export default function FAQSection() {
                 <h2 className="accordion-header" id="headingTwo">
                   <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                     aria-expanded="false" aria-controls="collapseTwo">
-                    What is the impact of SEO and digital marketing on business ?
+                    How does StarNext Softech help businesses grow online?
                   </button>
                 </h2>
                 <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                   <div className="accordion-body">
-                    SEO and digital marketing improve visibility, increase qualified traffic, reduce customer acquisition
-                    costs over time, and build brand trust—leading to higher conversions and better ROI.
+                    
+We use a combination of SEO, social media marketing, paid advertising, and content strategies to increase visibility, attract the right audience, and generate high-quality leads.
+
                   </div>
                 </div>
               </div>
@@ -206,13 +206,12 @@ export default function FAQSection() {
                 <h2 className="accordion-header" id="headingThree">
                   <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                     aria-expanded="false" aria-controls="collapseThree">
-                    Does my website will be SSL secured ?
+                    Can StarNext Softech work with both small businesses and large enterprises?
                   </button>
                 </h2>
                 <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                  <div className="accordion-body">
-                    Yes. We ensure SSL is enabled so your website runs securely on HTTPS. (SSL availability can depend on
-                    your hosting/domain provider, but we handle setup and verification.)
+                  <div className="accordion-body">Yes, we work with businesses of all sizes. Our strategies are scalable and tailored to meet the specific goals and budgets of startups, SMEs, and large enterprises.
+
                   </div>
                 </div>
               </div>
@@ -221,13 +220,13 @@ export default function FAQSection() {
                 <h2 className="accordion-header" id="headingFour">
                   <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                     aria-expanded="false" aria-controls="collapseFour">
-                    Will you buy domain for me or I have to buy ?
+                    Do you provide customized digital marketing strategies?
                   </button>
                 </h2>
                 <div id="collapseFour" className="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                   <div className="accordion-body">
-                    Either works. You can purchase it yourself (recommended for ownership), or we can purchase on your
-                    behalf and transfer/control it to you.
+                    Absolutely. Every strategy is designed based on your business objectives, industry, competition, and target audience to ensure maximum effectiveness and ROI.
+
                   </div>
                 </div>
               </div>
@@ -236,13 +235,14 @@ export default function FAQSection() {
                 <h2 className="accordion-header" id="headingFive">
                   <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                     aria-expanded="false" aria-controls="collapseFive">
-                    What kind of social media marketing services you provides ?
+                    How soon can I expect results after starting with StarNext Softech?
+
                   </button>
                 </h2>
                 <div id="collapseFive" className="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
                   <div className="accordion-body">
-                    Strategy, content planning, creatives, Reels, ad campaigns, audience targeting, reporting, and ongoing
-                    optimization—tailored to your business goals and budget.
+                    Timelines depend on the service. Paid campaigns can deliver results within days, while SEO typically takes a few months to show consistent growth. We focus on delivering steady and measurable performance.
+
                   </div>
                 </div>
               </div>

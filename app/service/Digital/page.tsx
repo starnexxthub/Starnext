@@ -48,14 +48,24 @@ export default function Digital() {
   .floating-card-inner {
     padding: 1.25rem !important;
   }
+  .para{
+  margin-left:5px;
+  }
+  .section{
+  padding-right:5px;
+  padding-left:5px;
+  }
 }
+
+
+
       `}</style>
       <Navbar />
 
       <main style={{ backgroundColor: "#f5f5f5", color: "black", overflowX: "hidden" }}>
         {/* HERO */}
         <section
-          className="position-relative d-flex flex-column align-items-center px-3 px-sm-4"
+          className="position-relative d-flex flex-column align-items-center "
           style={{ minHeight: "100vh", paddingTop: "clamp(4rem, 5vw, 5rem)" }}
         >
           <h1
@@ -98,7 +108,7 @@ export default function Digital() {
       {/* LEFT CONTENT */}
       <div className="col-12 col-lg-7 ">
         <div
-          className="rounded-4 p-4 p-sm-5 text-white"
+          className="rounded-4 p-2 p-sm-5 text-white"
           style={{ backgroundColor: "#031E4C" }}
         >
           <p className="mb-0" style={{ fontSize: "16px", lineHeight: "1.8" }}>
