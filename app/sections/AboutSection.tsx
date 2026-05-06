@@ -233,14 +233,14 @@ export default function AboutSection() {
         {/* Stats */}
         <div className="row g-4 stats-row">
           {[
-            { label: 'Projects Completed', suffix: '' },
-            { label: 'Clients Covered',    suffix: '' },
-            { label: 'Happy Clients',      suffix: '' },
-            { label: 'Success Rate',       suffix: '%' },
-          ].map(({ label, suffix }, i) => (
+  { label: 'Projects Completed', prefix: '', suffix: '+' },
+  { label: 'Clients Covered',    prefix: '', suffix: '+' },
+  { label: 'Happy Clients',      prefix: '', suffix: '+' },
+  { label: 'Success Rate',       prefix: '', suffix: '%' },
+].map(({ label, prefix, suffix }, i) => (
             <div key={i} className="col-6 col-md-3">
               <div className="stat-card text-center p-4 clean-card">
-                <div className="d-flex align-items-end justify-content-center" style={{ gap: '.25rem' }}>
+                <div className="d-flex align-items-end justify-content-center" style={{ gap: '.15rem' }}>
                   <h3
                     ref={el => { counterRefs.current[i] = el }}
                     className="stat-number mb-2"

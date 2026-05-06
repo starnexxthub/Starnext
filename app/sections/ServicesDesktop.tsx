@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useInView, useAnimation, motion, AnimatePresence } from 'framer-motion'
 
 const servicesData = [
   { title: '', desc: '', img: '/img/DigitalM-2.webp' },
@@ -46,129 +47,164 @@ const ArrowIcon = () => (
   </svg>
 )
 
+// Staggered point entrance — each child slides up in sequence
+function ServicePoint({
+  step, heading, sub, body, href, isActive
+}: {
+  step: number; heading: string; sub: string; body: string; href: string; isActive: boolean
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '0px 0px -18% 0px' })
+
+  const items = [
+    { el: 'h3', content: heading, className: `js-anim${step === 0 ? ' fw-semibold' : ''}` },
+    { el: 'p',  content: sub,     className: 'fw-semibold js-anim' },
+    { el: 'p',  content: body,    className: 'js-anim' },
+  ]
+
+  return (
+    <div
+      ref={ref}
+      className={`point js-point ${isActive ? 'active' : ''}`}
+      data-step={step}
+    >
+      {items.map(({ el, content, className }, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+        >
+          {el === 'h3'
+            ? <h3 className={className}>{content}</h3>
+            : <p  className={className}>{content}</p>
+          }
+        </motion.div>
+      ))}
+
+      <motion.div
+        className="magnetic-wrap js-anim"
+        initial={{ opacity: 0, y: 28 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+      >
+        <a href={href} className="btn faq-btn">
+          MORE ABOUT US <ArrowIcon />
+        </a>
+      </motion.div>
+    </div>
+  )
+}
+
+// Right card — scale+fade entrance, image crossfade via AnimatePresence
+function RightCard({ activeIndex }: { activeIndex: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '0px 0px -15% 0px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      className="right-card"
+      id="rightCard"
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="media" style={{ overflow: 'hidden', position: 'relative' }}>
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={activeIndex}
+            id="rightImg"
+            src={servicesData[activeIndex].img}
+            alt={services[activeIndex].heading}
+            style={{ willChange: 'transform, opacity', width: '100%', height: '100%', objectFit: 'cover' }}
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.06 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </AnimatePresence>
+      </div>
+      <div className="overlay" />
+      <div className="content">
+        <h2 className="right-title" id="rightTitle">{servicesData[activeIndex].title}</h2>
+        <p className="right-desc" id="rightDesc">{servicesData[activeIndex].desc}</p>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function ServicesDesktop() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [prevIndex, setPrevIndex] = useState(0)
-  const imgRef = useRef<HTMLImageElement>(null)
-  const imgWrapRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
-  // Smooth image crossfade on activeIndex change
-  useEffect(() => {
-    const gsap = (window as any).gsap
-    if (!gsap || !imgRef.current || !imgWrapRef.current) return
-
-    if (activeIndex === prevIndex) return
-
-    // Slide-out old, swap src, slide-in new
-    const img = imgRef.current
-    const tl = gsap.timeline()
-
-    tl.to(img, {
-      scale: 1.06,
-      opacity: 0,
-      duration: 0.35,
-      ease: 'power2.in',
-      onComplete: () => {
-        img.src = servicesData[activeIndex].img
-        img.alt = services[activeIndex].heading
-      }
-    }).fromTo(
-      img,
-      { scale: 1.06, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }
-    )
-
-    setPrevIndex(activeIndex)
-  }, [activeIndex])
-
+  // ScrollTrigger for pinning right card + active index tracking — still uses GSAP
+  // only for the pin + scroll position detection (no animation logic)
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const gsap = (window as any).gsap
-    const ScrollTrigger = (window as any).ScrollTrigger
-    if (!gsap || !ScrollTrigger) return
+    let rafId: number
+    const wait = () => {
+      const gsap = (window as any).gsap
+      const ScrollTrigger = (window as any).ScrollTrigger
+      if (!gsap || !ScrollTrigger) { rafId = requestAnimationFrame(wait); return }
 
-    const section = document.getElementById('brandSection')
-    const rightCard = document.getElementById('rightCard')
-    const points = document.querySelectorAll<HTMLElement>('#brandSection .js-point')
+      const section = sectionRef.current
+      const rightCard = document.getElementById('rightCard')
+      const points = sectionRef.current?.querySelectorAll<HTMLElement>('.js-point')
 
-    if (!section || !rightCard || !points.length) return
+      if (!section || !rightCard || !points?.length) return
 
-    const triggers: any[] = []
+      const triggers: any[] = []
 
-    // Pin right card on desktop
-    ScrollTrigger.matchMedia({
-      '(min-width: 992px)': function () {
+      ScrollTrigger.matchMedia({
+        '(min-width: 992px)': function () {
+          triggers.push(
+            ScrollTrigger.create({
+              trigger: section,
+              start: 'top top+=30',
+              end: () => '+=' + (section.offsetHeight - rightCard.offsetHeight),
+              pin: rightCard,
+              pinSpacing: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            })
+          )
+        }
+      })
+
+      points.forEach((el) => {
+        const index = Number(el.getAttribute('data-step'))
         triggers.push(
           ScrollTrigger.create({
-            trigger: section,
-            start: 'top top+=30',
-            end: () => '+=' + (section.offsetHeight - rightCard.offsetHeight),
-            pin: rightCard,
-            pinSpacing: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true
+            trigger: el,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => setActiveIndex(index),
+            onEnterBack: () => setActiveIndex(index)
           })
         )
-      }
-    })
-
-    points.forEach((el) => {
-      const index = Number(el.getAttribute('data-step'))
-
-      // Active index tracker
-      triggers.push(
-        ScrollTrigger.create({
-          trigger: el,
-          start: 'top center',
-          end: 'bottom center',
-          onEnter: () => setActiveIndex(index),
-          onEnterBack: () => setActiveIndex(index)
-        })
-      )
-
-      // Staggered entrance: heading, sub, body, btn each slide up
-      const children = el.querySelectorAll('.js-anim')
-      gsap.set(children, { y: 28, opacity: 0 })
-
-      gsap.to(children, {
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 82%',
-          once: true
-        },
-        y: 0,
-        opacity: 1,
-        duration: 0.65,
-        ease: 'power3.out',
-        stagger: 0.1
       })
-    })
 
-    // Right card entrance (scale + fade)
-    gsap.from(rightCard, {
-      scrollTrigger: {
-        trigger: rightCard,
-        start: 'top 85%',
-        once: true
-      },
-      scale: 0.96,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    })
+      const onLoad = () => ScrollTrigger.refresh()
+      window.addEventListener('load', onLoad)
 
-    const onLoad = () => ScrollTrigger.refresh()
-    window.addEventListener('load', onLoad)
+      // store cleanup
+      ;(wait as any)._cleanup = () => {
+        window.removeEventListener('load', onLoad)
+        triggers.forEach(t => t.kill())
+      }
+    }
 
+    rafId = requestAnimationFrame(wait)
     return () => {
-      window.removeEventListener('load', onLoad)
-      triggers.forEach((t) => t.kill())
+      cancelAnimationFrame(rafId)
+      ;(wait as any)._cleanup?.()
     }
   }, [])
 
   return (
-    <section className="section-wrap d-none d-md-block" id="brandSection">
+    <section ref={sectionRef} className="section-wrap d-none d-md-block" id="brandSection">
       <div className="container-xxl">
         <div className="row g-5">
 
@@ -178,22 +214,15 @@ export default function ServicesDesktop() {
             <p className="desc mb-5">We help shape how your audience sees and remembers you.</p>
 
             {services.map(({ step, heading, sub, body, href }) => (
-              <div
+              <ServicePoint
                 key={step}
-                className={`point js-point ${activeIndex === step ? 'active' : ''}`}
-                data-step={step}
-              >
-                {/* Each child tagged js-anim for staggered entrance */}
-                <h3 className={`js-anim${step === 0 ? ' fw-semibold' : ''}`}>{heading}</h3>
-                <p className="fw-semibold js-anim">{sub}</p>
-                <p className="js-anim">{body}</p>
-
-                <div className="magnetic-wrap js-anim">
-                  <a href={href} className="btn faq-btn">
-                    MORE ABOUT US <ArrowIcon />
-                  </a>
-                </div>
-              </div>
+                step={step}
+                heading={heading}
+                sub={sub}
+                body={body}
+                href={href}
+                isActive={activeIndex === step}
+              />
             ))}
 
             <div style={{ height: '5vh' }} />
@@ -201,22 +230,7 @@ export default function ServicesDesktop() {
 
           {/* RIGHT SIDE */}
           <div className="col-lg-6">
-            <div className="right-card" id="rightCard">
-              <div className="media" ref={imgWrapRef} style={{ overflow: 'hidden' }}>
-                <img
-                  ref={imgRef}
-                  id="rightImg"
-                  src={servicesData[0].img}
-                  alt={services[0].heading}
-                  style={{ willChange: 'transform, opacity' }}
-                />
-              </div>
-              <div className="overlay" />
-              <div className="content">
-                <h2 className="right-title" id="rightTitle">{servicesData[activeIndex].title}</h2>
-                <p className="right-desc" id="rightDesc">{servicesData[activeIndex].desc}</p>
-              </div>
-            </div>
+            <RightCard activeIndex={activeIndex} />
           </div>
 
         </div>
