@@ -8,15 +8,15 @@ export default function TestimonialSection() {
 const testimonials = [
 {
 img:"/img/b4.png",
-text:`Working with Starnext was an absolute game-changer for our brand. Their creativity, attention to detail, and 100% passionate approach truly transformed our vision into reality. From the initial brainstorming sessions to the final execution, professionalism and enthusiasm.`
+text:`Working with StarNext really helped us. Their strategic approach, consistent communication, and result-driven campaigns significantly boosted our leads, visibility, and overall brand growth in a competitive real estate market.`
 },
 {
 img:"/img/b2.png",
-text:`Their creativity, attention to detail, and passionate approach helped our business scale faster than expected. The team delivered excellent results with professionalism and strong communication.`
+text:`StarNext transformed our website into a sleek, modern one that showcases our engineering expertise and innovations. Their team delivered good designs and fast performance—all within budget. We can recommend Star Next for anyone serious about standing out online.`
 },
 {
 img:"/img/b3.png",
-text:`Starnext understood our vision perfectly and turned it into something even better than we imagined. Highly professional team and outstanding delivery.`
+text:`Our experience with StarNext elevated our real estate brand presence. Through strategic social media execution and performance-driven Meta ads, they consistently generated premium leads and strengthened our market positioning.`
 }
 ]
 

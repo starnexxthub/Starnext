@@ -1,207 +1,172 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useRouter } from "next/navigation";
 
-// Define Particle interface
 interface ParticleType {
-  x: number
-  y: number
-  size: number
-  speedX: number
-  speedY: number
-  opacity: number
-  update: (canvasWidth: number, canvasHeight: number) => void
+  x: number; y: number; size: number
+  speedX: number; speedY: number; opacity: number
+  update: (w: number, h: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
 }
 
 export default function AboutSection() {
-  const router = useRouter();
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const canvasRef  = useRef<HTMLCanvasElement>(null)
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([])
   const counterTargets = [400, 600, 350, 90]
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const gsap = (window as any).gsap
-    const ScrollTrigger = (window as any).ScrollTrigger
-    
-    if (!gsap || !ScrollTrigger) return
+    // Poll until GSAP ready
+    let rafId: number
+    const waitForGSAP = () => {
+      const gsap = (window as any).gsap
+      const ScrollTrigger = (window as any).ScrollTrigger
+      if (!gsap || !ScrollTrigger) { rafId = requestAnimationFrame(waitForGSAP); return }
+      init(gsap, ScrollTrigger)
+    }
+    rafId = requestAnimationFrame(waitForGSAP)
+    return () => cancelAnimationFrame(rafId)
+  }, [])
 
-    // Particle animation
+  useEffect(() => {
+    // Particle canvas — totally independent from GSAP
     const canvas = canvasRef.current
     if (!canvas) return
-    
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
     let particles: ParticleType[] = []
+    let animId: number
 
-    const resizeCanvas = () => {
-      if (!canvas) return
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
     }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
+    resize()
+    window.addEventListener('resize', resize)
 
-    // Particle class
     class Particle implements ParticleType {
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      opacity: number
-      
-      constructor(canvasWidth: number, canvasHeight: number) {
-        this.x = Math.random() * canvasWidth
-        this.y = Math.random() * canvasHeight
-        this.size = Math.random() * 2
+      x: number; y: number; size: number
+      speedX: number; speedY: number; opacity: number
+      constructor(w: number, h: number) {
+        this.x = Math.random() * w
+        this.y = Math.random() * h
+        this.size   = Math.random() * 2
         this.speedX = Math.random() * 0.5 - 0.25
         this.speedY = Math.random() * 0.5 - 0.25
         this.opacity = Math.random() * 0.35
       }
-      
-      update(canvasWidth: number, canvasHeight: number) {
-        this.x += this.speedX
-        this.y += this.speedY
-        if (this.x > canvasWidth) this.x = 0
-        if (this.x < 0) this.x = canvasWidth
-        if (this.y > canvasHeight) this.y = 0
-        if (this.y < 0) this.y = canvasHeight
+      update(w: number, h: number) {
+        this.x += this.speedX; this.y += this.speedY
+        if (this.x > w) this.x = 0; if (this.x < 0) this.x = w
+        if (this.y > h) this.y = 0; if (this.y < 0) this.y = h
       }
-      
       draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = `rgba(11, 42, 87, ${this.opacity})`
+        ctx.fillStyle = `rgba(11,42,87,${this.opacity})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
       }
     }
 
-    const initParticles = () => {
-      particles = []
-      for (let i = 0; i < 50; i++) {
-        particles.push(new Particle(canvas.width, canvas.height))
-      }
-    }
-    initParticles()
+    for (let i = 0; i < 50; i++) particles.push(new Particle(canvas.width, canvas.height))
 
-    let animationId: number
     const animate = () => {
-      if (!ctx || !canvas) return
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      particles.forEach(p => { 
-        p.update(canvas.width, canvas.height)
-        p.draw(ctx)
-      })
-      animationId = requestAnimationFrame(animate)
+      particles.forEach(p => { p.update(canvas.width, canvas.height); p.draw(ctx) })
+      animId = requestAnimationFrame(animate)
     }
     animate()
 
-    // GSAP animations for content
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#about-section',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-      }
-    })
-
-    tl.fromTo('.about-label', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
-      .fromTo('.about-title', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-      .fromTo('.about-desc', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.5')
-      .fromTo('.about-btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.4')
-
-    // SVG line animation
-    const path = document.querySelector('#main-line') as SVGPathElement
-    if (path) {
-      const length = path.getTotalLength()
-      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
-      
-      tl.fromTo('.svg-container', { opacity: 0 }, { opacity: 1, duration: 0.3 })
-        .to(path, { strokeDashoffset: 0, duration: 2.5, ease: 'power2.inOut' })
-    }
-
-    tl.from('.node-group', {
-      scale: 0,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'elastic.out(1, 0.5)'
-    }, '-=1.5')
-
-    tl.from('.connector-line', {
-      scaleY: 0,
-      transformOrigin: 'top',
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power2.out'
-    }, '-=1')
-
-    // Counter animation with IntersectionObserver
-    const observerOptions = {
-      threshold: 0.5
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = Number(entry.target.getAttribute('data-index'))
-          animateCounter(index)
-          observer.unobserve(entry.target)
-        }
-      })
-    }, observerOptions)
-
-    const statCards = document.querySelectorAll('.stat-card')
-    statCards.forEach((card, index) => {
-      card.setAttribute('data-index', String(index))
-      observer.observe(card)
-    })
-
-    function animateCounter(index: number) {
-      const target = counterTargets[index]
-      const duration = 2000
-      const startTime = performance.now()
-      const startValue = 0
-
-      const updateCounter = (currentTime: number) => {
-        const elapsed = currentTime - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        
-        // Easing function (ease-out)
-        const easeOut = 1 - Math.pow(1 - progress, 3)
-        const currentValue = Math.floor(startValue + (target - startValue) * easeOut)
-        
-        const counterEl = counterRefs.current[index]
-        if (counterEl) {
-          counterEl.textContent = String(currentValue)
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter)
-        }
-      }
-
-      requestAnimationFrame(updateCounter)
-    }
-
-    // Cleanup
     return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      cancelAnimationFrame(animationId)
-      observer.disconnect()
+      window.removeEventListener('resize', resize)
+      cancelAnimationFrame(animId)
     }
   }, [])
 
+  function init(gsap: any, ScrollTrigger: any) {
+    const section = sectionRef.current
+    if (!section) return
+
+    // ✅ Scope ALL selectors to this section — prevents bleed into ServicesMobile
+    const q = (sel: string) => section.querySelectorAll(sel)
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        once: true,              // ✅ fire once, no reverse bleed
+        toggleActions: 'play none none none'
+      }
+    })
+
+    tl.fromTo(q('.about-label'),
+      { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
+      .fromTo(q('.about-title'),
+        { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6,  ease: 'power3.out' }, '-=0.25')
+      .fromTo(q('.about-desc'),
+        { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.45')
+      .fromTo(q('.about-btn'),
+        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4,  ease: 'power3.out' }, '-=0.35')
+
+    // SVG line
+    const path = section.querySelector('#main-line') as SVGPathElement | null
+    if (path) {
+      const length = path.getTotalLength()
+      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
+      tl.fromTo(section.querySelector('.svg-container'),
+          { opacity: 0 }, { opacity: 1, duration: 0.3 })
+        .to(path, { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut' })
+        .from(q('.node-group'), {
+          scale: 0, opacity: 0, duration: 0.7, stagger: 0.15,
+          ease: 'elastic.out(1,0.5)', transformOrigin: 'center'
+        }, '-=1.4')
+        .from(q('.connector-line'), {
+          scaleY: 0, transformOrigin: 'top',
+          duration: 0.5, stagger: 0.1, ease: 'power2.out'
+        }, '-=0.9')
+    }
+
+    // Stat counters — scoped IntersectionObserver
+    const statCards = section.querySelectorAll('.stat-card')
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const index = Number((entry.target as HTMLElement).dataset.index)
+        runCounter(index)
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.5, root: null })
+
+    statCards.forEach((card, i) => {
+      ;(card as HTMLElement).dataset.index = String(i)
+      observer.observe(card)
+    })
+
+    function runCounter(index: number) {
+      const target = counterTargets[index]
+      const start = performance.now()
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / 2000, 1)
+        const ease = 1 - Math.pow(1 - t, 3)
+        const el = counterRefs.current[index]
+        if (el) el.textContent = String(Math.floor(target * ease))
+        if (t < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }
+  }
+
   return (
-    <section id="about-section" className="min-vh-100 section-pad position-relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="about-section"
+      className="min-vh-100 section-pad position-relative overflow-hidden"
+    >
       <div className="container-7xl">
-        {/* Header */}
         <div className="header-grid">
           <div className="content-left">
             <p className="about-label">About Starnext</p>
@@ -213,154 +178,94 @@ export default function AboutSection() {
             </h2>
           </div>
 
-          <div className="content-right" style={{paddingTop:28}}>
+          <div className="content-right" style={{ paddingTop: 28 }}>
             <p className="about-desc">
-              We recognize that constant satisfaction of client is essential to business survival. Being a digital marketing and web
-              development company, we work towards securing a long-term partnership with each client by developing a productive work
-              environment and fostering a performance-based culture.
+              We recognize that constant satisfaction of client is essential to business survival.
+              Being a digital marketing and web development company, we work towards securing a
+              long-term partnership with each client by developing a productive work environment
+              and fostering a performance-based culture.
             </p>
-
-            <div className="magnetic-wrap" style={{ marginBottom: 20 }}> 
-
- <a href="/about" className="btn faq-btn about-btn">
-  <span style={{ marginRight: '8px' }}>MORE ABOUT US</span>
-  <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-  </svg>
-</a> 
-
-</div>
+            <div className="magnetic-wrap" style={{ marginBottom: 20 }}>
+              <a href="/about" className="btn faq-btn about-btn">
+                <span style={{ marginRight: '8px' }}>MORE ABOUT US</span>
+                <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* SVG line */}
+        {/* SVG */}
         <div className="svg-wrap mt-4 svg-container d-none d-md-block">
           <svg className="w-100 h-100" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid meet" fill="none">
             <defs>
               <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="2.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
               </filter>
             </defs>
-
             <path id="main-line"
               d="M 150 310 Q 300 120 450 190 T 750 260 T 1050 160"
-              stroke="var(--navy)"
-              strokeWidth="2"
-              fill="none"
-              filter="url(#softGlow)"
-              strokeLinecap="round" />
-
-            <path id="dotted-line"
-              d="M 150 310 Q 300 120 450 190 T 750 260 T 1050 160"
-              stroke="var(--navy)"
-              strokeWidth="3"
-              fill="none"
-              strokeDasharray="0 20"
-              opacity="0.18" />
-
-            <g className="node-group" data-index="0">
-              <circle cx="150" cy="310" r="8" fill="white" stroke="var(--navy)" strokeWidth="3" className="node-circle" />
-              <circle cx="150" cy="310" r="8" fill="var(--navy)" className="pulse-ring" opacity="0.35" />
-              <circle cx="150" cy="310" r="4" fill="var(--navy)" className="node-center" />
-            </g>
-
-            <g className="node-group" data-index="1">
-              <circle cx="450" cy="190" r="8" fill="white" stroke="var(--navy)" strokeWidth="3" className="node-circle" />
-              <circle cx="450" cy="190" r="8" fill="var(--navy)" className="pulse-ring" opacity="0.35" />
-              <circle cx="450" cy="190" r="4" fill="var(--navy)" className="node-center" />
-            </g>
-
-            <g className="node-group" data-index="2">
-              <circle cx="750" cy="260" r="8" fill="white" stroke="var(--navy)" strokeWidth="3" className="node-circle" />
-              <circle cx="750" cy="260" r="8" fill="var(--navy)" className="pulse-ring" opacity="0.35" />
-              <circle cx="750" cy="260" r="4" fill="var(--navy)" className="node-center" />
-            </g>
-
-            <g className="node-group" data-index="3">
-              <circle cx="1050" cy="160" r="8" fill="white" stroke="var(--navy)" strokeWidth="3" className="node-circle" />
-              <circle cx="1050" cy="160" r="8" fill="var(--navy)" className="pulse-ring" opacity="0.35" />
-              <circle cx="1050" cy="160" r="4" fill="var(--navy)" className="node-center" />
-            </g>
-
-            <line x1="150" y1="310" x2="150" y2="455" stroke="var(--navy)" strokeWidth="1" opacity="0.35" className="connector-line" />
-            <line x1="450" y1="190" x2="450" y2="455" stroke="var(--navy)" strokeWidth="1" opacity="0.35" className="connector-line" />
-            <line x1="750" y1="260" x2="750" y2="455" stroke="var(--navy)" strokeWidth="1" opacity="0.35" className="connector-line" />
-            <line x1="1050" y1="160" x2="1050" y2="455" stroke="var(--navy)" strokeWidth="1" opacity="0.35" className="connector-line" />
+              stroke="var(--navy)" strokeWidth="2" fill="none"
+              filter="url(#softGlow)" strokeLinecap="round" />
+            <path d="M 150 310 Q 300 120 450 190 T 750 260 T 1050 160"
+              stroke="var(--navy)" strokeWidth="3" fill="none"
+              strokeDasharray="0 20" opacity="0.18" />
+            {[
+              { cx: 150, cy: 310 }, { cx: 450, cy: 190 },
+              { cx: 750, cy: 260 }, { cx: 1050, cy: 160 }
+            ].map(({ cx, cy }, i) => (
+              <g key={i} className="node-group">
+                <circle cx={cx} cy={cy} r="8" fill="white" stroke="var(--navy)" strokeWidth="3" />
+                <circle cx={cx} cy={cy} r="8" fill="var(--navy)" opacity="0.35" />
+                <circle cx={cx} cy={cy} r="4" fill="var(--navy)" />
+              </g>
+            ))}
+            {[150, 450, 750, 1050].map((x, i) => (
+              <line key={i} x1={x} y1={i === 0 ? 310 : i === 1 ? 190 : i === 2 ? 260 : 160}
+                x2={x} y2="455" stroke="var(--navy)" strokeWidth="1"
+                opacity="0.35" className="connector-line" />
+            ))}
           </svg>
         </div>
 
-        {/* Stat cards */}
+        {/* Stats */}
         <div className="row g-4 stats-row">
-          <div className="col-6 col-md-3">
-            <div className="stat-card text-center p-4 clean-card">
-              <h3 
-                ref={el => { counterRefs.current[0] = el }}
-                className="stat-number mb-2" 
-                style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--navy)' }}
-              >
-                0
-              </h3>
-              <p className="mb-0" style={{ fontSize: '.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--navy)', opacity: .8 }}>
-                Projects Completed
-              </p>
-            </div>
-          </div>
-
-          <div className="col-6 col-md-3">
-            <div className="stat-card text-center p-4 clean-card">
-              <h3 
-                ref={el => { counterRefs.current[1] = el }}
-                className="stat-number mb-2" 
-                style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--navy)' }}
-              >
-                0
-              </h3>
-              <p className="mb-0" style={{ fontSize: '.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--navy)', opacity: .8 }}>
-                Clients Covered
-              </p>
-            </div>
-          </div>
-
-          <div className="col-6 col-md-3">
-            <div className="stat-card text-center p-4 clean-card">
-              <h3 
-                ref={el => { counterRefs.current[2] = el }}
-                className="stat-number mb-2" 
-                style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--navy)' }}
-              >
-                0
-              </h3>
-              <p className="mb-0" style={{ fontSize: '.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--navy)', opacity: .8 }}>
-                Happy Clients
-              </p>
-            </div>
-          </div>
-
-          <div className="col-6 col-md-3">
-            <div className="stat-card text-center p-4 clean-card">
-              <div className="d-flex align-items-end justify-content-center" style={{ gap: '.25rem' }}>
-                <h3 
-                  ref={el => { counterRefs.current[3] = el }}
-                  className="stat-number mb-2" 
-                  style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--navy)' }}
-                >
-                  0
-                </h3>
-                <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '.6rem' }}>%</span>
+          {[
+            { label: 'Projects Completed', suffix: '' },
+            { label: 'Clients Covered',    suffix: '' },
+            { label: 'Happy Clients',      suffix: '' },
+            { label: 'Success Rate',       suffix: '%' },
+          ].map(({ label, suffix }, i) => (
+            <div key={i} className="col-6 col-md-3">
+              <div className="stat-card text-center p-4 clean-card">
+                <div className="d-flex align-items-end justify-content-center" style={{ gap: '.25rem' }}>
+                  <h3
+                    ref={el => { counterRefs.current[i] = el }}
+                    className="stat-number mb-2"
+                    style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--navy)' }}
+                  >0</h3>
+                  {suffix && (
+                    <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '.6rem' }}>
+                      {suffix}
+                    </span>
+                  )}
+                </div>
+                <p className="mb-0" style={{ fontSize: '.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--navy)', opacity: .8 }}>
+                  {label}
+                </p>
               </div>
-              <p className="mb-0" style={{ fontSize: '.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--navy)', opacity: .8 }}>
-                Success Rate
-              </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      <canvas ref={canvasRef} id="particle-canvas"></canvas>
+      <canvas
+        ref={canvasRef}
+        id="particle-canvas"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+      />
     </section>
   )
 }
