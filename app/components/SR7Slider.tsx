@@ -161,7 +161,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-4" className="sr7-layer">Starnext</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-8-20" className="sr7-layer">Best Digital Marketing  Company In Uttrakhand</sr7-txt>
+            <sr7-txt id="SR7_2_1-8-20" className="sr7-layer">Best Digital Marketing  Company In Uttarakhand, India</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-24" className="sr7-layer">With the years of experience in Digital and Development industry Starnext Softech delivering, fulfilling and achieving their customers dreams and needs.</sr7-txt>
             <a id="SR7_2_1-8-31" className="sr7-layer" href="" target="_blank" rel="noopener">Call Now</a>
