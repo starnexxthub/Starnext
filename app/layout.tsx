@@ -3,7 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Starnext - Creative GSAP Animations',
+  title: 'Starnext  Softech-Best Digital Marketing & Web Development in Uttarakhand',
   description: 'Best Digital Marketing & Web Development in Uttarakhand',
 }
 

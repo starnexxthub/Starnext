@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const servicesData = [
   { title: '', desc: '', img: '/img/DigitalM-2.webp' },
@@ -48,24 +48,55 @@ const ArrowIcon = () => (
 
 export default function ServicesDesktop() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [prevIndex, setPrevIndex] = useState(0)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const imgWrapRef = useRef<HTMLDivElement>(null)
+
+  // Smooth image crossfade on activeIndex change
+  useEffect(() => {
+    const gsap = (window as any).gsap
+    if (!gsap || !imgRef.current || !imgWrapRef.current) return
+
+    if (activeIndex === prevIndex) return
+
+    // Slide-out old, swap src, slide-in new
+    const img = imgRef.current
+    const tl = gsap.timeline()
+
+    tl.to(img, {
+      scale: 1.06,
+      opacity: 0,
+      duration: 0.35,
+      ease: 'power2.in',
+      onComplete: () => {
+        img.src = servicesData[activeIndex].img
+        img.alt = services[activeIndex].heading
+      }
+    }).fromTo(
+      img,
+      { scale: 1.06, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }
+    )
+
+    setPrevIndex(activeIndex)
+  }, [activeIndex])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
     const gsap = (window as any).gsap
     const ScrollTrigger = (window as any).ScrollTrigger
-
     if (!gsap || !ScrollTrigger) return
 
     const section = document.getElementById('brandSection')
     const rightCard = document.getElementById('rightCard')
-    const points = document.querySelectorAll('#brandSection .js-point')
+    const points = document.querySelectorAll<HTMLElement>('#brandSection .js-point')
 
     if (!section || !rightCard || !points.length) return
 
     const triggers: any[] = []
 
-    // Pin on desktop only
+    // Pin right card on desktop
     ScrollTrigger.matchMedia({
       '(min-width: 992px)': function () {
         triggers.push(
@@ -96,20 +127,37 @@ export default function ServicesDesktop() {
         })
       )
 
-      // Entrance animation — same pattern as ServicesMobile
-      gsap.from(el, {
+      // Staggered entrance: heading, sub, body, btn each slide up
+      const children = el.querySelectorAll('.js-anim')
+      gsap.set(children, { y: 28, opacity: 0 })
+
+      gsap.to(children, {
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%'
+          start: 'top 82%',
+          once: true
         },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power3.out'
+        y: 0,
+        opacity: 1,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.1
       })
     })
 
-    // Refresh after full load
+    // Right card entrance (scale + fade)
+    gsap.from(rightCard, {
+      scrollTrigger: {
+        trigger: rightCard,
+        start: 'top 85%',
+        once: true
+      },
+      scale: 0.96,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    })
+
     const onLoad = () => ScrollTrigger.refresh()
     window.addEventListener('load', onLoad)
 
@@ -135,12 +183,12 @@ export default function ServicesDesktop() {
                 className={`point js-point ${activeIndex === step ? 'active' : ''}`}
                 data-step={step}
               >
-                <h3 className={step === 0 ? 'fw-semibold' : ''}>{heading}</h3>
-                <p className="fw-semibold">{sub}</p>
-                <p>{body}</p>
+                {/* Each child tagged js-anim for staggered entrance */}
+                <h3 className={`js-anim${step === 0 ? ' fw-semibold' : ''}`}>{heading}</h3>
+                <p className="fw-semibold js-anim">{sub}</p>
+                <p className="js-anim">{body}</p>
 
-                {/* ← same btn class pattern as ServicesMobile */}
-                <div className="magnetic-wrap">
+                <div className="magnetic-wrap js-anim">
                   <a href={href} className="btn faq-btn">
                     MORE ABOUT US <ArrowIcon />
                   </a>
@@ -154,11 +202,13 @@ export default function ServicesDesktop() {
           {/* RIGHT SIDE */}
           <div className="col-lg-6">
             <div className="right-card" id="rightCard">
-              <div className="media">
+              <div className="media" ref={imgWrapRef} style={{ overflow: 'hidden' }}>
                 <img
+                  ref={imgRef}
                   id="rightImg"
-                  src={servicesData[activeIndex].img}
-                  alt={services[activeIndex].heading}
+                  src={servicesData[0].img}
+                  alt={services[0].heading}
+                  style={{ willChange: 'transform, opacity' }}
                 />
               </div>
               <div className="overlay" />
