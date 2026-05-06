@@ -106,6 +106,16 @@ export default function BrandShowcase() {
 
   return (
     <section className="brand-showcase" id="brandShowcase">
+      <style>{`
+  @media (max-width: 767px) {
+    .brand-item[data-index="0"] { order: 1; }
+    .brand-item[data-index="1"] { order: 2; }
+    .brand-item[data-index="2"] { order: 4; }  /* push to row 2, col 2 */
+    .brand-item[data-index="3"] { order: 3; }  /* pull to row 2, col 1 */
+    .brand-item[data-index="4"] { order: 5; }
+    .brand-item[data-index="5"] { order: 6; }
+  }
+`}</style>
       <div className="stars-bg"></div>
       <div className="bg-overlay"></div>
 
@@ -132,12 +142,12 @@ export default function BrandShowcase() {
           <div className="glass-card">
             <div className="top-glow"></div>
 
-            <div className="brand-grid">
+            <div className="brand-grid grid-cols-2 md:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((item, index) => {
   const isAmae = item % 2 !== 0
 
   return (
-    <div className="brand-item" key={item}>
+    <div className="brand-item" key={item} data-index={index}>
       <div className="logo-wheel">
         <div className="logo-wheel-track" data-wheel="brand">
 
