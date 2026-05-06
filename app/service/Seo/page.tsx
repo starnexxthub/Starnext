@@ -167,7 +167,7 @@ maxWidth: "458px",
           PHONE
         </small>
         <span style={{ fontSize: "14px" }}>
-          + 91 98876543210
+          + 91 8267016702
         </span>
       </div>
 
