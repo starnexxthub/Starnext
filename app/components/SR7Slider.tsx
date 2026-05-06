@@ -170,7 +170,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-42" className="sr7-layer">Social media</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-8-43" className="sr7-layer">Website Devlopment</sr7-txt>
+            <sr7-txt id="SR7_2_1-8-43" className="sr7-layer">Website Development</sr7-txt>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-44" className="sr7-layer">Digital Marketing</sr7-txt>
           {/* @ts-ignore */}
