@@ -162,10 +162,15 @@ export default function AboutSection() {
 
   return (
     <section
-      ref={sectionRef}
-      id="about-section"
-      className="min-vh-100 section-pad position-relative overflow-hidden"
-    >
+  ref={sectionRef}
+  id="about-section"
+  className="min-vh-100 section-pad position-relative overflow-hidden"
+  style={{
+    zIndex: 1,
+    background: '#fff',
+    isolation: 'isolate'
+  }}
+>
       <div className="container-7xl">
         <div className="header-grid">
           <div className="content-left">

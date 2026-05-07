@@ -111,7 +111,7 @@ function RightCard({ activeIndex }: { activeIndex: number }) {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="media" style={{ overflow: 'hidden', position: 'relative' }}>
-        <AnimatePresence mode="sync">
+        <AnimatePresence mode="wait">
           <motion.img
             key={activeIndex}
             id="rightImg"
@@ -141,70 +141,91 @@ export default function ServicesDesktop() {
   // ScrollTrigger for pinning right card + active index tracking — still uses GSAP
   // only for the pin + scroll position detection (no animation logic)
   useEffect(() => {
-    if (typeof window === 'undefined') return
+  if (typeof window === 'undefined') return
 
-    let rafId: number
-    const wait = () => {
-      const gsap = (window as any).gsap
-      const ScrollTrigger = (window as any).ScrollTrigger
-      if (!gsap || !ScrollTrigger) { rafId = requestAnimationFrame(wait); return }
+  const gsap = (window as any).gsap
+  const ScrollTrigger = (window as any).ScrollTrigger
 
-      const section = sectionRef.current
-      const rightCard = document.getElementById('rightCard')
-      const points = sectionRef.current?.querySelectorAll<HTMLElement>('.js-point')
+  if (!gsap || !ScrollTrigger) return
 
-      if (!section || !rightCard || !points?.length) return
+  const section = sectionRef.current
+  const rightCard = document.getElementById('rightCard')
+  const points =
+    sectionRef.current?.querySelectorAll<HTMLElement>('.js-point')
 
-      const triggers: any[] = []
+  if (!section || !rightCard || !points?.length) return
 
-      ScrollTrigger.matchMedia({
-        '(min-width: 992px)': function () {
-          triggers.push(
-            ScrollTrigger.create({
-              trigger: section,
-              start: 'top top+=30',
-              end: () => '+=' + (section.offsetHeight - rightCard.offsetHeight),
-              pin: rightCard,
-              pinSpacing: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true
-            })
-          )
-        }
-      })
-
-      points.forEach((el) => {
-        const index = Number(el.getAttribute('data-step'))
-        triggers.push(
-          ScrollTrigger.create({
-            trigger: el,
-            start: 'top center',
-            end: 'bottom center',
-            onEnter: () => setActiveIndex(index),
-            onEnterBack: () => setActiveIndex(index)
-          })
-        )
-      })
-
-      const onLoad = () => ScrollTrigger.refresh()
-      window.addEventListener('load', onLoad)
-
-      // store cleanup
-      ;(wait as any)._cleanup = () => {
-        window.removeEventListener('load', onLoad)
-        triggers.forEach(t => t.kill())
-      }
+  // CLEAN OLD TRIGGERS
+  ScrollTrigger.getAll().forEach((trigger: any) => {
+    if (
+      trigger.trigger &&
+      section.contains(trigger.trigger)
+    ) {
+      trigger.kill()
     }
+  })
 
-    rafId = requestAnimationFrame(wait)
-    return () => {
-      cancelAnimationFrame(rafId)
-      ;(wait as any)._cleanup?.()
-    }
-  }, [])
+  const triggers: any[] = []
+
+  // DESKTOP ONLY PIN
+  if (window.innerWidth >= 992) {
+    triggers.push(
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top+=30',
+        end: () =>
+          '+=' + (section.offsetHeight - rightCard.offsetHeight),
+
+        pin: rightCard,
+        pinSpacing: true,
+
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+
+        fastScrollEnd: true,
+      })
+    )
+  }
+
+  // ACTIVE CARD CHANGE
+  points.forEach((el) => {
+    const index = Number(el.getAttribute('data-step'))
+
+    triggers.push(
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top center',
+        end: 'bottom center',
+
+        onEnter: () => setActiveIndex(index),
+        onEnterBack: () => setActiveIndex(index),
+      })
+    )
+  })
+
+  // IMPORTANT
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh()
+  })
+
+  return () => {
+    triggers.forEach((t) => t.kill())
+  }
+}, [])
 
   return (
-    <section ref={sectionRef} className="section-wrap d-none d-md-block" id="brandSection">
+    <section
+  ref={sectionRef}
+  className="section-wrap d-none d-md-block"
+  id="brandSection"
+  style={{
+    position: 'relative',
+    zIndex: 2,
+    isolation: 'isolate',
+    overflow: 'hidden',
+    background: '#fff'
+  }}
+>
       <div className="container-xxl">
         <div className="row g-5">
 
@@ -225,7 +246,7 @@ export default function ServicesDesktop() {
               />
             ))}
 
-            <div style={{ height: '5vh' }} />
+            <div style={{ height: '12vh' }} />
           </div>
 
           {/* RIGHT SIDE */}
