@@ -3,13 +3,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const IMAGES = [
-  { src: "/assets/image.webp", rotate: -24, x: "-90%", y: [-300, -120] },
+  { src: "/assets/image.webp", rotate: -24, x: "-120%", y: [-300, -220] },
   { src: "/assets/bmw.webp", rotate: 20, x: "-90%", y: [-100, 200] },
-  { src: "/assets/art.webp", rotate: -27, x: "-105%", y: [140, 360] },
+  { src: "/assets/art.webp", rotate: -27, x: "-125%", y: [140, 360] },
   { src: "/assets/cour.webp", rotate: 27, x: "70%", y: [140, 80] },
-  { src: "/assets/love.webp", rotate: 27, x: "40%", y: [-150, -470] },
+  { src: "/assets/love.webp", rotate: 27, x: "100%", y: [-150, -470] },
   { src: "/assets/est.webp", rotate: 10, x: "20%", y: [-96, -120] },
-  { src: "/assets/fact.webp", rotate: -17, x: "-10%", y: [420, -120] } ,
+  { src: "/assets/fact.webp", rotate: -17, x: "-10%", y: [420, -120] },
 ];
 
 export default function ScrollHero() {
@@ -28,6 +28,7 @@ export default function ScrollHero() {
           width: 100%;
           background-color: #f5f5f5;
         }
+
         .scroll-hero-sticky {
           position: sticky;
           top: 0;
@@ -37,47 +38,27 @@ export default function ScrollHero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          
         }
+
         .scroll-hero-card {
           position: absolute;
-          aspect-ratio: 4 / 3;
+          width: 20vw;
+          height: 20vw;        /* same as width → perfect square */
+          min-width: 120px;
+          min-height: 120px;
+          max-width: 420px;
+          max-height: 420px;
           border-radius: 1rem;
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.3);
-          
-          height: 20%;
         }
-        @media (min-width: 576px) {
-          .scroll-hero-card {
-            width: 200px;
-          }
-            .scroll-hero-sticky{
-             margin-left:0px;
-            }
-        }
-        @media (min-width: 768px) {
-          .scroll-hero-card {
-            width: 280px;
-          }
-            .scroll-hero-sticky{
-             margin-left:0px;
-            }
-        }
-        @media (min-width: 992px) {
-          .scroll-hero-card {
-            width: 415px;
-            
-          }
-            .scroll-hero-sticky{
-             margin-left:50px;
-            }
-        }
+
         .scroll-hero-card img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
         }
       `}</style>
 
