@@ -8,7 +8,7 @@ export default function BrandShowcase() {
   ["/logos/l3.webp", "/logos/l4.webp"],
   ["/logos/l5.webp", "/logos/l6.webp"],
   ["/logos/l7.webp", "/logos/l8.webp"],
-  ["/logos/l9.webp", "/logos/l10.webp"],
+  ["/logos/l9.webp", "/logos/l1.webp"],
 ]
   useEffect(() => {
     if (typeof window === 'undefined') return

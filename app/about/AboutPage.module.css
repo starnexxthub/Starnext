@@ -187,6 +187,14 @@
   max-width: 60%;
 }
 
+.keywordText {
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 400;
+  color: #333;
+  line-height: 1.75;
+  max-width: 520px;
+}
+
 .keyword {
   font-size: clamp(0.875rem, 2vw, 1.25rem);
   font-weight: 600;
@@ -286,6 +294,104 @@
   font-weight: 700;
 }
 
+/* ============================================================
+   LAPTOP BREAKPOINTS — desktop only (992px and up)
+   Mobile layout is completely untouched below 992px
+   ============================================================ */
+
+/* Small laptops: 992px – 1199px
+   Tighten everything — title, image, padding, text */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .coverSection {
+    padding: 0 4vw;
+  }
+
+  .sectionContent {
+    max-width: 960px;
+    padding: 12vh 0 8vh;
+  }
+
+  .sectionTitle {
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .sectionLabel {
+    font-size: clamp(0.8rem, 1.4vw, 1rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .keywords {
+    max-width: 52%;
+    margin-bottom: 4vh;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .keywordText {
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    max-width: 420px;
+    line-height: 1.7;
+  }
+
+  .imageContainer {
+    width: 36vw;
+    max-width: 380px;
+    height: 52vh;
+    right: 2vw;
+    margin-bottom: 30px;
+  }
+
+  .navDots {
+    right: 1.5rem;
+  }
+
+  .sectionIndicator {
+    bottom: 2rem;
+    left: 4vw;
+  }
+
+  .scrollProgress {
+    bottom: 2rem;
+  }
+}
+
+/* Medium laptops: 1200px – 1399px
+   Slight tightening from default — fits 14"–15" screens */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .sectionContent {
+    max-width: 1200px;
+    padding: 14vh 0 9vh;
+  }
+
+  .sectionTitle {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .keywords {
+    max-width: 56%;
+    margin-bottom: 4.5vh;
+  }
+
+  .keywordText {
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    max-width: 480px;
+  }
+
+  .imageContainer {
+    width: 38vw;
+    max-width: 450px;
+    height: 56vh;
+    right: 2.5vw;
+    margin-bottom: 35px;
+  }
+
+  .navDots {
+    right: 2rem;
+  }
+}
+
+/* Large screens 1400px+ — original defaults are fine */  
 /* Team Section */
 .teamWrapper {
   --progress: 0;
