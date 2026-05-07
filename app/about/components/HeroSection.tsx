@@ -8,7 +8,7 @@ import { Sun } from 'lucide-react';
 
 const images = [
   '/img/t1.webp?q=80&w=1000&auto=format&fit=crop',
-  '/img/t9.webp?q=80&w=1000&auto=format&fit=crop',
+  '/img/sakshi.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t6.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t10.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t13.webp?q=80&w=1000&auto=format&fit=crop',

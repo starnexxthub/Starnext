@@ -10,7 +10,7 @@ const teamMembers = [
   { name: 'Anshul Mamgain', role : 'CEO', img: '/img/t1.webp?w=400&h=550&fit=crop' },
   { name: 'Himanshu', role: 'SEO Expert', img: 'img/t3.webp?w=400&h=600&fit=crop' },
   { name: 'Ashima ', role: 'Editor', img: 'img/t2.webp?w=400&h=450&fit=crop' },
-  { name: 'Sakshi Butola', role: 'Business Head', img: '/img/t9.webp?w=400&h=550&fit=crop' },
+  { name: 'Sakshi Butola', role: 'Business Head', img: '/img/sakshi.webp?w=400&h=550&fit=crop' },
   { name: 'Kartik Singh', role: 'Full Stack Developer', img: '/img/t4.webp?w=400&h=500&fit=crop' },
   { name: 'Maheek ', role: 'UI-UX Head', img: '/img/t5.webp?w=400&h=480&fit=crop' },
   { name: 'Mahima', role: 'UI-UX Head', img: '/img/t6.webp?w=400&h=520&fit=crop' },
