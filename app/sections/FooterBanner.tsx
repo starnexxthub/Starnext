@@ -3,21 +3,23 @@ export default function TeamFooterBanner() {
   return (
     <div
       style={{
-        background: "#031E4C",
-        width: "100%",
-        overflow: "hidden",
-        display: "block",
-        lineHeight: 0, // removes any inline gap under image
+        position: 'sticky',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 50,
+        background: '#031E4C',
+        lineHeight: 0,
       }}
     >
       <img
-        src="/img/Team-Footer.webp" // 👈 update path if different
+        src="/img/Team-Footer.webp"
         alt="The Star Team"
         style={{
-          width: "100%",
-          height: "auto",
-          display: "block",
-          objectFit: "cover",
+          width: '100%',
+          height: 'auto',
+          display: 'block',
+          objectFit: 'cover',
         }}
       />
     </div>

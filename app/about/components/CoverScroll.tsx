@@ -122,6 +122,13 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   }, [scrollYProgress]);
 
   return (
+   
+<div
+  id="coverWrapper"
+  ref={wrapperRef}
+  className={styles.coverScrollWrapper}
+  style={{ overflow: 'hidden' }}   // ← ADD THIS inline or in CSS
+>
     <div id="coverWrapper" ref={wrapperRef} className={styles.coverScrollWrapper}>
       {/* Vision Section — stationary */}
       <section className={`${styles.coverSection} ${styles.sectionVision}`}>
@@ -187,6 +194,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
       </motion.section>
 
       <div ref={touchHintRef} className="touch-hint">Swipe to explore</div>
+    </div>
     </div>
   );
 }
