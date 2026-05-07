@@ -71,8 +71,8 @@ export default function ScrollHeroSocial() {
             margin-left: 0;
           }
           .scroll-hero-social-card {
-            width:  280px;
-            height: 280px;
+            width:  250px;
+            height: 250px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
           }
         }
