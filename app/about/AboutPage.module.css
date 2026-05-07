@@ -120,6 +120,8 @@
   position: relative;
   height: 200vh;
   width: 100%;
+   overflow: hidden;        /* ← prevents x-sliding section from bleeding out */
+  position: relative;
 }
 
 .coverSection {
@@ -133,6 +135,8 @@
   padding: 0 5vw;
   will-change: transform;
   overflow: hidden;
+  
+  will-change: transform;
 }
 
 .sectionVision {
