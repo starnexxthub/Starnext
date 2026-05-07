@@ -11,13 +11,21 @@ export default function ContactSection() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [refId, setRefId] = useState("");
+
+  const generateRef = () => {
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    return `SN-${today}-${rand}`;
+  };
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault(); // 🚨 prevent reload
+    e.preventDefault();
 
     setLoading(true);
 
@@ -25,7 +33,7 @@ export default function ContactSection() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // 🔥 IMPORTANT
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
@@ -33,8 +41,8 @@ export default function ContactSection() {
       const data = await res.json();
 
       if (data.success) {
-        alert("Message sent successfully ✅");
-
+        setRefId(generateRef());
+        setShowSuccess(true);
         setForm({
           name: "",
           email: "",
@@ -168,6 +176,60 @@ export default function ContactSection() {
 
         </div>
       </div>
+
+      {/* SUCCESS MODAL */}
+      {showSuccess && (
+        <div
+          style={{
+            position: "fixed", inset: 0,
+            background: "rgba(0,0,0,0.45)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            zIndex: 999
+          }}
+          onClick={() => setShowSuccess(false)}
+        >
+          <div
+            style={{
+              background: "#fff", borderRadius: "12px",
+              padding: "2rem", maxWidth: "400px", width: "90%",
+              textAlign: "center"
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{
+              width: "52px", height: "52px", borderRadius: "50%",
+              background: "#ecfdf5", color: "#059669",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              margin: "0 auto 1.25rem"
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+
+            <h2 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "0.5rem" }}>
+              Message Received
+            </h2>
+            <p style={{ fontSize: "14px", color: "#6b7280", lineHeight: 1.6, marginBottom: "0.75rem" }}>
+              Thank you for reaching out. A member of our team will review your enquiry and get back to you shortly.
+            </p>
+            <p style={{ fontSize: "12px", color: "#9ca3af", letterSpacing: "0.03em", marginBottom: "1.5rem" }}>
+              Reference: {refId}
+            </p>
+
+            <hr style={{ border: "none", borderTop: "1px solid #f3f4f6", marginBottom: "1.25rem" }} />
+
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="btn send-btn"
+              style={{ minWidth: "140px" }}
+            >
+              ← Back to site
+            </button>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }
