@@ -1,261 +1,292 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useInView, useAnimation, motion, AnimatePresence } from 'framer-motion'
 
 const servicesData = [
-  { title: '', desc: '', img: '/img/DigitalM-2.webp' },
-  { title: '', desc: '', img: '/img/social.webp' },
-  { title: '', desc: '', img: '/img/seo.webp' },
-  { title: '', desc: '', img: '/img/Development.webp' }
-]
-
-const services = [
   {
-    step: 0,
-    heading: 'DIGITAL MARKETING',
+    step: '01 — Digital',
+    title: 'DIGITAL MARKETING',
     sub: 'Best Digital Marketing Company',
-    body: 'StarNext Softech, the best digital marketing company, brings years of industry experience to help businesses achieve growth through innovative digital solutions.',
-    href: '/service/Digital'
+    body: 'StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.',
+    img: '/img/DigitalM-2.webp',
+    label: 'Digital Marketing',
   },
   {
-    step: 1,
-    heading: 'SOCIAL MEDIA MARKETING',
+    step: '02 — Social',
+    title: 'SOCIAL MEDIA MARKETING',
     sub: 'Best Social Media Marketing Company',
-    body: "StarNext's social media marketing drives growth with engaging campaigns, data-driven strategies, and stunning content, boosting reach, engagement, and loyalty.",
-    href: '/service/SocialMedia'
+    body: 'StarNext Softech is a results-driven social media marketing company with deep expertise in delivering high-impact social media solutions. Our mission is to establish ourselves as the leading social media marketing company globally.',
+    img: '/img/social.webp',
+    label: 'Social Media Marketing',
   },
   {
-    step: 2,
-    heading: 'SEO',
+    step: '03 — Search',
+    title: 'SEO',
     sub: 'Best SEO Company',
-    body: 'We help brands dominate search rankings through data-led SEO that drives qualified traffic and conversions.',
-    href: '/service/Seo'
+    body: "If you're a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice. We drive growth through strategic search optimisation while our local SEO services boost visibility and attract nearby customers.",
+    img: '/img/seo.webp',
+    label: 'SEO',
   },
   {
-    step: 3,
-    heading: 'WEB DESIGNING',
+    step: '04 — Design',
+    title: 'WEB DESIGNING',
     sub: 'Best Web Designing Company',
-    body: 'From concept to launch, we deliver high-performance, visually refined websites that engage audiences, convert customers, and accelerate measurable business growth.',
-    href: '/service'
-  }
+    body: 'StarNext Softech is a fast-growing and trusted web designing company in Dehradun, Uttarakhand. We specialise in high-quality website design and development services that combine clean UI/UX, strong performance, and business-focused functionality.',
+    img: '/img/Development.webp',
+    label: 'Web Designing',
+  },
 ]
-
-const ArrowIcon = () => (
-  <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-  </svg>
-)
-
-// Staggered point entrance — each child slides up in sequence
-function ServicePoint({
-  step, heading, sub, body, href, isActive
-}: {
-  step: number; heading: string; sub: string; body: string; href: string; isActive: boolean
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '0px 0px -18% 0px' })
-
-  const items = [
-    { el: 'h3', content: heading, className: `js-anim${step === 0 ? ' fw-semibold' : ''}` },
-    { el: 'p',  content: sub,     className: 'fw-semibold js-anim' },
-    { el: 'p',  content: body,    className: 'js-anim' },
-  ]
-
-  return (
-    <div
-      ref={ref}
-      className={`point js-point ${isActive ? 'active' : ''}`}
-      data-step={step}
-    >
-      {items.map(({ el, content, className }, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
-        >
-          {el === 'h3'
-            ? <h3 className={className}>{content}</h3>
-            : <p  className={className}>{content}</p>
-          }
-        </motion.div>
-      ))}
-
-      <motion.div
-        className="magnetic-wrap js-anim"
-        initial={{ opacity: 0, y: 28 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-      >
-        <a href={href} className="btn faq-btn">
-          MORE ABOUT US <ArrowIcon />
-        </a>
-      </motion.div>
-    </div>
-  )
-}
-
-// Right card — scale+fade entrance, image crossfade via AnimatePresence
-function RightCard({ activeIndex }: { activeIndex: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '0px 0px -15% 0px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="right-card"
-      id="rightCard"
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="media" style={{ overflow: 'hidden', position: 'relative' }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={activeIndex}
-            id="rightImg"
-            src={servicesData[activeIndex].img}
-            alt={services[activeIndex].heading}
-            style={{ willChange: 'transform, opacity', width: '100%', height: '100%', objectFit: 'cover' }}
-            initial={{ opacity: 0, scale: 1.06 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.06 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </AnimatePresence>
-      </div>
-      <div className="overlay" />
-      <div className="content">
-        <h2 className="right-title" id="rightTitle">{servicesData[activeIndex].title}</h2>
-        <p className="right-desc" id="rightDesc">{servicesData[activeIndex].desc}</p>
-      </div>
-    </motion.div>
-  )
-}
 
 export default function ServicesDesktop() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const sectionRef = useRef<HTMLElement>(null)
+  const activeIndexRef = useRef(0)
+  const pointRefs = useRef<(HTMLDivElement | null)[]>([])
 
-  // ScrollTrigger for pinning right card + active index tracking — still uses GSAP
-  // only for the pin + scroll position detection (no animation logic)
+  const activate = (idx: number) => {
+    if (idx === activeIndexRef.current) return
+    activeIndexRef.current = idx
+    setActiveIndex(idx)
+  }
+
+  // Dot click scrolls to the corresponding point
+  const scrollToPoint = (idx: number) => {
+    pointRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
   useEffect(() => {
-  if (typeof window === 'undefined') return
-
-  const gsap = (window as any).gsap
-  const ScrollTrigger = (window as any).ScrollTrigger
-
-  if (!gsap || !ScrollTrigger) return
-
-  const section = sectionRef.current
-  const rightCard = document.getElementById('rightCard')
-  const points =
-    sectionRef.current?.querySelectorAll<HTMLElement>('.js-point')
-
-  if (!section || !rightCard || !points?.length) return
-
-  // CLEAN OLD TRIGGERS
-  ScrollTrigger.getAll().forEach((trigger: any) => {
-    if (
-      trigger.trigger &&
-      section.contains(trigger.trigger)
-    ) {
-      trigger.kill()
-    }
-  })
-
-  const triggers: any[] = []
-
-  // DESKTOP ONLY PIN
-  if (window.innerWidth >= 992) {
-    triggers.push(
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top+=30',
-        end: () =>
-          '+=' + (section.offsetHeight - rightCard.offsetHeight),
-
-        pin: rightCard,
-        pinSpacing: true,
-
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-
-        fastScrollEnd: true,
-      })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.step)
+            activate(idx)
+          }
+        })
+      },
+      {
+        // Fire when the element occupies the middle 30% of the viewport
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: 0,
+      }
     )
-  }
 
-  // ACTIVE CARD CHANGE
-  points.forEach((el) => {
-    const index = Number(el.getAttribute('data-step'))
+    pointRefs.current.forEach((el) => {
+      if (el) observer.observe(el)
+    })
 
-    triggers.push(
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top center',
-        end: 'bottom center',
-
-        onEnter: () => setActiveIndex(index),
-        onEnterBack: () => setActiveIndex(index),
-      })
-    )
-  })
-
-  // IMPORTANT
-  requestAnimationFrame(() => {
-    ScrollTrigger.refresh()
-  })
-
-  return () => {
-    triggers.forEach((t) => t.kill())
-  }
-}, [])
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section
-  ref={sectionRef}
-  className="section-wrap d-none d-md-block"
-  id="brandSection"
-  style={{
-    position: 'relative',
-    zIndex: 2,
-    isolation: 'isolate',
-    overflow: 'hidden',
-    background: '#fff'
-  }}
->
-      <div className="container-xxl">
-        <div className="row g-5">
+    <>
+      <style>{`
+        /* ── section wrapper ── */
+        #brandSection {
+          display: none;
+        }
 
-          {/* LEFT SIDE */}
-          <div className="col-lg-6">
-            <h1 className="big-title mb-4">Our Services</h1>
-            <p className="desc mb-5">We help shape how your audience sees and remembers you.</p>
+        @media (min-width: 768px) {
+          #brandSection {
+            display: block;
+          }
+        }
 
-            {services.map(({ step, heading, sub, body, href }) => (
-              <ServicePoint
-                key={step}
-                step={step}
-                heading={heading}
-                sub={sub}
-                body={body}
-                href={href}
-                isActive={activeIndex === step}
-              />
-            ))}
+        /* ── left points ── */
+        .js-point {
+          padding: 2.5rem 0;
+          border-top: 0.5px solid rgba(0,0,0,0.12);
+          opacity: 0.35;
+          transition: opacity 0.45s ease;
+        }
 
-            <div style={{ height: '12vh' }} />
+        .js-point:last-of-type {
+          border-bottom: 0.5px solid rgba(0,0,0,0.12);
+          margin-bottom: 4rem;
+        }
+
+        .js-point.active {
+          opacity: 1;
+        }
+
+        .js-point .service-step {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #888;
+          margin-bottom: 0.5rem;
+          transition: color 0.3s;
+        }
+
+        .js-point.active .service-step {
+          color: #D85A30;
+        }
+
+        /* ── right card ── */
+        #rightCard {
+          position: sticky;
+          top: 90px;
+          height: calc(100vh - 180px);
+          border-radius: 12px;
+          overflow: hidden;
+          
+        }
+
+        /* ── image layers ── */
+        #rightCard .img-layer {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+          transform: scale(1.05);
+          transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                      transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1;
+        }
+
+        #rightCard .img-layer.visible {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        /* ── overlay & label ── */
+        .right-overlay {
+          position: absolute;
+          inset: 0;
+          
+          z-index: 3;
+          pointer-events: none;
+        }
+
+        .right-label {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 1.5rem;
+          z-index: 4;
+        }
+
+        .right-label-step {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.6);
+          margin-bottom: 4px;
+        }
+
+        .right-label-title {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        /* ── progress dots ── */
+        .progress-dots {
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          z-index: 5;
+        }
+
+        .progress-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.35);
+          cursor: pointer;
+          border: none;
+          padding: 0;
+          transition: background 0.3s, transform 0.3s;
+        }
+
+        .progress-dot.active {
+          background: #fff;
+          transform: scale(1.6);
+        }
+      `}</style>
+
+      <section id="brandSection">
+        <div className="container-xxl">
+          <div className="row g-5">
+
+            {/* ── LEFT ── */}
+            <div className="col-lg-6">
+              <h1 className="big-title mb-3">Our Services</h1>
+              <p className="desc mb-5">We help shape how your audience sees and remembers you.</p>
+
+              {servicesData.map((svc, idx) => (
+                <div
+                  key={idx}
+                  ref={(el) => { pointRefs.current[idx] = el }}
+                  className={`js-point${activeIndex === idx ? ' active' : ''}`}
+                  data-step={idx}
+                >
+                  <p className="service-step">{svc.step}</p>
+                  <h3>{svc.title}</h3>
+                  <p className="fw-semibold">{svc.sub}</p>
+                  <p>{svc.body}</p>
+                  <button className="about-btn btn-navy">
+                    MORE ABOUT US
+                    <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+
+              <div style={{ height: '5vh' }} />
+            </div>
+
+            {/* ── RIGHT ── */}
+            <div className="col-lg-6">
+              <div id="rightCard">
+
+                {/* One image per service — only the active one is visible */}
+                {servicesData.map((svc, idx) => (
+                  <img
+                    key={idx}
+                    src={svc.img}
+                    alt={svc.label}
+                    className={`img-layer${activeIndex === idx ? ' visible' : ''}`}
+                  />
+                ))}
+
+                <div className="right-overlay" />
+
+                {/* Bottom label updates with active service 
+                <div className="right-label">
+                  <p className="right-label-step">{servicesData[activeIndex].step}</p>
+                  <p className="right-label-title">{servicesData[activeIndex].label}</p>
+                </div>
+                */}
+
+                {/* Dot navigation */}
+                <div className="progress-dots">
+                  {servicesData.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`progress-dot${activeIndex === idx ? ' active' : ''}`}
+                      aria-label={`Go to ${servicesData[idx].label}`}
+                      onClick={() => scrollToPoint(idx)}
+                    />
+                  ))}
+                </div>
+
+              </div>
+            </div>
+
           </div>
-
-          {/* RIGHT SIDE */}
-          <div className="col-lg-6">
-            <RightCard activeIndex={activeIndex} />
-          </div>
-
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

@@ -3789,13 +3789,7 @@ html {
 }
 
 
-.right-card,
-.right-card img,
-.media {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-}
+
 
 .section-wrap {
   contain: layout paint;
