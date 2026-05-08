@@ -18,6 +18,7 @@ import Newsletter from './sections/Newsletter'
 import SocialBar from './sections/SocialBar'
 import Footer from './sections/Footer'
 import HeroSection from './sections/HeroSection'
+import FloatingCard from './components/FloatingCard'
 
 // Dynamically import ScrollSequence to avoid SSR issues
 const ScrollSequence = dynamic(() => import('./components/ScrollSequence'), {
@@ -91,6 +92,7 @@ export default function Home() {
       <div suppressHydrationWarning>
   <SR7Slider key="main-slider" />
 </div>
+<FloatingCard />
       <VideoSection />
       <AboutSection />
       <ServicesMobile />
