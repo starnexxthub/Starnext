@@ -9,102 +9,104 @@ export default function VideoSection() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const gsap = (window as any).gsap
-    const ScrollTrigger = (window as any).ScrollTrigger
+    const setup = () => {
+      const gsap = (window as any).gsap
+      const ScrollTrigger = (window as any).ScrollTrigger
+      if (!gsap || !ScrollTrigger) return
 
-    if (!gsap || !ScrollTrigger) return
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
+      const activeVideo = isMobile ? videoRef2.current : videoRef1.current
+      if (!activeVideo) return
 
-    // Only register the visible video — skip the hidden one
-    const isMobile = window.matchMedia('(max-width: 767px)').matches
-    const activeVideo = isMobile ? videoRef2.current : videoRef1.current
+      const safePlay = (video: HTMLVideoElement) => {
+        if (document.visibilityState === 'hidden') return
+        video.currentTime = 0
+        const p = video.play()
+        if (p?.catch) p.catch(() => {})
+      }
 
-    if (!activeVideo) return
+      const safePause = (video: HTMLVideoElement) => {
+        video.pause()
+      }
 
-    const safePlay = (video: HTMLVideoElement) => {
-  if (document.visibilityState === 'hidden') return
-  
-  video.currentTime = 0   // 🔥 ensures clean restart
-  const p = video.play()
-  if (p?.catch) p.catch(() => {})
-}
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === 'hidden') safePause(activeVideo)
+      }
+      document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    const safePause = (video: HTMLVideoElement) => {
-      video.pause()
-    }
+      const videoSection = activeVideo.closest('.video-section')
 
-    // Pause video when tab is hidden to save resources
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        safePause(activeVideo)
+      const trigger = ScrollTrigger.create({
+        trigger: videoSection,
+        start: 'top top',       // pin starts when video section hits top of viewport
+        end: '+=100%',          // pinned for 1 full viewport height (adjust as needed)
+        //pin: true,
+        //pinSpacing: true,
+        //anticipatePin: 1,       // ✅ prevents jump/flicker when pin activates
+        onEnter: () => safePlay(activeVideo),
+        onEnterBack: () => safePlay(activeVideo),
+        onLeave: () => safePause(activeVideo),
+        onLeaveBack: () => safePause(activeVideo),
+      })
+
+      return () => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        trigger.kill()
       }
     }
-    document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    const trigger = ScrollTrigger.create({
-      trigger: activeVideo.closest('.video-section'),
-      start: 'top top',
-      end: '+=200%',
-      pin: true,
-      pinSpacing: true,
-      onEnter: () => safePlay(activeVideo),
-      onEnterBack: () => safePlay(activeVideo),
-      onLeave: () => safePause(activeVideo),
-      onLeaveBack: () => safePause(activeVideo),
-    })
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-      trigger.kill()
+    if ((window as any).gsap && (window as any).ScrollTrigger) {
+      setup()
+    } else {
+      window.addEventListener('gsap-ready', setup, { once: true })
+      return () => window.removeEventListener('gsap-ready', setup)
     }
   }, [])
 
   return (
     <>
       {/* Desktop Video */}
-      <section className="spacer header-index d-none d-md-block"></section>
+      {/* ✅ Spacer BEFORE video so slider fully scrolls away before pin activates */}
+      <section
+        className="header-index d-none d-md-block"
+          // matches SR7Slider height so it clears viewport first
+      />
       <section className="video-section header-index d-none d-md-block">
         <video
-  ref={videoRef1}
-  className="hero-video"
-  muted
-  playsInline
-  loop                     // ✅ infinite loop
-  preload="none"
-  poster="/video/video1-poster.webp"
-  style={{
-    width: "100%",
-    height: "100vh",
-    objectFit: "cover",   // ✅ responsive fill (important)
-  }}
->
-  <source src="/video/video1.webm" type="video/webm" />
-  <source src="/video/video1.mp4" type="video/mp4" />
-</video>
+          ref={videoRef1}
+          className="hero-video"
+          muted
+          playsInline
+          loop
+          preload="none"
+          poster="/video/video1-poster.webp"
+          style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+        >
+          <source src="/video/video1.webm" type="video/webm" />
+          <source src="/video/video1.mp4" type="video/mp4" />
+        </video>
       </section>
-      <section className="spacer2 header-index d-none d-md-block"></section>
 
       {/* Mobile Video */}
-      <section className="spacer header-index d-md-none"></section>
+      <section
+        className="header-index d-md-none"
+        style={{ height: '100vh' }}
+      />
       <section className="video-section header-index d-md-none">
         <video
-  ref={videoRef2}
-  className="hero-video"
-  muted
-  playsInline
-  loop
-  preload="none"
-  poster="/video/video1-2-poster.webp"
-  style={{
-    width: "100%",
-    height: "100vh",
-    objectFit: "cover",
-  }}
->
-  <source src="/video/video1-2.webm" type="video/webm" />
-  <source src="/video/video1-2.mp4" type="video/mp4" />
-</video>
+          ref={videoRef2}
+          className="hero-video"
+          muted
+          playsInline
+          loop
+          preload="none"
+          poster="/video/video1-2-poster.webp"
+          style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+        >
+          <source src="/video/video1-2.webm" type="video/webm" />
+          <source src="/video/video1-2.mp4" type="video/mp4" />
+        </video>
       </section>
-      <section className="spacer2 header-index d-md-none"></section>
     </>
   )
 }

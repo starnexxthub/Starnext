@@ -3030,28 +3030,9 @@ letter-spacing: -7px;
         .content-right{ padding-top:5rem; }
       }
 
-      .spacer {
-        height: 10vh;
-          background: linear-gradient(
-        180deg,
-        #0a0a0a 0%,      /* Deep black matching your top section */
-        #1a1a1a 30%,     /* Charcoal */
-        #2d2d2d 60%,     /* Dark gray */
-        #1f1f1f 100%     /* Back to dark */
-    );
-    /* Or for a smoother fade to content */
-    background: linear-gradient(
-        180deg,
-        rgba(10,10,10,1) 0%,
-        rgba(20,20,20,0.95) 50%,
-        rgba(30,30,30,0.9) 100%
-    );
-      }
+      
 
-      .spacer2{
-        height: 10vh;
-        background-color: #fff;
-      }
+      
 
       .video-section {
         height: 100vh;
@@ -3776,7 +3757,7 @@ letter-spacing: -7px;
 
 
         .header-index{
-            z-index:9999 !important;
+            z-index:10 !important;
         }
 
 
