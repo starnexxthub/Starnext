@@ -128,10 +128,7 @@ export default function VideoSection() {
       </section>
 
       {/* Mobile Video */}
-      <section
-        className="header-index d-md-none"
-        style={{ height: '100vh' }}
-      />
+      
 
       <section
         ref={sectionRef2}
@@ -147,7 +144,7 @@ export default function VideoSection() {
   preload="auto"
   webkit-playsinline="true"   
           poster="/video/video1-2-poster.webp"
-          style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+          style={{ width: '100%', objectFit: 'cover' }}
         >
           <source src="/video/video1-2.webm" type="video/webm" />
           <source src="/video/video1-2.mp4" type="video/mp4" />
