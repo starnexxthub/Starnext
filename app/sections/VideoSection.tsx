@@ -119,10 +119,10 @@ export default function VideoSection() {
   loop
   preload="auto"
   webkit-playsinline="true"   
-          poster="/video/video1-poster.webp"
+          
           style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
         >
-          <source src="/video/video1.webm" type="video/webm" />
+          
           <source src="/video/video1.mp4" type="video/mp4" />
         </video>
       </section>
@@ -143,10 +143,10 @@ export default function VideoSection() {
   loop
   preload="auto"
   webkit-playsinline="true"   
-          poster="/video/video1-2-poster.webp"
+          
           style={{ width: '100%', objectFit: 'cover' }}
         >
-          <source src="/video/video1-2.webm" type="video/webm" />
+          
           <source src="/video/video1-2.mp4" type="video/mp4" />
         </video>
       </section>
