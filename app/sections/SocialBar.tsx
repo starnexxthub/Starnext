@@ -5,10 +5,37 @@ export default function SocialBar() {
       {/* DESKTOP layout - original, untouched */}
       <div className="starnext-bar d-none d-sm-flex align-items-center">
         <div className="col-4 text-center">
-          <a href="#"><i className="fa-solid fa-globe px-2" style={{ color: 'white' }}></i></a>
-          <a href="#"><i className="fa-brands fa-facebook-f px-2" style={{ color: 'white' }}></i></a>
-          <a href="#"><i className="fa-brands fa-github px-2" style={{ color: 'white' }}></i></a>
-          <a href="#"><i className="fa-brands fa-instagram px-2" style={{ color: 'white' }}></i></a>
+          <a
+  href="https://www.linkedin.com/company/star-next-softech-private-ltd/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-linkedin-in px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.facebook.com/profile.php?id=61572375471264"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-facebook-f px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.instagram.com/starnextsoftech_?igsh=MXY3Y2NyenR6ejBvZw%3D%3D&utm_source=qr"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-instagram px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.youtube.com/@starnextsoftech-technology"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-youtube px-2" style={{ color: 'white' }}></i>
+</a>
         </div>
         <div className="col-4 text-center">
           <img src="/img/logostarnext.png" className="ps-5 w-50" alt="StarNext Logo" />
@@ -26,10 +53,37 @@ export default function SocialBar() {
           STAY AUTHENTIC &nbsp; STAY STYLISH
         </div>
         <div className="mt-2 d-flex justify-content-center gap-3">
-          <a href="#"><i className="fa-solid fa-globe" style={{ color: 'white', fontSize: '13px' }}></i></a>
-          <a href="#"><i className="fa-brands fa-facebook-f" style={{ color: 'white', fontSize: '13px' }}></i></a>
-          <a href="#"><i className="fa-brands fa-github" style={{ color: 'white', fontSize: '13px' }}></i></a>
-          <a href="#"><i className="fa-brands fa-instagram" style={{ color: 'white', fontSize: '13px' }}></i></a>
+          <a
+  href="https://www.linkedin.com/company/star-next-softech-private-ltd/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-linkedin-in px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.facebook.com/profile.php?id=61572375471264"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-facebook-f px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.instagram.com/starnextsoftech_?igsh=MXY3Y2NyenR6ejBvZw%3D%3D&utm_source=qr"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-instagram px-2" style={{ color: 'white' }}></i>
+</a>
+
+<a
+  href="https://www.youtube.com/@starnextsoftech-technology"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <i className="fa-brands fa-youtube px-2" style={{ color: 'white' }}></i>
+</a>
         </div>
       </div>
 
