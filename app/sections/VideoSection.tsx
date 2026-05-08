@@ -5,80 +5,120 @@ import { useEffect, useRef } from 'react'
 export default function VideoSection() {
   const videoRef1 = useRef<HTMLVideoElement>(null)
   const videoRef2 = useRef<HTMLVideoElement>(null)
+  const sectionRef1 = useRef<HTMLElement>(null)
+  const sectionRef2 = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+  if (typeof window === 'undefined') return
 
-    const setup = () => {
-      const gsap = (window as any).gsap
-      const ScrollTrigger = (window as any).ScrollTrigger
-      if (!gsap || !ScrollTrigger) return
+  let triggers: any[] = []
 
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-      const activeVideo = isMobile ? videoRef2.current : videoRef1.current
-      if (!activeVideo) return
+  const init = () => {
+    const ScrollTrigger = (window as any).ScrollTrigger
 
-      const safePlay = (video: HTMLVideoElement) => {
-        if (document.visibilityState === 'hidden') return
-        video.currentTime = 0
-        const p = video.play()
-        if (p?.catch) p.catch(() => {})
+    if (!ScrollTrigger) return
+
+    const setupVideo = (
+      video: HTMLVideoElement | null,
+      section: HTMLElement | null
+    ) => {
+      if (!video || !section) return
+
+      // FORCE LOAD
+      video.load()
+
+      const playVideo = async () => {
+        try {
+          if (document.visibilityState !== 'visible') return
+
+          // ensure loaded enough
+          if (video.readyState < 2) {
+            await new Promise((resolve) => {
+              video.onloadeddata = () => resolve(true)
+            })
+          }
+
+          if (video.paused) {
+            await video.play()
+          }
+        } catch (err) {
+          console.log('Video play prevented')
+        }
       }
 
-      const safePause = (video: HTMLVideoElement) => {
-        video.pause()
+      const pauseVideo = () => {
+        if (!video.paused) {
+          video.pause()
+        }
       }
-
-      const handleVisibilityChange = () => {
-        if (document.visibilityState === 'hidden') safePause(activeVideo)
-      }
-      document.addEventListener('visibilitychange', handleVisibilityChange)
-
-      const videoSection = activeVideo.closest('.video-section')
 
       const trigger = ScrollTrigger.create({
-        trigger: videoSection,
-        start: 'top top',       // pin starts when video section hits top of viewport
-        end: '+=100%',          // pinned for 1 full viewport height (adjust as needed)
-        //pin: true,
-        //pinSpacing: true,
-        //anticipatePin: 1,       // ✅ prevents jump/flicker when pin activates
-        onEnter: () => safePlay(activeVideo),
-        onEnterBack: () => safePlay(activeVideo),
-        onLeave: () => safePause(activeVideo),
-        onLeaveBack: () => safePause(activeVideo),
+        trigger: section,
+
+        start: 'top 85%',
+        end: 'bottom 15%',
+
+        onEnter: () => playVideo(),
+        onEnterBack: () => playVideo(),
+
+        onLeave: () => pauseVideo(),
+        onLeaveBack: () => pauseVideo(),
+
+        invalidateOnRefresh: true,
       })
 
-      return () => {
-        document.removeEventListener('visibilitychange', handleVisibilityChange)
-        trigger.kill()
-      }
+      triggers.push(trigger)
     }
 
-    if ((window as any).gsap && (window as any).ScrollTrigger) {
-      setup()
-    } else {
-      window.addEventListener('gsap-ready', setup, { once: true })
-      return () => window.removeEventListener('gsap-ready', setup)
+    // desktop
+    if (window.innerWidth >= 768) {
+      setupVideo(videoRef1.current, sectionRef1.current)
     }
-  }, [])
+
+    // mobile
+    else {
+      setupVideo(videoRef2.current, sectionRef2.current)
+    }
+
+    ScrollTrigger.refresh()
+  }
+
+  const waitForGSAP = () => {
+    if (
+      (window as any).gsap &&
+      (window as any).ScrollTrigger
+    ) {
+      init()
+    } else {
+      requestAnimationFrame(waitForGSAP)
+    }
+  }
+
+  waitForGSAP()
+
+  return () => {
+    triggers.forEach((t) => t.kill())
+  }
+}, [])
 
   return (
     <>
       {/* Desktop Video */}
-      {/* ✅ Spacer BEFORE video so slider fully scrolls away before pin activates */}
+      <section className="header-index d-none d-md-block" />
+
       <section
-        className="header-index d-none d-md-block"
-          // matches SR7Slider height so it clears viewport first
-      />
-      <section className="video-section header-index d-none d-md-block">
+        ref={sectionRef1}
+        className="video-section header-index d-none d-md-block"
+      >
         <video
           ref={videoRef1}
-          className="hero-video"
-          muted
-          playsInline
-          loop
-          preload="none"
+  className="hero-video"
+  muted
+  autoPlay
+  playsInline
+  loop
+  preload="auto"
+  webkit-playsinline="true"   
           poster="/video/video1-poster.webp"
           style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
         >
@@ -92,14 +132,20 @@ export default function VideoSection() {
         className="header-index d-md-none"
         style={{ height: '100vh' }}
       />
-      <section className="video-section header-index d-md-none">
+
+      <section
+        ref={sectionRef2}
+        className="video-section header-index d-md-none"
+      >
         <video
           ref={videoRef2}
-          className="hero-video"
-          muted
-          playsInline
-          loop
-          preload="none"
+  className="hero-video"
+  muted
+  autoPlay
+  playsInline
+  loop
+  preload="auto"
+  webkit-playsinline="true"   
           poster="/video/video1-2-poster.webp"
           style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
         >
