@@ -62,7 +62,7 @@ export default function ContactForm() {
 
         @media (max-width: 768px) {
           section   { padding: 3rem 0 !important; }
-          h1        { margin-bottom: 2.5rem !important; margin-top: 30px; }
+          h1{ margin-bottom: 2.5rem !important; margin-top: 30px; }
           .form-card  { padding: 1.5rem !important; }
           .form-fields{ gap: 1.25rem !important; }
         }

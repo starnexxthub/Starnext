@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
          <link rel='stylesheet' href='/public/css/sr7.css' />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

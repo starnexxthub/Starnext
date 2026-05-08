@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from './sections/Navbar'
-import SR7Slider from './components/SR7Slider'
+//import SR7Slider from './components/SR7Slider'
 import VideoSection from './sections/VideoSection'
 import AboutSection from './sections/AboutSection'
 import ServicesMobile from './sections/ServicesMobile'
@@ -23,6 +23,18 @@ import HeroSection from './sections/HeroSection'
 const ScrollSequence = dynamic(() => import('./components/ScrollSequence'), {
   ssr: false,
   loading: () => <div className="scroll-section header-index" style={{ height: '100vh', background: '#000' }} />
+})
+const SR7Slider = dynamic(() => import('./components/SR7Slider'), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        height: '100vh',
+        width: '100%',
+        background: '#000',
+      }}
+    />
+  ),
 })
 
 export default function Home() {
@@ -76,7 +88,9 @@ export default function Home() {
     <>
       <div className="particles" id="particles"></div>
       <Navbar />
-      <SR7Slider/>
+      <div suppressHydrationWarning>
+  <SR7Slider key="main-slider" />
+</div>
       <VideoSection />
       <AboutSection />
       <ServicesMobile />
