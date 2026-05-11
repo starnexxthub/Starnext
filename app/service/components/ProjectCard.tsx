@@ -81,12 +81,12 @@ export default function ProjectCard() {
           -ms-overflow-style: none;
           scrollbar-width: none;
           overflow-y: scroll;
-          height: 80vh;
+          height: 70vh;
         }
 
         /* ── Card container ── */
         .card-container {
-          height: 80vh;
+          height: 70vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -104,8 +104,7 @@ export default function ProjectCard() {
           background-color: #EDF2F7;
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 -10px 50px rgba(0,0,0,0.1);
-          padding: clamp(1.25rem, 3vw, 2.5rem);
+            padding: clamp(1.25rem, 3vw, 2.5rem);
           transform-origin: top;
           box-sizing: border-box;
         }
@@ -131,8 +130,7 @@ export default function ProjectCard() {
           height: auto;
           border-radius: 12px;
           transform: rotate(-3deg);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-          display: block;
+           display: block;
         }
 
         /* ── Label ── */
@@ -222,6 +220,34 @@ export default function ProjectCard() {
 
           .project-card-desc { -webkit-line-clamp: 4; }
         }
+
+
+        @media (min-width: 1025px) and (max-width: 1440px) {
+
+  .scroll-container {
+    height: 68vh;
+  }
+
+  .card-container {
+    height: 68vh;
+  }
+
+  .project-card-inner {
+    max-width: 860px;
+  }
+
+  .project-card-grid {
+    gap: 1.2rem;
+  }
+
+  .project-card-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card-desc {
+    line-height: 1.45;
+  }
+}
       `}</style>
 
       {PROJECTS.map((project, i) => {

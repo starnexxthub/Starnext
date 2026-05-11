@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const servicesData = [
   {
-    step: '01 — Digital',
+    //step: '01 — Digital',
     title: 'DIGITAL MARKETING',
     sub: 'Best Digital Marketing Company',
     body: 'StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.',
@@ -12,7 +12,7 @@ const servicesData = [
     label: 'Digital Marketing',
   },
   {
-    step: '02 — Social',
+    //step: '02 — Social',
     title: 'SOCIAL MEDIA MARKETING',
     sub: 'Best Social Media Marketing Company',
     body: 'StarNext Softech is a results-driven social media marketing company with deep expertise in delivering high-impact social media solutions. Our mission is to establish ourselves as the leading social media marketing company globally.',
@@ -20,7 +20,7 @@ const servicesData = [
     label: 'Social Media Marketing',
   },
   {
-    step: '03 — Search',
+    //step: '03 — Search',
     title: 'SEO',
     sub: 'Best SEO Company',
     body: "If you're a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice. We drive growth through strategic search optimisation while our local SEO services boost visibility and attract nearby customers.",
@@ -28,7 +28,7 @@ const servicesData = [
     label: 'SEO',
   },
   {
-    step: '04 — Design',
+    //step: '04 — Design',
     title: 'WEB DESIGNING',
     sub: 'Best Web Designing Company',
     body: 'StarNext Softech is a fast-growing and trusted web designing company in Dehradun, Uttarakhand. We specialise in high-quality website design and development services that combine clean UI/UX, strong performance, and business-focused functionality.',
@@ -381,7 +381,7 @@ export default function ServicesDesktop() {
                   className={`js-point${activeIndex === idx ? ' active' : ''}`}
                   data-step={idx}
                 >
-                  <p className="service-step">{svc.step}</p>
+                  {/* <p className="service-step">{svc.step}</p> */}
                   <h3>{svc.title}</h3>
                   <p className="fw-semibold">{svc.sub}</p>
                   <p>{svc.body}</p>

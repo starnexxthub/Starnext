@@ -747,63 +747,173 @@ letter-spacing: -7px;
 .starnext-right a:hover {
   opacity: 0.7;
 }
-.footer-section{
-  background:#031E4C;
+.footer-section {
+  background: #031E4C;
   z-index: 99999 !important;
-  width:100%;
-  font-family:"Figtree", sans-serif;
-  color:#ffffff;
-  overflow:hidden;
+  width: 100%;
+  font-family: "Figtree", sans-serif;
+  color: #ffffff;
+  overflow: hidden;
 }
 
-.footer-row{
-  padding-top:64px;              /* adjust if your picture needs tighter/looser top */
-  row-gap:24px;
+/* Container: 250px left margin on desktop, auto on smaller screens */
+.container-footer {
+  margin-left: 250px;
+  margin-right: auto;
+  padding-right: 40px;
 }
 
-.footer-title{
-  font-weight:600;
-  font-size:18px;                /* adjust to match your screenshot */
-  margin:0 0 14px 0;
-  letter-spacing:0.2px;
+@media (max-width: 1199px) {
+  .container-footer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
-.footer-my-list{
-  list-style:none;
-  margin:0;
-  padding:0;
+@media (max-width: 767px) {
+  .container-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
-.footer-my-list li{
-  margin:10px 0;
+.footer-row {
+  padding-top: 64px;
+  row-gap: 32px;
 }
 
-.footer-my-list a{
-  font-weight:500;
-  font-size:16px;                /* adjust to match your screenshot */
-  color:rgba(255,255,255,0.9);
-  text-decoration:none;
-  transition:color .2s ease;
+@media (max-width: 767px) {
+  .footer-row {
+    padding-top: 40px;
+    row-gap: 28px;
+  }
 }
 
-.footer-my-list a:hover{
-  color:#DEFF58;
+/* Evenly space the 3 columns */
+.footer-row > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* On mobile, make all 3 cols full width stacked */
+@media (max-width: 575px) {
+  .footer-row > [class*="col-"] {
+    width: 100% !important;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.footer-title {
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 0 14px 0;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 767px) {
+  .footer-title {
+    font-size: 16px;
+  }
+}
+
+.footer-my-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-my-list li {
+  margin: 10px 0;
+}
+
+.footer-my-list a {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+@media (max-width: 767px) {
+  .footer-my-list a {
+    font-size: 14px;
+  }
+}
+
+.footer-my-list a:hover {
+  color: #DEFF58;
 }
 
 /* Image under blocks */
-.footer-image-wrap{
-  margin-top:48px;               /* spacing between lists and image */
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.footer-image-wrap {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-.footer-image{
-  width:auto;
-  height:auto;
-  display:block;
+.footer-image {
+  width: auto;
+  height: auto;
+  display: block;
 }
-/* Underline + copyright row under StarNext bar */
+
+/* Bottom bar */
+.footer-bottom {
+  border-top: 1px solid white;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  padding: 12px 40px;
+}
+
+.footer-bottom-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 40px;
+}
+
+.footer-bottom-inner h6 {
+  margin: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .footer-bottom {
+    padding: 16px 20px;
+    min-height: auto;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    gap: 6px;
+  }
+
+  .footer-bottom-inner h6 {
+    font-size: 12px;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 400px) {
+  .footer-bottom-inner h6 {
+    font-size: 11px;
+  }
+}/* Underline + copyright row under StarNext bar */
 .starnext-underbar{
   background:#001221;              /* same as starnext-bar */
   padding: 0 40px 16px;            /* matches your spacing */
@@ -3891,7 +4001,7 @@ right: 20px;
   .floating-card {
     width: 120px;  /* reduced from 180px */
 
-    top: 190px;     /* slightly higher */
+    bottom: 90px;     /* slightly higher */
     right: 12px;   /* closer to edge */
     border-radius: 10px;
   }

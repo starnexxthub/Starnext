@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from "next/link";
@@ -9,72 +8,33 @@ import Footer from '../sections/Footer';
 import Newsletter from '../sections/Newsletter';
 import SocialBar from '../sections/SocialBar';
 
-
 export default function BlogPage() {
-  
-  
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [particles, setParticles] = useState<any[]>([]);
- 
 
   const blogPosts = [
-    {
-      id: 1,
-      title: "Best Digital Marketing Company—One-Stop Solution for Success",
-      image: "/img/b2.png"
-    },
-    {
-      id: 2,
-      title: "Now Get SEO Services For Your Company At Ease",
-      image: "/img/b3.png"
-    },
-    {
-      id: 3,
-      title: "Your Number 1 Digital Marketing Company In Dehradun",
-      image: "/img/b4.png"
-    },
-    {
-      id: 4,
-      title: "2x customers with lead generation service for your institute",
-      image: "/img/b6.png"
-    },
-    {
-      id: 5,
-      title: "Your Best Web Development Company in Dehradun",
-      image: "/img/b3.png"
-    },
-    {
-      id: 6,
-      title: "How Algorithm of Google Work?",
-      image: "/img/b2.png"
-    },
-    {
-      id:7,
-      title:"Your Best Website Development Company for Excellence ",
-      image:"/img/b3.png"
-
-    }
-
-
+    { id: 1, title: "Best Digital Marketing Company—One-Stop Solution for Success", image: "/img/b2.png" },
+    { id: 2, title: "Now Get SEO Services For Your Company At Ease", image: "/img/b3.png" },
+    { id: 3, title: "Your Number 1 Digital Marketing Company In Dehradun", image: "/img/b4.png" },
+    { id: 4, title: "2x customers with lead generation service for your institute", image: "/img/b6.png" },
+    { id: 5, title: "Your Best Web Development Company in Dehradun", image: "/img/b3.png" },
+    { id: 6, title: "How Algorithm of Google Work?", image: "/img/b2.png" },
+    { id: 7, title: "Your Best Website Development Company for Excellence", image: "/img/b3.png" },
   ];
 
-
   useEffect(() => {
-  const generated = [...Array(30)].map(() => ({
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 15}s`,
-    animationDuration: `${10 + Math.random() * 10}s`
-  }));
-
-  setParticles(generated);
-}, []);
- 
+    const generated = [...Array(30)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 15}s`,
+      animationDuration: `${10 + Math.random() * 10}s`
+    }));
+    setParticles(generated);
+  }, []);
 
   return (
-    
     <>
-    <Navbar />
+      <Navbar />
       <Head>
         <title>Creative Blogs Section - StarNext UI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,15 +56,13 @@ export default function BlogPage() {
           overflow-x: hidden;
           color: var(--text-primary);
           position: relative;
-          margin-top:90px;
+          margin-top: 90px;
         }
 
         .bg-animation {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
           z-index: -1;
           background: 
             radial-gradient(ellipse at 20% 80%, rgba(0, 100, 255, 0.15) 0%, transparent 50%),
@@ -115,10 +73,8 @@ export default function BlogPage() {
 
         .grid-overlay {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
           background-image: 
             linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
@@ -128,18 +84,15 @@ export default function BlogPage() {
 
         .floating-particles {
           position: fixed;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
+          width: 100%; height: 100%;
+          top: 0; left: 0;
           z-index: -1;
           overflow: hidden;
         }
 
         .particle {
           position: absolute;
-          width: 2px;
-          height: 2px;
+          width: 2px; height: 2px;
           background: var(--accent-blue);
           border-radius: 50%;
           opacity: 0.5;
@@ -159,26 +112,21 @@ export default function BlogPage() {
         }
 
         .sidebar {
-  background: rgba(10, 20, 35, 0.9);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 25px;
-  position: sticky;
-  top: 30px;
-}
+          background: rgba(10, 20, 35, 0.9);
+          backdrop-filter: blur(15px);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 14px;
+          padding: 25px;
+          position: sticky;
+          top: 30px;
+        }
 
-.sidebar-title {
-  font-size: 18px;
-  letter-spacing: 4px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-.sidebar-title::after {
-  height: 1px;
-  background: rgba(255,255,255,0.2);
-}
+        .sidebar-title {
+          font-size: 18px;
+          letter-spacing: 4px;
+          font-weight: 500;
+          margin-bottom: 20px;
+        }
 
         .blog-list {
           list-style: none;
@@ -186,41 +134,32 @@ export default function BlogPage() {
           margin-bottom: 30px;
         }
 
- .blog-list-item {
-  font-size: 12px;
-  color: #cbd5e1;
-  letter-spacing: 1px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  cursor: pointer;
-  transition: 0.3s ease;
-
-  transform: none;   /* remove old shift */
-}
+        .blog-list-item {
+          font-size: 12px;
+          color: #cbd5e1;
+          letter-spacing: 1px;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+          cursor: pointer;
+          transition: 0.3s ease;
+        }
 
         .blog-list-item:hover {
           color: var(--accent-blue);
           padding-left: 10px;
         }
 
-        .blog-list-item::before {
-          content: '';
-          margin-right: 8px;
-          color: var(--accent-blue);
-          font-weight: 600;
+        .connect-section {
+          margin-top: 20px;
+          padding-top: 15px;
+          border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .connect-section {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.connect-title {
-  font-size: 14px;
-  color: #cbd5e1;
-  margin-bottom: 15px;
-}
+        .connect-title {
+          font-size: 14px;
+          color: #cbd5e1;
+          margin-bottom: 15px;
+        }
 
         .social-icons {
           display: flex;
@@ -228,44 +167,22 @@ export default function BlogPage() {
         }
 
         .social-icon {
-          width: 40px;
-          height: 40px;
+          width: 40px; height: 40px;
           border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 18px;
-          
           cursor: pointer;
           position: relative;
           overflow: hidden;
-          
+          transition: transform 0.2s ease;
         }
 
-        .social-icon::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          
-          border-radius: 10px;
-          
-        }
-
-        .social-icon:hover::before {
-          
-          transform: scale(1.2);
-        }
-          .social-icon:hover {
-  transform: scale(1.25);
-}
-
-
+        .social-icon:hover { transform: scale(1.25); }
         .social-icon.linkedin { color: #0077b5; }
         .social-icon.youtube { color: #ff0000; }
-        .social-icon.instagram { 
+        .social-icon.instagram {
           background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -273,25 +190,26 @@ export default function BlogPage() {
         .social-icon.whatsapp { color: #25d366; }
 
         .blog-cards-wrapper {
-  position: relative;
-   height: 1000px;
-  
-  overflow-x: hidden;
-  scroll-behavior: smooth;  
-}
-
-        .blog-cards-track {
-          
           position: relative;
-          
+          height: 1000px;
+          overflow-x: hidden;
+          scroll-behavior: smooth;
         }
 
+        .blog-cards-track {
+          position: relative;
+        }
+
+        /* Card is now a full Link */
         .blog-card {
-  height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 20px;   /* 🔥 spacing between cards */
-}
+          height: 200px;
+          border-radius: 16px;
+          overflow: hidden;
+          margin-bottom: 20px;
+          display: block;              /* Link is inline by default */
+          text-decoration: none;
+          cursor: pointer;
+        }
 
         .blog-card-inner {
           position: relative;
@@ -301,276 +219,155 @@ export default function BlogPage() {
         }
 
         .blog-card:hover .blog-card-inner {
-          transform: translateZ(20px) scale(1.02);
+          transform: scale(1.02);
         }
 
         .blog-card-bg {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
           background-size: cover;
           background-position: center;
           transition: all 0.5s ease;
         }
 
+        /* Slight zoom on bg image for extra polish */
+        .blog-card:hover .blog-card-bg {
+          transform: scale(1.05);
+        }
+
         .blog-card-overlay {
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,0.9) 0%,
-    rgba(0,0,0,0.6) 40%,
-    rgba(0,0,0,0.2) 70%,
-    transparent 100%
-  );
-}
-
-        
-
-         .blog-card-content {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-}
-
- .blog-card-title {
-  font-size: 16px;
-  font-weight: 600;
-  max-width: 280px;
-  line-height: 1.4;
-}
-
-        .read-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 20px;
-          background: rgba(0, 0, 0, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 20px;
-          color: white;
-          font-size: 13px;
-          font-weight: 500;
-          opacity: 0;
-          transform: translateY(15px);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: linear-gradient(
+            90deg,
+            rgba(0,0,0,0.9) 0%,
+            rgba(0,0,0,0.6) 40%,
+            rgba(0,0,0,0.2) 70%,
+            transparent 100%
+          );
+          transition: background 0.3s ease;
         }
 
-        .blog-card:hover .read-btn {
-          opacity: 1;
-          transform: translateY(0);
+        /* Slightly lighten overlay on hover for clickable feel */
+        .blog-card:hover .blog-card-overlay {
+          background: linear-gradient(
+            90deg,
+            rgba(0,0,0,0.75) 0%,
+            rgba(0,0,0,0.45) 40%,
+            rgba(0,0,0,0.15) 70%,
+            transparent 100%
+          );
         }
 
-        .read-btn:hover {
-          background: var(--accent-blue);
-          border-color: var(--accent-blue);
-          box-shadow: 0 0 20px var(--hover-glow);
+        .blog-card-content {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          right: 20px;
         }
 
-        
-
-        .blog-card:hover::after {
-          opacity: 0.5;
+        .blog-card-title {
+          font-size: 16px;
+          font-weight: 600;
+          max-width: 280px;
+          line-height: 1.4;
+          color: #fff;
+          margin: 0;
         }
 
-        .loader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: var(--primary-bg);
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.5s ease;
-        }
-
-        .loader.hidden {
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        .loader-circle {
-          width: 50px;
-          height: 50px;
-          border: 3px solid rgba(0, 212, 255, 0.1);
-          border-top-color: var(--accent-blue);
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          to { transform: rotate(360deg); }
+        /* Cyan underline hint on hover */
+        .blog-card:hover .blog-card-title {
+          color: var(--accent-blue);
+          transition: color 0.3s ease;
         }
 
         @media (max-width: 991px) {
-          .sidebar {
-            position: relative;
-            top: 0;
-            margin-bottom: 30px;
-          }
-          
-          .blog-cards-wrapper {
-            height: 500px;
-          }
-          
-          .blog-card {
-            height: 180px;
-          }
-          
-          .blog-card-title {
-            font-size: 18px;
-          }
+          .sidebar { position: relative; top: 0; margin-bottom: 30px; }
+          .blog-cards-wrapper { height: 500px; }
+          .blog-card { height: 180px; }
+          .blog-card-title { font-size: 18px; }
         }
 
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: var(--accent-blue);
-          border-radius: 3px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
       `}</style>
 
-      {/* Loading Screen */}
-      
-
       <div className="blog-page">
-        {/* Background Elements */}
         <div className="bg-animation"></div>
         <div className="grid-overlay"></div>
         <div className="floating-particles">
           {particles.map((p, i) => (
-  <div
-    key={i}
-    className="particle"
-    style={p}
-  />
-))}
+            <div key={i} className="particle" style={p} />
+          ))}
         </div>
 
-        {/* Main Content */}
         <section className="blogs-section">
           <div className="container-fluid px-4 px-lg-5">
             <div className="row g-4">
-              
+
               {/* Left Sidebar */}
               <div className="col-lg-3">
                 <div className="sidebar">
                   <h2 className="sidebar-title">BLOGS</h2>
-                  
                   <ul className="blog-list">
-  {blogPosts.map((post) => (
-    <li 
-      key={post.id} 
-      className="blog-list-item"
-      onClick={() => {
-        const el = document.getElementById(`blog-${post.id}`);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }}
-    >
-      {post.title}
-    </li>
-  ))}
-</ul>
+                    {blogPosts.map((post) => (
+                      <li
+                        key={post.id}
+                        className="blog-list-item"
+                        onClick={() => {
+                          const el = document.getElementById(`blog-${post.id}`);
+                          if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }}
+                      >
+                        {post.title}
+                      </li>
+                    ))}
+                  </ul>
 
                   <div className="connect-section">
-  <h3 className="connect-title">Connect us</h3>
-
-  <div className="social-icons">
-
-    {/* LINKEDIN */}
-    <a
-      href="https://www.linkedin.com/company/star-next-softech-private-ltd/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="social-icon linkedin"
-    >
-      <img src="/img/_Linkedin.svg" alt="LinkedIn" />
-    </a>
-
-    {/* YOUTUBE */}
-    <a
-      href="https://www.youtube.com/@starnextsoftech-technology"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="social-icon youtube"
-    >
-      <img src="/img/_YouTube.svg" alt="YouTube" />
-    </a>
-
-    {/* INSTAGRAM */}
-    <a
-      href="https://www.instagram.com/starnextsoftech_?igsh=MXY3Y2NyenR6ejBvZw%3D%3D&utm_source=qr"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="social-icon instagram"
-    >
-      <img src="/img/_Instagram.svg" alt="Instagram" />
-    </a>
-
-    {/* WHATSAPP */}
-    <a
-      href="https://wa.me/918267016702"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="social-icon whatsapp"
-    >
-      <img src="/img/_WhatsApp.svg" alt="WhatsApp" />
-    </a>
-
-  </div>
-</div>
+                    <h3 className="connect-title">Connect us</h3>
+                    <div className="social-icons">
+                      <a href="https://www.linkedin.com/company/star-next-softech-private-ltd/" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
+                        <img src="/img/_Linkedin.svg" alt="LinkedIn" />
+                      </a>
+                      <a href="https://www.youtube.com/@starnextsoftech-technology" target="_blank" rel="noopener noreferrer" className="social-icon youtube">
+                        <img src="/img/_YouTube.svg" alt="YouTube" />
+                      </a>
+                      <a href="https://www.instagram.com/starnextsoftech_?igsh=MXY3Y2NyenR6ejBvZw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
+                        <img src="/img/_Instagram.svg" alt="Instagram" />
+                      </a>
+                      <a href="https://wa.me/918267016702" target="_blank" rel="noopener noreferrer" className="social-icon whatsapp">
+                        <img src="/img/_WhatsApp.svg" alt="WhatsApp" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Content - Blog Cards */}
+              {/* Right — Blog Cards */}
               <div className="col-lg-9">
-                <div 
-                  className="blog-cards-wrapper" 
-                  ref={wrapperRef}
-                  
-                >
+                <div className="blog-cards-wrapper" ref={wrapperRef}>
                   <div className="blog-cards-track">
-  {blogPosts.map((post) => (
-    <div className="blog-card" key={post.id} id={`blog-${post.id}`}>
-      <div className="blog-card-inner">
-
-        {/* IMAGE */}
-        <div
-          className="blog-card-bg"
-          style={{ backgroundImage: `url(${post.image})` }}
-        ></div>
-
-        {/* OVERLAY */}
-        <div className="blog-card-overlay"></div>
-
-        {/* CONTENT */}
-        <div className="blog-card-content">
-          <h3 className="blog-card-title">
-            {post.title}
-          </h3>
-
-          <Link href={`/blogs/${post.id}`} className="read-btn">
-  Read More →
-</Link>
-        </div>
-
-      </div>
-    </div>
-  ))}
-</div>
+                    {blogPosts.map((post) => (
+                      <Link
+                        href={`/blogs/${post.id}`}
+                        className="blog-card"
+                        key={post.id}
+                        id={`blog-${post.id}`}
+                      >
+                        <div className="blog-card-inner">
+                          <div className="blog-card-bg" style={{ backgroundImage: `url(${post.image})` }} />
+                          <div className="blog-card-overlay" />
+                          <div className="blog-card-content">
+                            <h3 className="blog-card-title">{post.title}</h3>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -579,14 +376,9 @@ export default function BlogPage() {
         </section>
       </div>
 
-      {/* External Scripts */}
-      
-      <Newsletter/>
+      <Newsletter />
       <SocialBar />
-      <Footer/>
+      <Footer />
     </>
-    
   );
-  
-  
 }
