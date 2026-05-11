@@ -3862,19 +3862,22 @@ right: 20px;
 }
 
 /* MOBILE */
+/* MOBILE */
 @media (max-width: 768px) {
 
   .floating-card {
-    width: 180px;
+    width: 120px;  /* reduced from 180px */
 
-    top: 100px;
-right: 20px;
-    border-radius: 14px;
+    top: 190px;     /* slightly higher */
+    right: 12px;   /* closer to edge */
+    border-radius: 10px;
   }
 
   .floating-close {
-    width: 26px;
-    height: 26px;
-    font-size: 12px;
+    width: 20px;   /* reduced from 26px */
+    height: 20px;
+    font-size: 10px;
+    top: 6px;
+    right: 6px;
   }
 }
