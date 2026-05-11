@@ -67,6 +67,28 @@ export default function HeroSection() {
     wrapper?.addEventListener('mouseenter', handleMouseEnter);
     wrapper?.addEventListener('mouseleave', handleMouseLeave);
 
+    // Mobile: prevent default touch behavior from stopping animation,
+    // and toggle pause/play on tap
+    let isPaused = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      e.preventDefault();
+      if (isPaused) {
+        scrollTweenRef.current?.play();
+        isPaused = false;
+      } else {
+        scrollTweenRef.current?.pause();
+        isPaused = true;
+      }
+    };
+
+    wrapper?.addEventListener('touchstart', handleTouchStart, { passive: false });
+    wrapper?.addEventListener('touchend', handleTouchEnd, { passive: false });
+
     // Entrance animations
     const tl = gsap.timeline();
     tl.from("#ratingBadge", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" })
@@ -101,6 +123,8 @@ export default function HeroSection() {
     return () => {
       wrapper?.removeEventListener('mouseenter', handleMouseEnter);
       wrapper?.removeEventListener('mouseleave', handleMouseLeave);
+      wrapper?.removeEventListener('touchstart', handleTouchStart);
+      wrapper?.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener("scroll", handleScroll);
       scrollTweenRef.current?.kill();
     };

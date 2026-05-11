@@ -60,13 +60,10 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     const wrapper = wrapperRef.current;
     if (!wrapper) return false;
     const rect = wrapper.getBoundingClientRect();
-    // The wrapper occupies 200vh of scroll space.
-    // It's "active" when its sticky panel is pinned — i.e. rect.top <= 0
-    // and the bottom of the wrapper hasn't left the screen yet.
     return rect.top <= 0 && rect.bottom > 0;
   };
 
-  // ── Keyboard navigation (guard added) ────────────────────────────────────
+  // ── Keyboard navigation ───────────────────────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isWrapperActive()) return;
@@ -78,17 +75,14 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollYProgress]);
 
-  // ── Wheel snap — ONLY fires when coverWrapper is the active section ───────
+  // ── Wheel snap ────────────────────────────────────────────────────────────
   useEffect(() => {
     let lastScrollTime = 0;
     const handleWheel = (e: WheelEvent) => {
-      // Guard: ignore completely if section isn't pinned on screen
       if (!isWrapperActive()) return;
-
       const now = Date.now();
       if (now - lastScrollTime < 800 || Math.abs(e.deltaY) < 50) return;
       lastScrollTime = now;
-
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
       const next = current + (e.deltaY > 0 ? 1 : -1);
       if (next >= 0 && next <= 1) goToSection(next);
@@ -97,16 +91,14 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('wheel', handleWheel);
   }, [scrollYProgress]);
 
-  // ── Touch swipe snap — guard added ───────────────────────────────────────
+  // ── Touch swipe snap ──────────────────────────────────────────────────────
   useEffect(() => {
     let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.changedTouches[0].screenY;
     };
     const handleTouchEnd = (e: TouchEvent) => {
-      // Guard: ignore if section isn't active
       if (!isWrapperActive()) return;
-
       const diff = touchStartY - e.changedTouches[0].screenY;
       if (Math.abs(diff) < 50) return;
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
@@ -122,14 +114,12 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   }, [scrollYProgress]);
 
   return (
-   
-<div
-  id="coverWrapper"
-  ref={wrapperRef}
-  className={styles.coverScrollWrapper}
-  style={{ overflow: 'hidden' }}   // ← ADD THIS inline or in CSS
->
-    <div id="coverWrapper" ref={wrapperRef} className={styles.coverScrollWrapper}>
+    // ✅ Single wrapper — no more duplicate div with id="coverWrapper"
+    <div
+      id="coverWrapper"
+      ref={wrapperRef}
+      className={styles.coverScrollWrapper}
+    >
       {/* Vision Section — stationary */}
       <section className={`${styles.coverSection} ${styles.sectionVision}`}>
         <div className={styles.sectionContent}>
@@ -143,13 +133,13 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               </div>
             </div>
             <div className={styles.keywords}>
-  <p className={styles.keywordText}>
-    We envision becoming a leader in advancing businesses using digital mediums. 
-    Customer loyalty and satisfaction, openness, creativity and teamwork growth 
-    play an essential role in our driving mission. All this contributes to 
-    reflecting who we are, what we are, how we work, and what we strive for.
-  </p>
-</div>
+              <p className={styles.keywordText}>
+                We envision becoming a leader in advancing businesses using digital mediums.
+                Customer loyalty and satisfaction, openness, creativity and teamwork growth
+                play an essential role in our driving mission. All this contributes to
+                reflecting who we are, what we are, how we work, and what we strive for.
+              </p>
+            </div>
           </div>
           <div className={styles.imageContainer}>
             <img
@@ -161,7 +151,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
         </div>
       </section>
 
-      {/* Mission Section — slides in slowly from right */}
+      {/* Mission Section — slides in from right */}
       <motion.section
         className={`${styles.coverSection} ${styles.sectionMission}`}
         style={{ x: section2X }}
@@ -177,11 +167,12 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               </div>
             </div>
             <div className={styles.keywords}>
-  <p className={styles.keywordText}>
-    To empower businesses with result-driven digital solutions by combining strategy, technology, and creative excellence—while fostering strong customer relationships, delivering measurable outcomes, and continuously evolving with the digital landscape.
-
-  </p>
-</div>
+              <p className={styles.keywordText}>
+                To empower businesses with result-driven digital solutions by combining strategy,
+                technology, and creative excellence—while fostering strong customer relationships,
+                delivering measurable outcomes, and continuously evolving with the digital landscape.
+              </p>
+            </div>
           </div>
           <div className={styles.imageContainer}>
             <img
@@ -194,7 +185,6 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
       </motion.section>
 
       <div ref={touchHintRef} className="touch-hint">Swipe to explore</div>
-    </div>
     </div>
   );
 }
