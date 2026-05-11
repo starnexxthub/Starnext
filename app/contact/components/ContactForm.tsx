@@ -59,13 +59,25 @@ export default function ContactForm() {
     <>
       <style>{`
         .form-control::placeholder { color: #cbd5e1; }
+        h1{
+          font-size: 60px !important;
+          margin-top:30px !important;}
 
         @media (max-width: 768px) {
           section   { padding: 3rem 0 !important; }
-          h1{ margin-bottom: 2.5rem !important; margin-top: 30px; }
+          h1{ margin-bottom: 2.5rem !important; margin-top: 50px; }
           .form-card  { padding: 1.5rem !important; }
           .form-fields{ gap: 1.25rem !important; }
         }
+        @media (max-width: 480px) {
+          h1 { font-size: 28px !important;
+               margin-top: 3.5rem !important; }
+        }
+               @media (min-width: 641px) and (max-width: 1023px) {
+          h1 { font-size: 30px !important; 
+               margin-top: 3rem !important; }
+
+
       `}</style>
 
       <section
