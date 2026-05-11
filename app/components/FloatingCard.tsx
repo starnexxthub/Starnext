@@ -13,6 +13,7 @@ export default function FloatingCard() {
       target="_blank"
       rel="noopener noreferrer"
       className="floating-card"
+      
     >
       
       {/* CLOSE BUTTON */}

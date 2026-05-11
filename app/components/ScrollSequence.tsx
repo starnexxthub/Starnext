@@ -110,7 +110,7 @@ export default function ScrollSequence() {
   return (
     <section
       className="scroll-sequence-section"
-      style={{ height: '500vh', position: 'relative' }}
+      style={{ height: '500vh', position: 'relative' ,zIndex:10}}
     >
       <canvas
         ref={canvasRef}
