@@ -875,16 +875,18 @@ letter-spacing: -7px;
   display: flex;
   align-items: center;
   padding: 12px 40px;
+  
+  justify-content: center;
 }
 
 .footer-bottom-inner {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  text-align: center;
   gap: 8px;
-  padding: 0 40px;
+  padding: 0;
 }
 
 .footer-bottom-inner h6 {
@@ -900,11 +902,12 @@ letter-spacing: -7px;
   }
 
   .footer-bottom-inner {
-    flex-direction: column;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
     text-align: center;
     padding: 0;
-    gap: 6px;
   }
 
   .footer-bottom-inner h6 {

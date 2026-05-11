@@ -67,7 +67,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="footer-bottom-inner">
           <h6 className="noww">© 2026 Starnext Softech Private Limited. All rights reserved.</h6>
-          <h6 className="noww">Terms & Conditions | Privacy Policy</h6>
+          {/*<h6 className="noww">Terms & Conditions | Privacy Policy</h6>*/}
         </div>
       </div>
     </footer>
