@@ -51,7 +51,7 @@ export default function BlogPage() {
         }
 
         .blog-page {
-          font-family: 'Inter', sans-serif;
+          font-family:  sans-serif;
           min-height: 100vh;
           overflow-x: hidden;
           color: var(--text-primary);
