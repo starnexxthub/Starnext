@@ -204,6 +204,33 @@
     font-size: 0.85rem;
   }
 }
+@media (max-width:480px) {
+
+  .heroSection{
+    min-height: 90vh;
+  }
+  .heroTitle {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    max-width: 100%;
+    margin-top: 50px;
+  }
+
+  .heroSubtitle {
+    font-size: clamp(0.9rem, 4vw, 1rem);
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .galleryItem {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .galleryTrack {
+    gap: 12px;
+  }
+}
 /* Cover Scroll Section */
 .coverScrollWrapper {
   position: relative;
