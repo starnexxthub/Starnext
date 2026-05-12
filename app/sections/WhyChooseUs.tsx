@@ -66,6 +66,8 @@ export default function WhyChooseUs() {
           grid-row: 2 / 3;
           min-height: 250px;
         }
+          a:hover{
+          color:white;}
  
         /* ─── TABLET GRID (640px–1023px) ─── */
         @media (min-width: 640px) and (max-width: 1023px) {
@@ -345,8 +347,7 @@ export default function WhyChooseUs() {
           white-space: nowrap;
         }
  
-        .wcu-talk-btn:hover { background: #1a3a8f; }
- 
+        
         /* Disable GSAP entrance animations on mobile */
         @media (max-width: 767px) {
           .wcu-line-1, .wcu-line-2, .wcu-subtitle { opacity: 1 !important; transform: none !important; }
