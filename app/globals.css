@@ -3930,7 +3930,7 @@ html {
   .floating-card {
   position: fixed;
 
-  bottom: 100px;
+  bottom: 10px;
 right: 20px;
   width: 150px;
 
@@ -4021,3 +4021,5 @@ right: 20px;
     right: 6px;
   }
 }
+
+
