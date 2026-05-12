@@ -163,8 +163,8 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-20" className="sr7-layer">Best Digital Marketing  Company In Uttarakhand, India</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-8-24" className="sr7-layer">With the years of experience in Digital and Development industry Starnext Softech delivering, fulfilling and achieving their customers dreams and needs.</sr7-txt>
-            <a id="SR7_2_1-8-31" className="sr7-layer" href="" target="_blank" rel="noopener">Call Now</a>
+            <sr7-txt id="SR7_2_1-8-24" className="sr7-layer">With years of experience as the best digital marketing company, StarNext Softech has successfully delivered and fulfilled its customers' dreams and needs.</sr7-txt>
+            <a id="SR7_2_1-8-31" className="sr7-layer" href="" target="_blank" rel="/contact">Call Now</a>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-8-38" className="sr7-layer">Graphics and Video editings</sr7-txt>
             {/* @ts-ignore */}
@@ -195,7 +195,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-13-23" className="sr7-layer">&gt;&gt;&gt;</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-13-24" className="sr7-layer">StarNext Softech is a fast-growing and best website designing company in Dehradun, Uttarakhand. We specialize in the best website design and development services.</sr7-txt>
+            <sr7-txt id="SR7_2_1-13-24" className="sr7-layer">From concept to launch, we deliver high-performance, visually refined websites that engage audiences, convert customers, and accelerate measurable business growth.</sr7-txt>
             <a id="SR7_2_1-13-31" className="sr7-layer" href="" target="_blank" rel="noopener">Call Now</a>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-13-38" className="sr7-layer">Graphics and Video editing</sr7-txt>
@@ -227,7 +227,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-12-23" className="sr7-layer">&gt;&gt;&gt;</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-12-24" className="sr7-layer">At StarNext Softech we have a team of photo stylists, photo editors, photographer and videographers to ensure that the right story is portrayed in your imagery.</sr7-txt>
+            <sr7-txt id="SR7_2_1-12-24" className="sr7-layer">From stunning creatives to scroll-stopping videos — we help brands stand out, engage better, and grow faster with professional editing and design.</sr7-txt>
             <a id="SR7_2_1-12-31" className="sr7-layer" href="" target="_blank" rel="noopener">call now</a>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-12-38" className="sr7-layer">Social media</sr7-txt>
@@ -259,7 +259,7 @@ export default function SR7Slider() {
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-11-23" className="sr7-layer">&gt;&gt;&gt;</sr7-txt>
             {/* @ts-ignore */}
-            <sr7-txt id="SR7_2_1-11-24" className="sr7-layer">StarNext Softech is a social media marketing company with extensive experience in social media marketing services. Our goal is to be the best social media marketing company on the planet!</sr7-txt>
+            <sr7-txt id="SR7_2_1-11-24" className="sr7-layer">StarNext’s social media marketing drives growth with engaging campaigns, data-driven strategies, and stunning content, boosting reach, engagement, and loyalty.</sr7-txt>
             <a id="SR7_2_1-11-31" className="sr7-layer" href="" target="_blank" rel="noopener">CALL NOW</a>
             {/* @ts-ignore */}
             <sr7-txt id="SR7_2_1-11-38" className="sr7-layer">SOCIAL MEDIA</sr7-txt>

@@ -127,7 +127,7 @@ export default function FAQSection() {
             <h2 className="faq-title mb-4">
               <span className="reveal-text"><span>Frequently Asked</span></span><br className="d-none d-md-block" />
               <span className="reveal-text"><span>Question</span></span>
-              <span className="dot">.</span>
+              
             </h2>
 
             <p className="faq-sub mb-4" id="faqSub">

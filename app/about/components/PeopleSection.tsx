@@ -18,8 +18,9 @@ const teamMembers = [
   { name: 'Priyanka', role: 'Brand Head', img: '/img/t8.webp?w=400&h=460&fit=crop' },
   { name: 'Saurabh', role: 'Head Editor', img: '/img/t10.webp?w=400&h=460&fit=crop' },
   { name: 'Shivansh Kapoor', role: 'SEO Expert', img: '/img/t11.webp?w=400&h=460&fit=crop' },
-  { name: 'Sumit ', role: ' Editor', img: '/img/t12.webp?w=400&h=460&fit=crop' },
+  { name: 'Sumit ', role: 'Editor', img: '/img/t12.webp?w=400&h=460&fit=crop' },
   { name: 'Utkarsh', role: 'Senior Full Stack Developer', img: '/img/t13.webp?w=400&h=460&fit=crop' },
+  { name: 'Nisha', role: 'Social Media Executive', img: '/img/t14.webp?w=400&h=460&fit=crop' },
 
 ];
 

@@ -20,6 +20,7 @@ const images = [
   '/img/t8.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t11.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t12.webp?q=80&w=1000&auto=format&fit=crop',
+  '/img/t14.webp?q=80&w=1000&auto=format&fit=crop'
 ];
 
 export default function HeroSection() {

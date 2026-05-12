@@ -368,7 +368,7 @@ export default function WhyChooseUs() {
             <span className="wcu-line-1" style={{ display: 'block' }}>Starnext Softech</span>
           </h2>
           <p className="wcu-subtitle wcu-subtitle">
-            Trusted by 100+ clients, we deliver solutions with precision and excellence.
+            Best digital marketing company turning digital attention into sales and clicks into conversions. Trusted by 100+ clients. Zero guesswork. Only measurable wins.
           </p>
         </div>
 
