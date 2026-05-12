@@ -1,42 +1,42 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
 const servicesData = [
   {
-    //step: '01 — Digital',
     title: 'DIGITAL MARKETING',
     sub: 'Best Digital Marketing Company',
     body: 'StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.',
     img: '/img/DigitalM-2.webp',
     label: 'Digital Marketing',
+    href: '/service/Digital',   // ← added
   },
   {
-    //step: '02 — Social',
     title: 'SOCIAL MEDIA MARKETING',
     sub: 'Best Social Media Marketing Company',
     body: 'StarNext Softech is a results-driven social media marketing company with deep expertise in delivering high-impact social media solutions. Our mission is to establish ourselves as the leading social media marketing company globally.',
     img: '/img/social.webp',
     label: 'Social Media Marketing',
+    href: '/service/SocialMedia',  // ← added
   },
   {
-    //step: '03 — Search',
     title: 'SEO',
     sub: 'Best SEO Company',
     body: "If you're a business owner seeking a reliable digital marketing company in India, StarNext Softech stands out as a strong choice. We drive growth through strategic search optimisation while our local SEO services boost visibility and attract nearby customers.",
     img: '/img/seo.webp',
     label: 'SEO',
+    href: '/service/Seo',   // ← added
   },
   {
-    //step: '04 — Design',
     title: 'WEB DESIGNING',
     sub: 'Best Web Designing Company',
     body: 'StarNext Softech is a fast-growing and trusted web designing company in Dehradun, Uttarakhand. We specialise in high-quality website design and development services that combine clean UI/UX, strong performance, and business-focused functionality.',
     img: '/img/Development.webp',
     label: 'Web Designing',
+    href: '/service',   // ← added
   },
 ]
-
 export default function ServicesDesktop() {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeIndexRef = useRef(0)
@@ -385,12 +385,12 @@ export default function ServicesDesktop() {
                   <h3>{svc.title}</h3>
                   <p className="fw-semibold">{svc.sub}</p>
                   <p>{svc.body}</p>
-                  <button className="about-btn btn-navy">
-                    MORE ABOUT US
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
+         <Link href={svc.href} className="about-btn btn-navy">
+  MORE ABOUT US
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+  </svg>
+</Link>
                 </div>
               ))}
 
