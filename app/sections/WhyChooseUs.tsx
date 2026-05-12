@@ -83,7 +83,12 @@ export default function WhyChooseUs() {
             grid-column: 1 / 3;
             grid-row: 3 / 4;
             min-height: 200px;
+
           }
+            .wcu-card-dark {
+  display: flex;
+  flex-direction: column;
+}
  
           .wcu-star-wrap {
             width: clamp(80px, 28vw, 220px) !important;
@@ -152,18 +157,18 @@ export default function WhyChooseUs() {
  
         .wcu-card-icon {
           width: 44px;
-          height: 44px;
+          height: 40px;
           border-radius: 12px;
-          background: #f0f3ff;
+          background:white;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 20px;
+          
         }
  
         .wcu-card-title {
           font-family: sans-serif;
-          font-size: 18px;
+          font-size: 24px;
           font-weight: 700;
           color: #0d1b3e;
           margin: 0 0 10px 0;
@@ -173,7 +178,7 @@ export default function WhyChooseUs() {
         .wcu-card-dark .wcu-card-title { color: #fff; }
  
         .wcu-card-body {
-          font-size: 14px;
+          font-size: 16px;
           color: #6b7590;
           line-height: 1.65;
           margin: 0;
@@ -213,13 +218,14 @@ export default function WhyChooseUs() {
           border: 1.5px solid rgba(255,255,255,0.3);
           background: rgba(255,255,255,0.1);
           color: #fff;
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 600;
           cursor: pointer;
           text-decoration: none;
           transition: background 0.2s ease, border-color 0.2s ease;
-          font-family: 'DM Sans', sans-serif;
+          font-family:  sans-serif;
           white-space: nowrap;
+          margin-left: auto;
         }
  
         .wcu-connect-btn:hover {
@@ -377,12 +383,7 @@ export default function WhyChooseUs() {
 
             {/* Card 1 — Expert Business Solutions */}
             <div className="wcu-card wcu-card-light wcu-card-1" data-wcu-card="1">
-              <div className="wcu-card-icon">
-                <svg width="22" height="22" fill="none" stroke="#1a3a8f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect x="2" y="7" width="20" height="14" rx="2" />
-                  <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
-                </svg>
-              </div>
+              
               <h3 className="wcu-card-title">Expert Business Solutions</h3>
               <p className="wcu-card-body">
                 We sit together with you, refine<br></br> your ideas, and deliver tailored <br></br>digital solutions that achieve results.
@@ -397,12 +398,7 @@ export default function WhyChooseUs() {
 
             {/* Card 2 — Results That Matter */}
             <div className="wcu-card wcu-card-light wcu-card-2" data-wcu-card="2">
-              <div className="wcu-card-icon">
-                <svg width="22" height="22" fill="none" stroke="#1a3a8f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                  <polyline points="16 7 22 7 22 13" />
-                </svg>
-              </div>
+              
               <h3 className="wcu-card-title">Results That Matter</h3>
               <p className="wcu-card-body">
                 Focused on outcomes that amplify<br></br> your business, not just activities.
@@ -418,11 +414,12 @@ export default function WhyChooseUs() {
             {/* Card 3 — Dedicated Teamwork */}
             <div className="wcu-card wcu-card-light wcu-card-3" data-wcu-card="3">
               <div className="wcu-card-icon">
-                <svg width="22" height="22" fill="none" stroke="#1a3a8f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                </svg>
+                <img
+  src="/assets/coll.svg"
+  alt="Team Icon"
+  width={32}
+  height={32}
+/>
               </div>
               <h3 className="wcu-card-title">Dedicated Teamwork</h3>
               <p className="wcu-card-body">
@@ -441,13 +438,14 @@ export default function WhyChooseUs() {
               <div className="wcu-dark-glow" />
               <div className="wcu-shimmer" />
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
                 <svg width="22" height="22" fill="none" stroke="#7eb3ff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
                   <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
                 </svg>
-                <h3 className="wcu-card-title" style={{ margin: 0 }}>Always Connected</h3>
+                
               </div>
+              <h3 className="wcu-card-title" style={{ margin: 0 }}>Always Connected</h3>
 
               <p className="wcu-card-body" style={{ marginBottom: 24 }}>
                 We keep you in touch throughout the process—call anytime<br></br> to check your project status.
@@ -455,9 +453,13 @@ export default function WhyChooseUs() {
 
               <a href="/contact" className="wcu-connect-btn">
                 Let's Connect
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-                </svg>
+                <img
+  src="/assets/connect.svg"
+  alt="Arrow Icon"
+  width={14}
+  height={14}
+  className="tw-object-contain"
+/>
               </a>
             </div>
 

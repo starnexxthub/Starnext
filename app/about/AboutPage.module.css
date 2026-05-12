@@ -23,6 +23,8 @@
   background: #ffffff;
   z-index: 10;
 }
+.heroTitleWrapper   { overflow: visible; }
+.heroSubtitleWrapper { overflow: visible; }
 
 
 
@@ -392,6 +394,99 @@
 
   .navDots {
     right: 2rem;
+  }
+}
+/* ============================================================
+   MOBILE — below 992px
+   Completely overrides the fixed/slide desktop layout.
+   Cards stack vertically; each is fully visible before the next.
+   Desktop styles above 992px are completely untouched.
+   ============================================================ */
+@media (max-width: 991px) {
+
+  /* Wrapper: let content flow naturally — no fixed height needed */
+  .coverScrollWrapper {
+    height: auto !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+
+  /* Sections: exit fixed positioning, stack as normal blocks */
+  .coverSection {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100svh;          /* each card fills the viewport */
+    padding: 0 5vw !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    overflow: visible !important;
+    will-change: auto !important;
+  }
+
+  /* Mission section: kill the slide-in transform entirely on mobile */
+  .sectionMission {
+    transform: none !important;  /* overrides framer-motion x: 100% */
+  }
+
+  /* Content: vertical column, comfortable spacing */
+  .sectionContent {
+    padding: 6rem 0 3rem !important;
+    height: auto !important;
+    justify-content: flex-start !important;
+    gap: 1.5rem;
+  }
+
+  /* Title: scale down for narrow screens */
+  .sectionTitle {
+    font-size: clamp(2.2rem, 12vw, 3.5rem) !important;
+    margin-bottom: 1rem !important;
+    line-height: 1 !important;
+  }
+
+  .sectionLabel {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  /* Text block: full width on mobile */
+  .keywords {
+    max-width: 100% !important;
+    margin-bottom: 1.5rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .keywordText {
+    font-size: clamp(0.875rem, 4vw, 1rem) !important;
+    line-height: 1.7 !important;
+    max-width: 100% !important;
+  }
+
+  /* Image: below the text, full width, fixed aspect ratio */
+  .imageContainer {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 50vw !important;      /* landscape crop — looks great on phones */
+    min-height: 200px !important;
+    margin-bottom: 2rem !important;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sectionImage {
+    border-radius: 12px;
+  }
+
+  /* Hide desktop-only UI chrome on mobile */
+  .navDots,
+  .scrollProgress,
+  .sectionIndicator {
+    display: none !important;
   }
 }
 

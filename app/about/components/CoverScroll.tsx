@@ -18,6 +18,12 @@ interface CoverScrollProps {
 export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScrollProps) {
   const touchHintRef = useRef<HTMLDivElement>(null);
   const wrapperRef   = useRef<HTMLDivElement>(null);
+  const isMobileRef  = useRef(false);
+
+  // Detect mobile once on mount
+  useEffect(() => {
+    isMobileRef.current = window.innerWidth < 992;
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -32,6 +38,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   });
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (isMobileRef.current) return; // mobile handles its own scroll indicator separately
     if (progressBarRef.current) {
       progressBarRef.current.style.width = `${latest * 100}%`;
     }
@@ -55,7 +62,6 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     window.scrollTo({ top: index === 0 ? top : top + height, behavior: 'smooth' });
   };
 
-  /** Returns true only when #coverWrapper is the pinned section on screen */
   const isWrapperActive = (): boolean => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return false;
@@ -63,10 +69,10 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return rect.top <= 0 && rect.bottom > 0;
   };
 
-  // ── Keyboard navigation ───────────────────────────────────────────────────
+  // ── Keyboard navigation (desktop only) ───────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isWrapperActive()) return;
+      if (isMobileRef.current || !isWrapperActive()) return;
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
       if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && current === 0) goToSection(1);
       if ((e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   && current === 1) goToSection(0);
@@ -75,11 +81,11 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollYProgress]);
 
-  // ── Wheel snap ────────────────────────────────────────────────────────────
+  // ── Wheel snap (desktop only) ─────────────────────────────────────────────
   useEffect(() => {
     let lastScrollTime = 0;
     const handleWheel = (e: WheelEvent) => {
-      if (!isWrapperActive()) return;
+      if (isMobileRef.current || !isWrapperActive()) return;
       const now = Date.now();
       if (now - lastScrollTime < 800 || Math.abs(e.deltaY) < 50) return;
       lastScrollTime = now;
@@ -91,14 +97,14 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
     return () => window.removeEventListener('wheel', handleWheel);
   }, [scrollYProgress]);
 
-  // ── Touch swipe snap ──────────────────────────────────────────────────────
+  // ── Touch swipe snap (desktop only) ──────────────────────────────────────
   useEffect(() => {
     let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.changedTouches[0].screenY;
     };
     const handleTouchEnd = (e: TouchEvent) => {
-      if (!isWrapperActive()) return;
+      if (isMobileRef.current || !isWrapperActive()) return;
       const diff = touchStartY - e.changedTouches[0].screenY;
       if (Math.abs(diff) < 50) return;
       const current = scrollYProgress.get() > 0.5 ? 1 : 0;
@@ -114,13 +120,12 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
   }, [scrollYProgress]);
 
   return (
-    // ✅ Single wrapper — no more duplicate div with id="coverWrapper"
     <div
       id="coverWrapper"
       ref={wrapperRef}
       className={styles.coverScrollWrapper}
     >
-      {/* Vision Section — stationary */}
+      {/* Vision Section — stationary on desktop, normal flow on mobile */}
       <section className={`${styles.coverSection} ${styles.sectionVision}`}>
         <div className={styles.sectionContent}>
           <div className={styles.contentText}>
@@ -151,7 +156,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
         </div>
       </section>
 
-      {/* Mission Section — slides in from right */}
+      {/* Mission Section — slides from right on desktop, normal flow on mobile */}
       <motion.section
         className={`${styles.coverSection} ${styles.sectionMission}`}
         style={{ x: section2X }}

@@ -20,12 +20,12 @@ const images = [
   '/img/t8.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t11.webp?q=80&w=1000&auto=format&fit=crop',
   '/img/t12.webp?q=80&w=1000&auto=format&fit=crop',
-
 ];
 
 export default function HeroSection() {
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTweenRef = useRef<gsap.core.Tween | null>(null);
+  const isPausedRef = useRef(false);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -42,11 +42,11 @@ export default function HeroSection() {
       track.appendChild(clone);
     });
 
-    // Infinite scroll animation
+    // Infinite scroll animation — unchanged from desktop
     scrollTweenRef.current = gsap.to(track, {
       x: `-=${totalWidth}`,
       duration: 30,
-      ease: "none",
+      ease: 'none',
       repeat: -1,
       modifiers: {
         x: gsap.utils.unitize((x: string | number) => {
@@ -55,49 +55,63 @@ export default function HeroSection() {
           const relativeX = val - initialOffset;
           const wrapped = relativeX % totalWidth;
           return initialOffset + wrapped;
-        })
-      }
+        }),
+      },
     });
 
-    // Pause on hover
     const wrapper = track.parentElement;
+
+    // ── Desktop: hover pause/resume (unchanged) ──
     const handleMouseEnter = () => scrollTweenRef.current?.pause();
     const handleMouseLeave = () => scrollTweenRef.current?.play();
-
     wrapper?.addEventListener('mouseenter', handleMouseEnter);
     wrapper?.addEventListener('mouseleave', handleMouseLeave);
 
-    // Mobile: prevent default touch behavior from stopping animation,
-    // and toggle pause/play on tap
-    let isPaused = false;
+    // ── Mobile: tap anywhere in gallery to toggle pause/resume ──
+    // Using touchend so it fires after the finger lifts (feels snappier).
+    // We track touchstart X to ignore swipe-scrolls — only a clean tap toggles.
+    let touchStartX = 0;
+    let touchStartY = 0;
 
     const handleTouchStart = (e: TouchEvent) => {
-      e.preventDefault();
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      e.preventDefault();
-      if (isPaused) {
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+
+      // Only treat as a tap if the finger barely moved (not a scroll/swipe)
+      const isTap = dx < 10 && dy < 10;
+      if (!isTap) return;
+
+      if (isPausedRef.current) {
         scrollTweenRef.current?.play();
-        isPaused = false;
+        isPausedRef.current = false;
       } else {
         scrollTweenRef.current?.pause();
-        isPaused = true;
+        isPausedRef.current = true;
       }
     };
 
-    wrapper?.addEventListener('touchstart', handleTouchStart, { passive: false });
-    wrapper?.addEventListener('touchend', handleTouchEnd, { passive: false });
+    // passive: true keeps native scroll smooth; we don't need preventDefault
+    wrapper?.addEventListener('touchstart', handleTouchStart, { passive: true });
+    wrapper?.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-    // Entrance animations
+    // Entrance animations — unchanged
     const tl = gsap.timeline();
-    tl.from("#ratingBadge", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" })
-      .from("#mainTitle", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, "-=0.6")
-      .from("#subTitle", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, "-=0.6")
-      .from("#ctaButton", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, "-=0.6")
-      .from(`.${styles.galleryItem}`, { opacity: 0, y: 20, duration: 0.8, stagger: 0.1, ease: "power2.out" }, "-=0.4");
+    tl.from('#ratingBadge', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' })
+      .from('#mainTitle', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+      .from('#subTitle', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+      .from('#ctaButton', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+      .from(
+        `.${styles.galleryItem}`,
+        { opacity: 0, y: 20, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
+        '-=0.4'
+      );
 
-    // Scroll velocity skew effect
+    // Scroll velocity skew — unchanged
     let lastScrollTop = 0;
     let scrollTimeout: NodeJS.Timeout;
 
@@ -109,23 +123,23 @@ export default function HeroSection() {
       gsap.to(`.${styles.galleryItem}`, {
         skewX: scrollVelocity * 0.05,
         duration: 0.3,
-        ease: "power1.out"
+        ease: 'power1.out',
       });
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        gsap.to(`.${styles.galleryItem}`, { skewX: 0, duration: 0.5, ease: "power2.out" });
+        gsap.to(`.${styles.galleryItem}`, { skewX: 0, duration: 0.5, ease: 'power2.out' });
       }, 100);
     };
 
-    window.addEventListener("scroll", handleScroll, false);
+    window.addEventListener('scroll', handleScroll, false);
 
     return () => {
       wrapper?.removeEventListener('mouseenter', handleMouseEnter);
       wrapper?.removeEventListener('mouseleave', handleMouseLeave);
       wrapper?.removeEventListener('touchstart', handleTouchStart);
       wrapper?.removeEventListener('touchend', handleTouchEnd);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
       scrollTweenRef.current?.kill();
     };
   }, []);
@@ -154,7 +168,7 @@ export default function HeroSection() {
         <div ref={trackRef} className={styles.galleryTrack}>
           {images.map((src, index) => (
             <div key={index} className={styles.galleryItem}>
-              <img src={src} alt={`Creative Portrait ${index + 1}`} />
+              <img src={src} alt={`Creative Portrait ${index + 1}`} loading="lazy" draggable={false} />
             </div>
           ))}
         </div>
