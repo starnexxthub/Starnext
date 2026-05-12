@@ -150,9 +150,8 @@ export default function HeroSection() {
       <div className="container">
         <div className="text-center">
           <div id="ratingBadge" className={styles.ratingBadge}>
-            <Sun size={18} />
-            <span>Rated 4.90/5 from 175+ reviews</span>
-          </div>
+           
+            </div>
         </div>
 
         <h1 id="mainTitle" className={styles.heroTitle}>
