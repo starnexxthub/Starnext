@@ -11,22 +11,21 @@
 
 
 /* Hero Section */
+/* Hero Section */
 .heroSection {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
-  padding-top: 40px; /* Increased from 80px to account for navbar */
-  padding-bottom: 40px;
+  padding-top: 90px; /* sits snug below navbar */
+  padding-bottom: 150px;
   background: #ffffff;
   z-index: 10;
+  /* REMOVED: min-height: 100vh and justify-content: center */
 }
+
 .heroTitleWrapper   { overflow: visible; }
 .heroSubtitleWrapper { overflow: visible; }
-
-
 
 .ratingBadge {
   display: inline-flex;
@@ -116,18 +115,18 @@
   filter: grayscale(0%);
   transform: scale(1.05);
 }
+
 /* ── Responsive: Laptop screens ── */
 
 /* Large laptops: 1024px–1440px */
 @media (max-width: 1440px) {
   .heroSection {
-    padding-top: 100px;
+    padding-top: 90px;
   }
 
   .heroTitle {
     font-size: clamp(2.2rem, 4vw, 3.8rem);
     max-width: 800px;
-
   }
 
   .heroSubtitle {
@@ -143,7 +142,7 @@
 /* Standard laptops: 1024px–1280px */
 @media (max-width: 1280px) {
   .heroSection {
-    padding-top: 90px;
+    padding-top: 50px;
     padding-bottom: 32px;
   }
 
@@ -170,8 +169,7 @@
 /* Small/older laptops: 1024px–1100px */
 @media (max-width: 1100px) {
   .heroSection {
-    padding-top: 80px;
-    min-height: auto;
+    padding-top: 40px;
     padding-bottom: 28px;
   }
 
@@ -205,7 +203,6 @@
     font-size: 0.85rem;
   }
 }
-
 /* Cover Scroll Section */
 .coverScrollWrapper {
   position: relative;
