@@ -139,10 +139,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
             </div>
             <div className={styles.keywords}>
               <p className={styles.keywordText}>
-                We envision becoming a leader in advancing businesses using digital mediums.
-                Customer loyalty and satisfaction, openness, creativity and teamwork growth
-                play an essential role in our driving mission. All this contributes to
-                reflecting who we are, what we are, how we work, and what we strive for.
+                At StarNext Softech, our vision is to drive measurable business growth through strategic digital marketing and innovation. We exist to help brands build, scale, and sustain their digital presence—from market entry to market leadership. Transparency, creativity, data-driven execution, and long-term partnerships define how we operate and the value we deliver.
               </p>
             </div>
           </div>
@@ -173,9 +170,8 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
             </div>
             <div className={styles.keywords}>
               <p className={styles.keywordText}>
-                To empower businesses with result-driven digital solutions by combining strategy,
-                technology, and creative excellence—while fostering strong customer relationships,
-                delivering measurable outcomes, and continuously evolving with the digital landscape.
+                At Starnext Softech, our mission is to empower businesses with performance-focused digital solutions that create real impact. We combine strategy, technology, creativity, and marketing expertise to help brands attract the right audience, strengthen customer engagement, and achieve sustainable growth. Through consistent innovation, transparent collaboration, and result-oriented execution, we aim to become a trusted growth partner for businesses across industries.
+
               </p>
             </div>
           </div>
