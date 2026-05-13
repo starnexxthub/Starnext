@@ -33,7 +33,7 @@ export default function Footer() {
     <h4 className="footer-title">Company</h4>
     <ul className="footer-my-list">
       <li><a href="/about">About Us</a></li>
-      <li><a href="/team">Our Team</a></li>
+      {/* <li><a href="/team">Our Team</a></li> */}
       <li><a href="/blogs">Blogs</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
