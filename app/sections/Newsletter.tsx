@@ -24,7 +24,7 @@ export default function Newsletter() {
     setLoading(false);
 
     if (data.success) {
-      alert("Subscribed successfully 🎉");
+      alert("Thank you for subscribing. You have been successfully added to our newsletter.");
       setEmail("");
     } else {
       alert("Something went wrong ❌");

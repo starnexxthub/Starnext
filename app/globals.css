@@ -613,13 +613,30 @@ letter-spacing: -7px;
   display: flex;
   align-items: center;
 }
+.newsletter-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at top right,
+      rgba(255,255,255,0.12),
+      transparent 32%);
+
+  pointer-events: none;
+}
 
 .newsletter-inner {
   width: min(1200px, 92%);
   margin: 0 auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 40px;
+
+  position: relative;
+  z-index: 1;
 }
 
 .newsletter-title {
@@ -682,10 +699,11 @@ letter-spacing: -7px;
 
 /* Center-aligned disclaimer */
 .newsletter-note {
-  margin-top: 20px;
+  margin-top: 18px;
   font-size: 13px;
   text-align: center;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.78);
+  letter-spacing: 0.02em;
 }
 
 /* Mobile */
@@ -874,8 +892,9 @@ letter-spacing: -7px;
 
 @media (max-width: 1199px) {
   .footer-image {
-    margin-right: 0;
+    margin-right: 120px;
     width: 100%;
+    
   }
 }
 
@@ -931,7 +950,40 @@ letter-spacing: -7px;
   .footer-bottom-inner h6 {
     font-size: 11px;
   }
-}/* Underline + copyright row under StarNext bar */
+}
+/* Add a mid-range breakpoint for laptops (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container-footer {
+    margin-left: 120px;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .footer-row {
+    padding-top: 52px;
+  }
+
+  .footer-my-list a {
+    font-size: 15px;
+  }
+
+  .footer-title {
+    font-size: 17px;
+  }
+}
+
+/* Tighten spacing on smaller laptops */
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer-row > [class*="col-"] {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding-right: 16px;
+  }
+}
+
+
+/* Underline + copyright row under StarNext bar */
 .starnext-underbar{
   background:#001221;              /* same as starnext-bar */
   padding: 0 40px 16px;            /* matches your spacing */

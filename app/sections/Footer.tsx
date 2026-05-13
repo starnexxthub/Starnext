@@ -29,36 +29,36 @@ export default function Footer() {
       <div className="container-footer">
         <div className="row footer-row justify-content-between">
 
-          <div className="col-6 col-md-4 col-lg-4">
-            <h4 className="footer-title">Company</h4>
-            <ul className="footer-my-list">
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/team">Our Team</a></li>
-              <li><a href="/blogs">Blogs</a></li>
-              <li><a href="/contact">Contact</a></li>
-            </ul>
-          </div>
+  <div className="col-6 col-sm-4 col-md-4 col-lg-4">
+    <h4 className="footer-title">Company</h4>
+    <ul className="footer-my-list">
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/team">Our Team</a></li>
+      <li><a href="/blogs">Blogs</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
 
-          <div className="col-6 col-md-4 col-lg-4">
-            <h4 className="footer-title">Services</h4>
-            <ul className="footer-my-list">
-              <li><a href="/service/Digital">Digital Marketing</a></li>
-              <li><a href="/service">Web & App Development</a></li>
-              <li><a href="/service/Seo">Search Engine Optimization</a></li>
-              <li><a href="/service/SocialMedia">Social Media Marketing</a></li>
-            </ul>
-          </div>
+  <div className="col-6 col-sm-4 col-md-4 col-lg-4">
+    <h4 className="footer-title">Services</h4>
+    <ul className="footer-my-list">
+      <li><a href="/service/Digital">Digital Marketing</a></li>
+      <li><a href="/service">Web & App Development</a></li>
+      <li><a href="/service/Seo">Search Engine Optimization</a></li>
+      <li><a href="/service/SocialMedia">Social Media Marketing</a></li>
+    </ul>
+  </div>
 
-          <div className="col-6 col-md-4 col-lg-4">
-            <h4 className="footer-title">Legal</h4>
-            <ul className="footer-my-list">
-              <li><a href="/faq">FAQs</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms & Conditions</a></li>
-            </ul>
-          </div>
+  <div className="col-6 col-sm-4 col-md-4 col-lg-4">
+    <h4 className="footer-title">Legal</h4>
+    <ul className="footer-my-list">
+      <li><a href="/faq">FAQs</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms & Conditions</a></li>
+    </ul>
+  </div>
 
-        </div>
+</div>
         <div className="footer-image-wrap">
           <img src="/img/footer3.png" alt="Footer graphic" className="footer-image w-100" />
         </div>

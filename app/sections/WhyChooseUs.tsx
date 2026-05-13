@@ -332,20 +332,35 @@ export default function WhyChooseUs() {
         }
  
         .wcu-talk-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 28px;
-          border-radius: 8px;
-          background: #0d1b3e;
-          color: #fff;
-          font-size: 13px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background 0.2s ease;
-          font-family: sans-serif;
-          white-space: nowrap;
-        }
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  background: #0d1b3e;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: sans-serif;
+  white-space: nowrap;
+
+  transition:
+    transform 0.28s ease,
+    background 0.25s ease,
+    box-shadow 0.28s ease;
+
+  transform-origin: center;
+}
+
+.wcu-talk-btn:hover {
+  
+
+  transform: scale(1.08);
+
+  box-shadow:
+    0 14px 30px rgba(13, 27, 62, 0.28);
+}
  
         
         /* Disable GSAP entrance animations on mobile */
