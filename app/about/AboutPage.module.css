@@ -150,6 +150,7 @@
   .heroTitle {
     font-size: clamp(2rem, 3.8vw, 3.2rem);
     max-width: 720px;
+    margin-top: 20px;
   }
 
   .heroSubtitle {
