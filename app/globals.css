@@ -780,7 +780,7 @@ letter-spacing: -7px;
 
 /* Container: 250px left margin on desktop, auto on smaller screens */
 .container-footer {
-  margin-left: 250px;
+  
   margin-right: auto;
   padding-right: 40px;
 }
@@ -804,6 +804,7 @@ letter-spacing: -7px;
 .footer-row {
   padding-top: 64px;
   row-gap: 32px;
+  margin-left: 250px;
 }
 
 @media (max-width: 767px) {
@@ -879,20 +880,24 @@ letter-spacing: -7px;
   opacity: 0;
   transform: translateY(30px);
   overflow: hidden;
+  
 }
 
 .footer-image {
   width: min(100%, 1100px);
   height: auto;
   display: block;
-  margin-right: 220px;
+  
 }
 
 /* tablets + small laptops */
 @media (max-width: 1199px) {
   .footer-image {
     width: 100%;
-    margin-right: 0;
+    
+  }
+  .footer-image-wrap{
+    margin-right: 40px;
   }
 }
 
@@ -966,8 +971,7 @@ letter-spacing: -7px;
 /* Add a mid-range breakpoint for laptops (768px - 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
   .container-footer {
-    margin-left: 120px;
-    margin-right: auto;
+     margin-right: auto;
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -995,9 +999,27 @@ letter-spacing: -7px;
 }
 @media (min-width: 1600px) {
   .container-footer {
-    margin-left: clamp(250px, 16vw, 310px);
+    
     margin-right: auto;
     padding-right: 40px;
+  }
+  
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer-row {
+    padding-left: 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-row {
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .footer-row {
+    padding-left: clamp(250px, 16vw, 120px);
   }
 }
 
