@@ -1019,7 +1019,7 @@ letter-spacing: -7px;
 
 @media (min-width: 1600px) {
   .footer-row {
-    padding-left: clamp(250px, 16vw, 120px);
+    padding-left: clamp(320px, 20vw, 480px);
   }
 }
 
