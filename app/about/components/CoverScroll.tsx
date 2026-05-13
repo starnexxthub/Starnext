@@ -185,7 +185,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
         </div>
       </motion.section>
 
-      <div ref={touchHintRef} className="touch-hint">Swipe to explore</div>
+      
     </div>
   );
 }

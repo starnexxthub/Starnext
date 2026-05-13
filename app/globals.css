@@ -4127,4 +4127,14 @@ right: 20px;
         .sn-bar-mobile a:hover {
           opacity: 0.7;
         }
+@media (min-width: 1600px) {
+  .sn-tagline {
+    margin-right: 190px;
+  }
+}
+@media (min-width: 1600px) {
+  .sn-logo {
+    margin-right: 235px;
+  }
+}
 
