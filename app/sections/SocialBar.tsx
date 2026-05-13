@@ -23,14 +23,14 @@ export default function SocialBar() {
         <div className="col-4 text-center">
   <img
     src="/assets/3DLogoLabNew-1-1.png"
-    className="ps-3"
-    style={{ width: '110px', maxWidth: '100%',marginRight:'120px' }}
+    className="ps-3 sn-logo"
+style={{ width: '110px', maxWidth: '100%' }}
     alt="StarNext Logo"
   />
 </div>
 
         <div className="col-4">
-          <div className="text-center" style={{ color: 'white',marginRight:'120px' }}>
+          <div className="text-center sn-tagline" style={{ color: 'white' }}>
             STAY AUTHENTIC, STAY STYLISH
           </div>
         </div>

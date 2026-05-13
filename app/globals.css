@@ -4127,14 +4127,39 @@ right: 20px;
         .sn-bar-mobile a:hover {
           opacity: 0.7;
         }
-@media (min-width: 1600px) {
-  .sn-tagline {
-    margin-right: 190px;
-  }
+
+
+
+/* sn-logo */
+.sn-logo {
+  margin-right: 120px; /* default: 15" and standard */
 }
+
 @media (min-width: 1600px) {
   .sn-logo {
-    margin-right: 235px;
+    margin-right: 235px; /* 16"+ */
   }
 }
 
+@media (max-width: 1199px) {
+  .sn-logo {
+    margin-right: 0;
+  }
+}
+
+/* sn-tagline */
+.sn-tagline {
+  margin-right: 120px; /* default: 15" and standard */
+}
+
+@media (min-width: 1600px) {
+  .sn-tagline {
+    margin-right: 190px; /* 16"+ */
+  }
+}
+
+@media (max-width: 1199px) {
+  .sn-tagline {
+    margin-right: 0;
+  }
+}
