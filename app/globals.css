@@ -863,9 +863,20 @@ letter-spacing: -7px;
 }
 
 .footer-image {
-  width: auto;
+  width: min(100%, 1100px);
   height: auto;
   display: block;
+
+  /* responsive alignment */
+  margin-right: 220px;
+}
+
+
+@media (max-width: 1199px) {
+  .footer-image {
+    margin-right: 0;
+    width: 100%;
+  }
 }
 
 /* Bottom bar */
