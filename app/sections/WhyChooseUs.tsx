@@ -151,11 +151,7 @@ export default function WhyChooseUs() {
           border: 1.5px solid #e8eaf0;
         }
  
-        .wcu-card-light:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 8px 32px rgba(20,30,80,0.08);
-          border-color: #c8cde0;
-        }
+        
  
         .wcu-card-icon {
           width: 44px;
@@ -188,23 +184,9 @@ export default function WhyChooseUs() {
  
         .wcu-card-dark .wcu-card-body { color: #a8bbd8; }
  
-        .wcu-learn-more {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 13px;
-          font-weight: 600;
-          color: #1a3a8f;
-          margin-top: 20px;
-          opacity: 0;
-          transform: translateY(8px);
-          transition: opacity 0.25s ease, transform 0.25s ease;
-        }
+        
  
-        .wcu-card-light:hover .wcu-learn-more {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        
  
         /* On touch devices, always show learn more */
         @media (hover: none) {
@@ -404,12 +386,7 @@ export default function WhyChooseUs() {
               <p className="wcu-card-body">
                 We sit together with you, refine<br></br> your ideas, and deliver tailored <br></br>digital solutions that achieve results.
               </p>
-              <span className="wcu-learn-more">
-                Learn more
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
+              
             </div>
 
             {/* Card 2 — Results That Matter */}
@@ -419,12 +396,7 @@ export default function WhyChooseUs() {
               <p className="wcu-card-body">
                 Focused on outcomes that amplify<br></br> your business, not just activities.
               </p>
-              <span className="wcu-learn-more">
-                Learn more
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
+              
             </div>
 
             {/* Card 3 — Dedicated Teamwork */}
@@ -441,12 +413,7 @@ export default function WhyChooseUs() {
               <p className="wcu-card-body">
                 We work as one team, ensuring<br></br> results that stand out and speak<br></br> for themselves.
               </p>
-              <span className="wcu-learn-more">
-                Learn more
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
+              
             </div>
 
             {/* Card 4 — Always Connected (dark) */}
