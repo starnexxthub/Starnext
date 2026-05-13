@@ -9,16 +9,31 @@ export default function ContactInfo() {
         }
 
         .contact-box {
-          background-color: rgba(10, 30, 60, 0.85);
-          border-radius: 12px;
-          padding: 24px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 100%;
-          min-height: 200px;
-          box-sizing: border-box;
-        }
+  background-color: rgba(10, 30, 60, 0.85);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 200px;
+  box-sizing: border-box;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+
+  transform-origin: center;
+}
+  .contact-box:hover {
+  transform: scale(1.04);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.28);
+
+  background-color: rgba(14, 36, 72, 0.95);
+}
 
         .contact-icon {
           width: 42px;
