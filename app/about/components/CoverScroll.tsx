@@ -133,7 +133,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               <div className="row">
                 <div className="col-lg-7 col-md-8 col-12 pt-4 pt-md-0">
                   <p className={styles.sectionLabel}>We always aim for the best</p>
-                  <h2 className={styles.sectionTitle}>Our Vision.</h2>
+                  <h2 className={styles.sectionTitle}>Our Vision</h2>
                 </div>
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
               <div className="row">
                 <div className="col-lg-7 col-md-8 col-12 pt-4 pt-md-0">
                   <p className={styles.sectionLabel}>Mission statement on top.</p>
-                  <h2 className={styles.sectionTitle}>Our Mission.</h2>
+                  <h2 className={styles.sectionTitle}>Our Mission</h2>
                 </div>
               </div>
             </div>
