@@ -18,7 +18,7 @@ export default function ServicesMobile() {
             <div className="glow"></div>
 
             <div className="card-image-wrapper">
-              <img src="/img/dm.webp" alt="Digital Marketing" className="card-image" />
+              <img src="/img/dup.webp" alt="Digital Marketing" className="card-image" />
               <div className="card-image-overlay"></div>
             </div>
 

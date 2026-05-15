@@ -1082,6 +1082,7 @@ letter-spacing: -7px;
 
 .starnext-faq{
     background:#ffffff;
+    z-index: 10;
   }
 
   .faq-title{
@@ -1218,11 +1219,13 @@ letter-spacing: -7px;
 
   .starnext-contact .container {
   max-width: 1180px;
+  
 }
 
   .starnext-contact {
     background: #ffffff;
     overflow-x: hidden;
+    
   }
 
   /* LEFT TITLE */
@@ -1803,6 +1806,7 @@ letter-spacing: -7px;
         position: relative;
         overflow: hidden;
         background: #fff;
+        z-index: 10;
       }
 
       .t-bg-blob {
@@ -2567,6 +2571,7 @@ letter-spacing: -7px;
         overflow: hidden;
         background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
         padding: 90px 0;
+        z-index: 10;
       }
 
       .brand-showcase .stars-bg {
@@ -3384,6 +3389,7 @@ letter-spacing: -7px;
         padding: 10px 20px;
         position: relative;
         background: linear-gradient(180deg, var(--bg-light, #FBFCFC) 0%, #F4F7FF 50%, var(--bg-light, #FBFCFC) 100%);
+        z-index: 10;
       }
 
       /* Particles background */

@@ -8,7 +8,7 @@ const servicesData = [
     title: 'DIGITAL MARKETING',
     sub: 'Best Digital Marketing Company',
     body: 'StarNext Softech delivers performance-focused digital marketing solutions for businesses and individuals aiming to grow online. Our strategies are built to create measurable impact and long-term brand value.',
-    img: '/img/DigitalM-2.webp',
+    img: '/img/dup.webp',
     label: 'Digital Marketing',
     href: '/service/Digital',   // ← added
   },
@@ -81,6 +81,7 @@ export default function ServicesDesktop() {
         /* ── section wrapper ── */
         #brandSection {
           display: none;
+          z-index: 10;
         }
 
         @media (min-width: 768px) {

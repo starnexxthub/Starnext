@@ -166,7 +166,7 @@ export default function AboutSection() {
   id="about-section"
   className="min-vh-100 section-pad position-relative overflow-hidden"
   style={{
-    zIndex: 1,
+    zIndex: 10,
     background: '#fff',
     isolation: 'isolate'
   }}

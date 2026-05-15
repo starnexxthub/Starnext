@@ -38,11 +38,11 @@ export default function WhyChooseUs() {
 }, [])
 
   return (
-    <section style={{ position: 'relative', padding: '80px 24px', background: '#fff', overflow: 'hidden', fontFamily: "'DM Sans', sans-serif" }}>
+    <section style={{ position: 'relative', padding: '80px 24px', background: '#fff', overflow: 'hidden', fontFamily: "'DM Sans', sans-serif", zIndex: 10 }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
  
-        .wcu-section * { box-sizing: border-box; }
+        .wcu-section * { box-sizing: border-box;  }
  
         /* ─── DESKTOP GRID (≥1024px) — unchanged from original ─── */
         .wcu-grid {
