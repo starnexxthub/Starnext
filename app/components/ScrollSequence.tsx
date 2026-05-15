@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 export default function ScrollSequence() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isMobile, setIsMobile] = useState<boolean | null>(null)
+  const [showScrollHint, setShowScrollHint] = useState(true)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -15,7 +16,6 @@ export default function ScrollSequence() {
   }, [])
 
   useEffect(() => {
-    // Wait until isMobile is determined
     if (isMobile === null) return
     if (typeof window === 'undefined') return
 
@@ -24,15 +24,14 @@ export default function ScrollSequence() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // ✅ Different config for mobile vs desktop
     const config = isMobile
       ? {
-          frameCount: 218, // your mobile frame count
+          frameCount: 218,
           framePath: (i: number) =>
             `/frames/mobile/ezgif-frame-${String(i).padStart(3, '0')}.jpg`,
         }
       : {
-          frameCount: 218, // your desktop frame count
+          frameCount: 218,
           framePath: (i: number) =>
             `/frames/frames/ezgif-frame-${String(i).padStart(3, '0')}.jpg`,
         }
@@ -44,7 +43,6 @@ export default function ScrollSequence() {
     const imageSeq = { frame: 0 }
     let rafId: number | null = null
 
-    // Preload all images for current device
     for (let i = 1; i <= config.frameCount; i++) {
       const img = new Image()
       img.src = config.framePath(i)
@@ -75,6 +73,10 @@ export default function ScrollSequence() {
         if (maxScroll <= 0) return
 
         const scrollFraction = Math.min(1, scrollInside / maxScroll)
+
+        // Hide hint after scrolling 8% into the section
+        setShowScrollHint(scrollFraction < 0.08)
+
         const frameIndex = Math.min(
           config.frameCount - 1,
           Math.floor(scrollFraction * config.frameCount)
@@ -85,6 +87,9 @@ export default function ScrollSequence() {
           if (rafId) cancelAnimationFrame(rafId)
           rafId = requestAnimationFrame(render)
         }
+      } else if (rect.top > 0) {
+        // Section hasn't started yet — show hint
+        setShowScrollHint(true)
       }
     }
 
@@ -102,15 +107,14 @@ export default function ScrollSequence() {
       window.removeEventListener('resize', handleResize)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [isMobile]) // ✅ Re-runs when device type changes, loads correct frames
+  }, [isMobile])
 
-  // Don't render until we know device type (avoids flash)
   if (isMobile === null) return null
 
   return (
     <section
       className="scroll-sequence-section"
-      style={{ height: '500vh', position: 'relative' ,zIndex:10}}
+      style={{ height: '500vh', position: 'relative', zIndex: 10 }}
     >
       <canvas
         ref={canvasRef}
@@ -123,6 +127,78 @@ export default function ScrollSequence() {
           display: 'block',
         }}
       />
+
+      {/* Floating scroll hint — mobile only */}
+      {isMobile && (
+        <div
+          style={{
+            position: 'sticky',
+            bottom: 28,
+            left: 0,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            pointerEvents: 'none',
+            zIndex: 20,
+            marginTop: '-60px', // pull up over the canvas
+            opacity: showScrollHint ? 1 : 0,
+            transition: 'opacity 0.4s ease',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              borderRadius: 999,
+              padding: '8px 16px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+            }}
+          >
+            <span
+              style={{
+                fontSize: 12,
+                fontWeight: 500,
+                color: 'rgba(255,255,255,0.9)',
+                letterSpacing: '0.03em',
+                fontFamily: 'system-ui, sans-serif',
+              }}
+            >
+              Scroll down
+            </span>
+            {/* Animated arrow */}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                animation: 'scrollBounce 1.4s ease-in-out infinite',
+              }}
+            >
+              <path
+                d="M7 2v10M3.5 8.5L7 12l3.5-3.5"
+                stroke="rgba(255,255,255,0.9)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(-2px); }
+          50%       { transform: translateY(2px); }
+        }
+      `}</style>
     </section>
   )
 }

@@ -20,7 +20,6 @@ export default function Testimonials() {
 
     if (!gsap || !ScrollTrigger) return
 
-    // ── Main entrance timeline ─────────────────────────────────
     gsap.timeline({
       scrollTrigger: {
         trigger: '#testimonials',
@@ -34,7 +33,6 @@ export default function Testimonials() {
       .to('.progress-container',    { opacity: 1, duration: 0.6 },                           '-=0.4')
       .to(['.mask-left', '.mask-right'], { opacity: 1, duration: 0.8 },                      '-=0.4')
 
-    // ── Cards entrance ─────────────────────────────────────────
     gsap.to('.card-item', {
       scrollTrigger: { trigger: '#scrollContainer', start: 'top 85%' },
       x: 0,
@@ -44,14 +42,12 @@ export default function Testimonials() {
       ease: 'power3.out'
     })
 
-    // ── Parallax blobs ─────────────────────────────────────────
     gsap.to('.parallax-bg', {
       y: -100,
       ease: 'none',
       scrollTrigger: { trigger: '#testimonials', start: 'top bottom', end: 'bottom top', scrub: 1 }
     })
 
-    // ── Magnetic buttons ───────────────────────────────────────
     document.querySelectorAll('.magnetic-btn').forEach((btn) => {
       const el = btn as HTMLElement
 
@@ -71,7 +67,6 @@ export default function Testimonials() {
       el.addEventListener('mouseleave', onLeave)
     })
 
-    // ── Card hover ─────────────────────────────────────────────
     document.querySelectorAll('.testimonial-card').forEach((card) => {
       const content = card.querySelector('.card-content')
       if (!content) return
@@ -79,10 +74,9 @@ export default function Testimonials() {
       card.addEventListener('mouseleave', () => gsap.to(content, { y:  0, duration: 0.4, ease: 'power2.out' }))
     })
 
-    // ── Scroll controls ────────────────────────────────────────
     const scrollContainer = scrollContainerRef.current
-    const prevBtn         = document.getElementById('prevBtn')
-    const nextBtn         = document.getElementById('nextBtn')
+    const prevBtns        = document.querySelectorAll('[data-nav="prev"]')
+    const nextBtns        = document.querySelectorAll('[data-nav="next"]')
     const scrollProgress  = document.getElementById('scrollProgress')
 
     const getCardWidth = () => {
@@ -96,10 +90,9 @@ export default function Testimonials() {
       gsap.to(scrollContainer, { scrollLeft: scrollContainer.scrollLeft + dir * getCardWidth(), duration: 0.8, ease: 'power3.inOut' })
     }
 
-    nextBtn?.addEventListener('click', () => scrollBy( 1, nextBtn as HTMLElement))
-    prevBtn?.addEventListener('click', () => scrollBy(-1, prevBtn as HTMLElement))
+    prevBtns.forEach(btn => btn.addEventListener('click', () => scrollBy(-1, btn as HTMLElement)))
+    nextBtns.forEach(btn => btn.addEventListener('click', () => scrollBy( 1, btn as HTMLElement)))
 
-    // ── Progress bar ───────────────────────────────────────────
     const onScroll = () => {
       if (!scrollContainer || !scrollProgress) return
       const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth
@@ -109,7 +102,6 @@ export default function Testimonials() {
     }
     scrollContainer?.addEventListener('scroll', onScroll, { passive: true })
 
-    // ── Drag to scroll ─────────────────────────────────────────
     let isDown = false
     let startX = 0
     let startScrollLeft = 0
@@ -140,7 +132,6 @@ export default function Testimonials() {
       scrollContainer.addEventListener('mousemove',  onMouseMove)
     }
 
-    // ── Video autoplay on scroll visibility ────────────────────
     const videoObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ target, isIntersecting }) => {
@@ -174,13 +165,14 @@ export default function Testimonials() {
                 We&apos;ve helped teams rethink their offers, their structure, and their story.
               </p>
 
-              <div className="d-flex gap-3 nav-controls mb-4">
-                <button id="prevBtn" className="magnetic-btn" type="button" aria-label="Previous">
+              {/* Desktop-only nav arrows */}
+              <div className="d-none d-lg-flex gap-3 nav-controls mb-4">
+                <button data-nav="prev" id="prevBtn" className="magnetic-btn" type="button" aria-label="Previous">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="18" height="18">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                   </svg>
                 </button>
-                <button id="nextBtn" className="magnetic-btn" type="button" aria-label="Next">
+                <button data-nav="next" id="nextBtn" className="magnetic-btn" type="button" aria-label="Next">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="18" height="18">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
@@ -195,8 +187,75 @@ export default function Testimonials() {
 
           {/* RIGHT */}
           <div className="col-lg-8 position-relative">
-            {/*<div className="t-mask-left mask-left d-none d-lg-block"></div>
-            <div className="t-mask-right mask-right d-none d-lg-block"></div>*/}
+
+            {/* Mobile side arrows — overlaid on the scroll container */}
+            <div
+              className="d-flex d-lg-none align-items-center justify-content-between"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: 0,
+                right: 0,
+                transform: 'translateY(-50%)',
+                zIndex: 10,
+                pointerEvents: 'none',
+                padding: '0 6px',
+              }}
+            >
+              <button
+                data-nav="prev"
+                type="button"
+                aria-label="Previous"
+                style={{
+                  pointerEvents: 'all',
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  border: '1px solid rgba(255,255,255,0.25)',
+                  background: 'rgba(255,255,255,0.12)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                  flexShrink: 0,
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="16" height="16">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+              </button>
+
+              <button
+                data-nav="next"
+                type="button"
+                aria-label="Next"
+                style={{
+                  pointerEvents: 'all',
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  border: '1px solid rgba(255,255,255,0.25)',
+                  background: 'rgba(255,255,255,0.12)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+                  flexShrink: 0,
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="16" height="16">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </button>
+            </div>
 
             <div ref={scrollContainerRef} id="scrollContainer" className="t-scroll ps-2 ms-n2">
               {videoSources.map((src, index) => (
@@ -206,7 +265,7 @@ export default function Testimonials() {
                     muted
                     loop
                     playsInline
-                    preload="none"          // ← was "metadata"; defer all loading until visible
+                    preload="none"
                     className="w-100 h-100 object-cover"
                   />
                 </div>
