@@ -88,9 +88,9 @@ const slides: Slide[] = [
     accentColor: "#ff8c00",
     floatingCards: [
       // Mobile: main card slightly above center
-      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 170, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 150, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left
-      { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -90 },
+      { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -60 },
       // Mobile: small card bottom-right
       { id: 3, image: "/assets/g3.png", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
     ],
@@ -110,7 +110,7 @@ const slides: Slide[] = [
       // Mobile: main (wide) card — scale down heavily and center it
       { id: 1, image: "/hero/s1.png",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,    mobileOffsetY: 20  },
       // Mobile: small card top-left
-      { id: 2, image: "/assets/s2.png", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -95 },
+      { id: 2, image: "/assets/s2.png", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -45 },
       // Mobile: small card bottom-right
       { id: 3, image: "/hero/s3.png",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -3, zIndex: 3, mobileOffsetX: 90,   mobileOffsetY: 135 },
     ],
@@ -278,7 +278,7 @@ function SlideContent({
       {/* ══ MOBILE: CTA bottom ══ */}
       {isMobile && (
         <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
-          style={{ position: "absolute", bottom: 140, left: 140, zIndex: 20 }}>
+          style={{ position: "absolute", bottom: 100, left: 140, zIndex: 20 }}>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
             style={{
               padding: "10px 20px", borderRadius: 8, color: "#fff", border: "none", cursor: "pointer",
@@ -386,7 +386,7 @@ function SlideContent({
       )}
 
       {/* ══ Bottom service nav — mobile ══ */}
-      {isMobile && (
+      {/*{isMobile && (
         <div style={{
           position: "absolute", bottom: 68, left: 0, right: 0, zIndex: 30,
           display: "flex", justifyContent: "center", gap: 8, padding: "0 16px", flexWrap: "wrap",
@@ -402,7 +402,7 @@ function SlideContent({
             }}>{svc}</button>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
