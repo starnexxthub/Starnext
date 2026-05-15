@@ -14,6 +14,10 @@ interface FloatingCard {
   image: string;
   offsetX: number;
   offsetY: number;
+  /** mobile-specific X offset from center (overrides offsetX on mobile) */
+  mobileOffsetX?: number;
+  /** mobile-specific Y offset from center (overrides offsetY on mobile) */
+  mobileOffsetY?: number;
   width: number;
   /** width at ~1024–1279px (small laptop) */
   laptopWidth: number;
@@ -63,9 +67,12 @@ const slides: Slide[] = [
     bgWordColor: "rgba(160,80,255,0.07)",
     accentColor: "#b060ff",
     floatingCards: [
-      { id: 1, image: "/assets/w2.png",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: -2, zIndex: 2 },
-      { id: 2, image: "/assets/w1.png",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 100, delay: 0.15, rotate: -8, zIndex: 3 },
-      { id: 3, image: "/assets/w3.png",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 100, delay: 0.3,  rotate: 5,  zIndex: 3 },
+      // Mobile: main card centered in the middle zone of screen
+      { id: 1, image: "/assets/w2.png",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      // Mobile: small card top-left of center
+      { id: 2, image: "/assets/w1.png",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -75 },
+      // Mobile: small card bottom-right of center
+      { id: 3, image: "/assets/w3.png",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.3,  rotate: 5,  zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 185 },
     ],
   },
   {
@@ -80,9 +87,12 @@ const slides: Slide[] = [
     bgWordColor: "rgba(255,140,0,0.07)",
     accentColor: "#ff8c00",
     floatingCards: [
-      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: 2,  zIndex: 2 },
-      { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 95,  delay: 0.15, rotate: -7, zIndex: 3 },
-      { id: 3, image: "/assets/g3.png", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 95,  delay: 0.3,  rotate: -2, zIndex: 3 },
+      // Mobile: main card slightly above center
+      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      // Mobile: small card top-left
+      { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -90 },
+      // Mobile: small card bottom-right
+      { id: 3, image: "/assets/g3.png", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
     ],
   },
   {
@@ -97,9 +107,12 @@ const slides: Slide[] = [
     bgWordColor: "rgba(0,200,80,0.07)",
     accentColor: "#00d46a",
     floatingCards: [
-      { id: 1, image: "/hero/s1.png",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2 },
-      { id: 2, image: "/assets/s2.png", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3 },
-      { id: 3, image: "/hero/s3.png",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 95,  delay: 0.3,  rotate: -3, zIndex: 3 },
+      // Mobile: main (wide) card — scale down heavily and center it
+      { id: 1, image: "/hero/s1.png",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,    mobileOffsetY: 20  },
+      // Mobile: small card top-left
+      { id: 2, image: "/assets/s2.png", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -95 },
+      // Mobile: small card bottom-right
+      { id: 3, image: "/hero/s3.png",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -3, zIndex: 3, mobileOffsetX: 90,   mobileOffsetY: 135 },
     ],
   },
 ];
@@ -143,6 +156,11 @@ function FloatingCardItem({
   const w     = bp === "mobile" ? card.mobileWidth
               : bp === "laptop" ? card.laptopWidth
               : card.width;
+
+  // On mobile, use dedicated mobile offsets if provided; otherwise fall back to desktop offsets
+  const ox = bp === "mobile" && card.mobileOffsetX !== undefined ? card.mobileOffsetX : card.offsetX;
+  const oy = bp === "mobile" && card.mobileOffsetY !== undefined ? card.mobileOffsetY : card.offsetY;
+
   // Laptop: scale offsets down proportionally so cards stay inside the column
   const scale = bp === "laptop" ? 0.70 : 1;
 
@@ -153,8 +171,8 @@ function FloatingCardItem({
         left: "50%",
         top: "50%",
         width: w,
-        marginLeft: -w / 2 + card.offsetX * scale,
-        marginTop:  -80    + card.offsetY * scale,
+        marginLeft: -w / 2 + (bp === "mobile" ? ox : ox * scale),
+        marginTop:  -80    + (bp === "mobile" ? oy : oy * scale),
         zIndex: card.zIndex,
         borderRadius: 18,
         overflow: "hidden",
@@ -260,7 +278,7 @@ function SlideContent({
       {/* ══ MOBILE: CTA bottom ══ */}
       {isMobile && (
         <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
-          style={{ position: "absolute", bottom: 150, left: 160, zIndex: 20 }}>
+          style={{ position: "absolute", bottom: 150, left: 140, zIndex: 20 }}>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
             style={{
               padding: "10px 20px", borderRadius: 8, color: "#fff", border: "none", cursor: "pointer",
