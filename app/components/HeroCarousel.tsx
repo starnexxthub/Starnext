@@ -44,7 +44,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 0,
-    bgImage: "/assets/s-bg1.jpg",
+    bgImage: "/assets/s-bg1.webp",
     badge: "Best in Uttarakhand",
     title: "Best Digital Marketing",
     titleHighlight: "Company in Uttarakhand",
@@ -57,7 +57,7 @@ const slides: Slide[] = [
   },
   {
     id: 1,
-    bgImage: "/assets/s-bg3.jpg",
+    bgImage: "/assets/s-bg3.webp",
     badge: "Dehradun's #1",
     title: "Best Web Designing",
     titleHighlight: "Company in Dehradun",
@@ -68,16 +68,16 @@ const slides: Slide[] = [
     accentColor: "#b060ff",
     floatingCards: [
       // Mobile: main card centered in the middle zone of screen
-      { id: 1, image: "/assets/w2.png",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 180, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      { id: 1, image: "/assets/w2.webp",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 180, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left of center
-      { id: 2, image: "/assets/w1.png",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -75 },
+      { id: 2, image: "/assets/w1.webp",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -75 },
       // Mobile: small card bottom-right of center
-      { id: 3, image: "/assets/w3.png",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.3,  rotate: 5,  zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 185 },
+      { id: 3, image: "/assets/w3.webp",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.3,  rotate: 5,  zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 185 },
     ],
   },
   {
     id: 2,
-    bgImage: "/assets/s-bg2.jpg",
+    bgImage: "/assets/s-bg2.webp",
     badge: "Creative Experts",
     title: "Best Graphics Video &",
     titleHighlight: "Photography in Dehradun",
@@ -88,16 +88,16 @@ const slides: Slide[] = [
     accentColor: "#ff8c00",
     floatingCards: [
       // Mobile: main card slightly above center
-      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 150, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      { id: 1, image: "/assets/g2.webp", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 150, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left
-      { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -60 },
+      { id: 2, image: "/assets/g1.webp", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -60 },
       // Mobile: small card bottom-right
-      { id: 3, image: "/assets/g3.png", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
+      { id: 3, image: "/assets/g3.webp", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
     ],
   },
   {
     id: 3,
-    bgImage: "/assets/s-bg4-1.jpg",
+    bgImage: "/assets/s-bg4-1.webp",
     badge: "Growth Focused",
     title: "Best Social Media",
     titleHighlight: "Marketing in Dehradun",
@@ -108,11 +108,11 @@ const slides: Slide[] = [
     accentColor: "#00d46a",
     floatingCards: [
       // Mobile: main (wide) card — scale down heavily and center it
-      { id: 1, image: "/hero/s1.png",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,    mobileOffsetY: 20  },
+      { id: 1, image: "/assets/s1.webp",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,    mobileOffsetY: 20  },
       // Mobile: small card top-left
-      { id: 2, image: "/assets/s2.png", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -45 },
+      { id: 2, image: "/assets/s2.webp", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -45 },
       // Mobile: small card bottom-right
-      { id: 3, image: "/hero/s3.png",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -3, zIndex: 3, mobileOffsetX: 90,   mobileOffsetY: 135 },
+      { id: 3, image: "/assets/s3.webp",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -3, zIndex: 3, mobileOffsetX: 90,   mobileOffsetY: 135 },
     ],
   },
 ];
