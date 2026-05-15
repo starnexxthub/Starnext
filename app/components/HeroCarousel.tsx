@@ -68,7 +68,7 @@ const slides: Slide[] = [
     accentColor: "#b060ff",
     floatingCards: [
       // Mobile: main card centered in the middle zone of screen
-      { id: 1, image: "/assets/w2.png",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      { id: 1, image: "/assets/w2.png",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 180, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left of center
       { id: 2, image: "/assets/w1.png",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -75 },
       // Mobile: small card bottom-right of center
@@ -88,7 +88,7 @@ const slides: Slide[] = [
     accentColor: "#ff8c00",
     floatingCards: [
       // Mobile: main card slightly above center
-      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 200, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
+      { id: 1, image: "/assets/g2.png", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 170, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left
       { id: 2, image: "/assets/g1.png", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -90 },
       // Mobile: small card bottom-right
@@ -278,7 +278,7 @@ function SlideContent({
       {/* ══ MOBILE: CTA bottom ══ */}
       {isMobile && (
         <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
-          style={{ position: "absolute", bottom: 150, left: 140, zIndex: 20 }}>
+          style={{ position: "absolute", bottom: 140, left: 140, zIndex: 20 }}>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
             style={{
               padding: "10px 20px", borderRadius: 8, color: "#fff", border: "none", cursor: "pointer",
