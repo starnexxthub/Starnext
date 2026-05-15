@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
@@ -201,6 +202,7 @@ function FloatingCardItem({
 
 // ─── SlideContent ─────────────────────────────────────────────────────────────
 function SlideContent({
+  
   slide, isActive, navigate, current, bp,
 }: {
   slide: Slide; isActive: boolean; navigate: (i: number) => void; current: number; bp: BP;
@@ -209,6 +211,7 @@ function SlideContent({
   const shouldAnimate  = isActive && !prefersReduced;
   const isMobile       = bp === "mobile";
   const isLaptop       = bp === "laptop";
+  const router = useRouter();
 
   const textVars: Variants = {
     hidden:  { opacity: 0, x: -20 },
@@ -279,15 +282,25 @@ function SlideContent({
       {isMobile && (
         <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
           style={{ position: "absolute", bottom: 100, left: 140, zIndex: 20 }}>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-            style={{
-              padding: "10px 20px", borderRadius: 8, color: "#fff", border: "none", cursor: "pointer",
-              fontSize: 12, fontWeight: 700, letterSpacing: "0.08em",
-              background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
-              boxShadow: `0 4px 20px ${slide.accentColor}55`,
-            }}>
-            CALL NOW
-          </motion.button>
+          <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.96 }}
+  onClick={() => router.push("/contact")}
+  style={{
+    padding: "10px 20px",
+    borderRadius: 8,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    fontSize: 12,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
+    boxShadow: `0 4px 20px ${slide.accentColor}55`,
+  }}
+>
+  CALL NOW
+</motion.button>
         </motion.div>
       )}
 
@@ -337,16 +350,26 @@ function SlideContent({
             <p style={{ color: "rgba(255,255,255,0.78)", margin: 0, fontSize: descSize, lineHeight: 1.8, maxWidth: descMaxW }}>
               {slide.description}
             </p>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-              style={{
-                padding: btnPad, borderRadius: 8, color: "#fff", border: "none", cursor: "pointer",
-                fontSize: btnFontSz, fontWeight: 700, letterSpacing: "0.08em",
-                background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
-                boxShadow: `0 4px 20px ${slide.accentColor}55`,
-                alignSelf: "flex-end",
-              }}>
-              CALL NOW
-            </motion.button>
+            <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.96 }}
+  onClick={() => router.push("/contact")}
+  style={{
+    padding: btnPad,
+    borderRadius: 8,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    fontSize: btnFontSz,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
+    boxShadow: `0 4px 20px ${slide.accentColor}55`,
+    alignSelf: "flex-end",
+  }}
+>
+  CALL NOW
+</motion.button>
           </motion.div>
         </div>
       )}
@@ -452,6 +475,7 @@ export default function HeroCarousel() {
   const [paused, setPaused]       = useState(false);
   const timerRef                  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const bp                        = useBreakpoint();
+  
 
   const navigate = useCallback((next: number) => {
     setDirection(next > current ? 1 : -1);
