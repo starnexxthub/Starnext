@@ -401,14 +401,7 @@ export default function WhyChooseUs() {
 
             {/* Card 3 — Dedicated Teamwork */}
             <div className="wcu-card wcu-card-light wcu-card-3" data-wcu-card="3">
-              <div className="wcu-card-icon">
-                <img
-  src="/assets/coll.svg"
-  alt="Team Icon"
-  width={32}
-  height={32}
-/>
-              </div>
+              
               <h3 className="wcu-card-title">Dedicated Teamwork</h3>
               <p className="wcu-card-body">
                 We work as one team, ensuring<br></br> results that stand out and speak<br></br> for themselves.
@@ -450,7 +443,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bottom bar */}
-        <div className="wcu-bottom-bar">
+        {/*<div className="wcu-bottom-bar">
           <p className="wcu-bottom-text">
             Designing seamless user interfaces that <br></br>transform ideas into exceptional digital<br></br> experiences.
           </p>
@@ -460,7 +453,7 @@ export default function WhyChooseUs() {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-        </div>
+        </div> */}
 
       </div>
     </section>

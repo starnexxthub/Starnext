@@ -9,8 +9,8 @@ import Image from "next/image";
  * Scroll phases (each ~1 viewport height of scroll travel):
  *  0 → 1  : Three images appear; middle rises to front
  *  1 → 2  : Middle image expands fullscreen; side images hide
- *  2 → 3  : Replacement image cross-fades in at fullscreen
- *  3 → 4  : Stats slide in from left & right over the image
+ *  2 → 3  : Video fades in and scrubs with scroll
+ *  3 → 4  : Stats slide in from left & right over the video
  *  4 → 5  : Curtain panels close, concealing everything
  *
  * Everything reverses on scroll up.
@@ -25,25 +25,17 @@ import Image from "next/image";
  *     ],
  *   }
  *
+ * Place your video at: /public/video/journey.mp4  (or update VIDEO_SRC below)
  * Then simply render <JourneySection /> in any page.
  */
 
-// ─── Unsplash image URLs ─────────────────────────────────────────────────────
-// Left panel  — architecture / urban texture
-const IMAGE_LEFT =
-  "img/j1.webp";
+// ─── Asset paths ──────────────────────────────────────────────────────────────
+const IMAGE_LEFT   = "img/j1.webp";
+const IMAGE_CENTER = "img/Founders.webp";
+const IMAGE_RIGHT  = "img/Image_.webp";
 
-// Center hero — cinematic mountain landscape
-const IMAGE_CENTER =
-  "img/Founders.webp";
-
-// Right panel — people / creative collaboration
-const IMAGE_RIGHT =
-  "img/Image_.webp";
-
-
-const IMAGE_FULL =
-  "img/black.webp";
+// ↓ Replace with your actual video file path
+const VIDEO_SRC    = "img/web.mp4";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOTAL_PHASES = 5;
@@ -60,7 +52,7 @@ const STATS_LEFT: Stat[] = [
 ];
 
 const STATS_RIGHT: Stat[] = [
-  { value: "100%",  label: "Sucess rate" },
+  { value: "100%", label: "Success rate" },
   { value: "400+", label: "Clients covered" },
   { value: "50+",  label: "Brands launched" },
 ];
@@ -85,6 +77,7 @@ function ease(t: number): number {
 
 export default function JourneySection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef     = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -101,32 +94,46 @@ export default function JourneySection() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ── Scrub video to match scroll position within phase 2-3 ──────────────────
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+
+    // p2 raw (0→1) maps to phase 2 progress; video plays during phases 2 & 3
+    const rawP2 = phaseProgress(2, TOTAL_PHASES, progress);
+    const rawP3 = phaseProgress(3, TOTAL_PHASES, progress);
+
+    // Combine: phase2 handles first half of video, phase3 the rest
+    const videoProgress = Math.min(1, rawP2 * 0.5 + rawP3 * 0.5);
+    video.currentTime = videoProgress * video.duration;
+  }, [progress]);
+
   const N  = TOTAL_PHASES;
   const p0 = ease(phaseProgress(0, N, progress)); // images arrive, center rises
   const p1 = ease(phaseProgress(1, N, progress)); // center expands fullscreen
-  const p2 = ease(phaseProgress(2, N, progress)); // replacement fades in
+  const p2 = ease(phaseProgress(2, N, progress)); // video fades in
   const p3 = ease(phaseProgress(3, N, progress)); // stats slide in
   const p4 = ease(phaseProgress(4, N, progress)); // curtain closes
 
-  const sidesOpacity   = p0 * (1 - p1);
-  const leftX          = lerp(80, 0, p0);
-  const rightX         = lerp(-80, 0, p0);
-  const centerZ        = p0 > 0.01 ? 10 : 5;
-  const centerScale    = lerp(0.32, 1, p1);
-  const centerOpacity  = 1 - p2 * 0.8;
-  const replaceOpacity = p2;
-  const statsLeftX     = lerp(-60, 0, p3);
-  const statsRightX    = lerp(60, 0, p3);
-  const statsOpacity   = p3 * (1 - p4);
-  const curtainTop     = lerp(-100, 0, p4);
-  const curtainBottom  = lerp(100, 0, p4);
+  const sidesOpacity  = p0 * (1 - p1);
+  const leftX         = lerp(80, 0, p0);
+  const rightX        = lerp(-80, 0, p0);
+  const centerZ       = p0 > 0.01 ? 10 : 5;
+  const centerScale   = lerp(0.32, 1, p1);
+  const centerOpacity = 1 - p2 * 0.9;     // center image fades as video fades in
+  const videoOpacity  = p2;               // video fades in during phase 2
+  const statsLeftX    = lerp(-60, 0, p3);
+  const statsRightX   = lerp(60, 0, p3);
+  const statsOpacity  = p3 * (1 - p4);
+  const curtainTop    = lerp(-100, 0, p4);
+  const curtainBottom = lerp(100, 0, p4);
 
   return (
     <>
       {/* Scroll travel container */}
       <div
         ref={containerRef}
-        style={{ height: `${(TOTAL_PHASES + 1) * 100}vh`, position: "relative" }}
+        style={{ height: `${(TOTAL_PHASES + 1) * 100}vh`, position: "relative",zIndex: 99999 }}
       >
         {/* Sticky viewport */}
         <div style={{
@@ -183,13 +190,13 @@ export default function JourneySection() {
             />
           </div>
 
-          {/* CENTER IMAGE — hero that expands fullscreen */}
+          {/* CENTER IMAGE — hero that expands fullscreen then fades out as video appears */}
           <div style={{
             position: "absolute",
             left: "50%",
             top: "50%",
             width: "100vw",
-            height: "120vh",
+            height: "100vh",
             transform: `translate(-50%, -50%) scale(${centerScale})`,
             opacity: centerOpacity * (p0 > 0 ? 1 : 0),
             zIndex: centerZ,
@@ -234,21 +241,28 @@ export default function JourneySection() {
             />
           </div>
 
-          {/* REPLACEMENT FULLSCREEN IMAGE */}
+          {/* ── FULLSCREEN VIDEO (replaces black-and-white image) ─────────────── */}
           <div style={{
             position: "absolute",
             inset: 0,
-            opacity: replaceOpacity,
+            opacity: videoOpacity,
             zIndex: 15,
             overflow: "hidden",
           }}>
-            <Image
-              src={IMAGE_FULL}
-              alt="Our journey — city skyline"
-              fill
-              sizes="100vw"
-              style={{ objectFit: "cover",objectPosition: "center top" }}
+            <video
+              ref={videoRef}
+              src={VIDEO_SRC}
+              muted
+              playsInline
+              preload="auto"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+              }}
             />
+            {/* Subtle vignette over video */}
             <div style={{
               position: "absolute",
               inset: 0,
@@ -256,6 +270,7 @@ export default function JourneySection() {
               pointerEvents: "none",
             }} />
           </div>
+          {/* ──────────────────────────────────────────────────────────────────── */}
 
           {/* STATS OVERLAY */}
           <div style={{
