@@ -3,10 +3,17 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 
 const videoSources = [
-  '/video/kj reel.mp4',
-  '/video/Thin thread reel.mp4',
-  '/video/optilux video.mp4',
-  '/video/oriana priyanka reel.mp4',
+  '/video/kj reel2.mp4',
+  '/video/tt.mp4',
+  '/video/as.mp4',
+  '/video/op.mp4',
+]
+
+const videoPoster = [
+  '/img/kjreel.jpg',
+  '/img/ttr.jpg',
+  '/img/asr.jpg',
+  '/img/opr.jpg',
 ]
 
 // Detect low-end / Android devices to apply aggressive optimisations
@@ -303,13 +310,15 @@ export default function Testimonials() {
 
                   <video
                     ref={el => { videoRefs.current[index] = el }}
-                    data-src={src}        // real src assigned lazily
+                    data-src={src}
                     data-index={index}
+                    poster={videoPoster[index]}
                     muted
                     loop
                     playsInline
-                    preload="none"        // never auto-download — we control this
-                    // poster="/video/poster.jpg"  // ← add a poster per video for instant preview
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    preload="none"
                     className="w-100 h-100 object-cover"
                     style={{
                       // GPU-composited layer for smooth decode on Android
