@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 const videoSources = [
   '/video/kj reel2.mp4',
   '/video/tt.mp4',
-  '/video/as.mp4',
+  '/video/optilux video.mp4',
   '/video/op.mp4',
 ]
 
@@ -285,28 +285,32 @@ export default function Testimonials() {
               {videoSources.map((src, index) => (
                 <div key={index} className="t-card testimonial-card card-item">
 
-                  {/* Loading skeleton shown until video is loaded */}
-                  {!loadedVideos.has(index) && (
-                    <div
-                      className="video-skeleton"
-                      style={{
-                        position: 'absolute', inset: 0,
-                        background: 'linear-gradient(110deg, #1a1a2e 30%, #2a2a4e 50%, #1a1a2e 70%)',
-                        backgroundSize: '200% 100%',
-                        animation: 'shimmer 1.5s infinite',
-                        borderRadius: 'inherit',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      }}
-                    >
-                      {/* Simple spinner */}
-                      <div style={{
-                        width: 36, height: 36, borderRadius: '50%',
-                        border: '3px solid rgba(255,255,255,0.15)',
-                        borderTopColor: 'rgba(255,255,255,0.7)',
-                        animation: 'spin 0.8s linear infinite',
-                      }} />
-                    </div>
-                  )}
+                  {/*
+                   * POSTER PLACEHOLDER
+                   * Shown until the video has loaded enough data to display.
+                   * Uses the same poster image the <video> would show, so there's
+                   * no layout shift and no spinner needed.
+                   * Fades out once the video is ready (loadedVideos contains index).
+                   */}
+                  <img
+                    src={videoPoster[index]}
+                    alt=""
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: 'inherit',
+                      // Stay on top until video is ready, then fade out
+                      opacity: loadedVideos.has(index) ? 0 : 1,
+                      transition: 'opacity 0.4s ease',
+                      // Sit above the video while loading, below once loaded
+                      zIndex: loadedVideos.has(index) ? 0 : 1,
+                      pointerEvents: 'none',
+                    }}
+                  />
 
                   <video
                     ref={el => { videoRefs.current[index] = el }}
@@ -316,22 +320,32 @@ export default function Testimonials() {
                     muted
                     loop
                     playsInline
+                    // iOS Safari requires webkit-playsinline for older versions
+                    {...{ 'webkit-playsinline': 'true' } as any}
                     disablePictureInPicture
                     disableRemotePlayback
+                    // "none" defers all network activity until IntersectionObserver fires
                     preload="none"
                     className="w-100 h-100 object-cover"
                     style={{
-                      // GPU-composited layer for smooth decode on Android
+                      // Promote to its own compositing layer — avoids jank on
+                      // Android Chrome and Safari during decode/first-frame paint
                       willChange: 'transform',
                       transform: 'translateZ(0)',
                       WebkitTransform: 'translateZ(0)',
-                      // Fade in once loaded
+                      // Fade in once the first frame is available
                       opacity: loadedVideos.has(index) ? 1 : 0,
                       transition: 'opacity 0.4s ease',
+                      // Keep video behind the poster img until ready
+                      position: 'relative',
+                      zIndex: 0,
                     }}
+                    // Both events fire at different readyStates across browsers:
+                    // - loadeddata  → Safari / desktop Chrome (readyState 2+)
+                    // - canplay     → Android Chrome / Firefox  (readyState 3+)
                     onLoadedData={() => handleVideoLoad(index)}
                     onCanPlay={()    => handleVideoLoad(index)}
-                    // On mobile browsers that need a tap to play, clicking the card plays
+                    // Tap-to-toggle for mobile browsers that block autoplay
                     onClick={() => {
                       const v = videoRefs.current[index]
                       if (!v) return
@@ -347,6 +361,7 @@ export default function Testimonials() {
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         background: 'rgba(0,0,0,0.25)',
                         borderRadius: 'inherit', cursor: 'pointer',
+                        zIndex: 2,
                       }}
                       onClick={() => videoRefs.current[index]?.play().catch(() => {})}
                     >
@@ -375,17 +390,6 @@ export default function Testimonials() {
 
         </div>
       </div>
-
-      {/* Inline keyframes for skeleton + spinner */}
-      <style>{`
-        @keyframes shimmer {
-          0%   { background-position: 200% 0 }
-          100% { background-position: -200% 0 }
-        }
-        @keyframes spin {
-          to { transform: rotate(360deg) }
-        }
-      `}</style>
     </section>
   )
 }
