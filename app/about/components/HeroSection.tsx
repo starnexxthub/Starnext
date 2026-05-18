@@ -156,7 +156,7 @@ export default function HeroSection() {
 
         <h1 id="mainTitle" className={styles.heroTitle}>
           StarNext Digital Growth <br />
-          and <span className={styles.textMuted}>digital experiences.</span>
+          and <span className={styles.textMuted}>digital experiences</span>
         </h1>
 
         <p id="subTitle" className={styles.heroSubtitle}>
