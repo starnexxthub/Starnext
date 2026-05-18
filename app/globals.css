@@ -905,7 +905,7 @@ letter-spacing: -7px;
 }
 
 .footer-my-list a:hover {
-  color: #DEFF58;
+  color:  #56b4f5 ;
 }
 
 /* ─── Image wrap ─────────────────────────────────────────────────────────── */
@@ -2466,7 +2466,7 @@ letter-spacing: -7px;
         transition:color .2s ease;
       }
       .footer-my-list a:hover{
-        color:#DEFF58;
+        color:#56b4f5;
       }
       .footer-image-wrap{
         margin-top:48px;
