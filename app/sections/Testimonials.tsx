@@ -33,7 +33,6 @@ export default function Testimonials() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const videoRefs          = useRef<(HTMLVideoElement | null)[]>([])
   const observerRef        = useRef<IntersectionObserver | null>(null)
-  const [loadedVideos, setLoadedVideos]   = useState<Set<number>>(new Set())
   const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set())
   const [activeIndex, setActiveIndex]     = useState(0)
   const deviceProfile = useRef(getDeviceProfile())
@@ -194,11 +193,6 @@ export default function Testimonials() {
     return () => { observerRef.current?.disconnect() }
   }, [setupVideoObserver])
 
-  /* ─── Handle video load events to update state ─────────────────────────── */
-  const handleVideoLoad = (idx: number) => {
-    setLoadedVideos(p => new Set(p).add(idx))
-  }
-
   /* ─── Preload adjacent video on scroll ────────────────────────────────── */
   useEffect(() => {
     const next = videoRefs.current[activeIndex + 1]
@@ -284,34 +278,6 @@ export default function Testimonials() {
             <div ref={scrollContainerRef} id="scrollContainer" className="t-scroll ps-2 ms-n2">
               {videoSources.map((src, index) => (
                 <div key={index} className="t-card testimonial-card card-item">
-
-                  {/*
-                   * POSTER PLACEHOLDER
-                   * Shown until the video has loaded enough data to display.
-                   * Uses the same poster image the <video> would show, so there's
-                   * no layout shift and no spinner needed.
-                   * Fades out once the video is ready (loadedVideos contains index).
-                   */}
-                  <img
-                    src={videoPoster[index]}
-                    alt=""
-                    aria-hidden="true"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: 'inherit',
-                      // Stay on top until video is ready, then fade out
-                      opacity: loadedVideos.has(index) ? 0 : 1,
-                      transition: 'opacity 0.4s ease',
-                      // Sit above the video while loading, below once loaded
-                      zIndex: loadedVideos.has(index) ? 0 : 1,
-                      pointerEvents: 'none',
-                    }}
-                  />
-
                   <video
                     ref={el => { videoRefs.current[index] = el }}
                     data-src={src}
@@ -320,32 +286,18 @@ export default function Testimonials() {
                     muted
                     loop
                     playsInline
-                    // iOS Safari requires webkit-playsinline for older versions
                     {...{ 'webkit-playsinline': 'true' } as any}
                     disablePictureInPicture
                     disableRemotePlayback
-                    // "none" defers all network activity until IntersectionObserver fires
                     preload="none"
                     className="w-100 h-100 object-cover"
                     style={{
-                      // Promote to its own compositing layer — avoids jank on
-                      // Android Chrome and Safari during decode/first-frame paint
                       willChange: 'transform',
                       transform: 'translateZ(0)',
                       WebkitTransform: 'translateZ(0)',
-                      // Fade in once the first frame is available
-                      opacity: loadedVideos.has(index) ? 1 : 0,
-                      transition: 'opacity 0.4s ease',
-                      // Keep video behind the poster img until ready
                       position: 'relative',
                       zIndex: 0,
                     }}
-                    // Both events fire at different readyStates across browsers:
-                    // - loadeddata  → Safari / desktop Chrome (readyState 2+)
-                    // - canplay     → Android Chrome / Firefox  (readyState 3+)
-                    onLoadedData={() => handleVideoLoad(index)}
-                    onCanPlay={()    => handleVideoLoad(index)}
-                    // Tap-to-toggle for mobile browsers that block autoplay
                     onClick={() => {
                       const v = videoRefs.current[index]
                       if (!v) return
@@ -354,7 +306,7 @@ export default function Testimonials() {
                   />
 
                   {/* Tap-to-play icon for when autoplay is blocked */}
-                  {loadedVideos.has(index) && !playingVideos.has(index) && (
+                  {!playingVideos.has(index) && (
                     <div
                       style={{
                         position: 'absolute', inset: 0,
