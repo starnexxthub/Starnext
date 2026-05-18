@@ -773,20 +773,11 @@ letter-spacing: -7px;
   overflow: hidden;
 }
 
-/* Container: 250px left margin on desktop, auto on smaller screens */
+/* ─── Container ─────────────────────────────────────────────────────────── */
 .container-footer {
-  
+  margin-left: auto;
   margin-right: auto;
   padding-right: 40px;
-}
-
-@media (max-width: 1199px) {
-  .container-footer {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
 }
 
 @media (max-width: 767px) {
@@ -796,27 +787,65 @@ letter-spacing: -7px;
   }
 }
 
+/* ─── Footer row: single source of truth for left indent ────────────────── */
+/*
+  The left indent is controlled ONLY here, via a CSS custom property.
+  Nothing else sets margin-left or padding-left on .footer-row.
+*/
 .footer-row {
+  --footer-indent: 250px;       /* default: ≥1200px desktop */
   padding-top: 64px;
   row-gap: 32px;
-  margin-left: 250px;
+  padding-left: var(--footer-indent);
+  margin-left: 0;               /* never use margin-left here */
 }
 
+/* Tablet / small laptop: shrink indent */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer-row {
+    --footer-indent: 120px;
+    padding-top: 52px;
+  }
+}
+
+/* 16"+ screens (1440px and up): lock indent to 250px — same as base desktop */
+@media (min-width: 1440px) {
+  .footer-row {
+    --footer-indent: 250px;
+  }
+}
+
+/* Wide monitors (1920px+): cap indent so content doesn't drift too far */
+@media (min-width: 1920px) {
+  .footer-row {
+    --footer-indent: 300px;
+  }
+}
+
+/* Mobile: minimal indent */
 @media (max-width: 767px) {
   .footer-row {
+    --footer-indent: 20px;
     padding-top: 40px;
     row-gap: 28px;
   }
 }
 
-/* Evenly space the 3 columns */
+/* ─── Columns ────────────────────────────────────────────────────────────── */
 .footer-row > [class*="col-"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* On mobile, make all 3 cols full width stacked */
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer-row > [class*="col-"] {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding-right: 16px;
+  }
+}
+
 @media (max-width: 575px) {
   .footer-row > [class*="col-"] {
     width: 100% !important;
@@ -825,11 +854,18 @@ letter-spacing: -7px;
   }
 }
 
+/* ─── Typography ─────────────────────────────────────────────────────────── */
 .footer-title {
   font-weight: 600;
   font-size: 18px;
   margin: 0 0 14px 0;
   letter-spacing: 0.2px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer-title {
+    font-size: 17px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -856,6 +892,12 @@ letter-spacing: -7px;
   transition: color 0.2s ease;
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer-my-list a {
+    font-size: 15px;
+  }
+}
+
 @media (max-width: 767px) {
   .footer-my-list a {
     font-size: 14px;
@@ -866,7 +908,7 @@ letter-spacing: -7px;
   color: #DEFF58;
 }
 
-/* Image under blocks */
+/* ─── Image wrap ─────────────────────────────────────────────────────────── */
 .footer-image-wrap {
   margin-top: 48px;
   display: flex;
@@ -875,49 +917,42 @@ letter-spacing: -7px;
   opacity: 0;
   transform: translateY(30px);
   overflow: hidden;
-  
 }
 
 .footer-image {
   width: min(100%, 1100px);
   height: auto;
   display: block;
-  
 }
 
-/* tablets + small laptops */
 @media (max-width: 1199px) {
   .footer-image {
     width: 100%;
-    
   }
-  .footer-image-wrap{
+  .footer-image-wrap {
     margin-right: 40px;
   }
 }
 
-/* mobile */
 @media (max-width: 767px) {
   .footer-image-wrap {
     margin-top: 32px;
   }
-
   .footer-image {
     width: 140%;
     max-width: none;
     margin-right: 50px;
     transform: translateX(8%);
-    
   }
 }
-/* Bottom bar */
+
+/* ─── Bottom bar ─────────────────────────────────────────────────────────── */
 .footer-bottom {
   border-top: 1px solid white;
   min-height: 10vh;
   display: flex;
   align-items: center;
   padding: 12px 40px;
-  
   justify-content: center;
 }
 
@@ -944,10 +979,7 @@ letter-spacing: -7px;
   }
 
   .footer-bottom-inner {
-    width: 100%;
-    display: flex;
     justify-content: center;
-    align-items: center;
     text-align: center;
     padding: 0;
   }
@@ -961,60 +993,6 @@ letter-spacing: -7px;
 @media (max-width: 400px) {
   .footer-bottom-inner h6 {
     font-size: 11px;
-  }
-}
-/* Add a mid-range breakpoint for laptops (768px - 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .container-footer {
-     margin-right: auto;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .footer-row {
-    padding-top: 52px;
-  }
-
-  .footer-my-list a {
-    font-size: 15px;
-  }
-
-  .footer-title {
-    font-size: 17px;
-  }
-}
-
-/* Tighten spacing on smaller laptops */
-@media (min-width: 768px) and (max-width: 991px) {
-  .footer-row > [class*="col-"] {
-    flex: 0 0 33.333%;
-    max-width: 33.333%;
-    padding-right: 16px;
-  }
-}
-@media (min-width: 1600px) {
-  .container-footer {
-    
-    margin-right: auto;
-    padding-right: 40px;
-  }
-  
-}
-@media (min-width: 768px) and (max-width: 1199px) {
-  .footer-row {
-    padding-left: 120px;
-  }
-}
-
-@media (max-width: 767px) {
-  .footer-row {
-    padding-left: 20px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .footer-row {
-    padding-left: clamp(320px, 20vw, 480px);
   }
 }
 
