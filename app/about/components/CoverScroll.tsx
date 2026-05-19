@@ -177,7 +177,7 @@ export default function CoverScroll({ progressBarRef, updateNavDots }: CoverScro
           </div>
           <div className={styles.imageContainer}>
             <img
-              src="img/Mission.webp?w=800&q=80"
+              src="img/Mission-2.webp?w=800&q=80"
               alt="Mission"
               className={styles.sectionImage}
             />
