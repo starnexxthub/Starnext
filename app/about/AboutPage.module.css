@@ -224,6 +224,22 @@
     gap: 12px;
   }
 }
+/* ─── Large screens: 16"+ (≥1440px) ──────────────────────────── */
+@media (min-width: 1440px) {
+  .heroTitle {
+    font-size: 4rem;
+    max-width: 960px;
+  }
+
+  .galleryItem {
+    width: 360px;
+    height: 480px;
+  }
+
+  .galleryTrack {
+    gap: 28px;
+  }
+}
 /* Cover Scroll Section */
 .coverScrollWrapper {
   position: relative;

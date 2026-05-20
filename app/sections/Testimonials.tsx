@@ -6,14 +6,14 @@ const videoSources = [
   '/video/kj reel2.mp4',
   '/video/tt.mp4',
   '/video/optilux video.mp4',
-  '/video/op.mp4',
+  '/video/oriana priyanka reel.mp4',
 ]
 
 const videoPoster = [
   '/img/kjreel.jpg',
   '/img/ttr.jpg',
   '/img/asr.jpg',
-  '/img/opr.jpg',
+  '/img/oriana priyanka reel.jpg',
 ]
 
 // Detect low-end / Android devices to apply aggressive optimisations
