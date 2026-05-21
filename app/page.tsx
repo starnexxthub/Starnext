@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from './sections/Navbar'
-//import SR7Slider from './components/SR7Slider'
+//import SR7Slider from './components/'
 import VideoSection from './sections/VideoSection'
 import AboutSection from './sections/AboutSection'
 import ServicesMobile from './sections/ServicesMobile'
@@ -90,7 +90,7 @@ export default function Home() {
     <>
       <div className="particles" id="particles"></div>
       <Navbar />
-      {/*<SR7Slider key="main-slider" />*/}
+      {/* <SR7Slider key="main-slider" /> */}
   <HeroCarousel key="hero-carousel" />
       {/* <HeroSection /> */}
 <FloatingCard />
