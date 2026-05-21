@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   motion,
   AnimatePresence,
@@ -15,12 +15,9 @@ interface FloatingCard {
   image: string;
   offsetX: number;
   offsetY: number;
-  /** mobile-specific X offset from center (overrides offsetX on mobile) */
   mobileOffsetX?: number;
-  /** mobile-specific Y offset from center (overrides offsetY on mobile) */
   mobileOffsetY?: number;
   width: number;
-  /** width at ~1024–1279px (small laptop) */
   laptopWidth: number;
   mobileWidth: number;
   delay: number;
@@ -116,22 +113,46 @@ const SERVICE_LABELS = [
   "SOCIAL MEDIA",
 ];
 
-// ─── Breakpoint hook ──────────────────────────────────────────────────────────
+// ─── Collect all image URLs for preloading ────────────────────────────────────
+const ALL_IMAGES: string[] = [
+  "/assets/3DLogoLabNew-1-1.png",
+  ...slides.map((s) => s.bgImage),
+  ...slides.flatMap((s) => s.floatingCards.map((c) => c.image)),
+];
+
+// ─── Preload images imperatively so browser fetches them before they're needed ─
+function preloadImages(urls: string[]) {
+  urls.forEach((src) => {
+    const img = new Image();
+    img.fetchPriority = "high";
+    img.src = src;
+  });
+}
+
+// ─── Breakpoint hook (debounced) ──────────────────────────────────────────────
 type BP = "mobile" | "laptop" | "desktop";
 
+function getBreakpoint(): BP {
+  if (typeof window === "undefined") return "desktop";
+  const w = window.innerWidth;
+  if (w < 768)  return "mobile";
+  if (w < 1280) return "laptop";
+  return "desktop";
+}
+
 function useBreakpoint(): BP {
-  const get = (): BP => {
-    if (typeof window === "undefined") return "desktop";
-    const w = window.innerWidth;
-    if (w < 768)  return "mobile";
-    if (w < 1280) return "laptop";
-    return "desktop";
-  };
-  const [bp, setBp] = useState<BP>(get);
+  const [bp, setBp] = useState<BP>(getBreakpoint);
   useEffect(() => {
-    const h = () => setBp(get());
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
+    let raf = 0;
+    const h = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setBp(getBreakpoint()));
+    };
+    window.addEventListener("resize", h, { passive: true });
+    return () => {
+      window.removeEventListener("resize", h);
+      cancelAnimationFrame(raf);
+    };
   }, []);
   return bp;
 }
@@ -144,14 +165,21 @@ function FloatingCardItem({
 }) {
   const prefersReduced = useReducedMotion();
 
-  const w     = bp === "mobile" ? card.mobileWidth
-              : bp === "laptop" ? card.laptopWidth
-              : card.width;
+  // Memoize derived values so they don't recompute on every render
+  const { w, ox, oy, scale } = useMemo(() => {
+    const w     = bp === "mobile" ? card.mobileWidth
+                : bp === "laptop" ? card.laptopWidth
+                : card.width;
+    const ox    = bp === "mobile" && card.mobileOffsetX !== undefined ? card.mobileOffsetX : card.offsetX;
+    const oy    = bp === "mobile" && card.mobileOffsetY !== undefined ? card.mobileOffsetY : card.offsetY;
+    const scale = bp === "laptop" ? 0.70 : 1;
+    return { w, ox, oy, scale };
+  }, [bp, card]);
 
-  const ox = bp === "mobile" && card.mobileOffsetX !== undefined ? card.mobileOffsetX : card.offsetX;
-  const oy = bp === "mobile" && card.mobileOffsetY !== undefined ? card.mobileOffsetY : card.offsetY;
-
-  const scale = bp === "laptop" ? 0.70 : 1;
+  // Float animation: disabled on mobile to reduce GPU load & battery drain
+  const floatY = active && !prefersReduced && bp !== "mobile"
+    ? [0, -10, 0]
+    : 0;
 
   return (
     <motion.div
@@ -167,23 +195,34 @@ function FloatingCardItem({
         overflow: "hidden",
         border: "1px solid rgba(255,255,255,0.12)",
         boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
-        willChange: "transform",
+        // willChange only during animation — removes the hint after mount
+        // to free compositor resources on mobile
+        willChange: active ? "transform, opacity" : "auto",
       }}
       initial={{ opacity: 0, y: 40, rotate: card.rotate, scale: 0.88 }}
       animate={
         active
-          ? { opacity: 1, scale: 1, rotate: card.rotate, y: prefersReduced ? 0 : [0, -10, 0] }
+          ? { opacity: 1, scale: 1, rotate: card.rotate, y: floatY }
           : { opacity: 0, y: 40, scale: 0.88 }
       }
       transition={{
         opacity: { delay: card.delay, duration: 0.55 },
         scale:   { delay: card.delay, duration: 0.55 },
-        y: active
+        y: active && bp !== "mobile"
           ? { delay: card.delay + 0.4, duration: 4.5, repeat: Infinity, ease: "easeInOut" }
-          : {},
+          : { duration: 0 },
       }}
     >
-      <img src={card.image} alt="" style={{ width: "100%", display: "block", objectFit: "cover" }} draggable={false} />
+      {/* fetchpriority="high" + decoding="async" for fast paint without blocking */}
+      <img
+        src={card.image}
+        alt=""
+        width={w}
+        decoding="async"
+        fetchPriority="high"
+        style={{ width: "100%", display: "block", objectFit: "cover" }}
+        draggable={false}
+      />
     </motion.div>
   );
 }
@@ -198,7 +237,24 @@ function SlideContent({
   const shouldAnimate  = isActive && !prefersReduced;
   const isMobile       = bp === "mobile";
   const isLaptop       = bp === "laptop";
-  const router = useRouter();
+  const router         = useRouter();
+
+  // Memoise layout constants so they don't re-derive every render
+  const layout = useMemo(() => ({
+    hPad:      isLaptop ? "0 36px"          : "0 60px",
+    titleSize: isLaptop ? "clamp(1.1rem, 2.2vw, 1.8rem)" : "clamp(1.4rem, 3.6vw, 2.6rem)",
+    descSize:  isLaptop ? 12                : 14,
+    descMaxW:  isLaptop ? 240               : 320,
+    badgeSz:   isLaptop ? 10                : 12,
+    btnPad:    isLaptop ? "9px 18px"        : "12px 28px",
+    btnFontSz: isLaptop ? 11                : 13,
+    navGap:    isLaptop ? 16                : 28,
+    navLeft:   isLaptop ? 36                : 60,
+    navFontSz: isLaptop ? 9                 : 10,
+    logoW:     isLaptop ? 200               : 300,
+    logoTop:   isLaptop ? "42%"             : "40%",
+    logoLeft:  isLaptop ? "30%"             : "30%",
+  }), [isLaptop]);
 
   const textVars: Variants = {
     hidden:  { opacity: 0, x: -20 },
@@ -207,20 +263,6 @@ function SlideContent({
       transition: { delay: i * 0.1, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
     }),
   };
-
-  const hPad      = isLaptop ? "0 36px"          : "0 60px";
-  const titleSize = isLaptop ? "clamp(1.1rem, 2.2vw, 1.8rem)" : "clamp(1.4rem, 3.6vw, 2.6rem)";
-  const descSize  = isLaptop ? 12                : 14;
-  const descMaxW  = isLaptop ? 240               : 320;
-  const badgeSz   = isLaptop ? 10                : 12;
-  const btnPad    = isLaptop ? "9px 18px"        : "12px 28px";
-  const btnFontSz = isLaptop ? 11                : 13;
-  const navGap    = isLaptop ? 16                : 28;
-  const navLeft   = isLaptop ? 36                : 60;
-  const navFontSz = isLaptop ? 9                 : 10;
-  const logoW     = isLaptop ? 200               : 300;
-  const logoTop   = isLaptop ? "42%"             : "40%";
-  const logoLeft  = isLaptop ? "30%"             : "30%";
 
   return (
     <div style={{
@@ -297,16 +339,16 @@ function SlideContent({
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
           alignItems: "center",
-          padding: hPad,
+          padding: layout.hPad,
         }}>
           {/* Col 1 — title */}
           <div style={{ display: "flex", flexDirection: "column", gap: isLaptop ? 8 : 14 }}>
             <motion.span custom={0} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
-              style={{ fontSize: badgeSz, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: slide.accentColor }}>
+              style={{ fontSize: layout.badgeSz, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: slide.accentColor }}>
               {slide.badge}
             </motion.span>
             <motion.h1 custom={1} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
-              style={{ color: "#fff", fontWeight: 900, lineHeight: 1.15, margin: 0, fontSize: titleSize }}>
+              style={{ color: "#fff", fontWeight: 900, lineHeight: 1.15, margin: 0, fontSize: layout.titleSize }}>
               {slide.title}<br />
               <span style={{ color: slide.accentColor }}>{slide.titleHighlight}</span>
             </motion.h1>
@@ -320,7 +362,9 @@ function SlideContent({
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={shouldAnimate ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.8 }}
-                style={{ position: "absolute", top: logoTop, left: logoLeft, transform: "translate(-50%, -50%)", width: logoW, objectFit: "contain" }}
+                fetchPriority="high"
+                decoding="async"
+                style={{ position: "absolute", top: layout.logoTop, left: layout.logoLeft, transform: "translate(-50%, -50%)", width: layout.logoW, objectFit: "contain" }}
                 draggable={false}
               />
             ) : (
@@ -333,7 +377,7 @@ function SlideContent({
           {/* Col 3 — description + CTA */}
           <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
             style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", textAlign: "right", gap: isLaptop ? 10 : 16 }}>
-            <p style={{ color: "rgba(255,255,255,0.78)", margin: 0, fontSize: descSize, lineHeight: 1.8, maxWidth: descMaxW }}>
+            <p style={{ color: "rgba(255,255,255,0.78)", margin: 0, fontSize: layout.descSize, lineHeight: 1.8, maxWidth: layout.descMaxW }}>
               {slide.description}
             </p>
             <motion.button
@@ -341,12 +385,12 @@ function SlideContent({
               whileTap={{ scale: 0.96 }}
               onClick={() => router.push("/contact")}
               style={{
-                padding: btnPad,
+                padding: layout.btnPad,
                 borderRadius: 8,
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                fontSize: btnFontSz,
+                fontSize: layout.btnFontSz,
                 fontWeight: 700,
                 letterSpacing: "0.08em",
                 background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
@@ -374,6 +418,8 @@ function SlideContent({
           initial={{ opacity: 0, scale: 0.8 }}
           animate={shouldAnimate ? { opacity: 0.7, scale: 1 } : {}}
           transition={{ duration: 0.8 }}
+          fetchPriority="high"
+          decoding="async"
           style={{ position: "absolute", left: "35%", top: "45%", transform: "translate(-50%,-50%)", width: 140, objectFit: "contain", zIndex: 10, pointerEvents: "none" }}
           draggable={false}
         />
@@ -381,11 +427,11 @@ function SlideContent({
 
       {/* ══ Bottom service nav — desktop/laptop ══ */}
       {!isMobile && (
-        <div style={{ position: "absolute", bottom: 22, left: navLeft, zIndex: 30, display: "flex", gap: navGap }}>
+        <div style={{ position: "absolute", bottom: 22, left: layout.navLeft, zIndex: 30, display: "flex", gap: layout.navGap }}>
           {SERVICE_LABELS.map((svc, i) => (
             <button key={svc} onClick={() => navigate(i)} style={{
               background: "none", border: "none", cursor: "pointer",
-              fontSize: navFontSz, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase",
+              fontSize: layout.navFontSz, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase",
               color: i === current ? slides[i].accentColor : "rgba(255,255,255,0.55)",
               borderBottom: i === current ? `1px solid ${slides[i].accentColor}` : "1px solid transparent",
               padding: "4px 0", transition: "color 0.3s, border-color 0.3s",
@@ -443,9 +489,21 @@ export default function HeroCarousel() {
   const timerRef                  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const bp                        = useBreakpoint();
 
+  // Preload all images as soon as the component mounts
+  useEffect(() => {
+    preloadImages(ALL_IMAGES);
+  }, []);
+
   const navigate = useCallback((next: number) => {
     setDirection(next > current ? 1 : -1);
     setCurrent((next + slides.length) % slides.length);
+  }, [current]);
+
+  // Preload the *next* slide's card images ahead of time
+  useEffect(() => {
+    const nextIdx = (current + 1) % slides.length;
+    const nextImages = slides[nextIdx].floatingCards.map((c) => c.image);
+    preloadImages(nextImages);
   }, [current]);
 
   useEffect(() => {
@@ -463,11 +521,6 @@ export default function HeroCarousel() {
     return () => window.removeEventListener("keydown", h);
   }, [current, navigate]);
 
-  // ─── Circular / wheel-spin transition ────────────────────────────────────
-  // Incoming slide spins in from behind (rotateY 90°→0°) with a slight
-  // upward arc (y: 60→0), and the outgoing slide spins out to the opposite
-  // side. The perspective wrapper gives it the 3-D depth so it truly looks
-  // like a carousel wheel turning.
   const variants = {
     enter:  (d: number) => ({
       rotateY: d > 0 ?  90 : -90,
@@ -494,7 +547,6 @@ export default function HeroCarousel() {
       style={{
         position: "relative", width: "100%", height: "100svh",
         minHeight: "100svh", overflow: "hidden", background: "#000",
-        // Perspective on the container gives the 3-D depth for rotateY
         perspective: "1200px",
         perspectiveOrigin: "50% 50%",
       }}
@@ -520,7 +572,6 @@ export default function HeroCarousel() {
           style={{
             position: "absolute", inset: 0,
             willChange: "transform",
-            // Keep the 3-D transform space for child elements
             transformStyle: "preserve-3d",
             backfaceVisibility: "hidden",
           }}
