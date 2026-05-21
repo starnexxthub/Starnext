@@ -68,11 +68,8 @@ const slides: Slide[] = [
     bgWordColor: "rgba(160,80,255,0.07)",
     accentColor: "#b060ff",
     floatingCards: [
-      // Mobile: main card centered in the middle zone of screen
       { id: 1, image: "/assets/w2.webp",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 180, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
-      // Mobile: small card top-left of center
       { id: 2, image: "/assets/w1.webp",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -35 },
-      // Mobile: small card bottom-right of center
       { id: 3, image: "/assets/w3.webp",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.3,  rotate: 5,  zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 185 },
     ],
   },
@@ -88,11 +85,8 @@ const slides: Slide[] = [
     bgWordColor: "rgba(255,140,0,0.07)",
     accentColor: "#ff8c00",
     floatingCards: [
-      // Mobile: main card slightly above center
       { id: 1, image: "/assets/g2.webp", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 150, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
-      // Mobile: small card top-left
       { id: 2, image: "/assets/g1.webp", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -35 },
-      // Mobile: small card bottom-right
       { id: 3, image: "/assets/g3.webp", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
     ],
   },
@@ -108,11 +102,8 @@ const slides: Slide[] = [
     bgWordColor: "rgba(0,200,80,0.07)",
     accentColor: "#00d46a",
     floatingCards: [
-      // Mobile: main (wide) card — scale down heavily and center it
       { id: 1, image: "/assets/s1.webp",   offsetX: 0,    offsetY: 0,   width: 460, laptopWidth: 320, mobileWidth: 210, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,    mobileOffsetY: 20  },
-      // Mobile: small card top-left
       { id: 2, image: "/assets/s2.webp", offsetX: -240, offsetY: -80, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95,  mobileOffsetY: -35 },
-      // Mobile: small card bottom-right
       { id: 3, image: "/assets/s3.webp",   offsetX: 185,  offsetY: 250, width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -3, zIndex: 3, mobileOffsetX: 90,   mobileOffsetY: 135 },
     ],
   },
@@ -126,7 +117,6 @@ const SERVICE_LABELS = [
 ];
 
 // ─── Breakpoint hook ──────────────────────────────────────────────────────────
-// mobile  < 768 | laptop 768–1279 | desktop ≥ 1280
 type BP = "mobile" | "laptop" | "desktop";
 
 function useBreakpoint(): BP {
@@ -158,11 +148,9 @@ function FloatingCardItem({
               : bp === "laptop" ? card.laptopWidth
               : card.width;
 
-  // On mobile, use dedicated mobile offsets if provided; otherwise fall back to desktop offsets
   const ox = bp === "mobile" && card.mobileOffsetX !== undefined ? card.mobileOffsetX : card.offsetX;
   const oy = bp === "mobile" && card.mobileOffsetY !== undefined ? card.mobileOffsetY : card.offsetY;
 
-  // Laptop: scale offsets down proportionally so cards stay inside the column
   const scale = bp === "laptop" ? 0.70 : 1;
 
   return (
@@ -202,7 +190,6 @@ function FloatingCardItem({
 
 // ─── SlideContent ─────────────────────────────────────────────────────────────
 function SlideContent({
-  
   slide, isActive, navigate, current, bp,
 }: {
   slide: Slide; isActive: boolean; navigate: (i: number) => void; current: number; bp: BP;
@@ -221,7 +208,6 @@ function SlideContent({
     }),
   };
 
-  // Per-breakpoint tokens for desktop/laptop only
   const hPad      = isLaptop ? "0 36px"          : "0 60px";
   const titleSize = isLaptop ? "clamp(1.1rem, 2.2vw, 1.8rem)" : "clamp(1.4rem, 3.6vw, 2.6rem)";
   const descSize  = isLaptop ? 12                : 14;
@@ -283,24 +269,24 @@ function SlideContent({
         <motion.div custom={2} variants={textVars} initial="hidden" animate={shouldAnimate ? "visible" : "hidden"}
           style={{ position: "absolute", bottom: 100, left: 140, zIndex: 20 }}>
           <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.96 }}
-  onClick={() => router.push("/contact")}
-  style={{
-    padding: "10px 20px",
-    borderRadius: 8,
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    fontSize: 12,
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
-    boxShadow: `0 4px 20px ${slide.accentColor}55`,
-  }}
->
-  CALL NOW
-</motion.button>
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => router.push("/contact")}
+            style={{
+              padding: "10px 20px",
+              borderRadius: 8,
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
+              boxShadow: `0 4px 20px ${slide.accentColor}55`,
+            }}
+          >
+            CALL NOW
+          </motion.button>
         </motion.div>
       )}
 
@@ -351,25 +337,25 @@ function SlideContent({
               {slide.description}
             </p>
             <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.96 }}
-  onClick={() => router.push("/contact")}
-  style={{
-    padding: btnPad,
-    borderRadius: 8,
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    fontSize: btnFontSz,
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
-    boxShadow: `0 4px 20px ${slide.accentColor}55`,
-    alignSelf: "flex-end",
-  }}
->
-  CALL NOW
-</motion.button>
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => router.push("/contact")}
+              style={{
+                padding: btnPad,
+                borderRadius: 8,
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
+                fontSize: btnFontSz,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                background: `linear-gradient(to right, ${slide.accentColor}, ${slide.accentColor}99)`,
+                boxShadow: `0 4px 20px ${slide.accentColor}55`,
+                alignSelf: "flex-end",
+              }}
+            >
+              CALL NOW
+            </motion.button>
           </motion.div>
         </div>
       )}
@@ -407,25 +393,6 @@ function SlideContent({
           ))}
         </div>
       )}
-
-      {/* ══ Bottom service nav — mobile ══ */}
-      {/*{isMobile && (
-        <div style={{
-          position: "absolute", bottom: 68, left: 0, right: 0, zIndex: 30,
-          display: "flex", justifyContent: "center", gap: 8, padding: "0 16px", flexWrap: "wrap",
-        }}>
-          {SERVICE_LABELS.map((svc, i) => (
-            <button key={svc} onClick={() => navigate(i)} style={{
-              background: i === current ? `${slides[i].accentColor}22` : "rgba(255,255,255,0.08)",
-              border: `1px solid ${i === current ? slides[i].accentColor : "rgba(255,255,255,0.15)"}`,
-              borderRadius: 20, cursor: "pointer",
-              fontSize: 8, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-              color: i === current ? slides[i].accentColor : "rgba(255,255,255,0.55)",
-              padding: "4px 10px", transition: "all 0.3s", backdropFilter: "blur(8px)",
-            }}>{svc}</button>
-          ))}
-        </div>
-      )} */}
     </div>
   );
 }
@@ -475,7 +442,6 @@ export default function HeroCarousel() {
   const [paused, setPaused]       = useState(false);
   const timerRef                  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const bp                        = useBreakpoint();
-  
 
   const navigate = useCallback((next: number) => {
     setDirection(next > current ? 1 : -1);
@@ -497,15 +463,41 @@ export default function HeroCarousel() {
     return () => window.removeEventListener("keydown", h);
   }, [current, navigate]);
 
+  // ─── Circular / wheel-spin transition ────────────────────────────────────
+  // Incoming slide spins in from behind (rotateY 90°→0°) with a slight
+  // upward arc (y: 60→0), and the outgoing slide spins out to the opposite
+  // side. The perspective wrapper gives it the 3-D depth so it truly looks
+  // like a carousel wheel turning.
   const variants = {
-    enter:  (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit:   (d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0 }),
+    enter:  (d: number) => ({
+      rotateY: d > 0 ?  90 : -90,
+      opacity: 0,
+      scale: 0.85,
+      z: -120,
+    }),
+    center: {
+      rotateY: 0,
+      opacity: 1,
+      scale: 1,
+      z: 0,
+    },
+    exit:   (d: number) => ({
+      rotateY: d > 0 ? -90 :  90,
+      opacity: 0,
+      scale: 0.85,
+      z: -120,
+    }),
   };
 
   return (
     <section
-      style={{ position: "relative", width: "100%", height: "100svh", minHeight: "100svh", overflow: "hidden", background: "#000" }}
+      style={{
+        position: "relative", width: "100%", height: "100svh",
+        minHeight: "100svh", overflow: "hidden", background: "#000",
+        // Perspective on the container gives the 3-D depth for rotateY
+        perspective: "1200px",
+        perspectiveOrigin: "50% 50%",
+      }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
@@ -514,10 +506,24 @@ export default function HeroCarousel() {
     >
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
         <motion.div
-          key={current} custom={direction} variants={variants}
-          initial="enter" animate="center" exit="exit"
-          transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ position: "absolute", inset: 0, willChange: "transform" }}
+          key={current}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            duration: 0.65,
+            ease: [0.4, 0.0, 0.2, 1],
+            opacity: { duration: 0.45 },
+          }}
+          style={{
+            position: "absolute", inset: 0,
+            willChange: "transform",
+            // Keep the 3-D transform space for child elements
+            transformStyle: "preserve-3d",
+            backfaceVisibility: "hidden",
+          }}
         >
           <SlideContent slide={slides[current]} isActive navigate={navigate} current={current} bp={bp} />
         </motion.div>
