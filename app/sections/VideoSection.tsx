@@ -156,7 +156,7 @@ export default function VideoSection() {
           preload="auto"
           // @ts-ignore
           webkit-playsinline="true"
-          style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+          style={{ width: '100%',  objectFit: 'cover' }}
         >
           <source src="/video/video1.mp4" type="video/mp4" />
         </video>
