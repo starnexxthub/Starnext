@@ -246,7 +246,9 @@
   height: 200vh;
   width: 100%;
    overflow: hidden;        /* ← prevents x-sliding section from bleeding out */
-  position: relative;
+  
+  background: #f5f5f5;
+  z-index: 1;
 }
 
 .coverSection {
@@ -266,12 +268,12 @@
 
 .sectionVision {
   background: #f5f5f5;
-  z-index: -3;
+  z-index: 2;
 }
 
 .sectionMission {
-  background: #ffffff;
-  z-index: -2;
+  background: #f5f5f5;
+  z-index: 3;
   transform: translateX(100%);
 }
 

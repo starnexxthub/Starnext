@@ -13,12 +13,12 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef  = useRef<HTMLCanvasElement>(null)
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([])
+  const titleRef = useRef<HTMLHeadingElement>(null)
   const counterTargets = [400, 600, 350, 90]
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Poll until GSAP ready
     let rafId: number
     const waitForGSAP = () => {
       const gsap = (window as any).gsap
@@ -31,7 +31,6 @@ export default function AboutSection() {
   }, [])
 
   useEffect(() => {
-    // Particle canvas — totally independent from GSAP
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -90,28 +89,112 @@ export default function AboutSection() {
     const section = sectionRef.current
     if (!section) return
 
-    // ✅ Scope ALL selectors to this section — prevents bleed into ServicesMobile
     const q = (sel: string) => section.querySelectorAll(sel)
+
+    // ── Scroll-synced word reveal on the heading ──────────────────────────
+    const titleEl = titleRef.current
+    if (titleEl) {
+      // Walk child nodes and split text into word spans, preserving <br> and <span> children
+      const splitNodeIntoWords = (node: Node): Node[] => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || ''
+          // Split by words, keep spaces as separate text nodes so layout is unchanged
+          const parts = text.split(/(\s+)/)
+          return parts.map(part => {
+            if (!part) return null
+            if (/^\s+$/.test(part)) return document.createTextNode(part)
+            const span = document.createElement('span')
+            span.className = 'scroll-word'
+            span.style.cssText = 'display:inline; position:relative;'
+            // Ghost (dim base layer)
+            const ghost = document.createElement('span')
+            ghost.setAttribute('aria-hidden', 'true')
+            ghost.style.cssText = 'position:absolute;inset:0;opacity:0.15;pointer-events:none;'
+            ghost.textContent = part
+            // Animated layer
+            const animated = document.createElement('span')
+            animated.className = 'scroll-word-inner'
+            animated.style.cssText = 'position:relative; opacity:0;'
+            animated.textContent = part
+            span.appendChild(ghost)
+            span.appendChild(animated)
+            return span
+          }).filter(Boolean) as Node[]
+        }
+        // Preserve element nodes (br, span.gradient-text, span.text-navy) — recurse inside them
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement
+          const tag = el.tagName.toLowerCase()
+          if (tag === 'br') return [node.cloneNode(true)]
+          // Clone the element, clear it, re-fill with split children
+          const clone = el.cloneNode(false) as HTMLElement
+          Array.from(el.childNodes).forEach(child => {
+            splitNodeIntoWords(child).forEach(n => clone.appendChild(n))
+          })
+          return [clone]
+        }
+        return [node.cloneNode(true)]
+      }
+
+      // Rebuild the heading with word spans
+      const originalNodes = Array.from(titleEl.childNodes)
+      titleEl.innerHTML = ''
+      originalNodes.forEach(node => {
+        splitNodeIntoWords(node).forEach(n => titleEl.appendChild(n))
+      })
+
+      const wordInners = Array.from(titleEl.querySelectorAll('.scroll-word-inner')) as HTMLElement[]
+      const total = wordInners.length
+
+      // Set all to opacity 0 initially (ghost layer still shows at 0.15)
+      gsap.set(wordInners, { opacity: 0 })
+
+      // Scrubbed ScrollTrigger — each word reveals as you scroll through the section
+      // Scrubbed ScrollTrigger — each word reveals as you scroll through the section
+const isMobile = window.innerWidth < 768
+
+if (isMobile) {
+  mobileWordReveal(gsap, ScrollTrigger, titleEl, wordInners, total)
+} else {
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top 75%',
+    end: 'center 40%',
+    scrub: 0.8,
+    onUpdate: (self: any) => {
+      const progress = self.progress
+      wordInners.forEach((word, i) => {
+        const wordStart = i / total
+        const wordEnd = wordStart + (1 / total)
+        const localP = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)))
+        word.style.opacity = String(localP)
+      })
+    },
+    onLeave: () => {
+      wordInners.forEach(w => { w.style.opacity = '1' })
+    }
+  })
+}
+    }
+    // ── End word reveal ───────────────────────────────────────────────────
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
-        once: true,              // ✅ fire once, no reverse bleed
+        once: true,
         toggleActions: 'play none none none'
       }
     })
 
     tl.fromTo(q('.about-label'),
       { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
-      .fromTo(q('.about-title'),
-        { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6,  ease: 'power3.out' }, '-=0.25')
+      // about-title intentionally excluded — handled by scroll reveal above
       .fromTo(q('.about-desc'),
-        { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.45')
+        { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.25')
       .fromTo(q('.about-btn'),
-        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4,  ease: 'power3.out' }, '-=0.35')
+        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, '-=0.35')
 
-    // SVG line
     const path = section.querySelector('#main-line') as SVGPathElement | null
     if (path) {
       const length = path.getTotalLength()
@@ -129,9 +212,7 @@ export default function AboutSection() {
         }, '-=0.9')
     }
 
-    // Stat counters — scoped IntersectionObserver
     const statCards = section.querySelectorAll('.stat-card')
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return
@@ -158,24 +239,55 @@ export default function AboutSection() {
       }
       requestAnimationFrame(tick)
     }
-  }
+  }   // ← closes init()
+
+  function mobileWordReveal(
+  gsap: any,
+  ScrollTrigger: any,
+  titleEl: HTMLElement,
+  wordInners: HTMLElement[],
+  total: number
+) {
+  ScrollTrigger.create({
+    trigger: titleEl,        // track the heading directly
+    start: 'top 90%',        // fires as soon as heading enters viewport bottom
+    end: 'bottom 15%',       // completes when heading bottom nears top
+    scrub: 0.6,              // slightly faster scrub feels snappier on mobile
+    onUpdate: (self: any) => {
+      const progress = self.progress
+      wordInners.forEach((word, i) => {
+        const wordStart = i / total
+        const wordEnd = wordStart + (1 / total)
+        const localP = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)))
+        word.style.opacity = String(localP)
+      })
+    },
+    onLeave: () => {
+      wordInners.forEach(w => { w.style.opacity = '1' })
+    },
+    onLeaveBack: () => {
+      // reset if user scrolls back above the heading
+      wordInners.forEach(w => { w.style.opacity = '0' })
+    }
+  })
+}  // ← closes mobileWordReveal()
 
   return (
     <section
-  ref={sectionRef}
-  id="about-section"
-  className="min-vh-100 section-pad position-relative overflow-hidden"
-  style={{
-    zIndex: 10,
-    background: '#fff',
-    isolation: 'isolate'
-  }}
->
+      ref={sectionRef}
+      id="about-section"
+      className="min-vh-100 section-pad position-relative overflow-hidden"
+      style={{ zIndex: 10, background: '#fff', isolation: 'isolate' }}
+    >
       <div className="container-7xl">
         <div className="header-grid">
           <div className="content-left">
             <p className="about-label">About Starnext</p>
-            <h2 className="about-title" style={{ color: 'var(--text)' }}>
+            <h2
+              ref={titleRef}
+              className="about-title"
+              style={{ color: 'var(--text)' }}
+            >
               WE DON&apos;T JUST <br />
               <span className="gradient-text">MARKET,</span><br />
               WE MAKE YOU <br />
@@ -238,11 +350,11 @@ export default function AboutSection() {
         {/* Stats */}
         <div className="row g-4 stats-row">
           {[
-  { label: 'Projects Completed', prefix: '', suffix: '+' },
-  { label: 'Clients Covered',    prefix: '', suffix: '+' },
-  { label: 'Happy Clients',      prefix: '', suffix: '+' },
-  { label: 'Success Rate',       prefix: '', suffix: '%' },
-].map(({ label, prefix, suffix }, i) => (
+            { label: 'Projects Completed', prefix: '', suffix: '+' },
+            { label: 'Clients Covered',    prefix: '', suffix: '+' },
+            { label: 'Happy Clients',      prefix: '', suffix: '+' },
+            { label: 'Success Rate',       prefix: '', suffix: '%' },
+          ].map(({ label, prefix, suffix }, i) => (
             <div key={i} className="col-6 col-md-3">
               <div className="stat-card text-center p-4 clean-card">
                 <div className="d-flex align-items-end justify-content-center" style={{ gap: '.15rem' }}>

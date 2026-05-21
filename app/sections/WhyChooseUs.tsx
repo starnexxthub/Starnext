@@ -1,10 +1,93 @@
 'use client'
+import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
-import { useEffect } from 'react'
+function ScrollHeadingDesktop() {
+  const ref = useRef<HTMLDivElement>(null)
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 85%', 'end 45%'],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0])
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1])
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        y,
+        opacity,
+      }}
+      className="wcu-heading-wrap desktop-heading"
+    >
+      <h2 className="wcu-heading">
+        <span
+          className="wcu-line-1"
+          style={{ display: 'block' }}
+        >
+          Why Choose
+        </span>
+
+        <span
+          className="wcu-line-1"
+          style={{ display: 'block' }}
+        >
+          Starnext Softech
+        </span>
+      </h2>
+
+      <p className="wcu-subtitle">
+        Best digital marketing company turning digital attention into sales and clicks into conversions. Trusted by 100+ clients. Zero guesswork. Only measurable wins.
+      </p>
+    </motion.div>
+  )
+}
+function ScrollHeadingMobile() {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 92%', 'end 55%'],
+  })
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1])
+  const y = useTransform(scrollYProgress, [0, 1], [40, 0])
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        opacity,
+        y,
+      }}
+      className="wcu-heading-wrap mobile-heading"
+    >
+      <h2 className="wcu-heading">
+        <span
+          className="wcu-line-1"
+          style={{ display: 'block' }}
+        >
+          Why Choose
+        </span>
+
+        <span
+          className="wcu-line-1"
+          style={{ display: 'block' }}
+        >
+          Starnext Softech
+        </span>
+      </h2>
+
+      <p className="wcu-subtitle">
+        Best digital marketing company turning digital attention into sales and clicks into conversions. Trusted by 100+ clients. Zero guesswork. Only measurable wins.
+      </p>
+    </motion.div>
+  )
+}
 export default function WhyChooseUs() {
-  useEffect(() => {
-  if (typeof window === 'undefined') return
+  useEffect(() => {  if (typeof window === 'undefined') return
 
   document.querySelectorAll('[data-wcu-card]').forEach((card) => {
     const gsap = (window as any).gsap
@@ -350,6 +433,27 @@ export default function WhyChooseUs() {
           .wcu-line-1, .wcu-line-2, .wcu-subtitle { opacity: 1 !important; transform: none !important; }
           [data-wcu-card] { opacity: 1 !important; transform: none !important; }
         }
+
+.wcu-mobile-heading {
+  display: none;
+}
+
+.wcu-desktop-heading {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .wcu-mobile-heading {
+    display: block;
+  }
+
+  .wcu-desktop-heading {
+    display: none;
+  }
+}
+
+
+
       `}</style>
  
 
@@ -360,15 +464,15 @@ export default function WhyChooseUs() {
       <div className="wcu-section" style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
-        <div className="wcu-heading-wrap">
-          <h2 className="wcu-heading">
-            <span className="wcu-line-1" style={{ display: 'block' }}>Why Choose</span>
-            <span className="wcu-line-1" style={{ display: 'block' }}>Starnext Softech</span>
-          </h2>
-          <p className="wcu-subtitle wcu-subtitle">
-            Best digital marketing company turning digital attention into sales and clicks into conversions. Trusted by 100+ clients. Zero guesswork. Only measurable wins.
-          </p>
-        </div>
+      {/* Desktop / Tablet */}
+<div className="wcu-desktop-heading">
+  <ScrollHeadingDesktop />
+</div>
+
+{/* Mobile */}
+<div className="wcu-mobile-heading">
+  <ScrollHeadingMobile />
+</div>
 
         {/* Grid */}
         <div style={{ position: 'relative' }}>
