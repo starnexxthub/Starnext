@@ -202,7 +202,7 @@ export default function BlogPage() {
 
         /* Card is now a full Link */
         .blog-card {
-          height: 200px;
+          height: 300px;
           border-radius: 16px;
           overflow: hidden;
           margin-bottom: 20px;
