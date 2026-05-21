@@ -71,7 +71,7 @@ const slides: Slide[] = [
       // Mobile: main card centered in the middle zone of screen
       { id: 1, image: "/assets/w2.webp",  offsetX: 0,    offsetY: -100, width: 340, laptopWidth: 240, mobileWidth: 180, delay: 0,    rotate: -2, zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left of center
-      { id: 2, image: "/assets/w1.webp",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -75, mobileOffsetY: -75 },
+      { id: 2, image: "/assets/w1.webp",  offsetX: -160, offsetY: -180, width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.15, rotate: -8, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -55 },
       // Mobile: small card bottom-right of center
       { id: 3, image: "/assets/w3.webp",  offsetX: 150,  offsetY: 260,  width: 160, laptopWidth: 110, mobileWidth: 95,  delay: 0.3,  rotate: 5,  zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 185 },
     ],
@@ -91,7 +91,7 @@ const slides: Slide[] = [
       // Mobile: main card slightly above center
       { id: 1, image: "/assets/g2.webp", offsetX: 0,    offsetY: -120, width: 340, laptopWidth: 240, mobileWidth: 150, delay: 0,    rotate: 2,  zIndex: 2, mobileOffsetX: 0,   mobileOffsetY: -20  },
       // Mobile: small card top-left
-      { id: 2, image: "/assets/g1.webp", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -75, mobileOffsetY: -60 },
+      { id: 2, image: "/assets/g1.webp", offsetX: -155, offsetY: -85,  width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.15, rotate: -7, zIndex: 3, mobileOffsetX: -95, mobileOffsetY: -45 },
       // Mobile: small card bottom-right
       { id: 3, image: "/assets/g3.webp", offsetX: 150,  offsetY: 95,   width: 155, laptopWidth: 108, mobileWidth: 90,  delay: 0.3,  rotate: -2, zIndex: 3, mobileOffsetX: 90,  mobileOffsetY: 130 },
     ],
