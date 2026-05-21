@@ -85,6 +85,81 @@ export default function AboutSection() {
     }
   }, [])
 
+  function splitNodeIntoWords(node: Node): Node[] {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent || ''
+      const parts = text.split(/(\s+)/)
+      return parts.map(part => {
+        if (!part) return null
+        if (/^\s+$/.test(part)) return document.createTextNode(part)
+        const span = document.createElement('span')
+        span.className = 'scroll-word'
+        span.style.cssText = 'display:inline; position:relative;'
+        const ghost = document.createElement('span')
+        ghost.setAttribute('aria-hidden', 'true')
+        ghost.style.cssText = 'position:absolute;inset:0;opacity:0.15;pointer-events:none;'
+        ghost.textContent = part
+        const animated = document.createElement('span')
+        animated.className = 'scroll-word-inner'
+        animated.style.cssText = 'position:relative; opacity:0;'
+        animated.textContent = part
+        span.appendChild(ghost)
+        span.appendChild(animated)
+        return span
+      }).filter(Boolean) as Node[]
+    }
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement
+      if (el.tagName.toLowerCase() === 'br') return [node.cloneNode(true)]
+      const clone = el.cloneNode(false) as HTMLElement
+      Array.from(el.childNodes).forEach(child => {
+        splitNodeIntoWords(child).forEach(n => clone.appendChild(n))
+      })
+      return [clone]
+    }
+    return [node.cloneNode(true)]
+  }
+
+  function registerWordReveal(
+    ScrollTrigger: any,
+    titleEl: HTMLElement,
+    wordInners: HTMLElement[],
+    total: number,
+    isMobile: boolean
+  ) {
+    const onUpdate = (self: any) => {
+      const progress = self.progress
+      wordInners.forEach((word, i) => {
+        const wordStart = i / total
+        const wordEnd   = wordStart + (1 / total)
+        const localP    = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)))
+        word.style.opacity = String(localP)
+      })
+    }
+
+    ScrollTrigger.create({
+      trigger  : titleEl,
+      start    : isMobile ? 'top 92%' : 'top 82%',
+      end      : isMobile ? 'bottom 10%' : 'bottom 25%',
+      scrub    : isMobile ? 0.5 : 0.8,
+      onUpdate,
+      onLeave      : () => { wordInners.forEach(w => { w.style.opacity = '1' }) },
+      onLeaveBack  : () => { wordInners.forEach(w => { w.style.opacity = '0' }) },
+      // ✅ force re-check state when scrolling back into view
+      onEnter      : (self: any) => { onUpdate(self) },
+      onEnterBack  : (self: any) => { onUpdate(self) },
+    })
+  }
+
+  function mobileWordReveal(
+    ScrollTrigger: any,
+    titleEl: HTMLElement,
+    wordInners: HTMLElement[],
+    total: number
+  ) {
+    registerWordReveal(ScrollTrigger, titleEl, wordInners, total, true)
+  }
+
   function init(gsap: any, ScrollTrigger: any) {
     const section = sectionRef.current
     if (!section) return
@@ -94,49 +169,6 @@ export default function AboutSection() {
     // ── Scroll-synced word reveal on the heading ──────────────────────────
     const titleEl = titleRef.current
     if (titleEl) {
-      // Walk child nodes and split text into word spans, preserving <br> and <span> children
-      const splitNodeIntoWords = (node: Node): Node[] => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const text = node.textContent || ''
-          // Split by words, keep spaces as separate text nodes so layout is unchanged
-          const parts = text.split(/(\s+)/)
-          return parts.map(part => {
-            if (!part) return null
-            if (/^\s+$/.test(part)) return document.createTextNode(part)
-            const span = document.createElement('span')
-            span.className = 'scroll-word'
-            span.style.cssText = 'display:inline; position:relative;'
-            // Ghost (dim base layer)
-            const ghost = document.createElement('span')
-            ghost.setAttribute('aria-hidden', 'true')
-            ghost.style.cssText = 'position:absolute;inset:0;opacity:0.15;pointer-events:none;'
-            ghost.textContent = part
-            // Animated layer
-            const animated = document.createElement('span')
-            animated.className = 'scroll-word-inner'
-            animated.style.cssText = 'position:relative; opacity:0;'
-            animated.textContent = part
-            span.appendChild(ghost)
-            span.appendChild(animated)
-            return span
-          }).filter(Boolean) as Node[]
-        }
-        // Preserve element nodes (br, span.gradient-text, span.text-navy) — recurse inside them
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          const el = node as HTMLElement
-          const tag = el.tagName.toLowerCase()
-          if (tag === 'br') return [node.cloneNode(true)]
-          // Clone the element, clear it, re-fill with split children
-          const clone = el.cloneNode(false) as HTMLElement
-          Array.from(el.childNodes).forEach(child => {
-            splitNodeIntoWords(child).forEach(n => clone.appendChild(n))
-          })
-          return [clone]
-        }
-        return [node.cloneNode(true)]
-      }
-
-      // Rebuild the heading with word spans
       const originalNodes = Array.from(titleEl.childNodes)
       titleEl.innerHTML = ''
       originalNodes.forEach(node => {
@@ -146,35 +178,23 @@ export default function AboutSection() {
       const wordInners = Array.from(titleEl.querySelectorAll('.scroll-word-inner')) as HTMLElement[]
       const total = wordInners.length
 
-      // Set all to opacity 0 initially (ghost layer still shows at 0.15)
       gsap.set(wordInners, { opacity: 0 })
 
-      // Scrubbed ScrollTrigger — each word reveals as you scroll through the section
-      // Scrubbed ScrollTrigger — each word reveals as you scroll through the section
-const isMobile = window.innerWidth < 768
+      const isMobile = window.innerWidth < 768
 
-if (isMobile) {
-  mobileWordReveal(gsap, ScrollTrigger, titleEl, wordInners, total)
-} else {
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top 75%',
-    end: 'center 40%',
-    scrub: 0.8,
-    onUpdate: (self: any) => {
-      const progress = self.progress
-      wordInners.forEach((word, i) => {
-        const wordStart = i / total
-        const wordEnd = wordStart + (1 / total)
-        const localP = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)))
-        word.style.opacity = String(localP)
+      // ✅ Delay ScrollTrigger registration by 2 frames so browser reflows
+      // the mutated DOM before ScrollTrigger measures element positions
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (isMobile) {
+            mobileWordReveal(ScrollTrigger, titleEl, wordInners, total)
+          } else {
+            registerWordReveal(ScrollTrigger, titleEl, wordInners, total, false)
+          }
+          // ✅ Refresh after registration so positions are accurate
+          ScrollTrigger.refresh()
+        })
       })
-    },
-    onLeave: () => {
-      wordInners.forEach(w => { w.style.opacity = '1' })
-    }
-  })
-}
     }
     // ── End word reveal ───────────────────────────────────────────────────
 
@@ -189,11 +209,10 @@ if (isMobile) {
 
     tl.fromTo(q('.about-label'),
       { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
-      // about-title intentionally excluded — handled by scroll reveal above
       .fromTo(q('.about-desc'),
         { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.25')
       .fromTo(q('.about-btn'),
-        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, '-=0.35')
+        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4,  ease: 'power3.out' }, '-=0.35')
 
     const path = section.querySelector('#main-line') as SVGPathElement | null
     if (path) {
@@ -239,38 +258,7 @@ if (isMobile) {
       }
       requestAnimationFrame(tick)
     }
-  }   // ← closes init()
-
-  function mobileWordReveal(
-  gsap: any,
-  ScrollTrigger: any,
-  titleEl: HTMLElement,
-  wordInners: HTMLElement[],
-  total: number
-) {
-  ScrollTrigger.create({
-    trigger: titleEl,        // track the heading directly
-    start: 'top 90%',        // fires as soon as heading enters viewport bottom
-    end: 'bottom 15%',       // completes when heading bottom nears top
-    scrub: 0.6,              // slightly faster scrub feels snappier on mobile
-    onUpdate: (self: any) => {
-      const progress = self.progress
-      wordInners.forEach((word, i) => {
-        const wordStart = i / total
-        const wordEnd = wordStart + (1 / total)
-        const localP = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)))
-        word.style.opacity = String(localP)
-      })
-    },
-    onLeave: () => {
-      wordInners.forEach(w => { w.style.opacity = '1' })
-    },
-    onLeaveBack: () => {
-      // reset if user scrolls back above the heading
-      wordInners.forEach(w => { w.style.opacity = '0' })
-    }
-  })
-}  // ← closes mobileWordReveal()
+  }
 
   return (
     <section
@@ -354,7 +342,7 @@ if (isMobile) {
             { label: 'Clients Covered',    prefix: '', suffix: '+' },
             { label: 'Happy Clients',      prefix: '', suffix: '+' },
             { label: 'Success Rate',       prefix: '', suffix: '%' },
-          ].map(({ label, prefix, suffix }, i) => (
+          ].map(({ label, suffix }, i) => (
             <div key={i} className="col-6 col-md-3">
               <div className="stat-card text-center p-4 clean-card">
                 <div className="d-flex align-items-end justify-content-center" style={{ gap: '.15rem' }}>
