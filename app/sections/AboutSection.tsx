@@ -286,7 +286,7 @@ if (isMobile) {
             <h2
               ref={titleRef}
               className="about-title"
-              style={{ color: 'var(--text)' }}
+              style={{ color: 'var(--text)', textShadow: 'none', filter: 'none' }}
             >
               WE DON&apos;T JUST <br />
               <span className="gradient-text">MARKET,</span><br />
