@@ -43,7 +43,7 @@ const slides: Slide[] = [
   {
     id: 0,
     bgImage: "/assets/s-bg1.webp",
-    badge: "Best in Uttarakhand",
+    badge: "Best in Uttarakhand, India",
     title: "Best Digital Marketing",
     titleHighlight: "Company in Uttarakhand",
     description:
@@ -56,7 +56,7 @@ const slides: Slide[] = [
   {
     id: 1,
     bgImage: "/assets/s-bg3.webp",
-    badge: "Dehradun's #1",
+    badge: "Premium Web Solutions",
     title: "Best Web Designing",
     titleHighlight: "Company in Dehradun",
     description:

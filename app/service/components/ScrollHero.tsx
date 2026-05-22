@@ -107,7 +107,7 @@ export default function ScrollHero() {
                 style={{
                   y: yTranslate,
                   rotate: img.rotate,
-                  x: img.x,
+                  x: img.x, 
                   zIndex: 10 - i,
                 }}
                 className="scroll-hero-card"
