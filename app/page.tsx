@@ -10,14 +10,14 @@ import ServicesMobile from './sections/ServicesMobile'
 import ServicesDesktop from './sections/ServicesDesktop'
 import WhyChooseUs from './sections/WhyChooseUs'
 import BrandShowcase from './sections/BrandShowcase'
-import HeroExpand from './sections/HeroExpand'
+//import HeroExpand from './sections/HeroExpand'
 import ContactSection from './sections/ContactSection'
 import Testimonials from './sections/Testimonials'
 import FAQSection from './sections/FAQSection'
 import Newsletter from './sections/Newsletter'
 import SocialBar from './sections/SocialBar'
 import Footer from './sections/Footer'
-import HeroSection from './sections/HeroSection'
+//import HeroSection from './sections/HeroSection'
 import FloatingCard from './components/FloatingCard'
 import HeroCarousel from './components/HeroCarousel'
 
@@ -90,9 +90,9 @@ export default function Home() {
     <>
       <div className="particles" id="particles"></div>
       <Navbar />
-      {/* <SR7Slider key="main-slider" /> */}
+       {/*<SR7Slider key="main-slider" /> */} 
   <HeroCarousel key="hero-carousel" />
-      {/* <HeroSection /> */}
+       
 <FloatingCard />
       <VideoSection />
       <AboutSection />
@@ -101,7 +101,7 @@ export default function Home() {
       <ScrollSequence />
       <WhyChooseUs />
       <BrandShowcase />
-      {/* <HeroExpand /> */}
+      
       <ContactSection />
       <Testimonials />
       <FAQSection />

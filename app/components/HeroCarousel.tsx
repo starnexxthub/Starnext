@@ -42,7 +42,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 0,
-    bgImage: "/assets/s-bg1.webp",
+    bgImage: "/assets/herobg1.png",
     badge: "Best in Uttarakhand, India",
     title: "Best Digital Marketing",
     titleHighlight: "Company in Uttarakhand",
@@ -55,7 +55,7 @@ const slides: Slide[] = [
   },
   {
     id: 1,
-    bgImage: "/assets/s-bg3.webp",
+    bgImage: "/assets/herobg2.png",
     badge: "Premium Web Solutions",
     title: "Best Web Designing",
     titleHighlight: "Company in Dehradun",
@@ -72,7 +72,7 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    bgImage: "/assets/s-bg2.webp",
+    bgImage: "/assets/herobg3.png",
     badge: "Creative Experts",
     title: "Best Graphics Video &",
     titleHighlight: "Photography in Dehradun",
@@ -89,7 +89,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    bgImage: "/assets/s-bg4-1.webp",
+    bgImage: "/assets/herobg4.png",
     badge: "Growth Focused",
     title: "Best Social Media",
     titleHighlight: "Marketing in Dehradun",
